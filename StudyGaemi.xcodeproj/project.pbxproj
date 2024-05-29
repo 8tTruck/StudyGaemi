@@ -14,6 +14,17 @@
 		FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */; };
 		FF0071542C074D88000AE7AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF0071532C074D88000AE7AA /* Assets.xcassets */; };
 		FF0071572C074D88000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF0071562C074D88000AE7AA /* Base */; };
+		FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF00715F2C074DAD000AE7AA /* SnapKit */; };
+		FF0071632C074DB7000AE7AA /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071622C074DB7000AE7AA /* Then */; };
+		FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071652C074DCD000AE7AA /* KakaoSDK */; };
+		FF0071682C074DCD000AE7AA /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071672C074DCD000AE7AA /* KakaoSDKAuth */; };
+		FF00716B2C074DFA000AE7AA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FF00716A2C074DFA000AE7AA /* FirebaseAuth */; };
+		FF00716D2C074DFA000AE7AA /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FF00716C2C074DFA000AE7AA /* FirebaseAuthCombine-Community */; };
+		FF00716F2C074DFA000AE7AA /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = FF00716E2C074DFA000AE7AA /* FirebaseDatabase */; };
+		FF0071712C074DFA000AE7AA /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071702C074DFA000AE7AA /* FirebaseDatabaseSwift */; };
+		FF0071732C074DFA000AE7AA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071722C074DFA000AE7AA /* FirebaseStorage */; };
+		FF0071752C074DFA000AE7AA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */; };
+		FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071762C074E0C000AE7AA /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +37,7 @@
 		FF0071532C074D88000AE7AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF0071562C074D88000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF0071582C074D88000AE7AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF0071762C074E0C000AE7AA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +45,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF0071712C074DFA000AE7AA /* FirebaseDatabaseSwift in Frameworks */,
+				FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */,
+				FF0071752C074DFA000AE7AA /* FirebaseStorageCombine-Community in Frameworks */,
+				FF0071732C074DFA000AE7AA /* FirebaseStorage in Frameworks */,
+				FF00716D2C074DFA000AE7AA /* FirebaseAuthCombine-Community in Frameworks */,
+				FF00716B2C074DFA000AE7AA /* FirebaseAuth in Frameworks */,
+				FF0071632C074DB7000AE7AA /* Then in Frameworks */,
+				FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */,
+				FF00716F2C074DFA000AE7AA /* FirebaseDatabase in Frameworks */,
+				FF0071682C074DCD000AE7AA /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +88,7 @@
 				FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */,
 				FF0071582C074D88000AE7AA /* Info.plist */,
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
+				FF0071762C074E0C000AE7AA /* BaseViewController.swift */,
 			);
 			path = StudyGaemi;
 			sourceTree = "<group>";
@@ -86,6 +109,18 @@
 			dependencies = (
 			);
 			name = StudyGaemi;
+			packageProductDependencies = (
+				FF00715F2C074DAD000AE7AA /* SnapKit */,
+				FF0071622C074DB7000AE7AA /* Then */,
+				FF0071652C074DCD000AE7AA /* KakaoSDK */,
+				FF0071672C074DCD000AE7AA /* KakaoSDKAuth */,
+				FF00716A2C074DFA000AE7AA /* FirebaseAuth */,
+				FF00716C2C074DFA000AE7AA /* FirebaseAuthCombine-Community */,
+				FF00716E2C074DFA000AE7AA /* FirebaseDatabase */,
+				FF0071702C074DFA000AE7AA /* FirebaseDatabaseSwift */,
+				FF0071722C074DFA000AE7AA /* FirebaseStorage */,
+				FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */,
+			);
 			productName = StudyGaemi;
 			productReference = FF0071442C074D86000AE7AA /* StudyGaemi.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +149,12 @@
 				Base,
 			);
 			mainGroup = FF00713B2C074D86000AE7AA;
+			packageReferences = (
+				FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */,
+				FF0071612C074DB7000AE7AA /* XCRemoteSwiftPackageReference "Then" */,
+				FF0071642C074DCD000AE7AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = FF0071452C074D86000AE7AA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF00714C2C074D86000AE7AA /* ViewController.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
@@ -222,7 +264,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -279,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -303,6 +345,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,6 +373,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -365,6 +409,94 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.7.1;
+			};
+		};
+		FF0071612C074DB7000AE7AA /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = exactVersion;
+				version = 3.0.0;
+			};
+		};
+		FF0071642C074DCD000AE7AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 2.22.2;
+			};
+		};
+		FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.26.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FF00715F2C074DAD000AE7AA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		FF0071622C074DB7000AE7AA /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071612C074DB7000AE7AA /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		FF0071652C074DCD000AE7AA /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071642C074DCD000AE7AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
+		FF0071672C074DCD000AE7AA /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071642C074DCD000AE7AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		FF00716A2C074DFA000AE7AA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		FF00716C2C074DFA000AE7AA /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		FF00716E2C074DFA000AE7AA /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		FF0071702C074DFA000AE7AA /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		FF0071722C074DFA000AE7AA /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */ = {
