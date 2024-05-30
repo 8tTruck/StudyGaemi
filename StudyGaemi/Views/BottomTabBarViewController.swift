@@ -10,7 +10,7 @@ import SnapKit
 
 class BottomTabBarViewController: UITabBarController {
     
-    let customTabBarView = UIView()
+    private let customTabBarView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class BottomTabBarViewController: UITabBarController {
         self.configureTabBarItemFonts()
     }
     
-    func setupTabBar() {
+    private func setupTabBar() {
         // 탭바의 배경을 투명하게 만듦
         self.tabBar.backgroundImage = UIImage()
         self.tabBar.shadowImage = UIImage()
@@ -45,7 +45,7 @@ class BottomTabBarViewController: UITabBarController {
         self.tabBar.tintColor = UIColor(named: "pointYellow")
     }
     
-    func configureUI() {
+    private func configureUI() {
         let alarmViewController = AlarmViewController()
         alarmViewController.tabBarItem.image = UIImage(systemName: "alarm")
         alarmViewController.tabBarItem.title = "기상하개미"
@@ -66,7 +66,7 @@ class BottomTabBarViewController: UITabBarController {
         
     }
     
-    func constraintLayout() {
+    private func constraintLayout() {
         customTabBarView.snp.makeConstraints { make in
             make.leading.equalTo(tabBar.snp.leading).offset(17)
             make.trailing.equalTo(tabBar.snp.trailing).offset(-17)
@@ -75,7 +75,7 @@ class BottomTabBarViewController: UITabBarController {
         }
     }
     
-    func configureTabBarItemFonts() {
+    private func configureTabBarItemFonts() {
         let font = UIFont(name: CustomFontType.bold.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
         
         let normalAttributes: [NSAttributedString.Key: Any] = [
