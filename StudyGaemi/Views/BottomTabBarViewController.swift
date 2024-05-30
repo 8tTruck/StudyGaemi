@@ -17,6 +17,7 @@ class BottomTabBarViewController: UITabBarController {
         self.setupTabBar()
         self.configureUI()
         self.constraintLayout()
+        self.configureTabBarItemFonts()
     }
     
     func setupTabBar() {
@@ -25,11 +26,11 @@ class BottomTabBarViewController: UITabBarController {
         self.tabBar.shadowImage = UIImage()
         self.tabBar.isTranslucent = true
         
-        customTabBarView.backgroundColor = .white
+        customTabBarView.backgroundColor = UIColor(named: "tabBarBackground")
         customTabBarView.layer.cornerRadius = 16
-        customTabBarView.layer.shadowColor = UIColor.gray.cgColor
+        customTabBarView.layer.shadowColor = UIColor(named: "pointDarkgray")?.cgColor
         customTabBarView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        customTabBarView.layer.shadowRadius = 5.0
+        customTabBarView.layer.shadowRadius = 2.0
         customTabBarView.layer.shadowOpacity = 0.5
         
         // 탭바에 customTabBarView 추가
@@ -69,9 +70,26 @@ class BottomTabBarViewController: UITabBarController {
         customTabBarView.snp.makeConstraints { make in
             make.leading.equalTo(tabBar.snp.leading).offset(17)
             make.trailing.equalTo(tabBar.snp.trailing).offset(-17)
-            make.height.equalTo(76)
-            make.top.equalTo(self.tabBar.snp.top).offset(-16)
+            make.height.equalTo(71)
+            make.top.equalTo(self.tabBar.snp.top).offset(-11)
         }
+    }
+    
+    func configureTabBarItemFonts() {
+        let font = UIFont(name: CustomFontType.bold.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
+        
+        let normalAttributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: UIColor(named: "tabBarItemColor") ?? UIColor.gray
+        ]
+        
+        let selectedAttributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: UIColor(named: "pointYellow") ?? UIColor.yellow
+        ]
+        
+        UITabBarItem.appearance().setTitleTextAttributes(normalAttributes, for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: .selected)
     }
 }
 

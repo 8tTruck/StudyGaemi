@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
-		FF00714C2C074D86000AE7AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00714B2C074D86000AE7AA /* ViewController.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
 		FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */; };
 		FF0071542C074D88000AE7AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF0071532C074D88000AE7AA /* Assets.xcassets */; };
@@ -30,13 +29,22 @@
 		FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717C2C075438000AE7AA /* StudyViewController.swift */; };
 		FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717E2C075446000AE7AA /* CalendarViewController.swift */; };
 		FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071802C075454000AE7AA /* SettingViewController.swift */; };
+		FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF0071862C0840D5000AE7AA /* Pretendard-Regular.otf */; };
+		FF0071902C0840D6000AE7AA /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF0071872C0840D5000AE7AA /* Pretendard-Black.otf */; };
+		FF0071912C0840D6000AE7AA /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF0071882C0840D5000AE7AA /* Pretendard-Light.otf */; };
+		FF0071922C0840D6000AE7AA /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF0071892C0840D5000AE7AA /* Pretendard-ExtraLight.otf */; };
+		FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718A2C0840D5000AE7AA /* Pretendard-Thin.otf */; };
+		FF0071942C0840D6000AE7AA /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718B2C0840D5000AE7AA /* Pretendard-Medium.otf */; };
+		FF0071952C0840D6000AE7AA /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718C2C0840D5000AE7AA /* Pretendard-SemiBold.otf */; };
+		FF0071962C0840D6000AE7AA /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718D2C0840D5000AE7AA /* Pretendard-ExtraBold.otf */; };
+		FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */; };
+		FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071982C08432E000AE7AA /* CustomFontType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FF00714B2C074D86000AE7AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FF00714E2C074D86000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF0071512C074D86000AE7AA /* StudyGaemi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyGaemi.xcdatamodel; sourceTree = "<group>"; };
 		FF0071532C074D88000AE7AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,6 +56,16 @@
 		FF00717C2C075438000AE7AA /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		FF00717E2C075446000AE7AA /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		FF0071802C075454000AE7AA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		FF0071862C0840D5000AE7AA /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		FF0071872C0840D5000AE7AA /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		FF0071882C0840D5000AE7AA /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		FF0071892C0840D5000AE7AA /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		FF00718A2C0840D5000AE7AA /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		FF00718B2C0840D5000AE7AA /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		FF00718C2C0840D5000AE7AA /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		FF00718D2C0840D5000AE7AA /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		FF0071982C08432E000AE7AA /* CustomFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,14 +108,32 @@
 		FF0071462C074D86000AE7AA /* StudyGaemi */ = {
 			isa = PBXGroup;
 			children = (
+				FF0071842C082573000AE7AA /* Models */,
+				FF0071832C08256A000AE7AA /* Views */,
+				FF0071822C08255F000AE7AA /* Controllers */,
 				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
+				FF0071852C0840B9000AE7AA /* Fonts */,
 				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
-				FF00714B2C074D86000AE7AA /* ViewController.swift */,
 				FF00714D2C074D86000AE7AA /* Main.storyboard */,
 				FF0071532C074D88000AE7AA /* Assets.xcassets */,
 				FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */,
 				FF0071582C074D88000AE7AA /* Info.plist */,
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
+				FF0071982C08432E000AE7AA /* CustomFontType.swift */,
+			);
+			path = StudyGaemi;
+			sourceTree = "<group>";
+		};
+		FF0071822C08255F000AE7AA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FF0071832C08256A000AE7AA /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				FF0071762C074E0C000AE7AA /* BaseViewController.swift */,
 				FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */,
 				FF00717A2C075429000AE7AA /* AlarmViewController.swift */,
@@ -105,7 +141,30 @@
 				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
 				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 			);
-			path = StudyGaemi;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FF0071842C082573000AE7AA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FF0071852C0840B9000AE7AA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FF0071872C0840D5000AE7AA /* Pretendard-Black.otf */,
+				FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */,
+				FF00718D2C0840D5000AE7AA /* Pretendard-ExtraBold.otf */,
+				FF0071892C0840D5000AE7AA /* Pretendard-ExtraLight.otf */,
+				FF0071882C0840D5000AE7AA /* Pretendard-Light.otf */,
+				FF00718B2C0840D5000AE7AA /* Pretendard-Medium.otf */,
+				FF0071862C0840D5000AE7AA /* Pretendard-Regular.otf */,
+				FF00718C2C0840D5000AE7AA /* Pretendard-SemiBold.otf */,
+				FF00718A2C0840D5000AE7AA /* Pretendard-Thin.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,9 +243,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF0071922C0840D6000AE7AA /* Pretendard-ExtraLight.otf in Resources */,
+				FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */,
 				FF0071542C074D88000AE7AA /* Assets.xcassets in Resources */,
+				FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */,
+				FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */,
 				FF0071572C074D88000AE7AA /* Base in Resources */,
 				FF00714F2C074D86000AE7AA /* Base in Resources */,
+				FF0071962C0840D6000AE7AA /* Pretendard-ExtraBold.otf in Resources */,
+				FF0071902C0840D6000AE7AA /* Pretendard-Black.otf in Resources */,
+				FF0071952C0840D6000AE7AA /* Pretendard-SemiBold.otf in Resources */,
+				FF0071912C0840D6000AE7AA /* Pretendard-Light.otf in Resources */,
+				FF0071942C0840D6000AE7AA /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,11 +268,11 @@
 				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
-				FF00714C2C074D86000AE7AA /* ViewController.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
+				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
