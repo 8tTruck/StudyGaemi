@@ -25,6 +25,11 @@
 		FF0071732C074DFA000AE7AA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071722C074DFA000AE7AA /* FirebaseStorage */; };
 		FF0071752C074DFA000AE7AA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */; };
 		FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071762C074E0C000AE7AA /* BaseViewController.swift */; };
+		FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */; };
+		FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717A2C075429000AE7AA /* AlarmViewController.swift */; };
+		FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717C2C075438000AE7AA /* StudyViewController.swift */; };
+		FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717E2C075446000AE7AA /* CalendarViewController.swift */; };
+		FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071802C075454000AE7AA /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		FF0071562C074D88000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF0071582C074D88000AE7AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0071762C074E0C000AE7AA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarViewController.swift; sourceTree = "<group>"; };
+		FF00717A2C075429000AE7AA /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		FF00717C2C075438000AE7AA /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
+		FF00717E2C075446000AE7AA /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		FF0071802C075454000AE7AA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +99,11 @@
 				FF0071582C074D88000AE7AA /* Info.plist */,
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
 				FF0071762C074E0C000AE7AA /* BaseViewController.swift */,
+				FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */,
+				FF00717A2C075429000AE7AA /* AlarmViewController.swift */,
+				FF00717C2C075438000AE7AA /* StudyViewController.swift */,
+				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
+				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 			);
 			path = StudyGaemi;
 			sourceTree = "<group>";
@@ -182,9 +197,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
+				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
 				FF00714C2C074D86000AE7AA /* ViewController.swift in Sources */,
+				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
+				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
+				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
