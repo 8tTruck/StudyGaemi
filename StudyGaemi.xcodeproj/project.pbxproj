@@ -39,6 +39,7 @@
 		FF0071962C0840D6000AE7AA /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718D2C0840D5000AE7AA /* Pretendard-ExtraBold.otf */; };
 		FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */; };
 		FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071982C08432E000AE7AA /* CustomFontType.swift */; };
+		FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719A2C086809000AE7AA /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		FF00718D2C0840D5000AE7AA /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		FF0071982C08432E000AE7AA /* CustomFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontType.swift; sourceTree = "<group>"; };
+		FF00719A2C086809000AE7AA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				FF00717C2C075438000AE7AA /* StudyViewController.swift */,
 				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
 				FF0071802C075454000AE7AA /* SettingViewController.swift */,
+				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
+				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
