@@ -26,6 +26,8 @@ class AlarmViewController: BaseViewController {
         $0.axis = .horizontal
         $0.spacing = 8
     }
+    
+    private var button = CustomButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,7 @@ class AlarmViewController: BaseViewController {
     override func configureUI() {
         view.backgroundColor = UIColor(named: "viewBackgroundColor") ?? .systemBackground
         self.navigationItem.titleView = titleView
+        view.addSubview(button)
         
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance().then {
@@ -54,6 +57,13 @@ class AlarmViewController: BaseViewController {
     override func constraintLayout() {
         imageView.snp.makeConstraints { make in
             make.width.height.equalTo(22)
+        }
+        
+        button.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(500)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(334)
+            make.height.equalTo(53)
         }
         // UIButton이나 UILabel 등과 같은 부분 제약조건 설정 함수
     }
