@@ -5,12 +5,12 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class BottomTabBarViewController: UITabBarController {
     
-    let customTabBarView = UIView()
+    private let customTabBarView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class BottomTabBarViewController: UITabBarController {
         self.configureTabBarItemFonts()
     }
     
-    func setupTabBar() {
+    private func setupTabBar() {
         // 탭바의 배경을 투명하게 만듦
         self.tabBar.backgroundImage = UIImage()
         self.tabBar.shadowImage = UIImage()
@@ -29,9 +29,9 @@ class BottomTabBarViewController: UITabBarController {
         customTabBarView.backgroundColor = UIColor(named: "tabBarBackground")
         customTabBarView.layer.cornerRadius = 16
         customTabBarView.layer.shadowColor = UIColor(named: "pointDarkgray")?.cgColor
-        customTabBarView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        customTabBarView.layer.shadowRadius = 2.0
-        customTabBarView.layer.shadowOpacity = 0.5
+        customTabBarView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        customTabBarView.layer.shadowRadius = 3.0
+        customTabBarView.layer.shadowOpacity = 0.7
         
         // 탭바에 customTabBarView 추가
         self.tabBar.addSubview(customTabBarView)
@@ -45,20 +45,20 @@ class BottomTabBarViewController: UITabBarController {
         self.tabBar.tintColor = UIColor(named: "pointYellow")
     }
     
-    func configureUI() {
-        let alarmViewController = AlarmViewController()
+    private func configureUI() {
+        let alarmViewController = UINavigationController(rootViewController: AlarmViewController())
         alarmViewController.tabBarItem.image = UIImage(systemName: "alarm")
         alarmViewController.tabBarItem.title = "기상하개미"
         
-        let studyViewController = StudyViewController()
+        let studyViewController = UINavigationController(rootViewController: StudyViewController())
         studyViewController.tabBarItem.image = UIImage(systemName: "timer")
         studyViewController.tabBarItem.title = "공부하개미"
         
-        let calendarViewController = CalendarViewController()
+        let calendarViewController = UINavigationController(rootViewController: CalendarViewController())
         calendarViewController.tabBarItem.image = UIImage(systemName: "calendar")
         calendarViewController.tabBarItem.title = "월간개미"
         
-        let settingViewController = SettingViewController()
+        let settingViewController = UINavigationController(rootViewController: SettingViewController())
         settingViewController.tabBarItem.image = UIImage(systemName: "person")
         settingViewController.tabBarItem.title = "개Me"
         
@@ -66,7 +66,7 @@ class BottomTabBarViewController: UITabBarController {
         
     }
     
-    func constraintLayout() {
+    private func constraintLayout() {
         customTabBarView.snp.makeConstraints { make in
             make.leading.equalTo(tabBar.snp.leading).offset(17)
             make.trailing.equalTo(tabBar.snp.trailing).offset(-17)
@@ -75,7 +75,7 @@ class BottomTabBarViewController: UITabBarController {
         }
     }
     
-    func configureTabBarItemFonts() {
+    private func configureTabBarItemFonts() {
         let font = UIFont(name: CustomFontType.bold.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
         
         let normalAttributes: [NSAttributedString.Key: Any] = [

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "kingAnt.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
