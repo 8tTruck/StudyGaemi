@@ -5,8 +5,8 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class BottomTabBarViewController: UITabBarController {
     
@@ -29,9 +29,9 @@ class BottomTabBarViewController: UITabBarController {
         customTabBarView.backgroundColor = UIColor(named: "tabBarBackground")
         customTabBarView.layer.cornerRadius = 16
         customTabBarView.layer.shadowColor = UIColor(named: "pointDarkgray")?.cgColor
-        customTabBarView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        customTabBarView.layer.shadowRadius = 2.0
-        customTabBarView.layer.shadowOpacity = 0.5
+        customTabBarView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        customTabBarView.layer.shadowRadius = 3.0
+        customTabBarView.layer.shadowOpacity = 0.7
         
         // 탭바에 customTabBarView 추가
         self.tabBar.addSubview(customTabBarView)
@@ -46,19 +46,19 @@ class BottomTabBarViewController: UITabBarController {
     }
     
     private func configureUI() {
-        let alarmViewController = AlarmViewController()
+        let alarmViewController = UINavigationController(rootViewController: AlarmViewController())
         alarmViewController.tabBarItem.image = UIImage(systemName: "alarm")
         alarmViewController.tabBarItem.title = "기상하개미"
         
-        let studyViewController = StudyViewController()
+        let studyViewController = UINavigationController(rootViewController: StudyViewController())
         studyViewController.tabBarItem.image = UIImage(systemName: "timer")
         studyViewController.tabBarItem.title = "공부하개미"
         
-        let calendarViewController = CalendarViewController()
+        let calendarViewController = UINavigationController(rootViewController: CalendarViewController())
         calendarViewController.tabBarItem.image = UIImage(systemName: "calendar")
         calendarViewController.tabBarItem.title = "월간개미"
         
-        let settingViewController = SettingViewController()
+        let settingViewController = UINavigationController(rootViewController: SettingViewController())
         settingViewController.tabBarItem.image = UIImage(systemName: "person")
         settingViewController.tabBarItem.title = "개Me"
         
