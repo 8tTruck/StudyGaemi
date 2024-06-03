@@ -11,7 +11,7 @@ import UIKit
 
 class CustomButton: UIButton {
 
-    private let gradient = CAGradientLayer().then {
+    let gradient = CAGradientLayer().then {
         $0.colors = [UIColor(named: "pointOrange")?.cgColor ?? UIColor.orange.cgColor,
                      UIColor(named: "pointYellow")?.cgColor ?? UIColor.yellow.cgColor]
         $0.startPoint = CGPoint(x: 0.0, y: 0.5)
