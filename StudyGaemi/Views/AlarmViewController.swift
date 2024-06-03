@@ -28,7 +28,7 @@ class AlarmViewController: BaseViewController {
     }
     
     private var button = CustomButton()
-    private var textField = customTextField()
+    private var textField = CustomTextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class customTextField: UITextField {
+class CustomTextField: UITextField {
 
     init(x: Int = 0, y: Int = 0, width: Int = 342, height: Int = 60, text: String = "정답을 적어보개미") {
         super.init(frame: CGRect(x: x, y: y, width: width, height: height))
