@@ -40,6 +40,8 @@
 		FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */; };
 		FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071982C08432E000AE7AA /* CustomFontType.swift */; };
 		FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719A2C086809000AE7AA /* LoginViewController.swift */; };
+		FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719C2C09B96B000AE7AA /* CustomButton.swift */; };
+		FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		FF0071982C08432E000AE7AA /* CustomFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontType.swift; sourceTree = "<group>"; };
 		FF00719A2C086809000AE7AA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FF00719C2C09B96B000AE7AA /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,8 @@
 				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
 				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
+				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
+				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -276,6 +282,8 @@
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
+				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
+				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
