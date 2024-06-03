@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
+		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
@@ -45,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 				FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */,
 				FF00716F2C074DFA000AE7AA /* FirebaseDatabase in Frameworks */,
 				FF0071682C074DCD000AE7AA /* KakaoSDKAuth in Frameworks */,
+				F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +153,7 @@
 				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
 				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
 				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
+				F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				FF0071702C074DFA000AE7AA /* FirebaseDatabaseSwift */,
 				FF0071722C074DFA000AE7AA /* FirebaseStorage */,
 				FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */,
+				F4E04FFA2C0D8DE900802477 /* FSCalendar */,
 			);
 			productName = StudyGaemi;
 			productReference = FF0071442C074D86000AE7AA /* StudyGaemi.app */;
@@ -237,6 +243,7 @@
 				FF0071612C074DB7000AE7AA /* XCRemoteSwiftPackageReference "Then" */,
 				FF0071642C074DCD000AE7AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = FF0071452C074D86000AE7AA /* Products */;
 			projectDirPath = "";
@@ -286,6 +293,7 @@
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
+				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +529,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 		FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -556,6 +572,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F4E04FFA2C0D8DE900802477 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		FF00715F2C074DAD000AE7AA /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */;
