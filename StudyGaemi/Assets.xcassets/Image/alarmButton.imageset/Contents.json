@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "alarmButton.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -39,3 +39,25 @@ extension BaseViewController {
         view.endEditing(true)
     }
 }
+
+extension UIButton {
+    
+    func addTouchAnimation() {
+        self.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
+        self.addTarget(self, action: #selector(buttonTouchUp), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+    }
+    
+    @objc private func buttonTouchDown(sender: UIButton) {
+        UIView.animate(withDuration: 0.1) {
+            sender.transform = CGAffineTransform(scaleX: 1.01, y: 1.01)
+        }
+        sender.isHighlighted = false
+    }
+    
+    @objc private func buttonTouchUp(sender: UIButton) {
+        UIView.animate(withDuration: 0.1) {
+            sender.transform = .identity
+        }
+        sender.isHighlighted = false
+    }
+}
