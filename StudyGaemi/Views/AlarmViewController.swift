@@ -28,6 +28,7 @@ class AlarmViewController: BaseViewController {
     }
     
     private var button = CustomButton()
+    private var textField = customTextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class AlarmViewController: BaseViewController {
         view.backgroundColor = UIColor(named: "viewBackgroundColor") ?? .systemBackground
         self.navigationItem.titleView = titleView
         view.addSubview(button)
+        view.addSubview(textField)
         
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance().then {
@@ -61,6 +63,13 @@ class AlarmViewController: BaseViewController {
         
         button.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(500)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(334)
+            make.height.equalTo(53)
+        }
+        
+        textField.snp.makeConstraints { make in
+            make.bottom.equalTo(button.snp.top).offset(-20)
             make.centerX.equalToSuperview()
             make.width.equalTo(334)
             make.height.equalTo(53)
