@@ -58,7 +58,7 @@ class AlarmButton: UIButton {
             make.top.equalTo(overlayImageView.snp.top).inset(108)
             make.bottom.equalTo(overlayLabel.snp.top).offset(-5)
             make.leading.equalTo(overlayImageView.snp.leading).inset(78)
-            make.leading.equalTo(overlayImageView.snp.trailing).inset(206)
+            make.trailing.equalTo(overlayImageView.snp.trailing).inset(206)
             
         }
     }

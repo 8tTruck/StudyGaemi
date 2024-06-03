@@ -11,6 +11,8 @@ import UIKit
 
 class AlarmViewController: BaseViewController {
     
+    private let alarmController = AlarmController()
+    
     private let titleLabel = UILabel().then {
         $0.text = "기상하개미"
         $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -26,6 +28,7 @@ class AlarmViewController: BaseViewController {
         $0.axis = .horizontal
         $0.spacing = 8
     }
+    
     private let alarmLabel = UILabel().then {
         $0.text = "몇시에 일어날 개미?"
         $0.font = UIFont(name: CustomFontType.regular.name, size: 18) ?? UIFont.systemFont(ofSize: 18)
@@ -42,7 +45,7 @@ class AlarmViewController: BaseViewController {
     private let alarmView = UIView().then {
         $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         $0.layer.cornerRadius = 23
-        $0.layer.shadowColor = UIColor.systemBackground.cgColor
+        $0.layer.shadowColor = UIColor(named: "pointBlack")?.cgColor
         $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         $0.layer.shadowRadius = 5.0
         $0.layer.shadowOpacity = 0.3
@@ -111,6 +114,8 @@ class AlarmViewController: BaseViewController {
         horizontalStackView.addArrangedSubview(timeLabel)
         horizontalStackView.addArrangedSubview(repeatLabel)
         
+        alarmButton.addTarget(self, action: #selector(tappedAlarmButton), for: .touchUpInside)
+        
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance().then {
                 $0.configureWithOpaqueBackground()
@@ -162,6 +167,10 @@ class AlarmViewController: BaseViewController {
             make.width.equalTo(38)
             make.height.equalTo(38)
         }
+    }
+    
+    @objc private func tappedAlarmButton() {
+        alarmController.tappedAlarmButton(navigationController)
     }
 
 }
