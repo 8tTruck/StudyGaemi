@@ -11,6 +11,8 @@ import UIKit
 
 class AlarmSettingView: BaseViewController {
     
+    private let alarmSettingController = AlarmSettingController()
+    
     private let titleLabel = UILabel().then {
         $0.text = "몇시에 일어날개미"
         $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -30,6 +32,7 @@ class AlarmSettingView: BaseViewController {
     private let timekPicker = UIDatePicker().then {
         $0.datePickerMode = .time
         $0.locale = Locale(identifier: "ko_KR")
+        $0.timeZone = TimeZone(identifier: "Asia/Seoul")
         if #available(iOS 13.4, *) {
             $0.preferredDatePickerStyle = .wheels
         }
@@ -180,7 +183,7 @@ class AlarmSettingView: BaseViewController {
         
         segmentButton.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         toggleButton.addTarget(self, action: #selector(toggleSwitchChanged(_:)), for: .valueChanged)
-        saveButton.addTarget(self, action: #selector(saveValues()), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveValues), for: .touchUpInside)
         
         dropDownButton.menu = UIMenu(children: [
             UIAction(title: "알림음 1", handler: { [weak self] _ in
@@ -283,7 +286,18 @@ class AlarmSettingView: BaseViewController {
     }
     
     @objc private func saveValues() {
+        let alarmModel = AlarmModel(
+            time: alarmSettingController.getKoreanTime(from: timekPicker),
+            difficulty: segmentButton.titleForSegment(at: segmentButton.selectedSegmentIndex) ?? "중",
+            sound: dropDownButton.currentTitle ?? "알림음 1",
+            repeatEnabled: toggleButton.isOn,
+            repeatInterval: toggleButton.isOn ? intervalButton.currentTitle : nil,
+            repeatCount: toggleButton.isOn ? numberButton.currentTitle : nil
+        )
         
+        alarmSettingController.setAlarm(alarmModel)
+        
+        alarmSettingController.getBackView(navigationController)
     }
 
     func buttonSetTitle(_ title: String, for button: UIButton?) {

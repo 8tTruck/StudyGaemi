@@ -49,6 +49,7 @@
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
 		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
+		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
 		FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingController.swift; sourceTree = "<group>"; };
+		FF875F622C0F4DC300A5D534 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 		FF0071842C082573000AE7AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FF875F622C0F4DC300A5D534 /* AlarmModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
+				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
