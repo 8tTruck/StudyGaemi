@@ -50,6 +50,8 @@
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
 		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
 		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
+		FF875F662C10474B00A5D534 /* 알림음 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF875F652C10474B00A5D534 /* 알림음 1.wav */; };
+		FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
 		FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingController.swift; sourceTree = "<group>"; };
 		FF875F622C0F4DC300A5D534 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
+		FF875F652C10474B00A5D534 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
+		FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,10 +137,11 @@
 				FF0071842C082573000AE7AA /* Models */,
 				FF0071832C08256A000AE7AA /* Views */,
 				FF0071822C08255F000AE7AA /* Controllers */,
-				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
 				FF0071852C0840B9000AE7AA /* Fonts */,
-				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
+				FF875F642C10473600A5D534 /* Wavs */,
 				FF00714D2C074D86000AE7AA /* Main.storyboard */,
+				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
+				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
 				FF0071532C074D88000AE7AA /* Assets.xcassets */,
 				FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */,
 				FF0071582C074D88000AE7AA /* Info.plist */,
@@ -171,6 +176,7 @@
 				FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */,
 				FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */,
 				F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */,
+				FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +203,14 @@
 				FF00718A2C0840D5000AE7AA /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FF875F642C10473600A5D534 /* Wavs */ = {
+			isa = PBXGroup;
+			children = (
+				FF875F652C10474B00A5D534 /* 알림음 1.wav */,
+			);
+			path = Wavs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +297,7 @@
 				FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */,
 				FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */,
 				FF0071572C074D88000AE7AA /* Base in Resources */,
+				FF875F662C10474B00A5D534 /* 알림음 1.wav in Resources */,
 				FF00714F2C074D86000AE7AA /* Base in Resources */,
 				FF0071962C0840D6000AE7AA /* Pretendard-ExtraBold.otf in Resources */,
 				FF0071902C0840D6000AE7AA /* Pretendard-Black.otf in Resources */,
@@ -303,6 +318,7 @@
 				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
+				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,

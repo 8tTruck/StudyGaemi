@@ -5,16 +5,23 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
+import UserNotifications
 import UIKit
 import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        UNUserNotificationCenter.current().delegate = self
+        // 알림 권한 요청
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if granted {
+                print("알림 권한이 수락되었습니다.")
+            } else {
+                print("알림 권한이 거부되었습니다.")
+            }
+        }
         return true
     }
 
@@ -76,6 +83,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    // MARK: - 포그라운드에서도 알림을 받게하는 메소드
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("포그라운드 알림 수신: \(notification.request.content.body)")
+        completionHandler([.banner, .sound])
+    }
+    
+    // MARK: - 알림을 터치했을 때 호출되는 메소드
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        if let viewControllerIdentifier = userInfo["viewControllerIdentifier"] as? String {
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                sceneDelegate.navigateToViewController(withIdentifier: viewControllerIdentifier)
+            }
+        }
+        completionHandler()
+    }
+    
+}

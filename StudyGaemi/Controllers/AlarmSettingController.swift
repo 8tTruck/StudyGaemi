@@ -12,14 +12,6 @@ class AlarmSettingController {
     
     private var alarmModel: AlarmModel?
     
-    // UIDatePicker에서 선택한 시간을 한국 시간대로 변환하는 함수
-    func getKoreanTime(from datePicker: UIDatePicker) -> Date {
-        let selectedDate = datePicker.date
-        let timeZone = TimeZone(identifier: "Asia/Seoul")!
-        let seconds = TimeInterval(timeZone.secondsFromGMT(for: selectedDate))
-        return Date(timeInterval: seconds, since: selectedDate)
-    }
-    
     func setAlarm(_ alarmModel: AlarmModel) {
         self.alarmModel = alarmModel
         print(alarmModel.time)
@@ -42,15 +34,26 @@ class AlarmSettingController {
     }
     
     private func scheduleAlarm(time: Date, sound: String, repeatEnabled: Bool, repeatInterval: String?, repeatCount: String?) {
+        let identifier = "기상하개미"
         let content = UNMutableNotificationContent()
-        content.title = "일어날 시간이에요!"
-        content.body = "설정한 시간입니다."
+        content.title = "일어나개미!"
+        content.body = "기상시간입니다. 일어나개미!"
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(sound).wav"))
+        content.userInfo = ["viewControllerIdentifier": "AlarmQuestionView"]
         
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
         
-        if repeatEnabled, let repeatInterval = repeatInterval, let repeatCount = repeatCount {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("알림 추가 오류: \(error.localizedDescription)")
+            }
+        }
+        
+        if repeatEnabled, let repeatInterval = repeatInterval, let repeatCount = repeatCount, let repeatCountInt = Int(repeatCount.replacingOccurrences(of: "회 반복", with: "")) {
             let repeatTimeInterval: TimeInterval
             switch repeatInterval {
             case "3분마다":
@@ -63,26 +66,20 @@ class AlarmSettingController {
                 repeatTimeInterval = 180
             }
             
-            let repeatTrigger = UNTimeIntervalNotificationTrigger(timeInterval: repeatTimeInterval, repeats: true)
-            for _ in 0..<Int(repeatCount.replacingOccurrences(of: "회 반복", with: "") )! {
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: repeatTrigger)
-                UNUserNotificationCenter.current().add(request) { (error) in
+            for i in 1...repeatCountInt {
+                let repeatTime = time.addingTimeInterval(Double(i) * repeatTimeInterval)
+                let repeatComponents = calendar.dateComponents([.hour, .minute], from: repeatTime)
+                let repeatTrigger = UNCalendarNotificationTrigger(dateMatching: repeatComponents, repeats: false)
+                
+                let repeatRequest = UNNotificationRequest(identifier: identifier + String(i), content: content, trigger: repeatTrigger)
+                UNUserNotificationCenter.current().add(repeatRequest) { (error) in
                     if let error = error {
-                        print("알림 추가 오류: \(error.localizedDescription)")
+                        print("반복 알림 추가 오류: \(error.localizedDescription)")
                     }
-                }
-            }
-        } else {
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("알림 추가 오류: \(error.localizedDescription)")
                 }
             }
         }
         
-        print("알람이 설정되었습니다.")
+        print("\(dateComponents)알람이 설정되었습니다.")
     }
 }

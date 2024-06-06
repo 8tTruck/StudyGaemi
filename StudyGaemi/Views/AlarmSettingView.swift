@@ -286,8 +286,9 @@ class AlarmSettingView: BaseViewController {
     }
     
     @objc private func saveValues() {
+        print(timekPicker.date)
         let alarmModel = AlarmModel(
-            time: alarmSettingController.getKoreanTime(from: timekPicker),
+            time: timekPicker.date,
             difficulty: segmentButton.titleForSegment(at: segmentButton.selectedSegmentIndex) ?? "중",
             sound: dropDownButton.currentTitle ?? "알림음 1",
             repeatEnabled: toggleButton.isOn,
