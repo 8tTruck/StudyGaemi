@@ -5,9 +5,13 @@
 //  Created by t2023-m0056 on 6/5/24.
 //
 
+import SnapKit
+import Then
 import UIKit
 
 class AlarmQuestionView: BaseViewController {
+    
+    private let alarmQuestionController = AlarmQuestionController()
 
     private let titleLabel = UILabel().then {
         $0.text = "문제 풀어보개미"
@@ -36,7 +40,7 @@ class AlarmQuestionView: BaseViewController {
     private let questionLabel = UILabel().then {
         $0.text = "문제"
         $0.font = UIFont(name: CustomFontType.medium.name, size: 20) ?? UIFont.systemFont(ofSize: 20)
-        $0.textColor = UIColor.systemGray2
+        $0.textColor = UIColor(named: "fontGray")
     }
     
     private lazy var expressionLabel = UILabel().then {
@@ -55,7 +59,10 @@ class AlarmQuestionView: BaseViewController {
     private let totalTime: TimeInterval = 180
     private var elapsedTime: TimeInterval = 0
     
-    private let customTextField = CustomTextField(text: "정답을 적어보개미")
+    private let customTextField = CustomTextField(text: "정답을 적어보개미").then {
+        $0.keyboardType = .numberPad
+    }
+    
     private let customButton = CustomButton(title: "제출")
     
     override func viewDidLoad() {
@@ -63,6 +70,10 @@ class AlarmQuestionView: BaseViewController {
         self.configureUI()
         self.constraintLayout()
         self.startTimer()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.customTextField.becomeFirstResponder()
     }
     
     override func configureUI() {
@@ -73,6 +84,8 @@ class AlarmQuestionView: BaseViewController {
         view.addSubview(questionStackView)
         view.addSubview(customTextField)
         view.addSubview(customButton)
+        
+        customButton.addTarget(self, action: #selector(checkAnswer), for: .touchUpInside)
         
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance().then {
@@ -128,7 +141,17 @@ class AlarmQuestionView: BaseViewController {
         if elapsedTime >= totalTime {
             timer?.invalidate()
             timer = nil
+            
+            let alarmResultView = AlarmResultView()
+            guard let navigation = navigationController else {
+                return
+            }
+            navigation.pushViewController(alarmResultView, animated: true)
         }
+    }
+    
+    @objc private func checkAnswer() {
+        alarmQuestionController.checkAnswer(customTextField.text, navigation: navigationController, timer: timer)
     }
 
 }
