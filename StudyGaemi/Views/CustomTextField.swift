@@ -14,9 +14,9 @@ class CustomTextField: UITextField {
         
         self.placeholder = text
         self.tintColor = UIColor.systemBackground
-        self.textColor = UIColor(named: "pointDarkgray") ?? UIColor.gray
-        self.layer.borderColor = UIColor(named: "navigationBarLine")?.cgColor ?? UIColor.gray.cgColor
-        self.layer.borderWidth = 1.0
+        self.textColor = UIColor(named: "fontGray") ?? UIColor.gray
+        self.layer.borderColor = UIColor(named: "textFieldColor")?.cgColor ?? UIColor.gray.cgColor
+        self.layer.borderWidth = 1.5
         self.layer.cornerRadius = 10
         
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: frame.height))

@@ -11,7 +11,7 @@ import UIKit
 
 class AlarmViewController: BaseViewController {
     
-    private let alarmController = AlarmController()
+    static let alarmController = AlarmController()
     
     private let titleLabel = UILabel().then {
         $0.text = "기상하개미"
@@ -38,8 +38,6 @@ class AlarmViewController: BaseViewController {
     
     private var alarmButton = AlarmButton().then {
         $0.setImage(UIImage(named: "alarmButton"),for: .normal)
-        $0.setTitle("09 : 00")
-        $0.setAmPmLabel("AM")
     }
     
     private let alarmView = UIView().then {
@@ -73,22 +71,19 @@ class AlarmViewController: BaseViewController {
         $0.distribution = .equalCentering
     }
     
-    private let timeLabel = UILabel().then {
-        $0.text = "09:00 AM"
+    private var timeLabel = UILabel().then {
         $0.font = UIFont(name: CustomFontType.semiBold.name, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
         $0.textAlignment = .left
     }
     
-    private let repeatLabel = UILabel().then {
-        $0.text = "3분마다"
+    private var repeatLabel = UILabel().then {
         $0.font = UIFont(name: CustomFontType.regular.name, size: 13) ?? UIFont.systemFont(ofSize: 13)
         $0.textColor = UIColor(named: "fontBlack")
         $0.textAlignment = .right
     }
     
-    private let difficultyLabel = UILabel().then {
-        $0.text = "문제 난이도 : 중"
+    private var difficultyLabel = UILabel().then {
         $0.font = UIFont(name: CustomFontType.regular.name, size: 13) ?? UIFont.systemFont(ofSize: 13)
         $0.textColor = UIColor(named: "fontBlack")
     }
@@ -97,6 +92,11 @@ class AlarmViewController: BaseViewController {
         super.viewDidLoad()
         self.configureUI()
         self.constraintLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setAlarm()
     }
     
     // UIButton이나 UILabel 등과 같은 부분 초기 설정 함수
@@ -169,8 +169,16 @@ class AlarmViewController: BaseViewController {
         }
     }
     
+    func setAlarm() {
+        alarmButton.setTitle(AlarmViewController.alarmController.setAlarmTime())
+        alarmButton.setAmPmLabel(AlarmViewController.alarmController.setAmPm())
+        timeLabel.text = "\(AlarmViewController.alarmController.setAlarmTime()) \(AlarmViewController.alarmController.setAmPm())"
+        repeatLabel.text = AlarmViewController.alarmController.setAlarmInterval()
+        difficultyLabel.text = "문제 난이도 : \(AlarmViewController.alarmController.setAlarmDifficulty())"
+    }
+    
     @objc private func tappedAlarmButton() {
-        alarmController.tappedAlarmButton(navigationController)
+        AlarmViewController.alarmController.goAheadView(navigationController)
     }
 
 }

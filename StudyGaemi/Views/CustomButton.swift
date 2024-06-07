@@ -37,4 +37,17 @@ class CustomButton: UIButton {
         super.layoutSubviews()
         gradient.frame = self.bounds
     }
+    
+    func setFontColor(_ color: UIColor?, for uiColor: UIControl.State) {
+        self.setTitleColor(color, for: uiColor)
+    }
+    
+    func setBackgroundColor(_ color: UIColor?) {
+        gradient.removeFromSuperlayer()
+        self.backgroundColor = color
+    }
+    
+    func setFontSize(name: String,_ size: CGFloat) {
+        self.titleLabel?.font = UIFont(name: name, size: size)
+    }
 }
