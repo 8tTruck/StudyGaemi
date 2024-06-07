@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
+		F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */; };
 		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
 		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
-		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
+		F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E050002C0EA02900802477 /* CalendarCell.swift */; };
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
@@ -51,8 +53,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
+		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 				FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */,
 				FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */,
 				F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */,
+				F4E050002C0EA02900802477 /* CalendarCell.swift */,
+				F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -298,11 +304,13 @@
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
+				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
+				F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
 				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
