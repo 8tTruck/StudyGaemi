@@ -61,3 +61,17 @@ extension UIButton {
         sender.isHighlighted = false
     }
 }
+
+extension UITextField {
+    func shake() {
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.values = [
+            NSValue(cgPoint: CGPoint(x: self.center.x - 2, y: self.center.y)),
+            NSValue(cgPoint: CGPoint(x: self.center.x + 2, y: self.center.y))
+        ]
+        animation.autoreverses = true
+        animation.repeatCount = 8
+        self.layer.add(animation, forKey: "shake")
+    }
+}

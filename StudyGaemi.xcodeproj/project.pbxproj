@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5255F2B32C0E63CD006FEE4B /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */; };
+		5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */; };
+		5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */; };
+		5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */; };
+		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
 		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
 		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
-		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
@@ -51,8 +55,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
+		5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
+		5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmViewController.swift; sourceTree = "<group>"; };
+		5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePasswordViewController.swift; sourceTree = "<group>"; };
+		5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountSuccessViewController.swift; sourceTree = "<group>"; };
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +169,10 @@
 				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
 				5275296A2C0D95F10002513F /* CreateAccountViewController.swift */,
+				5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */,
+				5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */,
+				5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */,
+				5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */,
 				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
 				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
 				FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */,
@@ -299,11 +311,15 @@
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
+				5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
+				5255F2B32C0E63CD006FEE4B /* EmailInputViewController.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
+				5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */,
+				5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */,
 				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
