@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class LoginViewController: UIViewController {
     
@@ -22,7 +23,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "viewBackgroundColor")
         loginImageSetting()
         loginTextFieldSetting()
         loginButtonSetting()
@@ -34,44 +35,40 @@ class LoginViewController: UIViewController {
     func orLabelSetting() {
         orLabel.text = "or"
         orLabel.textColor = .lightGray
-        orLabel.backgroundColor = .white
-        orLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        orLabel.backgroundColor = UIColor(named: "viewBackgroundColor")
+        orLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
         orLabel.textAlignment = .center
-        orLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(orLabel)
         
-        NSLayoutConstraint.activate([
-            orLabel.centerYAnchor.constraint(equalTo: separatorView.centerYAnchor),
-            orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            orLabel.widthAnchor.constraint(equalToConstant: 30)
-        ])
+        orLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(separatorView)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(30)
+        }
     }
     
     func separatorViewSetting() {
         separatorView.backgroundColor = UIColor.lightGray
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(separatorView)
-
-        NSLayoutConstraint.activate([
-            separatorView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20.5),
-            separatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            separatorView.widthAnchor.constraint(equalToConstant: 335),
-            separatorView.heightAnchor.constraint(equalToConstant: 1)
-        ])
+        
+        separatorView.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(20.5)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(335)
+            make.height.equalTo(1)
+        }
     }
     
     func loginImageSetting() {
         loginImage.image = UIImage(named: "heartAnt")
-        loginImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginImage)
         
-        NSLayoutConstraint.activate([
-            loginImage.widthAnchor.constraint(equalToConstant: 208),
-            loginImage.heightAnchor.constraint(equalToConstant: 124),
-            loginImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 58)
-        ])
+        loginImage.snp.makeConstraints { make in
+            make.width.equalTo(208)
+            make.height.equalTo(124)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(36)
+        }
     }
     
     func socialLoginUI() {
@@ -80,7 +77,7 @@ class LoginViewController: UIViewController {
         loginButtonStackView.spacing = 10
         loginButtonStackView.alignment = .center
         loginButtonStackView.distribution = .equalSpacing
-        loginButtonStackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loginButtonStackView)
         
         let signupStackView = UIStackView(arrangedSubviews: [signupLabel, createAccountButton])
         signupStackView.axis = .horizontal
@@ -91,14 +88,17 @@ class LoginViewController: UIViewController {
         mainStackView.axis = .vertical
         mainStackView.spacing = 10
         mainStackView.alignment = .center
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(mainStackView)
         
-        self.view.addSubview(mainStackView)
+        loginButtonStackView.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(41)
+            make.centerX.equalToSuperview()
+        }
         
-        NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 41),
-            mainStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
+        mainStackView.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(41)
+            make.centerX.equalToSuperview()
+        }
         
         socialLoginButtonSetting()
         
@@ -116,20 +116,22 @@ class LoginViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        passwordTextField.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
         
-        NSLayoutConstraint.activate([
-            emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emailTextField.topAnchor.constraint(equalTo: loginImage.bottomAnchor, constant: 58),
-            emailTextField.widthAnchor.constraint(equalToConstant: 342),
-            emailTextField.heightAnchor.constraint(equalToConstant: 60),
-            
-            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 12),
-            passwordTextField.widthAnchor.constraint(equalToConstant: 342),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 60)
-        ])
+        emailTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(loginImage.snp.bottom).offset(58)
+            make.width.equalTo(342)
+            make.height.equalTo(60)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(emailTextField.snp.bottom).offset(12)
+            make.width.equalTo(342)
+            make.height.equalTo(60)
+        }
     }
     
     func loginButtonSetting() {
@@ -137,23 +139,31 @@ class LoginViewController: UIViewController {
         // 애니메이션 추가
         loginButton.addTouchAnimation()
         
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 12),
-            loginButton.widthAnchor.constraint(equalToConstant: 342),
-            loginButton.heightAnchor.constraint(equalToConstant: 60)
-        ])
+        loginButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
+            make.width.equalTo(342)
+            make.height.equalTo(60)
+        }
+        
+        // 로그인 버튼에 액션 추가
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
     func socialLoginButtonSetting() {
-        NSLayoutConstraint.activate([
-            appleLoginButton.widthAnchor.constraint(equalToConstant: 300),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 45),
-            kakaoLoginButton.widthAnchor.constraint(equalToConstant: 300),
-            kakaoLoginButton.heightAnchor.constraint(equalToConstant: 45),
-            createAccountButton.heightAnchor.constraint(equalToConstant: 14)
-        ])
+        appleLoginButton.snp.makeConstraints { make in
+            make.width.equalTo(300)
+            make.height.equalTo(45)
+        }
+        
+        kakaoLoginButton.snp.makeConstraints { make in
+            make.width.equalTo(300)
+            make.height.equalTo(45)
+        }
+        
+        createAccountButton.snp.makeConstraints { make in
+            make.height.equalTo(14)
+        }
     }
     
     func configureAppleLoginButton() {
@@ -181,7 +191,7 @@ class LoginViewController: UIViewController {
     func configureCreateAccountButton() {
         createAccountButton.setTitle("계정 생성", for: .normal)
         createAccountButton.setTitleColor(.orange, for: .normal)
-        createAccountButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        createAccountButton.titleLabel?.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)
         createAccountButton.contentHorizontalAlignment = .right
         
         let attributes: [NSAttributedString.Key: Any] = [
@@ -198,7 +208,6 @@ class LoginViewController: UIViewController {
     }
 
     func applyCommonSettings(to button: UIButton) {
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.tintColor = .secondaryLabel
         button.setTitleColor(.black, for: .normal)
@@ -207,9 +216,28 @@ class LoginViewController: UIViewController {
         button.contentHorizontalAlignment = .center
     }
     
+    @objc func loginButtonTapped() {
+        let bottomTabBarVC = BottomTabBarViewController()
+//        let navigationController = UINavigationController(rootViewController: bottomTabBarVC)
+//        navigationController.modalPresentationStyle = .fullScreen
+//        self.navigationController?.pushViewController(bottomTabBarVC, animated: true)
+
+        // 현재 활성화된 씬을 통해 window를 가져와 rootViewController를 설정
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = bottomTabBarVC
+            window.makeKeyAndVisible()
+        }
+    }
+    
     @objc func createAccountButtonTapped() {
+        moveNextVC()
+    }
+    
+    func moveNextVC() {
         let createAccountVC = CreateAccountViewController()
         createAccountVC.modalPresentationStyle = .fullScreen
-        self.present(createAccountVC, animated: true, completion: nil)
+//        self.present(createAccountVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(createAccountVC, animated: true)
     }
 }
