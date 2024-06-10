@@ -11,10 +11,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
+      
         UINavigationController(rootViewController: LoginViewController())
         let bottomTabBarController = EmailInputViewController()
         
@@ -54,7 +54,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
 }
 
+extension SceneDelegate {
+    
+    
+    
+    // MARK: - 특정 ViewController로 이동하는 메소드
+    func navigateToViewController(withIdentifier identifier: String) {
+        guard let window = window else {
+            print("window없음")
+            return
+        }
+        
+        let rootViewController = window.rootViewController as? UINavigationController
+        
+        if rootViewController == nil {
+            // 네비게이션 컨트롤러가 없는 경우, 새로운 네비게이션 컨트롤러를 생성하여 설정
+            let navController = UINavigationController(rootViewController: createViewController(withIdentifier: identifier))
+            window.rootViewController = navController
+        } else {
+            // 네비게이션 컨트롤러가 있는 경우, 해당 네비게이션 컨트롤러를 통해 푸시
+            rootViewController?.pushViewController(createViewController(withIdentifier: identifier), animated: true)
+        }
+    }
+    
+    // MARK: - 특정 ViewController를 생성하는 메소드
+    private func createViewController(withIdentifier identifier: String) -> UIViewController {
+        switch identifier {
+        case "AlarmQuestionView":
+            return AlarmQuestionView()
+        default:
+            return AlarmViewController()
+        }
+    }
+}
