@@ -44,7 +44,7 @@ class AlarmSettingController {
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request) { (error) in
@@ -69,7 +69,7 @@ class AlarmSettingController {
             for i in 1...repeatCountInt {
                 let repeatTime = time.addingTimeInterval(Double(i) * repeatTimeInterval)
                 let repeatComponents = calendar.dateComponents([.hour, .minute], from: repeatTime)
-                let repeatTrigger = UNCalendarNotificationTrigger(dateMatching: repeatComponents, repeats: false)
+                let repeatTrigger = UNCalendarNotificationTrigger(dateMatching: repeatComponents, repeats: true)
                 
                 let repeatRequest = UNNotificationRequest(identifier: identifier + String(i), content: content, trigger: repeatTrigger)
                 UNUserNotificationCenter.current().add(repeatRequest) { (error) in
@@ -80,6 +80,6 @@ class AlarmSettingController {
             }
         }
         
-        print("\(dateComponents)알람이 설정되었습니다.")
+        print("알람이 설정되었습니다.")
     }
 }

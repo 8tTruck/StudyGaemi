@@ -181,6 +181,8 @@ class AlarmSettingView: BaseViewController {
         view.addSubview(bottomStackView)
         view.addSubview(saveButton)
         
+        saveButton.addTouchAnimation()
+        
         segmentButton.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         toggleButton.addTarget(self, action: #selector(toggleSwitchChanged(_:)), for: .valueChanged)
         saveButton.addTarget(self, action: #selector(saveValues), for: .touchUpInside)
@@ -194,6 +196,9 @@ class AlarmSettingView: BaseViewController {
             }),
             UIAction(title: "알림음 3", handler: { [weak self] _ in
                 self?.buttonSetTitle("알림음 3", for: self?.dropDownButton)
+            }),
+            UIAction(title: "알림음 4", handler: { [weak self] _ in
+                self?.buttonSetTitle("알림음 4", for: self?.dropDownButton)
             })
         ])
         

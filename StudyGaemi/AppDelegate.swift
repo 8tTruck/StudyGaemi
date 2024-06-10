@@ -5,6 +5,7 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
+import FirebaseCore
 import UserNotifications
 import UIKit
 import CoreData
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("알림 권한이 거부되었습니다.")
             }
         }
+        FirebaseApp.configure()
         return true
     }
 
@@ -104,4 +106,26 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler()
     }
     
+    // MARK: - 알림이 울린 뒤에 호출되는 메소드
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didDeliver notifications: [UNNotification]) {
+        let identifier = "기상하개미"
+        let content = UNMutableNotificationContent()
+        content.title = "일어나개미!"
+        content.body = "기상시간입니다. 일어나개미!"
+//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(sound).wav"))
+        content.userInfo = ["viewControllerIdentifier": "AlarmQuestionView"]
+        let timeInterval: TimeInterval = 4.5
+        
+        for i in 1...14 {
+            let triggerTime = timeInterval * Double(i)
+            let intervalTrigger = UNTimeIntervalNotificationTrigger(timeInterval: triggerTime, repeats: false)
+            let intervalRequest = UNNotificationRequest(identifier: identifier + "during" + String(i), content: content, trigger: intervalTrigger)
+            
+            UNUserNotificationCenter.current().add(intervalRequest) { (error) in
+                if let error = error {
+                    print("알림 추가 오류: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }
