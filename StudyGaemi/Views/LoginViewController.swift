@@ -9,20 +9,72 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    // 버튼 생성
+    let loginImage = UIImageView()
+    let emailTextField = CustomTextField(text: "E-mail")
+    let passwordTextField = CustomTextField(text: "Password")
+    let loginButton = CustomButton(title: "Login")
+    let separatorView = UIView()
+    let orLabel = UILabel()
     let appleLoginButton = UIButton()
     let kakaoLoginButton = UIButton()
     let signupLabel = UILabel()
     let createAccountButton = UIButton()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureLoginUI()
+        view.backgroundColor = .white
+        loginImageSetting()
+        loginTextFieldSetting()
+        loginButtonSetting()
+        separatorViewSetting()
+        orLabelSetting()
+        socialLoginUI()
     }
     
-    func configureLoginUI() {
-        // 버튼 추가 및 레이아웃 설정
+    func orLabelSetting() {
+        orLabel.text = "or"
+        orLabel.textColor = .lightGray
+        orLabel.backgroundColor = .white
+        orLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        orLabel.textAlignment = .center
+        orLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(orLabel)
+        
+        NSLayoutConstraint.activate([
+            orLabel.centerYAnchor.constraint(equalTo: separatorView.centerYAnchor),
+            orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            orLabel.widthAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+    
+    func separatorViewSetting() {
+        separatorView.backgroundColor = UIColor.lightGray
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(separatorView)
+
+        NSLayoutConstraint.activate([
+            separatorView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20.5),
+            separatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            separatorView.widthAnchor.constraint(equalToConstant: 335),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    
+    func loginImageSetting() {
+        loginImage.image = UIImage(named: "heartAnt")
+        loginImage.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loginImage)
+        
+        NSLayoutConstraint.activate([
+            loginImage.widthAnchor.constraint(equalToConstant: 208),
+            loginImage.heightAnchor.constraint(equalToConstant: 124),
+            loginImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 58)
+        ])
+    }
+    
+    func socialLoginUI() {
         let loginButtonStackView = UIStackView(arrangedSubviews: [appleLoginButton, kakaoLoginButton])
         loginButtonStackView.axis = .vertical
         loginButtonStackView.spacing = 10
@@ -44,68 +96,78 @@ class LoginViewController: UIViewController {
         self.view.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
-            mainStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 29),
-            mainStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -29),
-            mainStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -209),
-            
-//            loginButtonStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 470) // 수정된 부분
+            mainStackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 41),
+            mainStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        loginButtonAutoLayoutSetting()
+        socialLoginButtonSetting()
         
-        // 버튼 설정
         configureAppleLoginButton()
         configureKakaoLoginButton()
         configureSignupLabel()
         configureCreateAccountButton()
         
-        // 버튼에 애니메이션 추가
-        addAnimation(to: appleLoginButton)
-        addAnimation(to: kakaoLoginButton)
+        // 애니메이션 추가
+        appleLoginButton.addTouchAnimation()
+        kakaoLoginButton.addTouchAnimation()
     }
 
-    
-    func loginButtonAutoLayoutSetting() {
+    func loginTextFieldSetting() {
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
+        
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            appleLoginButton.widthAnchor.constraint(equalToConstant: 335),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 52),
-            kakaoLoginButton.widthAnchor.constraint(equalToConstant: 335),
-            kakaoLoginButton.heightAnchor.constraint(equalToConstant: 52),
+            emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emailTextField.topAnchor.constraint(equalTo: loginImage.bottomAnchor, constant: 58),
+            emailTextField.widthAnchor.constraint(equalToConstant: 342),
+            emailTextField.heightAnchor.constraint(equalToConstant: 60),
+            
+            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 12),
+            passwordTextField.widthAnchor.constraint(equalToConstant: 342),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+    
+    func loginButtonSetting() {
+        view.addSubview(loginButton)
+        // 애니메이션 추가
+        loginButton.addTouchAnimation()
+        
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 12),
+            loginButton.widthAnchor.constraint(equalToConstant: 342),
+            loginButton.heightAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+    
+    func socialLoginButtonSetting() {
+        NSLayoutConstraint.activate([
+            appleLoginButton.widthAnchor.constraint(equalToConstant: 300),
+            appleLoginButton.heightAnchor.constraint(equalToConstant: 45),
+            kakaoLoginButton.widthAnchor.constraint(equalToConstant: 300),
+            kakaoLoginButton.heightAnchor.constraint(equalToConstant: 45),
             createAccountButton.heightAnchor.constraint(equalToConstant: 14)
         ])
     }
     
     func configureAppleLoginButton() {
-        // 이미지 설정
-        if let image = UIImage(named: "apple") {
-            let scaledImage = image.resized(to: CGSize(width: 20, height: 20))
-            appleLoginButton.setImage(scaledImage, for: .normal)
-        }
-        appleLoginButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
-        // 나머지 버튼 설정
-        appleLoginButton.setTitle("Sign in with Apple", for: .normal)
-        appleLoginButton.setTitleColor(.black, for: .normal)
-        appleLoginButton.layer.cornerRadius = 22
-        appleLoginButton.layer.borderColor = UIColor.lightGray.cgColor
+        appleLoginButton.layer.cornerRadius = 12
+        let backgroundImage = UIImage(named: "apple")
+        appleLoginButton.setBackgroundImage(backgroundImage, for: .normal)
         appleLoginButton.layer.borderWidth = 1
-        appleLoginButton.backgroundColor = .white
         applyCommonSettings(to: appleLoginButton)
     }
     
     func configureKakaoLoginButton() {
-        // 이미지 설정
-        if let image = UIImage(named: "kakao") {
-            let scaledImage = image.resized(to: CGSize(width: 20, height: 20))
-            kakaoLoginButton.setImage(scaledImage, for: .normal)
-        }
-        kakaoLoginButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
-        // 나머지 버튼 설정
-        kakaoLoginButton.setTitle("카카오로 3초만에 시작하기", for: .normal)
-        kakaoLoginButton.setTitleColor(.black, for: .normal)
-        kakaoLoginButton.layer.cornerRadius = 22
-        kakaoLoginButton.layer.borderColor = UIColor.lightGray.cgColor
-        kakaoLoginButton.layer.borderWidth = 1
-        kakaoLoginButton.backgroundColor = .yellow
+        kakaoLoginButton.layer.cornerRadius = 12
+        let backgroundImage = UIImage(named: "kakao")
+        kakaoLoginButton.setBackgroundImage(backgroundImage, for: .normal)
         applyCommonSettings(to: kakaoLoginButton)
     }
     
@@ -118,24 +180,23 @@ class LoginViewController: UIViewController {
     
     func configureCreateAccountButton() {
         createAccountButton.setTitle("계정 생성", for: .normal)
-        createAccountButton.setTitleColor(.orange, for: .normal) // 텍스트 색상 변경
+        createAccountButton.setTitleColor(.orange, for: .normal)
         createAccountButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         createAccountButton.contentHorizontalAlignment = .right
         
-        // 텍스트에 밑줄 추가
         let attributes: [NSAttributedString.Key: Any] = [
             .underlineStyle: NSUnderlineStyle.single.rawValue,
-            .underlineColor: UIColor.orange // 밑줄 색상 변경
+            .underlineColor: UIColor.orange
         ]
         let attributedTitle = NSAttributedString(string: "계정 생성", attributes: attributes)
         createAccountButton.setAttributedTitle(attributedTitle, for: .normal)
         
-        // Auto Layout 제약 추가
         createAccountButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
+        // 버튼에 액션 추가
+        createAccountButton.addTarget(self, action: #selector(createAccountButtonTapped), for: .touchUpInside)
     }
 
-    
-    // 공통 설정 메서드
     func applyCommonSettings(to button: UIButton) {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -146,47 +207,9 @@ class LoginViewController: UIViewController {
         button.contentHorizontalAlignment = .center
     }
     
-    // 버튼에 애니메이션 추가하는 메서드
-    func addAnimation(to button: UIButton) {
-        button.addTarget(self, action: #selector(buttonTouchDown(sender:)), for: .touchDown)
-        button.addTarget(self, action: #selector(buttonTouchUp(sender:)), for: [.touchUpInside, .touchUpOutside, .touchCancel])
-    }
-    
-    @objc func buttonTouchDown(sender: UIButton) {
-        UIView.animate(withDuration: 0.1) {
-            sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }
-    }
-    
-    @objc func buttonTouchUp(sender: UIButton) {
-        UIView.animate(withDuration: 0.1) {
-            sender.transform = .identity
-        }
-    }
-}
-
-extension UIImage {
-    func resized(to targetSize: CGSize) -> UIImage {
-        let size = self.size
-
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-
-        // 이미지의 비율 유지
-        let newSize: CGSize
-        if widthRatio > heightRatio {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        self.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        return newImage ?? self
+    @objc func createAccountButtonTapped() {
+        let createAccountVC = CreateAccountViewController()
+        createAccountVC.modalPresentationStyle = .fullScreen
+        self.present(createAccountVC, animated: true, completion: nil)
     }
 }

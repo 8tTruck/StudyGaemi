@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */; };
+		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
+		F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */; };
+		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
+		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
+		F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E050002C0EA02900802477 /* CalendarCell.swift */; };
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
@@ -41,10 +46,25 @@
 		FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */; };
 		FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071982C08432E000AE7AA /* CustomFontType.swift */; };
 		FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719A2C086809000AE7AA /* LoginViewController.swift */; };
+		FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719C2C09B96B000AE7AA /* CustomButton.swift */; };
+		FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */; };
+		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
+		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
+		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
+		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
+		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
+		FF875F662C10474B00A5D534 /* 알림음 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF875F652C10474B00A5D534 /* 알림음 1.wav */; };
+		FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */; };
+		FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */; };
+		FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF931A632C12BC4700AD1513 /* AlarmResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
+		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
+		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +90,17 @@
 		FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		FF0071982C08432E000AE7AA /* CustomFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontType.swift; sourceTree = "<group>"; };
 		FF00719A2C086809000AE7AA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FF00719C2C09B96B000AE7AA /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
+		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
+		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
+		FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingController.swift; sourceTree = "<group>"; };
+		FF875F622C0F4DC300A5D534 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
+		FF875F652C10474B00A5D534 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
+		FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionView.swift; sourceTree = "<group>"; };
+		FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionController.swift; sourceTree = "<group>"; };
+		FF931A632C12BC4700AD1513 /* AlarmResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +118,7 @@
 				FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */,
 				FF00716F2C074DFA000AE7AA /* FirebaseDatabase in Frameworks */,
 				FF0071682C074DCD000AE7AA /* KakaoSDKAuth in Frameworks */,
+				F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,10 +147,11 @@
 				FF0071842C082573000AE7AA /* Models */,
 				FF0071832C08256A000AE7AA /* Views */,
 				FF0071822C08255F000AE7AA /* Controllers */,
-				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
 				FF0071852C0840B9000AE7AA /* Fonts */,
-				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
+				FF875F642C10473600A5D534 /* Wavs */,
 				FF00714D2C074D86000AE7AA /* Main.storyboard */,
+				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
+				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
 				FF0071532C074D88000AE7AA /* Assets.xcassets */,
 				FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */,
 				FF0071582C074D88000AE7AA /* Info.plist */,
@@ -131,6 +164,9 @@
 		FF0071822C08255F000AE7AA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FF6774012C0DACF800017E1F /* AlarmController.swift */,
+				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
+				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -146,6 +182,16 @@
 				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
 				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
+				5275296A2C0D95F10002513F /* CreateAccountViewController.swift */,
+				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
+				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
+				FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */,
+				FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */,
+				F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */,
+				F4E050002C0EA02900802477 /* CalendarCell.swift */,
+				F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */,
+				FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */,
+				FF931A632C12BC4700AD1513 /* AlarmResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -153,6 +199,7 @@
 		FF0071842C082573000AE7AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FF875F622C0F4DC300A5D534 /* AlarmModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -171,6 +218,14 @@
 				FF00718A2C0840D5000AE7AA /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FF875F642C10473600A5D534 /* Wavs */ = {
+			isa = PBXGroup;
+			children = (
+				FF875F652C10474B00A5D534 /* 알림음 1.wav */,
+			);
+			path = Wavs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +255,7 @@
 				FF0071702C074DFA000AE7AA /* FirebaseDatabaseSwift */,
 				FF0071722C074DFA000AE7AA /* FirebaseStorage */,
 				FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */,
+				F4E04FFA2C0D8DE900802477 /* FSCalendar */,
 			);
 			productName = StudyGaemi;
 			productReference = FF0071442C074D86000AE7AA /* StudyGaemi.app */;
@@ -234,6 +290,7 @@
 				FF0071612C074DB7000AE7AA /* XCRemoteSwiftPackageReference "Then" */,
 				FF0071642C074DCD000AE7AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = FF0071452C074D86000AE7AA /* Products */;
 			projectDirPath = "";
@@ -255,6 +312,7 @@
 				FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */,
 				FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */,
 				FF0071572C074D88000AE7AA /* Base in Resources */,
+				FF875F662C10474B00A5D534 /* 알림음 1.wav in Resources */,
 				FF00714F2C074D86000AE7AA /* Base in Resources */,
 				FF0071962C0840D6000AE7AA /* Pretendard-ExtraBold.otf in Resources */,
 				FF0071902C0840D6000AE7AA /* Pretendard-Black.otf in Resources */,
@@ -271,17 +329,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */,
 				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
+				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
+				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
+				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
+				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
+				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
+				FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
+				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
+				F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
+				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
+				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
+				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */,
+				FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
+				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,6 +589,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 		FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -552,6 +632,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F4E04FFA2C0D8DE900802477 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		FF00715F2C074DAD000AE7AA /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */;
