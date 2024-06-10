@@ -5,6 +5,7 @@
 //  Created by Seungseop Lee on 6/4/24.
 //
 
+import Firebase
 import UIKit
 import SnapKit
 
@@ -19,6 +20,10 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
     
     let textField = CustomTextField(text: "인증코드를 입력하세요")
     let confirmButton = CustomButton(title: "인증")
+    
+    private var timer: Timer?
+    private let totalTime: TimeInterval = 180
+    private var elapsedTime: TimeInterval = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +37,43 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
         updateConfirmButtonState()
+        startTimer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         textField.becomeFirstResponder()
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateProgress() {
+        print("이메일 인증 감지")
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user{
+                // 이메일 인증 완료 처리
+                print("Email verified successfully")
+                user.reload()
+                if user.isEmailVerified {
+                    self.moveNextVC()
+                    self.timer?.invalidate()
+                    self.timer = nil
+                }
+            } else {
+                // 이메일 인증 실패 처리
+                print("Email verification failed")
+            }
+        }
+        
+        if elapsedTime >= totalTime {
+            timer?.invalidate()
+            timer = nil
+            
+            // 시간 초과 시 계정 삭제하는 메소드 추가
+            // 시간 초과 시 로그아웃 하는 메소드 추가
+        }
     }
     
     func mainImageSetting() {
@@ -112,6 +149,7 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
     func isValidCode(code: String) -> Bool {
         // 임시로 6자리 숫자인지만 판독하도록 작성
         guard code.count == 6 else { return false }
+        
         return Int(code) != nil
     }
     
@@ -121,10 +159,14 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
     }
     
     func moveNextVC() {
-        let makePasswordVC = MakePasswordViewController()
-        makePasswordVC.modalPresentationStyle = .fullScreen
-//        present(makePasswordVC, animated: true, completion: nil)
-        self.navigationController?.pushViewController(makePasswordVC, animated: true)
+        let createAccountSuccessVC = CreateAccountSuccessViewController()
+        createAccountSuccessVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(createAccountSuccessVC, animated: true)
+
+//        let makePasswordVC = MakePasswordViewController()
+//        makePasswordVC.modalPresentationStyle = .fullScreen
+////        present(makePasswordVC, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(makePasswordVC, animated: true)
 
     }
     
