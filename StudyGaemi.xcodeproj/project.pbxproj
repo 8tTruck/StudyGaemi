@@ -59,10 +59,10 @@
 		FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */; };
 		FF03F9022C16D55600134B54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF03F9012C16D55600134B54 /* GoogleService-Info.plist */; };
 		FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF03F9032C16D59700134B54 /* FirebaseAnalytics */; };
-		FF03F9062C16E6D400134B54 /* EmailVerificationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03F9052C16E6D400134B54 /* EmailVerificationChecker.swift */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
+		FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */; };
 		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
 		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
 		FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */; };
@@ -113,10 +113,10 @@
 		FF03F8FD2C16A01400134B54 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
 		FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultController.swift; sourceTree = "<group>"; };
 		FF03F9012C16D55600134B54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		FF03F9052C16E6D400134B54 /* EmailVerificationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationChecker.swift; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
+		FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingController.swift; sourceTree = "<group>"; };
 		FF875F622C0F4DC300A5D534 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
 		FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionView.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
 				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
 				FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */,
-				FF03F9052C16E6D400134B54 /* EmailVerificationChecker.swift */,
+				FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -390,8 +390,8 @@
 				5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */,
 				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
+				FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */,
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
-				FF03F9062C16E6D400134B54 /* EmailVerificationChecker.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */,
 				FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */,

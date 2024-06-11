@@ -22,7 +22,7 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
     let confirmButton = CustomButton(title: "인증")
     
     private var timer: Timer?
-    private let totalTime: TimeInterval = 180
+    private let totalTime: TimeInterval = 30
     private var elapsedTime: TimeInterval = 0
 
     override func viewDidLoad() {
@@ -50,29 +50,17 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func updateProgress() {
+        elapsedTime += 1
         print("이메일 인증 감지")
-        Auth.auth().addStateDidChangeListener { auth, user in
-            if let user = user{
-                // 이메일 인증 완료 처리
-                print("Email verified successfully")
-                user.reload()
-                if user.isEmailVerified {
-                    self.moveNextVC()
-                    self.timer?.invalidate()
-                    self.timer = nil
-                }
-            } else {
-                // 이메일 인증 실패 처리
-                print("Email verification failed")
-            }
-        }
+        AuthenticationManager.shared.checkEmailVerified(timer: self.timer, navigationController: navigationController)
         
         if elapsedTime >= totalTime {
             timer?.invalidate()
             timer = nil
-            
-            // 시간 초과 시 계정 삭제하는 메소드 추가
+            // 시간 초과 시 계정 탈퇴 하는 메소드 추가
+            AuthenticationManager.shared.deleteUser()
             // 시간 초과 시 로그아웃 하는 메소드 추가
+            AuthenticationManager.shared.signOut()
         }
     }
     
