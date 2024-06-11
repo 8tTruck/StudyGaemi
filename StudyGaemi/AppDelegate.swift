@@ -5,6 +5,7 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
+import FirebaseCore
 import UserNotifications
 import UIKit
 import CoreData
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("알림 권한이 거부되었습니다.")
             }
         }
+        FirebaseApp.configure()
         return true
     }
 
@@ -103,5 +105,4 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         completionHandler()
     }
-    
 }

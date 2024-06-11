@@ -85,7 +85,9 @@ class AlarmQuestionView: BaseViewController {
         view.addSubview(customTextField)
         view.addSubview(customButton)
         
+        customButton.addTouchAnimation()
         customButton.addTarget(self, action: #selector(checkAnswer), for: .touchUpInside)
+        customTextField.addTarget(self, action: #selector(textFieldEditingDidBegin), for: .editingDidBegin)
         
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance().then {
@@ -151,7 +153,11 @@ class AlarmQuestionView: BaseViewController {
     }
     
     @objc private func checkAnswer() {
-        alarmQuestionController.checkAnswer(customTextField.text, navigation: navigationController, timer: timer)
+        alarmQuestionController.checkAnswer(customTextField.text, navigation: navigationController, timer: timer, textField: customTextField)
+    }
+    
+    @objc func textFieldEditingDidBegin(_ textField: UITextField) {
+        textField.text = ""
     }
 
 }

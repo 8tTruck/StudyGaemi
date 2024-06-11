@@ -171,10 +171,13 @@ class CreateAccountViewController: UIViewController {
     }
     
     func moveNextVC() {
-        let emailInputVC = EmailInputViewController()
-        emailInputVC.modalPresentationStyle = .fullScreen
-//        present(emailInputVC, animated: true, completion: nil)
-        self.navigationController?.pushViewController(emailInputVC, animated: true)
+        let makePasswordVC = MakePasswordViewController()
+        makePasswordVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(makePasswordVC, animated: true)
+//        let emailInputVC = EmailInputViewController()
+//        emailInputVC.modalPresentationStyle = .fullScreen
+////        present(emailInputVC, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(emailInputVC, animated: true)
 
     }
 }
