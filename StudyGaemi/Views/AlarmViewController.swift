@@ -114,6 +114,7 @@ class AlarmViewController: BaseViewController {
         horizontalStackView.addArrangedSubview(timeLabel)
         horizontalStackView.addArrangedSubview(repeatLabel)
         
+        alarmButton.addTouchAnimation()
         alarmButton.addTarget(self, action: #selector(tappedAlarmButton), for: .touchUpInside)
         
         if #available(iOS 13.0, *) {

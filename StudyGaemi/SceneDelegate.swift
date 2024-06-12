@@ -14,11 +14,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let bottomTabBarController = BottomTabBarViewController()
+      
+        UINavigationController(rootViewController: LoginViewController())
+        let bottomTabBarController = EmailInputViewController()
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = bottomTabBarController
+        window.rootViewController = UINavigationController(rootViewController: LoginViewController())
+//        window.rootViewController = UINavigationController(rootViewController: EmailConfirmViewController())
         window.makeKeyAndVisible()
         self.window = window
     }

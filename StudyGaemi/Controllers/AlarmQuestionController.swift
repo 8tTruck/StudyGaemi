@@ -9,7 +9,7 @@ import UIKit
 
 class AlarmQuestionController {
     
-    func checkAnswer(_ text: String?, navigation: UINavigationController?, timer: Timer?) {
+    func checkAnswer(_ text: String?, navigation: UINavigationController?, timer: Timer?, textField: UITextField) {
         if let answer = text {
             if answer == "361" {
                 let alarmResultView = AlarmResultView()
@@ -20,10 +20,16 @@ class AlarmQuestionController {
                 alarmResultView.status = .success
                 navigation.pushViewController(alarmResultView, animated: true)
             } else {
-                // 정답 틀렸을때 버튼 흔들리는 효과 넣기
+                textField.shake()
+                textField.layer.borderWidth = 1
+                textField.layer.borderColor = UIColor(named: "failureColor")?.cgColor
+                textField.becomeFirstResponder()
             }
         } else {
-            // 정답 틀렸을떄 버튼 흔들리는 효과 넣기
+            textField.shake()
+            textField.layer.borderWidth = 1
+            textField.layer.borderColor = UIColor(named: "failureColor")?.cgColor
+            textField.becomeFirstResponder()
         }
     }
     

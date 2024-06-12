@@ -56,7 +56,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let editButton = UIButton(type: .system).then {
         $0.setImage(UIImage(systemName: "pencil.line"), for: .normal)
         $0.tintColor = .gray
-        $0.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        $0.addTarget(SettingViewController.self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
     private let separatorView = UIView().then {

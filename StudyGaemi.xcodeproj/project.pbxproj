@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+
 		3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */; };
 		3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */; };
 		3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */; };
 		3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */; };
 		3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */; };
+		5255F2B32C0E63CD006FEE4B /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */; };
+		5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */; };
+		5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */; };
+		5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */; };
 		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
+		B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */; };
 		F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */; };
 		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
 		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
@@ -52,24 +58,37 @@
 		FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719A2C086809000AE7AA /* LoginViewController.swift */; };
 		FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719C2C09B96B000AE7AA /* CustomButton.swift */; };
 		FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */; };
+		FF03F8FA2C169F8D00134B54 /* 알림음 2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF03F8F62C169F8D00134B54 /* 알림음 2.wav */; };
+		FF03F8FB2C169F8D00134B54 /* 알림음 3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF03F8F72C169F8D00134B54 /* 알림음 3.wav */; };
+		FF03F8FC2C169F8D00134B54 /* 알림음 4.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF03F8F82C169F8D00134B54 /* 알림음 4.wav */; };
+		FF03F8FE2C16A01400134B54 /* 알림음 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF03F8FD2C16A01400134B54 /* 알림음 1.wav */; };
+		FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */; };
+		FF03F9022C16D55600134B54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF03F9012C16D55600134B54 /* GoogleService-Info.plist */; };
+		FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF03F9032C16D59700134B54 /* FirebaseAnalytics */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
+		FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */; };
 		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
 		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
-		FF875F662C10474B00A5D534 /* 알림음 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF875F652C10474B00A5D534 /* 알림음 1.wav */; };
 		FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */; };
 		FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */; };
 		FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF931A632C12BC4700AD1513 /* AlarmResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+
 		3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController.swift; sourceTree = "<group>"; };
 		3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportViewController.swift; sourceTree = "<group>"; };
 		3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
+		5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmViewController.swift; sourceTree = "<group>"; };
+		5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePasswordViewController.swift; sourceTree = "<group>"; };
+		5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountSuccessViewController.swift; sourceTree = "<group>"; };
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
@@ -100,12 +119,18 @@
 		FF00719A2C086809000AE7AA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FF00719C2C09B96B000AE7AA /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		FF03F8F62C169F8D00134B54 /* 알림음 2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 2.wav"; sourceTree = "<group>"; };
+		FF03F8F72C169F8D00134B54 /* 알림음 3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 3.wav"; sourceTree = "<group>"; };
+		FF03F8F82C169F8D00134B54 /* 알림음 4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 4.wav"; sourceTree = "<group>"; };
+		FF03F8FD2C16A01400134B54 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
+		FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultController.swift; sourceTree = "<group>"; };
+		FF03F9012C16D55600134B54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
+		FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingController.swift; sourceTree = "<group>"; };
 		FF875F622C0F4DC300A5D534 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
-		FF875F652C10474B00A5D534 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
 		FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionView.swift; sourceTree = "<group>"; };
 		FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionController.swift; sourceTree = "<group>"; };
 		FF931A632C12BC4700AD1513 /* AlarmResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultView.swift; sourceTree = "<group>"; };
@@ -118,6 +143,7 @@
 			files = (
 				FF0071712C074DFA000AE7AA /* FirebaseDatabaseSwift in Frameworks */,
 				FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */,
+				FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */,
 				FF0071752C074DFA000AE7AA /* FirebaseStorageCombine-Community in Frameworks */,
 				FF0071732C074DFA000AE7AA /* FirebaseStorage in Frameworks */,
 				FF00716D2C074DFA000AE7AA /* FirebaseAuthCombine-Community in Frameworks */,
@@ -165,6 +191,7 @@
 				FF0071582C074D88000AE7AA /* Info.plist */,
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
 				FF0071982C08432E000AE7AA /* CustomFontType.swift */,
+				FF03F9012C16D55600134B54 /* GoogleService-Info.plist */,
 			);
 			path = StudyGaemi;
 			sourceTree = "<group>";
@@ -175,6 +202,8 @@
 				FF6774012C0DACF800017E1F /* AlarmController.swift */,
 				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
 				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
+				FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */,
+				FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -186,10 +215,15 @@
 				FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */,
 				FF00717A2C075429000AE7AA /* AlarmViewController.swift */,
 				FF00717C2C075438000AE7AA /* StudyViewController.swift */,
+				B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */,
 				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
 				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
 				5275296A2C0D95F10002513F /* CreateAccountViewController.swift */,
+				5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */,
+				5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */,
+				5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */,
+				5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */,
 				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
 				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
 				FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */,
@@ -235,7 +269,10 @@
 		FF875F642C10473600A5D534 /* Wavs */ = {
 			isa = PBXGroup;
 			children = (
-				FF875F652C10474B00A5D534 /* 알림음 1.wav */,
+				FF03F8FD2C16A01400134B54 /* 알림음 1.wav */,
+				FF03F8F62C169F8D00134B54 /* 알림음 2.wav */,
+				FF03F8F72C169F8D00134B54 /* 알림음 3.wav */,
+				FF03F8F82C169F8D00134B54 /* 알림음 4.wav */,
 			);
 			path = Wavs;
 			sourceTree = "<group>";
@@ -268,6 +305,7 @@
 				FF0071722C074DFA000AE7AA /* FirebaseStorage */,
 				FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */,
 				F4E04FFA2C0D8DE900802477 /* FSCalendar */,
+				FF03F9032C16D59700134B54 /* FirebaseAnalytics */,
 			);
 			productName = StudyGaemi;
 			productReference = FF0071442C074D86000AE7AA /* StudyGaemi.app */;
@@ -324,13 +362,17 @@
 				FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */,
 				FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */,
 				FF0071572C074D88000AE7AA /* Base in Resources */,
-				FF875F662C10474B00A5D534 /* 알림음 1.wav in Resources */,
+				FF03F8FC2C169F8D00134B54 /* 알림음 4.wav in Resources */,
+				FF03F8FA2C169F8D00134B54 /* 알림음 2.wav in Resources */,
 				FF00714F2C074D86000AE7AA /* Base in Resources */,
 				FF0071962C0840D6000AE7AA /* Pretendard-ExtraBold.otf in Resources */,
 				FF0071902C0840D6000AE7AA /* Pretendard-Black.otf in Resources */,
 				FF0071952C0840D6000AE7AA /* Pretendard-SemiBold.otf in Resources */,
+				FF03F9022C16D55600134B54 /* GoogleService-Info.plist in Resources */,
 				FF0071912C0840D6000AE7AA /* Pretendard-Light.otf in Resources */,
+				FF03F8FE2C16A01400134B54 /* 알림음 1.wav in Resources */,
 				FF0071942C0840D6000AE7AA /* Pretendard-Medium.otf in Resources */,
+				FF03F8FB2C169F8D00134B54 /* 알림음 3.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,25 +388,32 @@
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
 				3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */,
+				FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */,
 				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
 				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
+				5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
+				5255F2B32C0E63CD006FEE4B /* EmailInputViewController.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */,
 				F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */,
 				3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
+				5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */,
+				5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */,
 				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
+				FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */,
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
+				B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */,
 				FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
 				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
@@ -702,6 +751,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		FF03F9032C16D59700134B54 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 

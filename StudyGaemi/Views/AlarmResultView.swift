@@ -16,6 +16,7 @@ enum Status {
 
 class AlarmResultView: BaseViewController {
     
+    private let alarmResultController = AlarmResultController()
     var status: Status = .failure
     
     private lazy var imageView = UIImageView().then {
@@ -119,6 +120,8 @@ class AlarmResultView: BaseViewController {
         view.addSubview(stackView)
         view.addSubview(buttonStackView)
         
+        studyCustomButton.addTouchAnimation()
+        calendarCustomButton.addTouchAnimation()
         studyCustomButton.addTarget(self, action: #selector(moveToStudy), for: .touchUpInside)
         calendarCustomButton.addTarget(self, action: #selector(moveToCalendar), for: .touchUpInside)
     }
@@ -148,10 +151,10 @@ class AlarmResultView: BaseViewController {
     }
     
     @objc func moveToStudy() {
-        
+        alarmResultController.moveToStudy()
     }
     
     @objc func moveToCalendar() {
-        
+        alarmResultController.moveToCalendar()
     }
 }
