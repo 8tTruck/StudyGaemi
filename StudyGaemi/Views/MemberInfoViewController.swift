@@ -28,6 +28,7 @@ class MemberInfoViewController: BaseViewController {
         setupUI()
         setupKeyboardNotifications()
         setupTapGesture()
+        setupBackButton()
     }
     
     private func setupUI() {
@@ -35,7 +36,6 @@ class MemberInfoViewController: BaseViewController {
         
         // 네비게이션 바 설정
         navigationItem.title = "비밀번호 변경"
-        navigationController?.navigationBar.topItem?.title = "Back"
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -122,6 +122,10 @@ class MemberInfoViewController: BaseViewController {
             make.height.equalTo(48)
             self.confirmButtonBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide).offset(originalConfirmButtonBottomOffset).constraint
         }
+        
+        [currentPasswordField, newPasswordField, confirmPasswordField].forEach { textField in
+            textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        }
     }
     
     private func setupTextField(_ textField: UITextField, placeholder: String) {
@@ -182,9 +186,10 @@ class MemberInfoViewController: BaseViewController {
         guard let newPassword = newPasswordField.text, let confirmPassword = confirmPasswordField.text else { return }
         
         if newPassword != confirmPassword {
-            errorLabel.text = "입력한 비밀번호가 일치하지 않습니다."
-            errorLabel.textColor = .red
+            confirmPasswordLabel.text = "비밀번호가 일치하지 않습니다."
+            confirmPasswordLabel.textColor = .red
         } else {
+            confirmPasswordLabel.textColor = .gray
             errorLabel.text = ""
             let alertController = UIAlertController(title: "비밀번호 변경", message: "비밀번호가 변경되었습니다.", preferredStyle: .alert)
             
@@ -197,27 +202,47 @@ class MemberInfoViewController: BaseViewController {
         }
     }
     
-    @objc private func passwordFieldEditingChanged() {
+    @objc private func textFieldEditingChanged(_ textField: UITextField) {
         updatePasswordLabels()
     }
     
     private func updatePasswordLabels() {
+        let currentPasswordValid = isPasswordValid(currentPasswordField.text ?? "")
         let newPasswordValid = isPasswordValid(newPasswordField.text ?? "")
-        let confirmPasswordValid = isPasswordValid(confirmPasswordField.text ?? "") && newPasswordField.text == confirmPasswordField.text
+        let confirmPasswordValid = newPasswordField.text == confirmPasswordField.text
         
+        currentPasswordLabel.textColor = currentPasswordValid ? .gray : .red
         newPasswordLabel.textColor = newPasswordValid ? .gray : .red
         confirmPasswordLabel.textColor = confirmPasswordValid ? .gray : .red
         
         if !confirmPasswordValid {
-            errorLabel.text = "비밀번호와 일치하지 않습니다."
+            confirmPasswordLabel.text = "비밀번호가 일치하지 않습니다."
         } else {
-            errorLabel.text = ""
+            confirmPasswordLabel.text = "영문 + 숫자 6자리 이상"
         }
     }
     
     private func isPasswordValid(_ password: String) -> Bool {
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d).{6,}$")
         return passwordPredicate.evaluate(with: password)
+    }
+    
+    private func setupBackButton() {
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.setTitle("Back", for: .normal)
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        backButton.tintColor = .black // 이미지 색상을 검은색으로 설정
+        backButton.setTitleColor(.black, for: .normal) // 텍스트 색상을 검은색으로 설정
+        backButton.sizeToFit()
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        let backButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backButtonItem
+    }
+
+    @objc private func goBack() {
+        navigationController?.popViewController(animated: true)
     }
     
     deinit {

@@ -12,9 +12,28 @@ import UIKit
 class PrivacyPolicyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackButton()
         configureScrollView()
     }
     
+    private func setupBackButton() {
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.setTitle("Back", for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
+        backButton.tintColor = UIColor(named: "fontBlack") // 이미지 색상을 설정
+        backButton.setTitleColor(UIColor(named: "fontBlack"), for: .normal) // 텍스트 색상을 설정
+        backButton.sizeToFit()
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        let backButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backButtonItem
+    }
+
+    @objc private func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
+
     private func configureScrollView() {
         let scrollView = UIScrollView()
         let contentView = UIView()
@@ -125,6 +144,8 @@ class PrivacyPolicyViewController: UIViewController {
                 시행일자 : 2024년 6월 +7일
                 """
             $0.numberOfLines = 0
+            $0.font = UIFont(name: "Pretendard-Regular", size: 16)
+            $0.textColor = UIColor(named: "fontBlack")
         }
         
         view.addSubview(scrollView)

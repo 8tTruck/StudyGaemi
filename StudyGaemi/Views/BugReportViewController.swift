@@ -17,11 +17,30 @@ class BugReportViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackButton()
         setupFixedHeaderView()
         configureBugReportView()
         configureTextView()
         configureSubmitButton()
         setupKeyboardNotifications()
+    }
+    
+    private func setupBackButton() {
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.setTitle("Back", for: .normal)
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        backButton.tintColor = .black // 이미지 색상을 검은색으로 설정
+        backButton.setTitleColor(.black, for: .normal) // 텍스트 색상을 검은색으로 설정
+        backButton.sizeToFit()
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        let backButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backButtonItem
+    }
+
+    @objc private func goBack() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func setupFixedHeaderView() {
