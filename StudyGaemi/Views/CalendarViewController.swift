@@ -10,6 +10,8 @@ import Then
 import UIKit
 import FSCalendar
 import Foundation
+import FirebaseFirestore
+import FirebaseAuth
 
 struct wakeup {
     let email: String
@@ -44,6 +46,8 @@ class CalendarViewController: BaseViewController {
         formatter.dateFormat = "yyyy/MM/dd"
         return formatter
     }()
+    
+    private let firestoreManager = FirestoreManager.shared
     
     //특정달의 정보만
     var studies: [study] = []
@@ -260,8 +264,19 @@ class CalendarViewController: BaseViewController {
             wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: true)
             
         ]
-        
+        setStudyData()
         updateData()
+    }
+    
+    //사용자 기반으로 data 불러오기
+    private func setStudyData(){
+        Task {
+            do {
+                try await firestoreManager.createWakeUpData(success: true)
+            } catch {
+                print("Error fetching wordbooks: \(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: - method
@@ -361,7 +376,6 @@ class CalendarViewController: BaseViewController {
         calculateStraightForBadge(of: .perfect)
         calculateStraightForBadge(of: .study)
         calculateStraightForBadge(of: .wakeup)
-        print("studyAntCount \(studyAntCount) perfectAntCount \(perfectAntCount)")
     }
     
     //이달의 완벽개미, 공부개미, 기상개미 측정
@@ -385,7 +399,7 @@ class CalendarViewController: BaseViewController {
         
         dateFormatter.dateFormat = "yyyy/MM/dd"
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-                
+        
         for day in range {
             var resultDict: [Date: status] = [:]
             components.day = day
@@ -422,7 +436,6 @@ class CalendarViewController: BaseViewController {
             return date1 < date2
         }
         
-        print(monthlyResultDict)
         return monthlyResultDict
     }
     
@@ -432,7 +445,7 @@ class CalendarViewController: BaseViewController {
         var temp = 0
         var badgeCount = 0
         let badgeValues: Set<status>
-
+        
         switch type {
         case .perfect:
             perfectAntTotalCount = 0 // 초기화
@@ -442,16 +455,16 @@ class CalendarViewController: BaseViewController {
         case .wakeup:
             badgeValues = [.wakeup, .perfect]
         }
-
+        
         if let firstDict = monthlyResultDict.first, let firstDay = firstDict.keys.first {
             var yesterday = firstDay
             let calendar = Calendar.current
-
+            
             for dic in monthlyResultDict {
                 for (day, value) in dic {
                     if badgeValues.contains(value) {
                         let difference = calendar.dateComponents([.day], from: yesterday, to: day)
-
+                        
                         if let dayDifference = difference.day, dayDifference == 1 {
                             temp += 1
                             max = temp >= max ? temp : max
@@ -470,7 +483,7 @@ class CalendarViewController: BaseViewController {
                 }
             }
         }
-
+        
         switch type {
         case .perfect:
             perfectAntCount = 0
@@ -509,7 +522,7 @@ class CalendarViewController: BaseViewController {
 // MARK: - extension
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         return result.count
     }
     
@@ -602,7 +615,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         let formatter = DateFormatter()
         formatter.dateFormat = "yy.MM"
         currentPageYearAndMonth = formatter.string(from: currentPage)
-   
+        
         updateData()
         calendarView.reloadData()
         tableHeight = Int(CGFloat(result.count) * 100.0)
