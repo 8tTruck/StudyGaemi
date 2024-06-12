@@ -7,13 +7,21 @@
 
 import UIKit
 import SnapKit
+import Firebase
 
 class LoginViewController: UIViewController {
+    
+    let offImage = UIImage(named: "checkboxOff")
+    let onImage = UIImage(named: "checkboxOn")
     
     let loginImage = UIImageView()
     let emailTextField = CustomTextField(text: "E-mail")
     let passwordTextField = CustomTextField(text: "Password")
+    let autoLoginButton = UIButton()
+    let autoLoginLabel = UILabel()
     let loginButton = CustomButton(title: "Login")
+    let findIDButton = UIButton()
+    let findPWButton = UIButton()
     let separatorView = UIView()
     let orLabel = UILabel()
     let appleLoginButton = UIButton()
@@ -26,37 +34,14 @@ class LoginViewController: UIViewController {
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
         loginImageSetting()
         loginTextFieldSetting()
+        autoLoginSetting()
         loginButtonSetting()
+        findAccountSetting()
+        createAccountSetting()
         separatorViewSetting()
         orLabelSetting()
-        socialLoginUI()
-    }
-    
-    func orLabelSetting() {
-        orLabel.text = "or"
-        orLabel.textColor = .lightGray
-        orLabel.backgroundColor = UIColor(named: "viewBackgroundColor")
-        orLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
-        orLabel.textAlignment = .center
-        view.addSubview(orLabel)
-        
-        orLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(separatorView)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(30)
-        }
-    }
-    
-    func separatorViewSetting() {
-        separatorView.backgroundColor = UIColor.lightGray
-        view.addSubview(separatorView)
-        
-        separatorView.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(20.5)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(335)
-            make.height.equalTo(1)
-        }
+        appleLoginButtonSetting()
+        kakaoLoginButtonSetting()
     }
     
     func loginImageSetting() {
@@ -67,61 +52,23 @@ class LoginViewController: UIViewController {
             make.width.equalTo(208)
             make.height.equalTo(124)
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(36)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
         }
     }
     
-    func socialLoginUI() {
-        let loginButtonStackView = UIStackView(arrangedSubviews: [appleLoginButton, kakaoLoginButton])
-        loginButtonStackView.axis = .vertical
-        loginButtonStackView.spacing = 10
-        loginButtonStackView.alignment = .center
-        loginButtonStackView.distribution = .equalSpacing
-        view.addSubview(loginButtonStackView)
-        
-        let signupStackView = UIStackView(arrangedSubviews: [signupLabel, createAccountButton])
-        signupStackView.axis = .horizontal
-        signupStackView.spacing = 10
-        signupStackView.alignment = .center
-        
-        let mainStackView = UIStackView(arrangedSubviews: [loginButtonStackView, signupStackView])
-        mainStackView.axis = .vertical
-        mainStackView.spacing = 10
-        mainStackView.alignment = .center
-        view.addSubview(mainStackView)
-        
-        loginButtonStackView.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(41)
-            make.centerX.equalToSuperview()
-        }
-        
-        mainStackView.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(41)
-            make.centerX.equalToSuperview()
-        }
-        
-        socialLoginButtonSetting()
-        
-        configureAppleLoginButton()
-        configureKakaoLoginButton()
-        configureSignupLabel()
-        configureCreateAccountButton()
-        
-        // 애니메이션 추가
-        appleLoginButton.addTouchAnimation()
-        kakaoLoginButton.addTouchAnimation()
-    }
-
     func loginTextFieldSetting() {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
+        
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.textContentType = .oneTimeCode
         
         emailTextField.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
         passwordTextField.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
         
         emailTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(loginImage.snp.bottom).offset(58)
+            make.top.equalTo(loginImage.snp.bottom).offset(28)
             make.width.equalTo(342)
             make.height.equalTo(60)
         }
@@ -134,6 +81,28 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func autoLoginSetting() {
+        view.addSubview(autoLoginButton)
+        view.addSubview(autoLoginLabel)
+        
+        autoLoginButton.setImage(offImage, for: .normal)
+        autoLoginButton.addTarget(self, action: #selector(autoLoginButtonTapped), for: .touchUpInside)
+        autoLoginLabel.text = "자동 로그인"
+        autoLoginLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        
+        autoLoginButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
+            make.leading.equalTo(passwordTextField.snp.leading)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
+        }
+        
+        autoLoginLabel.snp.makeConstraints { make in
+            make.leading.equalTo(autoLoginButton.snp.trailing)
+            make.centerY.equalTo(autoLoginButton.snp.centerY)
+        }
+    }
+    
     func loginButtonSetting() {
         view.addSubview(loginButton)
         // 애니메이션 추가
@@ -141,7 +110,7 @@ class LoginViewController: UIViewController {
         
         loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
+            make.top.equalTo(autoLoginButton.snp.bottom).offset(12)
             make.width.equalTo(342)
             make.height.equalTo(60)
         }
@@ -150,45 +119,107 @@ class LoginViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
-    func socialLoginButtonSetting() {
-        appleLoginButton.snp.makeConstraints { make in
-            make.width.equalTo(300)
-            make.height.equalTo(45)
+    func findAccountSetting() {
+        let findAccountStackView = UIStackView(arrangedSubviews: [findIDButton, findPWButton])
+        findAccountStackView.axis = .horizontal
+        findAccountStackView.spacing = 16
+        findAccountStackView.alignment = .center
+        view.addSubview(findAccountStackView)
+
+        findIDButton.setTitle("ID 찾기", for: .normal)
+        findIDButton.setTitleColor(.gray, for: .normal)
+        findIDButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        let findIDAttributes: [NSAttributedString.Key: Any] = [
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .underlineColor: UIColor.gray
+        ]
+        let findIDAttributedTitle = NSAttributedString(string: "ID 찾기", attributes: findIDAttributes)
+        findIDButton.setAttributedTitle(findIDAttributedTitle, for: .normal)
+        findIDButton.addTarget(self, action: #selector(findIDButtonTapped), for: .touchUpInside)
+        
+        findPWButton.setTitle("비밀번호 찾기", for: .normal)
+        findPWButton.setTitleColor(.gray, for: .normal)
+        findPWButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        let findPWAttributes: [NSAttributedString.Key: Any] = [
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .underlineColor: UIColor.gray
+        ]
+        let findPWAttributedTitle = NSAttributedString(string: "비밀번호 찾기", attributes: findPWAttributes)
+        findPWButton.setAttributedTitle(findPWAttributedTitle, for: .normal)
+        findPWButton.addTarget(self, action: #selector(findPWButtonTapped), for: .touchUpInside)
+        
+        findAccountStackView.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    @objc func findIDButtonTapped() {
+        let alert = UIAlertController(title: "ID 찾기", message: "이메일 주소를 입력해 주세요.", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "E-mail"
+        }
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            guard let email = alert.textFields?.first?.text, !email.isEmpty else {
+                self?.showAlert(message: "이메일 주소를 입력해 주세요.")
+                return
+            }
+            AuthenticationManager.shared.checkIfEmailExists(email: email) { exists, error in
+                if exists {
+                    self?.showAlert(message: "해당 이메일로 가입된 계정이 존재합니다.")
+                } else {
+                    self?.showAlert(message: error ?? "해당 이메일로 가입된 계정을 찾을 수 없습니다.")
+                }
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func findPWButtonTapped() {
+        let alert = UIAlertController(title: "비밀번호 찾기", message: "이메일 주소를 입력해 주세요.", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "E-mail"
+        }
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            guard let email = alert.textFields?.first?.text, !email.isEmpty else {
+                self?.showAlert(message: "이메일 주소를 입력해 주세요.")
+                return
+            }
+            AuthenticationManager.shared.resetPassword(email: email) { success, error in
+                if success {
+                    self?.showAlert(message: "비밀번호 재설정 이메일을 보냈습니다.")
+                } else {
+                    self?.showAlert(message: "비밀번호 재설정 이메일을 보내지 못했습니다. \(error ?? "")")
+                }
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+
+    
+    func createAccountSetting() {
+        // 스택뷰 생성 및 설정
+        let createAccountStackView = UIStackView(arrangedSubviews: [signupLabel, createAccountButton])
+        createAccountStackView.axis = .horizontal
+        createAccountStackView.spacing = 10
+        createAccountStackView.alignment = .center
+        view.addSubview(createAccountStackView)
+        
+        // 스택뷰 제약 조건 설정
+        createAccountStackView.snp.makeConstraints { make in
+            make.top.equalTo(findIDButton.snp.bottom).offset(5)
+            make.centerX.equalToSuperview()
         }
         
-        kakaoLoginButton.snp.makeConstraints { make in
-            make.width.equalTo(300)
-            make.height.equalTo(45)
-        }
-        
-        createAccountButton.snp.makeConstraints { make in
-            make.height.equalTo(14)
-        }
-    }
-    
-    func configureAppleLoginButton() {
-        appleLoginButton.layer.cornerRadius = 12
-        let backgroundImage = UIImage(named: "apple")
-        appleLoginButton.setBackgroundImage(backgroundImage, for: .normal)
-        appleLoginButton.layer.borderWidth = 1
-        applyCommonSettings(to: appleLoginButton)
-    }
-    
-    func configureKakaoLoginButton() {
-        kakaoLoginButton.layer.cornerRadius = 12
-        let backgroundImage = UIImage(named: "kakao")
-        kakaoLoginButton.setBackgroundImage(backgroundImage, for: .normal)
-        applyCommonSettings(to: kakaoLoginButton)
-    }
-    
-    func configureSignupLabel() {
+        // signupLabel 설정
         signupLabel.text = "아직 회원이 아니신가요?"
         signupLabel.font = UIFont.systemFont(ofSize: 14)
-        signupLabel.textColor = .black
+        signupLabel.textColor = .fontGray
         signupLabel.textAlignment = .right
-    }
-    
-    func configureCreateAccountButton() {
+        
+        // createAccountButton 설정
         createAccountButton.setTitle("계정 생성", for: .normal)
         createAccountButton.setTitleColor(.orange, for: .normal)
         createAccountButton.titleLabel?.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)
@@ -206,6 +237,64 @@ class LoginViewController: UIViewController {
         // 버튼에 액션 추가
         createAccountButton.addTarget(self, action: #selector(createAccountButtonTapped), for: .touchUpInside)
     }
+    
+    func separatorViewSetting() {
+        separatorView.backgroundColor = UIColor.lightGray
+        view.addSubview(separatorView)
+        
+        separatorView.snp.makeConstraints { make in
+            make.top.equalTo(signupLabel.snp.bottom).offset(20.5)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(335)
+            make.height.equalTo(1)
+        }
+    }
+    
+    func orLabelSetting() {
+        orLabel.text = "or"
+        orLabel.textColor = .lightGray
+        orLabel.backgroundColor = UIColor(named: "viewBackgroundColor")
+        orLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        orLabel.textAlignment = .center
+        view.addSubview(orLabel)
+        
+        orLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(separatorView.snp.centerY)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(30)
+        }
+    }
+    
+    func appleLoginButtonSetting() {
+        view.addSubview(appleLoginButton)
+        appleLoginButton.snp.makeConstraints { make in
+            make.top.equalTo(orLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(300)
+            make.height.equalTo(45)
+        }
+        appleLoginButton.addTouchAnimation()
+        appleLoginButton.layer.cornerRadius = 12
+        let backgroundImage = UIImage(named: "apple")
+        appleLoginButton.setBackgroundImage(backgroundImage, for: .normal)
+        appleLoginButton.layer.borderWidth = 1
+        applyCommonSettings(to: appleLoginButton)
+    }
+    
+    func kakaoLoginButtonSetting() {
+        view.addSubview(kakaoLoginButton)
+        kakaoLoginButton.snp.makeConstraints { make in
+            make.width.equalTo(300)
+            make.height.equalTo(45)
+            make.top.equalTo(appleLoginButton.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        kakaoLoginButton.addTouchAnimation()
+        kakaoLoginButton.layer.cornerRadius = 12
+        let backgroundImage = UIImage(named: "kakao")
+        kakaoLoginButton.setBackgroundImage(backgroundImage, for: .normal)
+        applyCommonSettings(to: kakaoLoginButton)
+    }
 
     func applyCommonSettings(to button: UIButton) {
         button.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -216,18 +305,42 @@ class LoginViewController: UIViewController {
         button.contentHorizontalAlignment = .center
     }
     
-    @objc func loginButtonTapped() {
-        let bottomTabBarVC = BottomTabBarViewController()
-//        let navigationController = UINavigationController(rootViewController: bottomTabBarVC)
-//        navigationController.modalPresentationStyle = .fullScreen
-//        self.navigationController?.pushViewController(bottomTabBarVC, animated: true)
-
-        // 현재 활성화된 씬을 통해 window를 가져와 rootViewController를 설정
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            window.rootViewController = bottomTabBarVC
-            window.makeKeyAndVisible()
+    @objc func autoLoginButtonTapped() {
+        
+        if autoLoginButton.imageView?.image == offImage {
+            autoLoginButton.setImage(onImage, for: .normal)
+        } else {
+            autoLoginButton.setImage(offImage, for: .normal)
         }
+        
+    }
+    
+    @objc func loginButtonTapped() {
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            showAlert(message: "이메일과 비밀번호를 입력해 주세요.")
+            return
+        }
+        
+        // Firebase의 signIn 메서드를 사용하여 로그인 시도
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
+            guard let self = self else { return }
+            
+            if let error = error {
+                // 로그인 실패 시 에러 메시지 출력
+                self.showAlert(message: "로그인에 실패했습니다. \(error.localizedDescription)")
+            } else if let _ = authResult?.user {
+                // 로그인 성공 시 BottomTabBarViewController로 이동
+                self.moveToBottomTabBarController()
+            }
+        }
+    }
+
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
     
     @objc func createAccountButtonTapped() {
@@ -235,9 +348,17 @@ class LoginViewController: UIViewController {
     }
     
     func moveNextVC() {
-        let createAccountVC = CreateAccountViewController()
-        createAccountVC.modalPresentationStyle = .fullScreen
-//        self.present(createAccountVC, animated: true, completion: nil)
-        self.navigationController?.pushViewController(createAccountVC, animated: true)
+        let nextVC = MakePasswordViewController()
+        nextVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    func moveToBottomTabBarController() {
+        let bottomTabBarVC = BottomTabBarViewController()
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = bottomTabBarVC
+            window.makeKeyAndVisible()
+        }
     }
 }
