@@ -5,6 +5,8 @@
 //  Created by Seungseop Lee on 6/4/24.
 //
 
+import Firebase
+import FirebaseAuth
 import UIKit
 import SnapKit
 
@@ -148,7 +150,7 @@ class MakePasswordViewController: UIViewController {
         var isValid = true
         
         // 닉네임이 비어있거나, 2자 미만, 8자 초과일 경우.
-        if let nickname = nicknameTextField.text, nickname.count >= 2, nickname.count <= 8 {
+        if let nickname = nicknameTextField.text, nickname.count >= 2, nickname.count <= 100 {
             // 닉네임 조건을 만족하는 경우
             setCorrect(for: nicknameTextField, label: nicknameDescriptionLabel)
         } else {
@@ -229,9 +231,17 @@ class MakePasswordViewController: UIViewController {
     }
     
     func moveNextVC() {
-        let createAccountSuccessVC = CreateAccountSuccessViewController()
-        createAccountSuccessVC.modalPresentationStyle = .fullScreen
-//        present(createAccountSuccessVC, animated: true, completion: nil)
-        self.navigationController?.pushViewController(createAccountSuccessVC, animated: true)
+        let emailConfirmVC = EmailConfirmViewController()
+        emailConfirmVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(emailConfirmVC, animated: true)
+
+        guard let email = nicknameTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            // 입력 필드가 비어있는 경우 처리
+            return
+        }
+        
+        AuthenticationManager.shared.createUser(email: email, password: password)
     }
+    
 }
