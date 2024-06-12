@@ -5,6 +5,7 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
+import BackgroundTasks
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -53,12 +54,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        (UIApplication.shared.delegate as? AppDelegate)?.scheduleAppRefresh()
     }
 }
 
 extension SceneDelegate {
-    
-    
     
     // MARK: - 특정 ViewController로 이동하는 메소드
     func navigateToViewController(withIdentifier identifier: String) {

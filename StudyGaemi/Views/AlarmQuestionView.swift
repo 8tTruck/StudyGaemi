@@ -44,7 +44,7 @@ class AlarmQuestionView: BaseViewController {
     }
     
     private lazy var expressionLabel = UILabel().then {
-        $0.text = "19 X 19 = ?"
+        $0.text = alarmQuestionController.getQuestionAlgorithm(difficulty: <#T##String#>)
         $0.font = UIFont(name: CustomFontType.bold.name, size: 50) ?? UIFont.systemFont(ofSize: 50)
         $0.textColor = UIColor(named: "fontBlack")
     }
@@ -148,7 +148,9 @@ class AlarmQuestionView: BaseViewController {
             guard let navigation = navigationController else {
                 return
             }
+            alarmResultView.correctNumber = alarmQuestionController.correctNumber
             navigation.pushViewController(alarmResultView, animated: true)
+            AudioController.shared.stopAlarmSound()
         }
     }
     
