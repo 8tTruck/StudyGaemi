@@ -33,7 +33,6 @@ enum status{
     case perfect
     case study
     case wakeup
-    case none
 }
 
 class CalendarViewController: BaseViewController {
@@ -359,9 +358,9 @@ class CalendarViewController: BaseViewController {
         result = []
         monthlyResultDict = []
         monthlyResultDict = calculateThisMonthAnt(yearAndMonth: currentPageYearAndMonth)
-        calculateStraightForPerfectBadge()
-        calculateStraightForStudyBadge()
-        calculateStraightForWakeupBadge()
+        calculateStraightForBadge(of: .perfect)
+        calculateStraightForBadge(of: .study)
+        calculateStraightForBadge(of: .wakeup)
         print("studyAntCount \(studyAntCount) perfectAntCount \(perfectAntCount)")
     }
     
@@ -428,121 +427,70 @@ class CalendarViewController: BaseViewController {
     }
     
     //연속일 계산
-    private func calculateStraightForPerfectBadge(){
+    private func calculateStraightForBadge(of type: badgeStatus) {
         var max = 0
         var temp = 0
-        perfectAntTotalCount = 0 //초기화
+        var badgeCount = 0
+        let badgeValues: Set<status>
+
+        switch type {
+        case .perfect:
+            perfectAntTotalCount = 0 // 초기화
+            badgeValues = [.perfect]
+        case .study:
+            badgeValues = [.study, .perfect]
+        case .wakeup:
+            badgeValues = [.wakeup, .perfect]
+        }
+
         if let firstDict = monthlyResultDict.first, let firstDay = firstDict.keys.first {
             var yesterday = firstDay
             let calendar = Calendar.current
-                
-                for dic in monthlyResultDict {
-                    for (day, value) in dic {
-                        if value == .perfect {
-                            let difference = calendar.dateComponents([.day], from: yesterday, to: day)
-        
-                            if let dayDifference = difference.day, dayDifference == 1 {
-                                temp += 1
-                                max = temp > max ? temp : max
-                                perfectAntTotalCount += 1
-                                yesterday = day
-                            } else {
-                                temp = 0
-                                temp += 1
-                                perfectAntTotalCount += 1
-                                yesterday = day
-                            }
+
+            for dic in monthlyResultDict {
+                for (day, value) in dic {
+                    if badgeValues.contains(value) {
+                        let difference = calendar.dateComponents([.day], from: yesterday, to: day)
+
+                        if let dayDifference = difference.day, dayDifference == 1 {
+                            temp += 1
+                            max = temp >= max ? temp : max
+                            badgeCount += 1
+                            yesterday = day
                         } else {
-                            temp = 0
+                            temp = 1
+                            max = temp >= max ? temp : max
+                            badgeCount += 1
                             yesterday = day
                         }
+                    } else {
+                        temp = 0
+                        yesterday = day
                     }
                 }
+            }
         }
 
-        //perfectAntTotalCount = count
-        perfectAntCount = 0
-        if max != 0{
-            result.append(.perfect)
-            perfectAntCount = max
-        }
-        
-    }
-    
-    private func calculateStraightForStudyBadge(){
-        var max = 0
-        var temp = 0
-        
-        if let firstDict = monthlyResultDict.first, let firstDay = firstDict.keys.first {
-            var yesterday = firstDay
-            let calendar = Calendar.current
-                
-                for dic in monthlyResultDict {
-                    for (day, value) in dic {
-                        if value == .study  || value == .perfect {
-                            let difference = calendar.dateComponents([.day], from: yesterday, to: day)
-        
-                            if let dayDifference = difference.day, dayDifference == 1 {
-                                temp += 1
-                                max = temp >= max ? temp : max
-                                yesterday = day
-                            } else {
-                                temp = 0
-                                temp += 1
-                                max = temp >= max ? temp : max
-                                yesterday = day
-                            }
-                        } else {
-                            temp = 0
-                            yesterday = day
-                        }
-                    }
-                }
-        }
-
-        studyAntCount = 0
-        if max != 0{
-            result.append(.study)
-            studyAntCount = max
-        }
-        
-    }
-    
-    private func calculateStraightForWakeupBadge(){
-        var max = 0
-        var temp = 0
-        
-        if let firstDict = monthlyResultDict.first, let firstDay = firstDict.keys.first {
-            var yesterday = firstDay
-            let calendar = Calendar.current
-                
-                for dic in monthlyResultDict {
-                    for (day, value) in dic {
-                        if value == .wakeup  || value == .perfect {
-                            let difference = calendar.dateComponents([.day], from: yesterday, to: day)
-        
-                            if let dayDifference = difference.day, dayDifference == 1 {
-                                temp += 1
-                                max = temp >= max ? temp : max
-                                yesterday = day
-                            } else {
-                                temp = 0
-                                temp += 1
-                                max = temp >= max ? temp : max
-                                yesterday = day
-                            }
-                        } else {
-                            temp = 0
-                            yesterday = day
-                        }
-                    }
-                }
-        }
-
-        wakeupAntCount = 0
-        if max != 0{
-            result.append(.wakeup)
-            wakeupAntCount = max
+        switch type {
+        case .perfect:
+            perfectAntCount = 0
+            perfectAntTotalCount = badgeCount
+            if max != 0 {
+                result.append(.perfect)
+                perfectAntCount = max
+            }
+        case .study:
+            studyAntCount = 0
+            if max != 0 {
+                result.append(.study)
+                studyAntCount = max
+            }
+        case .wakeup:
+            wakeupAntCount = 0
+            if max != 0 {
+                result.append(.wakeup)
+                wakeupAntCount = max
+            }
         }
     }
     
@@ -615,8 +563,6 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
                         cell.badgeView.image = UIImage.studyStamp
                     case .wakeup:
                         cell.badgeView.image = UIImage.wakeupStamp
-                    case .none:
-                        cell.badgeView.image = nil
                     }
                 }
             }
@@ -656,14 +602,9 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         let formatter = DateFormatter()
         formatter.dateFormat = "yy.MM"
         currentPageYearAndMonth = formatter.string(from: currentPage)
-        
-        
+   
         updateData()
-        
         calendarView.reloadData()
-        
-        print("============== \n \(result)")
-        
         tableHeight = Int(CGFloat(result.count) * 100.0)
         badgeView.reloadData()
     }
