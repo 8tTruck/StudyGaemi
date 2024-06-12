@@ -20,9 +20,17 @@
 		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
 		B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */; };
 		F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */; };
+		F4AF2A592C19944C00553A20 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A582C19944C00553A20 /* FirebaseAnalytics */; };
+		F4AF2A5B2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5A2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion */; };
+		F4AF2A5D2C19944C00553A20 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5C2C19944C00553A20 /* FirebaseAnalyticsSwift */; };
+		F4AF2A5F2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5E2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		F4AF2A612C19944C00553A20 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A602C19944C00553A20 /* FirebaseAppCheck */; };
 		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
 		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
 		F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E050002C0EA02900802477 /* CalendarCell.swift */; };
+		F4EDEB4B2C1994D50038819D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F4EDEB4A2C1994D50038819D /* FirebaseFirestore */; };
+		F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */; };
+		F4EDEB4F2C199A240038819D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDEB4E2C199A240038819D /* Data.swift */; };
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
@@ -92,6 +100,8 @@
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		F4EDEB4E2C199A240038819D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,12 +152,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF0071712C074DFA000AE7AA /* FirebaseDatabaseSwift in Frameworks */,
+				F4AF2A612C19944C00553A20 /* FirebaseAppCheck in Frameworks */,
 				FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */,
 				FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */,
+				F4AF2A5B2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				F4EDEB4B2C1994D50038819D /* FirebaseFirestore in Frameworks */,
 				FF0071752C074DFA000AE7AA /* FirebaseStorageCombine-Community in Frameworks */,
+				F4AF2A592C19944C00553A20 /* FirebaseAnalytics in Frameworks */,
 				FF0071732C074DFA000AE7AA /* FirebaseStorage in Frameworks */,
+				F4AF2A5F2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				FF00716D2C074DFA000AE7AA /* FirebaseAuthCombine-Community in Frameworks */,
 				FF00716B2C074DFA000AE7AA /* FirebaseAuth in Frameworks */,
+				F4AF2A5D2C19944C00553A20 /* FirebaseAnalyticsSwift in Frameworks */,
 				FF0071632C074DB7000AE7AA /* Then in Frameworks */,
 				FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */,
 				FF00716F2C074DFA000AE7AA /* FirebaseDatabase in Frameworks */,
@@ -159,11 +175,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F4EDEB492C1994D50038819D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FF00713B2C074D86000AE7AA = {
 			isa = PBXGroup;
 			children = (
 				FF0071462C074D86000AE7AA /* StudyGaemi */,
 				FF0071452C074D86000AE7AA /* Products */,
+				F4EDEB492C1994D50038819D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -246,6 +270,8 @@
 			isa = PBXGroup;
 			children = (
 				FF875F622C0F4DC300A5D534 /* AlarmModel.swift */,
+				F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */,
+				F4EDEB4E2C199A240038819D /* Data.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +332,12 @@
 				FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */,
 				F4E04FFA2C0D8DE900802477 /* FSCalendar */,
 				FF03F9032C16D59700134B54 /* FirebaseAnalytics */,
+				F4AF2A582C19944C00553A20 /* FirebaseAnalytics */,
+				F4AF2A5A2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion */,
+				F4AF2A5C2C19944C00553A20 /* FirebaseAnalyticsSwift */,
+				F4AF2A5E2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				F4AF2A602C19944C00553A20 /* FirebaseAppCheck */,
+				F4EDEB4A2C1994D50038819D /* FirebaseFirestore */,
 			);
 			productName = StudyGaemi;
 			productReference = FF0071442C074D86000AE7AA /* StudyGaemi.app */;
@@ -394,8 +426,10 @@
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
+				F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */,
+				F4EDEB4F2C199A240038819D /* Data.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
@@ -697,10 +731,40 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F4AF2A582C19944C00553A20 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F4AF2A5A2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		F4AF2A5C2C19944C00553A20 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		F4AF2A5E2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		F4AF2A602C19944C00553A20 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
 		F4E04FFA2C0D8DE900802477 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		F4EDEB4A2C1994D50038819D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		FF00715F2C074DAD000AE7AA /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
