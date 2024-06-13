@@ -155,6 +155,7 @@ class AlarmQuestionView: BaseViewController {
             alarmResultView.correctNumber = alarmQuestionController.correctNumber
             navigation.pushViewController(alarmResultView, animated: true)
             AudioController.shared.stopAlarmSound()
+            FirestoreManager.shared.createWakeUpData(success: false)
         }
     }
     

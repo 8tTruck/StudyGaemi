@@ -546,5 +546,6 @@ class MakePasswordViewController: UIViewController {
         }
         
         AuthenticationManager.shared.createUser(email: email, password: password)
+        FirestoreManager.shared.createUserData(email: email, nickName: email, userType: "Firebase")
     }
 }

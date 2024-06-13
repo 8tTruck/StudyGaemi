@@ -304,7 +304,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         cancelAction.setValue(UIColor.gray, forKey: "titleTextColor")
         
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
-            // 로그아웃 처리
+            AuthenticationManager.shared.signOut()
         })
         confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
         
@@ -335,7 +335,32 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         cancelAction.setValue(UIColor.gray, forKey: "titleTextColor")
         
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
-            // 회원탈퇴 처리
+            FirestoreManager.shared.deleteStudyData { result in
+                switch result {
+                case .success:
+                    print("Study 데이터가 삭제되었습니다.")
+                case .failure(let error):
+                    print("Study 데이터 삭제 에러: \(error)")
+                }
+            }
+            FirestoreManager.shared.deleteWakeUpData { result in
+                switch result {
+                case .success:
+                    print("WakeUp 데이터가 삭제되었습니다.")
+                case .failure(let error):
+                    print("WakeUp 데이터 삭제 에러: \(error)")
+                }
+            }
+            FirestoreManager.shared.deleteUserData { result in
+                switch result {
+                case .success:
+                    print("회원탈퇴가 완료되었습니다.")
+                case .failure(let error):
+                    print("회원탈퇴 에러: \(error)")
+                }
+            }
+            AuthenticationManager.shared.deleteUser()
+            AuthenticationManager.shared.signOut()
         })
         confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
         
