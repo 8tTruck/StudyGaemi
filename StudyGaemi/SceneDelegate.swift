@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let bottomTabBarController = EmailInputViewController()
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = UINavigationController(rootViewController: LoginViewController())
-//        window.rootViewController = UINavigationController(rootViewController: EmailConfirmViewController())
+//        window.rootViewController = UINavigationController(rootViewController: LoginViewController())
+        window.rootViewController = UINavigationController(rootViewController: EmailConfirmViewController())
         window.makeKeyAndVisible()
         self.window = window
     }
