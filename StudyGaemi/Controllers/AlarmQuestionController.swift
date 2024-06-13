@@ -23,6 +23,7 @@ class AlarmQuestionController {
                 alarmResultView.correctNumber = correctNumber
                 navigation.pushViewController(alarmResultView, animated: true)
                 AudioController.shared.stopAlarmSound()
+                FirestoreManager.shared.createWakeUpData(success: true)
             } else {
                 textField.shake()
                 textField.layer.borderWidth = 1

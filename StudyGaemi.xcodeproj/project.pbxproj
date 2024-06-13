@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
 		3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */; };
 		3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */; };
 		3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */; };
@@ -30,7 +29,6 @@
 		F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E050002C0EA02900802477 /* CalendarCell.swift */; };
 		F4EDEB4B2C1994D50038819D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F4EDEB4A2C1994D50038819D /* FirebaseFirestore */; };
 		F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */; };
-		F4EDEB4F2C199A240038819D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDEB4E2C199A240038819D /* Data.swift */; };
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
@@ -73,13 +71,15 @@
 		FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */; };
 		FF03F9022C16D55600134B54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF03F9012C16D55600134B54 /* GoogleService-Info.plist */; };
 		FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF03F9032C16D59700134B54 /* FirebaseAnalytics */; };
+		FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A322C1AA26E00504C24 /* StudyModel.swift */; };
+		FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A342C1AA29900504C24 /* WakeUpModel.swift */; };
+		FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A362C1ABCFF00504C24 /* UserModel.swift */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
 		FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */; };
 		FF783CA12C17EC700008AE70 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783CA02C17EC700008AE70 /* AudioController.swift */; };
 		FF8746E32C19939300F63A86 /* AlarmCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */; };
-		FF8746E92C19ADC800F63A86 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FF8746E82C19ADC800F63A86 /* FirebaseFirestore */; };
 		FF8746EB2C19AE0600F63A86 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */; };
 		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
 		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
@@ -89,7 +89,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-
 		3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController.swift; sourceTree = "<group>"; };
 		3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +104,6 @@
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
-		F4EDEB4E2C199A240038819D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +137,9 @@
 		FF03F8FD2C16A01400134B54 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
 		FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultController.swift; sourceTree = "<group>"; };
 		FF03F9012C16D55600134B54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FF254A322C1AA26E00504C24 /* StudyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyModel.swift; sourceTree = "<group>"; };
+		FF254A342C1AA29900504C24 /* WakeUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpModel.swift; sourceTree = "<group>"; };
+		FF254A362C1ABCFF00504C24 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
@@ -280,7 +281,9 @@
 			children = (
 				FF875F622C0F4DC300A5D534 /* AlarmModel.swift */,
 				F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */,
-				F4EDEB4E2C199A240038819D /* Data.swift */,
+				FF254A322C1AA26E00504C24 /* StudyModel.swift */,
+				FF254A342C1AA29900504C24 /* WakeUpModel.swift */,
+				FF254A362C1ABCFF00504C24 /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -433,13 +436,13 @@
 				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
 				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
+				FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
 				F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */,
 				FF8746E32C19939300F63A86 /* AlarmCoreDataManager.swift in Sources */,
-				F4EDEB4F2C199A240038819D /* Data.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
@@ -448,6 +451,7 @@
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */,
 				F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */,
+				FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */,
 				3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
 				5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */,
@@ -459,6 +463,7 @@
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */,
+				FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */,
 				FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
 				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
@@ -831,11 +836,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
-		};
-		FF8746E82C19ADC800F63A86 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
 		};
 		FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
