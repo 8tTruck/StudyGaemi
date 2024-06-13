@@ -77,6 +77,10 @@
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
 		FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */; };
+		FF783CA12C17EC700008AE70 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783CA02C17EC700008AE70 /* AudioController.swift */; };
+		FF8746E32C19939300F63A86 /* AlarmCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */; };
+		FF8746E92C19ADC800F63A86 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FF8746E82C19ADC800F63A86 /* FirebaseFirestore */; };
+		FF8746EB2C19AE0600F63A86 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */; };
 		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
 		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
 		FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */; };
@@ -139,6 +143,8 @@
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
 		FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		FF783CA02C17EC700008AE70 /* AudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
+		FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCoreDataManager.swift; sourceTree = "<group>"; };
 		FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingController.swift; sourceTree = "<group>"; };
 		FF875F622C0F4DC300A5D534 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
 		FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionView.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 				FF0071712C074DFA000AE7AA /* FirebaseDatabaseSwift in Frameworks */,
 				F4AF2A612C19944C00553A20 /* FirebaseAppCheck in Frameworks */,
 				FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */,
+				FF8746EB2C19AE0600F63A86 /* FirebaseFirestoreSwift in Frameworks */,
 				FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */,
 				F4AF2A5B2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				F4EDEB4B2C1994D50038819D /* FirebaseFirestore in Frameworks */,
@@ -228,6 +235,8 @@
 				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
 				FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */,
 				FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */,
+				FF783CA02C17EC700008AE70 /* AudioController.swift */,
+				FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -429,6 +438,7 @@
 				F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */,
+				FF8746E32C19939300F63A86 /* AlarmCoreDataManager.swift in Sources */,
 				F4EDEB4F2C199A240038819D /* Data.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */,
@@ -442,6 +452,7 @@
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
 				5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */,
 				5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */,
+				FF783CA12C17EC700008AE70 /* AudioController.swift in Sources */,
 				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
 				FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */,
@@ -820,6 +831,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		FF8746E82C19ADC800F63A86 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

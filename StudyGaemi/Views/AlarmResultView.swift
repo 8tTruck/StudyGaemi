@@ -18,6 +18,7 @@ class AlarmResultView: BaseViewController {
     
     private let alarmResultController = AlarmResultController()
     var status: Status = .failure
+    var correctNumber: Int = 0
     
     private lazy var imageView = UIImageView().then {
         switch status {
@@ -52,13 +53,13 @@ class AlarmResultView: BaseViewController {
     }
     
     private lazy var answerLabel = UILabel().then {
-        $0.text = "361"
-        $0.textColor = UIColor(named: "fontBlack")
+        $0.text = String(correctNumber)
+        $0.textColor = UIColor.fontBlack
         $0.font = UIFont(name: CustomFontType.bold.name, size: 24)
         $0.textAlignment = .center
-        $0.layer.backgroundColor = UIColor(named: "textFieldColor")?.cgColor
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         $0.layer.cornerRadius = 10
-        $0.layer.borderWidth = 1.0
+        $0.layer.borderWidth = 1.5
         switch status {
         case .success:
             $0.layer.borderColor = UIColor(named: "successColor")?.cgColor
@@ -134,7 +135,7 @@ class AlarmResultView: BaseViewController {
         
         answerLabel.snp.makeConstraints { make in
             make.height.equalTo(60)
-            make.width.equalTo(342)
+            make.width.equalTo(320)
         }
         
         stackView.snp.makeConstraints { make in

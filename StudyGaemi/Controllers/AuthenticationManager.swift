@@ -19,7 +19,7 @@ class AuthenticationManager {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 // 회원가입 실패 처리
-                print("Error creating user: \(error.localizedDescription)")
+                print("회원가입 실패 에러: \(error.localizedDescription)")
                 return
             }
             // 로그인
@@ -34,9 +34,9 @@ class AuthenticationManager {
     func signIn(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
-                print("Login failed: \(error.localizedDescription)")
+                print("로그인 실패 에러: \(error.localizedDescription)")
             } else if let user = authResult?.user {
-                print("Login successful: \(user.email ?? "")")
+                print("로그인 성공: \(user.email ?? "")")
             }
         }
     }
@@ -64,12 +64,12 @@ class AuthenticationManager {
         authResult?.user.sendEmailVerification { error in
             if let error = error {
                 // 이메일 인증 코드 전송 실패 처리
-                print("Error sending email verification: \(error.localizedDescription)")
+                print("인증메일 전송 실패 에러: \(error.localizedDescription)")
                 return
             }
             
             // 이메일 인증 코드 전송 성공 처리
-            print("Email verification code sent")
+            print("인증메일 전송 성공")
         }
     }
     
@@ -78,7 +78,7 @@ class AuthenticationManager {
         Auth.auth().addStateDidChangeListener { auth, user in
             if let user = user {
                 // 이메일 인증 완료 처리
-                print("Email verified successfully")
+                print("이메일 인증 완료")
                 user.reload()
                 if user.isEmailVerified {
                     let moveVC = CreateAccountSuccessViewController()
@@ -88,7 +88,7 @@ class AuthenticationManager {
                 }
             } else {
                 // 이메일 인증 실패 처리
-                print("Email verification failed")
+                print("이메일 인증 실패")
             }
         }
     }
@@ -109,9 +109,9 @@ class AuthenticationManager {
     func signOut() {
         do {
             try Auth.auth().signOut()
-            print("User signed out successfully")
+            print("로그아웃 완료")
         } catch let signOutError as NSError {
-            print("Error signing out: \(signOutError.localizedDescription)")
+            print("로그아웃 실패 에러: \(signOutError.localizedDescription)")
         }
     }
     
@@ -121,14 +121,14 @@ class AuthenticationManager {
             user.delete { error in
                 if let error = error {
                     // 회원탈퇴 실패 처리
-                    print("Error deleting user: \(error.localizedDescription)")
+                    print("회원탈퇴 실패 에러: \(error.localizedDescription)")
                 } else {
                     // 회원탈퇴 성공 처리
-                    print("User deleted successfully")
+                    print("회원탈퇴 성공")
                 }
             }
         } else {
-            print("No user is currently signed in")
+            print("가입된 계정이 아닙니다.")
         }
     }
 }

@@ -5,6 +5,8 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
+import AVFoundation
+import BackgroundTasks
 import FirebaseCore
 import UserNotifications
 import UIKit
@@ -24,10 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("알림 권한이 거부되었습니다.")
             }
         }
+
+        AlarmCoreDataManager.shared.fetchAlarm()
+        AudioController.shared.setupAudioSession()
+        registerBackgroundTasks()
         
         //Appcheck 인증제공자 설정
         let providerFactory = AppCheckDebugProviderFactory()
         AppCheck.setAppCheckProviderFactory(providerFactory)
+
         FirebaseApp.configure()
         return true
     }
@@ -98,6 +105,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("포그라운드 알림 수신: \(notification.request.content.body)")
         completionHandler([.banner, .sound])
+        AudioController.shared.playAlarmSound()
     }
     
     // MARK: - 알림을 터치했을 때 호출되는 메소드
@@ -109,5 +117,37 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             }
         }
         completionHandler()
+        AudioController.shared.playAlarmSound()
+    }
+}
+
+extension AppDelegate {
+    
+    func registerBackgroundTasks() {
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.8ttruck.StudyGaemi", using: nil) { task in
+            self.handleAppRefresh(task: task as! BGAppRefreshTask)
+        }
+    }
+    
+    func handleAppRefresh(task: BGAppRefreshTask) {
+
+        AudioController.shared.playAlarmSound()
+        print("백그라운드 작업 실행")
+        task.expirationHandler = {
+            task.setTaskCompleted(success: false)
+        }
+
+        task.setTaskCompleted(success: true)
+    }
+    
+    func scheduleAppRefresh() {
+        let request = BGAppRefreshTaskRequest(identifier: "com.8ttruck.StudyGaemi")
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 1 * 60)
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("백그라운드 작업 예약 실패: \(error)")
+        }
     }
 }
