@@ -53,13 +53,13 @@ class AlarmResultView: BaseViewController {
     }
     
     private lazy var answerLabel = UILabel().then {
-        $0.text = "361"
+        $0.text = String(correctNumber)
         $0.textColor = UIColor.fontBlack
         $0.font = UIFont(name: CustomFontType.bold.name, size: 24)
         $0.textAlignment = .center
-        $0.layer.backgroundColor = UIColor(named: "viewBackgroundColor")?.cgColor
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         $0.layer.cornerRadius = 10
-        $0.layer.borderWidth = 1.0
+        $0.layer.borderWidth = 1.5
         switch status {
         case .success:
             $0.layer.borderColor = UIColor(named: "successColor")?.cgColor

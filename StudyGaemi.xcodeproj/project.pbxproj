@@ -65,6 +65,8 @@
 		FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */; };
 		FF783CA12C17EC700008AE70 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783CA02C17EC700008AE70 /* AudioController.swift */; };
 		FF8746E32C19939300F63A86 /* AlarmCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */; };
+		FF8746E92C19ADC800F63A86 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FF8746E82C19ADC800F63A86 /* FirebaseFirestore */; };
+		FF8746EB2C19AE0600F63A86 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */; };
 		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
 		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
 		FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */; };
@@ -134,7 +136,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF0071712C074DFA000AE7AA /* FirebaseDatabaseSwift in Frameworks */,
+				FF8746E92C19ADC800F63A86 /* FirebaseFirestore in Frameworks */,
 				FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */,
+				FF8746EB2C19AE0600F63A86 /* FirebaseFirestoreSwift in Frameworks */,
 				FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */,
 				FF0071752C074DFA000AE7AA /* FirebaseStorageCombine-Community in Frameworks */,
 				FF0071732C074DFA000AE7AA /* FirebaseStorage in Frameworks */,
@@ -295,6 +299,8 @@
 				FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */,
 				F4E04FFA2C0D8DE900802477 /* FSCalendar */,
 				FF03F9032C16D59700134B54 /* FirebaseAnalytics */,
+				FF8746E82C19ADC800F63A86 /* FirebaseFirestore */,
+				FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */,
 			);
 			productName = StudyGaemi;
 			productReference = FF0071442C074D86000AE7AA /* StudyGaemi.app */;
@@ -742,6 +748,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		FF8746E82C19ADC800F63A86 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -44,7 +44,11 @@ class AlarmQuestionView: BaseViewController {
     }
     
     private lazy var expressionLabel = UILabel().then {
-        $0.text = alarmQuestionController.getQuestionAlgorithm(difficulty: <#T##String#>)
+        AlarmCoreDataManager.shared.fetchAlarm()
+        guard let difficulty = AlarmCoreDataManager.shared.coreData?.difficulty else {
+            return
+        }
+        $0.text = alarmQuestionController.getQuestionAlgorithm(difficulty: difficulty)
         $0.font = UIFont(name: CustomFontType.bold.name, size: 50) ?? UIFont.systemFont(ofSize: 50)
         $0.textColor = UIColor(named: "fontBlack")
     }

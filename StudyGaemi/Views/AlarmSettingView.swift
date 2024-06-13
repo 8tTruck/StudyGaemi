@@ -308,14 +308,6 @@ class AlarmSettingView: BaseViewController {
         alarmSettingController.getBackView(navigationController)
         
         AudioController.shared.soundName = dropDownButton.currentTitle ?? "알림음 1"
-        
-//        var dateComponents = DateComponents()
-//        dateComponents.hour = 15
-//        dateComponents.minute = 53
-//
-//        if let alarmDate = Calendar.current.date(from: dateComponents) {
-//            AudioController.shared.scheduleAlarm(at: alarmDate, sound: dropDownButton.currentTitle ?? "알림음 1")
-//        }
     }
 
     func buttonSetTitle(_ title: String, for button: UIButton?) {

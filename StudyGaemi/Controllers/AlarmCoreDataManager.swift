@@ -11,7 +11,7 @@ import UIKit
 
 class AlarmCoreDataManager {
     static let shared = AlarmCoreDataManager()
-    
+    var coreData: AlarmModel?
     private init() {}
     
     // MARK: - 코어데이터 context
@@ -43,14 +43,14 @@ class AlarmCoreDataManager {
     }
     
     // MARK: - 알람 불러오기 메소드
-    func fetchAlarm() -> AlarmModel? {
+    func fetchAlarm() {
         let fetchRequest: NSFetchRequest<Alarm> = Alarm.fetchRequest()
         
         do {
             let alarms = try context.fetch(fetchRequest)
             
             if let alarm = alarms.first {
-                return AlarmModel(
+                self.coreData = AlarmModel(
                     time: alarm.time ?? Date(),
                     difficulty: alarm.difficulty ?? "",
                     sound: alarm.sound ?? "",
@@ -62,8 +62,6 @@ class AlarmCoreDataManager {
         } catch {
             print("알람 불러오기 실패 에러: \(error)")
         }
-        
-        return nil
     }
     
     // MARK: - 알람 삭제 메소드
@@ -81,5 +79,13 @@ class AlarmCoreDataManager {
         } catch {
             print("알람 삭제 실패 에러: \(error)")
         }
+    }
+    
+    // MARK: - 알람 데이터 반환 메소드
+    func getAlarmData() -> AlarmModel {
+        guard let alarmData = self.coreData else {
+            return AlarmModel(time: Date(), difficulty: "중", sound: "알림음 1")
+        }
+        return alarmData
     }
 }

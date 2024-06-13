@@ -10,17 +10,16 @@ import UIKit
 
 class AlarmSettingController {
     
-    private var alarmModel: AlarmModel?
+    private var alarmModel: AlarmModel = AlarmCoreDataManager.shared.getAlarmData()
     
     func setAlarm(_ alarmModel: AlarmModel) {
-        self.alarmModel = alarmModel
-        print(alarmModel.time)
-        AlarmViewController.alarmController.getTextAlarm(alarmModel)
+        AlarmCoreDataManager.shared.saveAlarm(alarm: alarmModel)
+        AlarmCoreDataManager.shared.fetchAlarm()
+        self.alarmModel = AlarmCoreDataManager.shared.getAlarmData()
         
         // 알림 권한 요청
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             if granted {
-                guard let alarmModel = self.alarmModel else { return }
                 self.scheduleAlarm(time: alarmModel.time, sound: alarmModel.sound, repeatEnabled: alarmModel.setRepeatEnabled(), repeatInterval: alarmModel.setRepeatInterval(), repeatCount: alarmModel.setRepeatCount())
             } else {
                 print("알림 권한이 거부되었습니다.")

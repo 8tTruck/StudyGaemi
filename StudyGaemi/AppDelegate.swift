@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("알림 권한이 거부되었습니다.")
             }
         }
+        AlarmCoreDataManager.shared.fetchAlarm()
         AudioController.shared.setupAudioSession()
         registerBackgroundTasks()
         FirebaseApp.configure()
