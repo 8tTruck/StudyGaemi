@@ -5,6 +5,7 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
+import BackgroundTasks
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -14,11 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let bottomTabBarController = BottomTabBarViewController()
+      
+        UINavigationController(rootViewController: LoginViewController())
+        let bottomTabBarController = EmailInputViewController()
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = bottomTabBarController
+        window.rootViewController = UINavigationController(rootViewController: LoginViewController())
+//        window.rootViewController = UINavigationController(rootViewController: EmailConfirmViewController())
         window.makeKeyAndVisible()
         self.window = window
     }
@@ -52,12 +55,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        (UIApplication.shared.delegate as? AppDelegate)?.scheduleAppRefresh()
     }
 }
 
 extension SceneDelegate {
-    
-    
     
     // MARK: - 특정 ViewController로 이동하는 메소드
     func navigateToViewController(withIdentifier identifier: String) {

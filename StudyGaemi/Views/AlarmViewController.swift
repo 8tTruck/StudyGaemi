@@ -11,7 +11,7 @@ import UIKit
 
 class AlarmViewController: BaseViewController {
     
-    static let alarmController = AlarmController()
+    private let alarmController = AlarmController()
     
     private let titleLabel = UILabel().then {
         $0.text = "기상하개미"
@@ -114,6 +114,7 @@ class AlarmViewController: BaseViewController {
         horizontalStackView.addArrangedSubview(timeLabel)
         horizontalStackView.addArrangedSubview(repeatLabel)
         
+        alarmButton.addTouchAnimation()
         alarmButton.addTarget(self, action: #selector(tappedAlarmButton), for: .touchUpInside)
         
         if #available(iOS 13.0, *) {
@@ -170,15 +171,16 @@ class AlarmViewController: BaseViewController {
     }
     
     func setAlarm() {
-        alarmButton.setTitle(AlarmViewController.alarmController.setAlarmTime())
-        alarmButton.setAmPmLabel(AlarmViewController.alarmController.setAmPm())
-        timeLabel.text = "\(AlarmViewController.alarmController.setAlarmTime()) \(AlarmViewController.alarmController.setAmPm())"
-        repeatLabel.text = AlarmViewController.alarmController.setAlarmInterval()
-        difficultyLabel.text = "문제 난이도 : \(AlarmViewController.alarmController.setAlarmDifficulty())"
+        alarmController.alarmModel = AlarmCoreDataManager.shared.getAlarmData()
+        alarmButton.setTitle(alarmController.setAlarmTime())
+        alarmButton.setAmPmLabel(alarmController.setAmPm())
+        timeLabel.text = "\(alarmController.setAlarmTime()) \(alarmController.setAmPm())"
+        repeatLabel.text = alarmController.setAlarmInterval()
+        difficultyLabel.text = "문제 난이도 : \(alarmController.setAlarmDifficulty())"
     }
     
     @objc private func tappedAlarmButton() {
-        AlarmViewController.alarmController.goAheadView(navigationController)
+        alarmController.goAheadView(navigationController)
     }
 
 }

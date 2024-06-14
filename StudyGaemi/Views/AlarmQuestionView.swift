@@ -44,7 +44,11 @@ class AlarmQuestionView: BaseViewController {
     }
     
     private lazy var expressionLabel = UILabel().then {
-        $0.text = "19 X 19 = ?"
+        AlarmCoreDataManager.shared.fetchAlarm()
+        guard let difficulty = AlarmCoreDataManager.shared.coreData?.difficulty else {
+            return
+        }
+        $0.text = alarmQuestionController.getQuestionAlgorithm(difficulty: difficulty)
         $0.font = UIFont(name: CustomFontType.bold.name, size: 50) ?? UIFont.systemFont(ofSize: 50)
         $0.textColor = UIColor(named: "fontBlack")
     }
@@ -85,7 +89,9 @@ class AlarmQuestionView: BaseViewController {
         view.addSubview(customTextField)
         view.addSubview(customButton)
         
+        customButton.addTouchAnimation()
         customButton.addTarget(self, action: #selector(checkAnswer), for: .touchUpInside)
+        customTextField.addTarget(self, action: #selector(textFieldEditingDidBegin), for: .editingDidBegin)
         
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance().then {
@@ -146,12 +152,19 @@ class AlarmQuestionView: BaseViewController {
             guard let navigation = navigationController else {
                 return
             }
+            alarmResultView.correctNumber = alarmQuestionController.correctNumber
             navigation.pushViewController(alarmResultView, animated: true)
+            AudioController.shared.stopAlarmSound()
+            FirestoreManager.shared.createWakeUpData(success: false)
         }
     }
     
     @objc private func checkAnswer() {
-        alarmQuestionController.checkAnswer(customTextField.text, navigation: navigationController, timer: timer)
+        alarmQuestionController.checkAnswer(customTextField.text, navigation: navigationController, timer: timer, textField: customTextField)
+    }
+    
+    @objc func textFieldEditingDidBegin(_ textField: UITextField) {
+        textField.text = ""
     }
 
 }

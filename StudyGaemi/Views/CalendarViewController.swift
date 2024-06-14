@@ -10,15 +10,15 @@ import Then
 import UIKit
 import FSCalendar
 import Foundation
+import FirebaseFirestore
+import FirebaseAuth
 
 struct wakeup {
-    let email: String
     let date: Date
     let success: Bool
 }
 
 struct study {
-    let email: String
     let date: Date
     let success: Bool
 }
@@ -33,7 +33,6 @@ enum status{
     case perfect
     case study
     case wakeup
-    case none
 }
 
 class CalendarViewController: BaseViewController {
@@ -46,6 +45,8 @@ class CalendarViewController: BaseViewController {
         return formatter
     }()
     
+    private let firestoreManager = FirestoreManager.shared
+    
     //특정달의 정보만
     var studies: [study] = []
     var wakeups: [wakeup] = []
@@ -53,9 +54,30 @@ class CalendarViewController: BaseViewController {
     private var perfectAntCount = 0
     private var studyAntCount = 0
     private var wakeupAntCount = 0
-    private var result: [badgeStatus] = [.perfect, .study, .wakeup]
+    private var result: [badgeStatus] = []
     private var currentPageYearAndMonth: String = ""
-    private var monthlyResult: [status] = []
+    private var monthlyResultDict: [[Date: status]] = []
+    private var tableHeight = 300 {
+        didSet {
+            badgeView.snp.removeConstraints()
+            badgeView.snp.makeConstraints { make in
+                make.top.equalTo(calendarbackView.snp.bottom).offset(15)
+                make.leading.trailing.equalToSuperview().inset(20)
+                make.height.equalTo(tableHeight)
+                make.bottom.equalToSuperview().inset(10)
+            }
+            badgeView.reloadData()
+        }
+    }
+    private var perfectAntTotalCount = 0 {
+        didSet {
+            let currentPage = calendarView.currentPage
+            let calendar = Calendar.current
+            guard let range = calendar.range(of: .day, in: .month, for: currentPage) else { return }
+            let numberOfDays = range.count
+            updateCustomHeaderView(currentPage, numberOfDays)
+        }
+    }
     
     private let titleLabel = UILabel().then {
         $0.text = "월간개미"
@@ -143,11 +165,13 @@ class CalendarViewController: BaseViewController {
         calendar.appearance.titleFont = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
         
         //날짜 선택시
+        calendar.today = nil
         calendar.appearance.todayColor = .clear
-        calendar.appearance.titleTodayColor = .pointOrange //Today에 표시되는 특정 글자색
-        calendar.appearance.todaySelectionColor = .fontBlack //오늘날짜 선택시 색상
+        //calendar.appearance.titleTodayColor = .pointOrange //Today에 표시되는 특정 글자색
+        //calendar.appearance.todaySelectionColor = .clear //오늘날짜 선택시 색상
         calendar.appearance.selectionColor = .clear // 사용자가 선택한 날짜
         calendar.appearance.titleSelectionColor = .fontBlack // 선택한 날짜 글자색
+        calendar.allowsSelection = false
         
         return calendar
     }()
@@ -213,23 +237,92 @@ class CalendarViewController: BaseViewController {
         self.constraintLayout()
         calCurrentYearAndMonth()
         
-        studies = [
-            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
-            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
-            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
-            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: false),
-            study(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: false)
-        ]
-        wakeups = [
-            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
-            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
-            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
-            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: true),
-            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: true)
-        ]
-        
-        calculateThisMonthAnt(yearAndMonth: currentPageYearAndMonth)
+//        studies = [
+//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/05/05")!, success: true),
+//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/05/11")!, success: true),
+//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
+//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
+//            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
+//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: false),
+//            study(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: false),
+//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
+//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
+//            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: true),
+//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: false),
+//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: false)
+//        ]
+//        wakeups = [
+//            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
+//            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
+//            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
+//            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: true),
+//            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: true),
+//            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
+//            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
+//            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: false),
+//            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: true),
+//            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: true)
+//            
+//        ]
+        //updateData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setData()
+    }
+    
+    //사용자 기반으로 data 불러오기
+    private func setData() {
+        
+        var studiesData = [study]()
+        var wakeupsData = [wakeup]()
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        firestoreManager.readStudyData { result in
+            defer { dispatchGroup.leave() }
+            switch result {
+            case .success(let datas):
+                print("Study 데이터 불러오기 완료")
+                for data in datas{
+                    let study = study(
+                        date: self.removeTime(from: data.date.dateValue(), state: .study),
+                        success: data.success
+                    )
+                    studiesData.append(study)
+                }
+            case .failure(let error):
+                print("Study 데이터 불러오기 에러: \(error)")
+            }
+        }
+        
+        dispatchGroup.enter()
+        firestoreManager.readWakeUpData { result in
+            defer { dispatchGroup.leave() }
+            switch result {
+            case .success(let datas):
+                print("WakeUp 데이터 불러오기 완료")
+                for data in datas{
+                    let wakeup = wakeup(
+                        date: self.removeTime(from: data.date.dateValue(), state: .wakeup),
+                        success: data.success
+                    )
+                    wakeupsData.append(wakeup)
+                }
+            case .failure(let error):
+                print("WakeUp 데이터 불러오기 에러: \(error)")
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.studies = studiesData
+            self.wakeups = wakeupsData
+            self.updateData()
+            self.calendarView.reloadData()
+            self.badgeView.reloadData()
+        }
+    }
+    
     
     // MARK: - method
     override func configureUI() {
@@ -293,8 +386,8 @@ class CalendarViewController: BaseViewController {
         badgeView.snp.makeConstraints { make in
             make.top.equalTo(calendarbackView.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(282)
-            make.bottom.equalToSuperview().inset(30)
+            make.height.equalTo(tableHeight)
+            make.bottom.equalToSuperview().inset(10)
         }
         
         customHeaderView.snp.makeConstraints { make in
@@ -315,68 +408,175 @@ class CalendarViewController: BaseViewController {
         }
     }
     
+    
     private func updateCustomHeaderView(_ month: Date, _ days: Int){
-        //한달에 완벽개미 계산하는 로직
         monthLabel.text = headerDateFormatter.string(from: month)
-        totalLabel.text = "/\(days)"
+        totalLabel.text = "\(perfectAntTotalCount)/\(days)"
     }
     
-    //특정 일의 완벽개미, 공부개미, 기상개미 측정
-    private func calculateThisMonthAnt(yearAndMonth: String){
+    private func updateData(){
+        result = []
+        monthlyResultDict = []
+        monthlyResultDict = calculateThisMonthAnt(yearAndMonth: currentPageYearAndMonth)
+        calculateStraightForBadge(of: .perfect)
+        calculateStraightForBadge(of: .study)
+        calculateStraightForBadge(of: .wakeup)
+    }
+    
+    private func removeTime(from date: Date, state: status) -> Date{
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day], from: date)
+        
+        //5시 이전이면 전날로 설정
+        if state == .study {
+            let hour = calendar.component(.hour, from: date)
+
+            if hour < 5 {
+                guard let previousDay = calendar.date(byAdding: .day, value: -1, to: date) else {
+                    return calendar.date(from: components)!
+                }
+                components = calendar.dateComponents([.year, .month, .day], from: previousDay)
+            }
+            return calendar.date(from: components)!
+        } else {
+            return calendar.date(from: components)!
+        }
+        
+        
+    }
+    
+    //이달의 완벽개미, 공부개미, 기상개미 측정
+    private func calculateThisMonthAnt(yearAndMonth: String) -> [[Date: status]] {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yy.MM"
         
         guard let yearMonthDate = dateFormatter.date(from: yearAndMonth) else {
             print("Invalid year and month format")
-            return
+            return []
         }
         
-        let calendar = Calendar.current
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Seoul")!
+        
         let range = calendar.range(of: .day, in: .month, for: yearMonthDate)!
-        let components = calendar.dateComponents([.year, .month], from: yearMonthDate)
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-        var monthlyResult: [status] = []
+        var components = calendar.dateComponents([.year, .month], from: yearMonthDate)
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         
         for day in range {
-            var dayComponents = components
-            dayComponents.day = day
-            guard let date = calendar.date(from: dayComponents) else{ return }
+            var resultDict: [Date: status] = [:]
+            components.day = day
+            guard let date = calendar.date(from: components) else { continue }
             
             let matchingStudies = studies.filter { $0.date == date }
-            
-            if matchingStudies.isEmpty {
-                monthlyResult.append(.none)
-            } else {
+            if !matchingStudies.isEmpty{
                 let successfulStudy = matchingStudies.contains { $0.success }
-                
                 if successfulStudy {
-                    
-                    monthlyResult.append(.study)
-                } else {
-                    monthlyResult.append(.none)
+                    resultDict[date] = .study
                 }
             }
             
             let matchingWakeups = wakeups.filter { $0.date == date }
             if !matchingWakeups.isEmpty {
                 let successfulWakeup = matchingWakeups.contains { $0.success }
-                if successfulWakeup{
-                    
-                    if monthlyResult.popLast() == .study {
-                        
-                        monthlyResult.append(.perfect)
-                        
+                if successfulWakeup {
+                    if let previousResult = resultDict[date], previousResult == .study {
+                        resultDict[date] = .perfect
                     } else {
-                        
-                        monthlyResult.append(.wakeup)
-                        
+                        resultDict[date] = .wakeup
                     }
                 }
             }
-            
+            if !resultDict.isEmpty {
+                monthlyResultDict.append(resultDict)
+            }
         }
-        print(monthlyResult)
+        
+        monthlyResultDict.sort { (dict1, dict2) in
+            guard let date1 = dict1.keys.first, let date2 = dict2.keys.first else {
+                return false // 빈 거 고려
+            }
+            return date1 < date2
+        }
+        
+        print("monthlyResultDict \(monthlyResultDict)")
+        return monthlyResultDict
+    }
+    
+    //연속일 계산
+    private func calculateStraightForBadge(of type: badgeStatus) {
+        var max = 0
+        var temp = 0
+        var badgeCount = 0
+        let badgeValues: Set<status>
+        
+        switch type {
+        case .perfect:
+            perfectAntTotalCount = 0 // 초기화
+            badgeValues = [.perfect]
+        case .study:
+            badgeValues = [.study, .perfect]
+        case .wakeup:
+            badgeValues = [.wakeup, .perfect]
+        }
+        
+        if let firstDict = monthlyResultDict.first, let firstDay = firstDict.keys.first {
+            var yesterday = firstDay
+            let calendar = Calendar.current
+            
+            for dic in monthlyResultDict {
+                for (day, value) in dic {
+                    if badgeValues.contains(value) {
+                        let difference = calendar.dateComponents([.day], from: yesterday, to: day)
+                        
+                        if let dayDifference = difference.day, dayDifference == 1 {
+                            temp += 1
+                            max = temp >= max ? temp : max
+                            badgeCount += 1
+                            yesterday = day
+                        } else {
+                            temp = 1
+                            max = temp >= max ? temp : max
+                            badgeCount += 1
+                            yesterday = day
+                        }
+                    } else {
+                        temp = 0
+                        yesterday = day
+                    }
+                }
+            }
+        }
+        
+        switch type {
+        case .perfect:
+            perfectAntCount = 0
+            perfectAntTotalCount = badgeCount
+            if max != 0 {
+                result.append(.perfect)
+                perfectAntCount = max
+            }
+        case .study:
+            studyAntCount = 0
+            if max != 0 {
+                result.append(.study)
+                studyAntCount = max
+            }
+        case .wakeup:
+            wakeupAntCount = 0
+            if max != 0 {
+                result.append(.wakeup)
+                wakeupAntCount = max
+            }
+        }
+    }
+    
+    //timestamp를 date형식으로 변환
+    private func convertTimestampToDate(timestamp: Timestamp) -> Date {
+        return timestamp.dateValue()
     }
     
     //오늘 달과 날짜 계산
@@ -394,6 +594,7 @@ class CalendarViewController: BaseViewController {
 // MARK: - extension
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return result.count
     }
     
@@ -435,10 +636,27 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
     
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell{
         guard let cell = calendar.dequeueReusableCell(withIdentifier: "CalendarCell", for: date, at: position) as? CalendarCell else { return FSCalendarCell() }
-        //        switch monthlyResult[indexPath.row]{
-        //        case .perfect:
-        //            cell[indexPath.row].image =
-        //        }
+        let calendar = Calendar.current
+        
+        for resultDict in monthlyResultDict {
+            print(resultDict)
+            for (dat, status) in resultDict {
+                print((dat, status))
+                if calendar.isDate(dat, inSameDayAs: date) {
+                    print("=============================Stamp")
+                    switch status {
+                    case .perfect:
+                        cell.badgeView.image = UIImage.perfectStamp
+                    case .study:
+                        cell.badgeView.image = UIImage.studyStamp
+                    case .wakeup:
+                        cell.badgeView.image = UIImage.wakeupStamp
+                        print("cell.badgeView.image = UIImage.wakeupStamp")
+                    }
+                }
+            }
+        }
+        
         return cell
     }
     
@@ -447,6 +665,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         return 0
     }
     
+    //
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
         let today = Date()
         let calendar = Calendar.current
@@ -474,6 +693,9 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         formatter.dateFormat = "yy.MM"
         currentPageYearAndMonth = formatter.string(from: currentPage)
         
+        updateData()
+        calendarView.reloadData()
+        tableHeight = Int(CGFloat(result.count) * 100.0)
         badgeView.reloadData()
     }
 }
