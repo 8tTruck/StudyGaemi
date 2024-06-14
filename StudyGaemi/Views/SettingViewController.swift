@@ -309,11 +309,17 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
             AuthenticationManager.shared.signOut()
             DispatchQueue.main.async {
-                let loginVC = LoginViewController()
-                loginVC.modalPresentationStyle = .fullScreen
-                self.present(loginVC, animated: true, completion: nil)
+                let loginVC = UINavigationController(rootViewController: LoginViewController())
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+                    window.rootViewController = loginVC
+                    window.makeKeyAndVisible()
+                }
             }
         })
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     private func showDeleteAlert() {
