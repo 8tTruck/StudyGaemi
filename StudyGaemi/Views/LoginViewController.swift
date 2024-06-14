@@ -8,8 +8,12 @@
 import UIKit
 import SnapKit
 import Firebase
+import FirebaseFirestore
 
 class LoginViewController: UIViewController {
+    
+    var firestore: Firestore!
+    let db = Firestore.firestore()
     
     let offImage = UIImage(named: "checkboxOff")
     let onImage = UIImage(named: "checkboxOn")
@@ -31,6 +35,22 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let user = Auth.auth().currentUser {
+            // 사용자가 이미 로그인된 상태
+            print("자동 로그인 성공: \(user.email ?? "")")
+            navigateToMainScreen()
+        } else {
+            // 로그인 화면으로 이동
+            navigateToLoginScreen()
+        }
+    }
+    
+    func navigateToMainScreen() {
+        moveToBottomTabBarController()
+    }
+    
+    func navigateToLoginScreen() {
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
         loginImageSetting()
         loginTextFieldSetting()
@@ -154,6 +174,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
     @objc func findIDButtonTapped() {
         let alert = UIAlertController(title: "ID 찾기", message: "이메일 주소를 입력해 주세요.", preferredStyle: .alert)
         alert.addTextField { textField in
@@ -165,16 +186,77 @@ class LoginViewController: UIViewController {
                 self?.showAlert(message: "이메일 주소를 입력해 주세요.")
                 return
             }
-            AuthenticationManager.shared.checkIfEmailExists(email: email) { exists, error in
-                if exists {
-                    self?.showAlert(message: "해당 이메일로 가입된 계정이 존재합니다.")
+            
+            self?.emailCheck(email: email) { isAvailable in
+                if isAvailable {
+                    self?.showAlert(message: "데이터 중복 안 됨, 가입 진행 가능")
                 } else {
-                    self?.showAlert(message: error ?? "해당 이메일로 가입된 계정을 찾을 수 없습니다.")
+                    self?.showAlert(message: "데이터 중복 됨, 가입 진행 불가")
                 }
             }
         }))
         present(alert, animated: true, completion: nil)
     }
+
+    
+    func emailCheck(email: String, completion: @escaping (Bool) -> Void) {
+        let userDB = db.collection("User")
+        let query = userDB.whereField("email", isEqualTo: email)
+        query.getDocuments { (qs, err) in
+            if let error = err {
+                print("Firebase 오류: \(error.localizedDescription)")
+                completion(false)
+            }
+            
+            if let documents = qs?.documents, documents.isEmpty {
+                print("데이터 중복 안 됨, 가입 진행 가능")
+                completion(true)
+            } else {
+                print("데이터 중복 됨, 가입 진행 불가")
+                completion(false)
+            }
+        }
+    }
+
+    
+//    @objc func findIDButtonTapped() {
+//        let alert = UIAlertController(title: "ID 찾기", message: "이메일 주소를 입력해 주세요.", preferredStyle: .alert)
+//        alert.addTextField { textField in
+//            textField.placeholder = "E-mail"
+//        }
+//        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+//        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+//            guard let email = alert.textFields?.first?.text, !email.isEmpty else {
+//                self?.showAlert(message: "이메일 주소를 입력해 주세요.")
+//                return
+//            }
+//            
+//            // 이메일이 서버에 존재하는지 확인
+//            AuthenticationManager.shared.checkIfUserExists(email: email) { [weak self] exists in
+//                guard let self = self else { return }
+//                
+//                if exists {
+//                    // 이미 가입된 계정이 있는 경우
+//                    self.showAlert(message: "해당 이메일로 이미 가입된 계정이 존재합니다.")
+//                    print("LoginVC : 해당 이메일로 가입된 계정이 있습니다.")
+//                } else {
+//                    // 가입된 계정이 없는 경우
+//                    self.showAlert(message: "해당 이메일로 가입된 계정을 찾을 수 없습니다.")
+//                    print("LoginVC : 해당 이메일로 가입된 계정이 없습니다.")
+//                }
+//            }
+//        }))
+//        present(alert, animated: true, completion: nil)
+//    }
+
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
+
+
     
     @objc func findPWButtonTapped() {
         let alert = UIAlertController(title: "비밀번호 찾기", message: "이메일 주소를 입력해 주세요.", preferredStyle: .alert)
@@ -334,13 +416,6 @@ class LoginViewController: UIViewController {
                 self.moveToBottomTabBarController()
             }
         }
-    }
-
-    
-    func showAlert(message: String) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default))
-        present(alert, animated: true)
     }
     
     @objc func createAccountButtonTapped() {
