@@ -56,7 +56,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let editButton = UIButton(type: .system).then {
         $0.setImage(UIImage(systemName: "pencil.line"), for: .normal)
         $0.tintColor = .gray
-        $0.addTarget(SettingViewController.self, action: #selector(editButtonTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
     private let separatorView = UIView().then {
@@ -212,10 +212,10 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = settingItems[indexPath.row]
         if settingItems[indexPath.row] == "회원탈퇴" {
-               cell.textLabel?.textColor = .red
-           } else {
-               cell.textLabel?.textColor = .black
-           }
+            cell.textLabel?.textColor = .red
+        } else {
+            cell.textLabel?.textColor = .black
+        }
         return cell
     }
     
@@ -226,7 +226,10 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "설정"
+        let titleString = NSAttributedString(string: "설정", attributes: [
+            .font: UIFont.systemFont(ofSize: 12, weight: .regular)
+        ])
+        return titleString.string
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -305,14 +308,12 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
             AuthenticationManager.shared.signOut()
-        })
-        confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
+            DispatchQueue.main.async {
+                let loginVC = LoginViewController()
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: true, completion: nil)
+            }
+    
     private func showDeleteAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         
@@ -320,13 +321,12 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             .font: UIFont.boldSystemFont(ofSize: 17)
         ])
         
-        let messageString = NSAttributedString(string:
-                                                        """
-                                                        회원탈퇴시 모든 정보가 삭제됩니다.
-                                                        정말 회원탈퇴하시겠습니까?
-                                                        """, attributes: [
-                                                            .font: UIFont.systemFont(ofSize: 14)
-                                                        ])
+        let messageString = NSAttributedString(string: """
+        회원탈퇴시 모든 정보가 삭제됩니다.
+        정말 회원탈퇴하시겠습니까?
+        """, attributes: [
+            .font: UIFont.systemFont(ofSize: 14)
+        ])
         
         alertController.setValue(titleString, forKey: "attributedTitle")
         alertController.setValue(messageString, forKey: "attributedMessage")
@@ -335,47 +335,18 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         cancelAction.setValue(UIColor.gray, forKey: "titleTextColor")
         
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
-            let dispatchGroup = DispatchGroup()
-
-            dispatchGroup.enter()
-            FirestoreManager.shared.deleteStudyData { result in
-                switch result {
-                case .success:
-                    print("Study 데이터가 삭제되었습니다.")
-                case .failure(let error):
-                    print("Study 데이터 삭제 에러: \(error)")
+            AuthenticationManager.shared.deleteUser()
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(title: "회원탈퇴 처리되었습니다.", message: nil, preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+                    let loginVC = LoginViewController()
+                    loginVC.modalPresentationStyle = .fullScreen
+                    self.present(loginVC, animated: true, completion: nil)
                 }
-                dispatchGroup.leave()
+                alertController.addAction(confirmAction)
+                self.present(alertController, animated: true, completion: nil)
             }
 
-            dispatchGroup.enter()
-            FirestoreManager.shared.deleteWakeUpData { result in
-                switch result {
-                case .success:
-                    print("WakeUp 데이터가 삭제되었습니다.")
-                case .failure(let error):
-                    print("WakeUp 데이터 삭제 에러: \(error)")
-                }
-                dispatchGroup.leave()
-            }
-
-            dispatchGroup.enter()
-            FirestoreManager.shared.deleteUserData { result in
-                switch result {
-                case .success:
-                    print("회원탈퇴가 완료되었습니다.")
-                case .failure(let error):
-                    print("회원탈퇴 에러: \(error)")
-                }
-                dispatchGroup.leave()
-            }
-
-            dispatchGroup.notify(queue: .main) {
-                print("모든 데이터 삭제 작업이 완료되었습니다.")
-                AuthenticationManager.shared.deleteUser()
-                AuthenticationManager.shared.signOut()
-            }
-            
         })
         confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
         
