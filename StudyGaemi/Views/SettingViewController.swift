@@ -28,7 +28,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     private let userView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         $0.layer.cornerRadius = 23
         $0.layer.shadowColor = UIColor(named: "pointBlack")?.cgColor
         $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
@@ -44,6 +44,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let userLabel = UILabel().then {
         $0.text = "User Name"
         $0.font = UIFont.systemFont(ofSize: 17)
+        $0.textColor = UIColor.fontBlack
         $0.backgroundColor = .clear
     }
     
@@ -72,11 +73,12 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let totalTimeLabel = UILabel().then {
         $0.text = "33시간 51분"
         $0.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        $0.textColor = .black
+        $0.textColor = UIColor(named: "fontBlack")
     }
     
     private let tableView = UITableView().then {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         $0.separatorStyle = .none
     }
     let settingItems = ["비밀번호 변경", "개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "로그아웃", "회원탈퇴"]
@@ -102,6 +104,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
     
     override func configureUI() {
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
@@ -211,10 +214,13 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = settingItems[indexPath.row]
+        cell.backgroundColor = UIColor(named: "viewBackgroundColor")
         if settingItems[indexPath.row] == "회원탈퇴" {
-            cell.textLabel?.textColor = .red
+            cell.textLabel?.textColor = UIColor(named: "fontRed")
+            cell.backgroundColor = UIColor(named: "viewBackgroundColor")
         } else {
-            cell.textLabel?.textColor = .black
+            cell.textLabel?.textColor = UIColor(named: "fontBlack")
+            cell.backgroundColor = UIColor(named: "viewBackgroundColor")
         }
         return cell
     }
@@ -239,22 +245,22 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         switch pageIndex {
         case 0:
             pageViewController = MemberInfoViewController()
-            pageViewController.view.backgroundColor = .white
+            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
             pageViewController.title = settingItems[pageIndex]
             navigationController?.pushViewController(pageViewController, animated: true)
         case 1:
             pageViewController = PrivacyPolicyViewController()
-            pageViewController.view.backgroundColor = .white
+            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
             pageViewController.title = settingItems[pageIndex]
             navigationController?.pushViewController(pageViewController, animated: true)
         case 2:
             pageViewController = BugReportViewController()
-            pageViewController.view.backgroundColor = .white
+            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
             pageViewController.title = settingItems[pageIndex]
             navigationController?.pushViewController(pageViewController, animated: true)
         case 3:
             pageViewController = AnnouncementViewController()
-            pageViewController.view.backgroundColor = .white
+            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
             pageViewController.title = settingItems[pageIndex]
             navigationController?.pushViewController(pageViewController, animated: true)
         case 4:
