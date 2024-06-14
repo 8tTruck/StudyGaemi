@@ -102,8 +102,8 @@ class AlarmQuestionController {
     }
     
     private func generateHardQuestion() -> String {
-        let num1 = Int.random(in: 10...99)
-        let num2 = Int.random(in: 1...9)
+        let num1 = Int.random(in: 20...99)
+        let num2 = Int.random(in: 1...19)
         let operations = ["*", "/"]
         let operation = operations.randomElement()!
         var question: String = ""
@@ -111,16 +111,20 @@ class AlarmQuestionController {
         switch operation {
         case "*":
             correctNumber = num1 * num2
+            question = "\(num1) X \(num2) = ?"
         case "/":
-            correctNumber = num1 / num2
-            correctNumber *= num2
-            question = "\(correctNumber) \(operation) \(num2) = ?"
-            return question
+            var divisibleNum1 = num1
+            
+            while divisibleNum1 % num2 != 0 {
+                divisibleNum1 = Int.random(in: 10...99)
+            }
+            
+            correctNumber = divisibleNum1 / num2
+            question = "\(divisibleNum1) ÷ \(num2) = ?"
         default:
             break
         }
         
-        question = "\(num1) \(operation) \(num2) = ?"
         return question
     }
 }
