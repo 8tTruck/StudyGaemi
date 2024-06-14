@@ -8,8 +8,9 @@
 import SnapKit
 import Then
 import UIKit
+import MessageUI
 
-class BugReportViewController: BaseViewController {
+class BugReportViewController: BaseViewController, MFMailComposeViewControllerDelegate {
     private let bugReportView = UIView()
     private let textView = UITextView()
     private let fixedHeaderView = UIView()
@@ -125,22 +126,67 @@ class BugReportViewController: BaseViewController {
             
             present(alertController, animated: true, completion: nil)
         } else {
+            // sendEmail(withContent: textView.text)
             let alertController = UIAlertController(title: "오류 및 버그 신고", message: "성공적으로 제출되었습니다.", preferredStyle: .alert)
-            
             let confirmAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
                 self.clearTextView()
             })
             confirmAction.setValue(UIColor.orange, forKey: "titleTextColor")
-            
             alertController.addAction(confirmAction)
             
             // 뒷 배경을 하얗게 설정
             let backgroundView = alertController.view.subviews.first?.subviews.first?.subviews.first
             backgroundView?.backgroundColor = UIColor.white
             
-            present(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    /*
+    private func sendEmail(withContent content: String) {
+        guard MFMailComposeViewController.canSendMail() else {
+            let alertController = UIAlertController(title: "이메일 설정 오류", message: "이메일 계정이 설정되어 있지 않습니다. 설정 후 다시 시도해주세요.", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        let mailComposeViewController = MFMailComposeViewController()
+        mailComposeViewController.mailComposeDelegate = self
+        mailComposeViewController.setToRecipients(["taengdev@gamial.com"])
+        mailComposeViewController.setSubject("오류 및 버그 신고")
+        mailComposeViewController.setMessageBody(content, isHTML: false)
+        
+        present(mailComposeViewController, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true) {
+            if result == .sent {
+                let alertController = UIAlertController(title: "오류 및 버그 신고", message: "성공적으로 제출되었습니다.", preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+                    self.clearTextView()
+                })
+                confirmAction.setValue(UIColor.orange, forKey: "titleTextColor")
+                alertController.addAction(confirmAction)
+                
+                // 뒷 배경을 하얗게 설정
+                let backgroundView = alertController.view.subviews.first?.subviews.first?.subviews.first
+                backgroundView?.backgroundColor = UIColor.white
+                
+                self.present(alertController, animated: true, completion: nil)
+            } else if result == .failed {
+                let alertController = UIAlertController(title: "오류 및 버그 신고 실패", message: "이메일 전송에 실패하였습니다. 다시 시도해주세요.", preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                confirmAction.setValue(UIColor.orange, forKey: "titleTextColor")
+                alertController.addAction(confirmAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    */
     
     private func clearTextView() {
         textView.text = "오류 및 버그를 작성 후 제출버튼을 눌러주세요."

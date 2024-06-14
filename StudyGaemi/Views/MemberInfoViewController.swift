@@ -7,6 +7,7 @@
 
 import SnapKit
 import UIKit
+import Firebase
 
 class MemberInfoViewController: BaseViewController {
     private let scrollView = UIScrollView()
@@ -133,7 +134,7 @@ class MemberInfoViewController: BaseViewController {
         textField.textColor = .gray
         textField.borderStyle = .roundedRect
         textField.delegate = self
-        textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = false
         textField.isUserInteractionEnabled = true // 터치 이벤트를 받을 수 있도록 설정
     }
     
@@ -183,7 +184,9 @@ class MemberInfoViewController: BaseViewController {
     }
     
     @objc private func confirmButtonTapped() {
-        guard let newPassword = newPasswordField.text, let confirmPassword = confirmPasswordField.text else { return }
+        guard let currentPassword = currentPasswordField.text,
+              let newPassword = newPasswordField.text,
+              let confirmPassword = confirmPasswordField.text else { return }
         
         if newPassword != confirmPassword {
             confirmPasswordLabel.text = "비밀번호가 일치하지 않습니다."
@@ -191,14 +194,19 @@ class MemberInfoViewController: BaseViewController {
         } else {
             confirmPasswordLabel.textColor = .gray
             errorLabel.text = ""
-            let alertController = UIAlertController(title: "비밀번호 변경", message: "비밀번호가 변경되었습니다.", preferredStyle: .alert)
             
-            let confirmAction = UIAlertAction(title: "확인", style: .destructive, handler: nil)
-            confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
-            
-            alertController.addAction(confirmAction)
-            
-            present(alertController, animated: true, completion: nil)
+            AuthenticationManager.shared.updatePassword(currentPassword: currentPassword, newPassword: newPassword) { success, error in
+                if success {
+                    let alertController = UIAlertController(title: "비밀번호 변경", message: "비밀번호가 성공적으로 변경되었습니다.", preferredStyle: .alert)
+                    let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                    confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
+                    alertController.addAction(confirmAction)
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    self.errorLabel.text = error
+                    self.errorLabel.textColor = .red
+                }
+            }
         }
     }
     

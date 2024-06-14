@@ -68,7 +68,7 @@ class AnnouncementViewController: UIViewController {
     }
 
     private func loadURL() {
-        if let url = URL(string: "https://shard-chips-957.notion.site/5f294c41f1a046519855520f2ed1e9d0?v=309cac703cd244b29d1dc51e22f32510&pvs=4") {
+        if let url = URL(string: "https://shard-chips-957.notion.site/4228b5c554d24f0faf7c8b5b1c9e0233?pvs=4") {
             let request = URLRequest(url: url)
             webView.load(request)
         } else {

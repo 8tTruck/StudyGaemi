@@ -131,4 +131,27 @@ class AuthenticationManager {
             print("No user is currently signed in")
         }
     }
+    
+    // MARK: - 비밀번호 변경
+    func updatePassword(currentPassword: String, newPassword: String, completion: @escaping (Bool, String?) -> Void) {
+        let user = Auth.auth().currentUser
+        let email = user?.email
+        
+        let credential = EmailAuthProvider.credential(withEmail: email!, password: currentPassword)
+        
+        user?.reauthenticate(with: credential, completion: { (authResult, error) in
+            if let error = error {
+                completion(false, "Current password is incorrect.")
+                return
+            }
+            
+            user?.updatePassword(to: newPassword, completion: { (error) in
+                if let error = error {
+                    completion(false, error.localizedDescription)
+                } else {
+                    completion(true, nil)
+                }
+            })
+        })
+    }
 }
