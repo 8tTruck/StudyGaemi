@@ -12,6 +12,7 @@ import SnapKit
 
 class MakePasswordViewController: UIViewController {
     
+    let db = Firestore.firestore()
     // 입력 부분
     let mainImage = UIImageView()
     var nicknameDescriptionLabel = UILabel()
@@ -453,25 +454,50 @@ class MakePasswordViewController: UIViewController {
             return
         }
         
-        // 이메일이 서버에 존재하는지 확인
-//        AuthenticationManager.shared.checkIfEmailExists(email: emailText) { [weak self] exists in
-//            guard let self = self else { return }
-//            
-//            if exists {
-//                // 이메일이 존재하는 경우
-//                isValid = false
-//                self.showAlert(message: "해당 이메일로 가입된 계정이 존재합니다.")
-//                print("이미 계정 있다우")
-//                return
-//            }
+        let dispatchGroup = DispatchGroup()
 
+        // 이메일 중복 검사
+        dispatchGroup.enter()
+        emailCheck(email: emailText) { isEmailValid in
+            if !isEmailValid {
+                isValid = false
+                self.setFailed(for: self.nicknameTextField, label: self.nicknameDescriptionLabel)
+            }
+            dispatchGroup.leave()
+        }
+
+        // 모든 비동기 작업이 완료된 후 호출
+        dispatchGroup.notify(queue: .main) {
             // 이메일 존재 여부 확인이 끝난 후 isValid 상태를 검사하여 다음 단계를 진행
-            if isValid == true {
+            if isValid {
                 // 추가적인 유효성 검사나 다음 단계로의 전환 등을 여기에 추가할 수 있습니다
                 self.moveNextVC()
-//            }
+            } else {
+                // 실패 메시지를 출력
+                self.showAlert(message: "이미 가입된 이메일입니다.")
+            }
         }
     }
+
+    func emailCheck(email: String, completion: @escaping (Bool) -> Void) {
+        let userDB = db.collection("User")
+        let query = userDB.whereField("email", isEqualTo: email)
+        query.getDocuments { (qs, err) in
+            if let error = err {
+                print("Firebase 오류: \(error.localizedDescription)")
+                completion(false)
+            }
+            
+            if let documents = qs?.documents, documents.isEmpty {
+                print("데이터 중복 안 됨, 가입 진행 가능")
+                completion(true)
+            } else {
+                print("데이터 중복 됨, 가입 진행 불가")
+                completion(false)
+            }
+        }
+    }
+
 
         
 //        if isValid, let email = nicknameTextField.text {
