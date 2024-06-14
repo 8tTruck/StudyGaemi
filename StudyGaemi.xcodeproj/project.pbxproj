@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */; };
 		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
+		B579CBD02C1C0D3200A95AD6 /* RepeatingSecondsTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579CBCF2C1C0D3200A95AD6 /* RepeatingSecondsTimer.swift */; };
+		B579CBD22C1C0D5F00A95AD6 /* SettingTiemrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579CBD12C1C0D5F00A95AD6 /* SettingTiemrVC.swift */; };
+		B579CBD62C1C0D9E00A95AD6 /* CircularTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579CBD52C1C0D9E00A95AD6 /* CircularTimerVC.swift */; };
+		B579CBD82C1C11A900A95AD6 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579CBD72C1C11A900A95AD6 /* CircularTimerView.swift */; };
+		B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */; };
 		F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */; };
 		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
 		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
@@ -60,8 +64,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		B579CBCF2C1C0D3200A95AD6 /* RepeatingSecondsTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingSecondsTimer.swift; sourceTree = "<group>"; };
+		B579CBD12C1C0D5F00A95AD6 /* SettingTiemrVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTiemrVC.swift; sourceTree = "<group>"; };
+		B579CBD52C1C0D9E00A95AD6 /* CircularTimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerVC.swift; sourceTree = "<group>"; };
+		B579CBD72C1C11A900A95AD6 /* CircularTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
+		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
@@ -125,6 +133,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B579CBCE2C1C0D1E00A95AD6 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				B579CBCF2C1C0D3200A95AD6 /* RepeatingSecondsTimer.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		FF00713B2C074D86000AE7AA = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +160,7 @@
 		FF0071462C074D86000AE7AA /* StudyGaemi */ = {
 			isa = PBXGroup;
 			children = (
+				B579CBCE2C1C0D1E00A95AD6 /* Component */,
 				FF0071842C082573000AE7AA /* Models */,
 				FF0071832C08256A000AE7AA /* Views */,
 				FF0071822C08255F000AE7AA /* Controllers */,
@@ -167,6 +184,8 @@
 				FF6774012C0DACF800017E1F /* AlarmController.swift */,
 				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
 				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
+				B579CBD12C1C0D5F00A95AD6 /* SettingTiemrVC.swift */,
+				B579CBD52C1C0D9E00A95AD6 /* CircularTimerVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -192,6 +211,7 @@
 				F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */,
 				FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */,
 				FF931A632C12BC4700AD1513 /* AlarmResultView.swift */,
+				B579CBD72C1C11A900A95AD6 /* CircularTimerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,13 +358,17 @@
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
+				B579CBD62C1C0D9E00A95AD6 /* CircularTimerVC.swift in Sources */,
 				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
 				FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
+				B579CBD22C1C0D5F00A95AD6 /* SettingTiemrVC.swift in Sources */,
 				F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */,
+				B579CBD82C1C11A900A95AD6 /* CircularTimerView.swift in Sources */,
+				B579CBD02C1C0D3200A95AD6 /* RepeatingSecondsTimer.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
 				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
