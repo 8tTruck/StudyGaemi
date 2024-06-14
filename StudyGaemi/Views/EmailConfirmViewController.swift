@@ -61,6 +61,15 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
             AuthenticationManager.shared.deleteUser()
             // 시간 초과 시 로그아웃 하는 메소드 추가
             AuthenticationManager.shared.signOut()
+            // 시간 초과 시 데이터베이스에서 계정 삭제 및 데이터 삭제
+            FirestoreManager.shared.deleteUserData { result in
+                switch result {
+                case .success:
+                    print("User 데이터베이스 삭제 완료")
+                case .failure(let error):
+                    print("User 데이터베이스 삭제 에러: \(error)")
+                }
+            }
         }
     }
     
