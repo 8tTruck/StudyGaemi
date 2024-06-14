@@ -313,14 +313,6 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 loginVC.modalPresentationStyle = .fullScreen
                 self.present(loginVC, animated: true, completion: nil)
             }
-        })
-        confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
     
     private func showDeleteAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
@@ -354,6 +346,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 alertController.addAction(confirmAction)
                 self.present(alertController, animated: true, completion: nil)
             }
+
         })
         confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
         

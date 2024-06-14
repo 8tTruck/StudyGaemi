@@ -17,7 +17,7 @@ class CalendarCell: FSCalendarCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.image = UIImage.studyStamp
+        //view.image = UIImage.studyStamp
         return view
     }()
     
@@ -51,7 +51,7 @@ class CalendarCell: FSCalendarCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        badgeView.image = UIImage.studyStamp
+        badgeView.image = nil
     }
     
     // 셀의 높이와 너비 중 작은 값 리턴

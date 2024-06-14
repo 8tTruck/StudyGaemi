@@ -187,6 +187,8 @@ class AlarmSettingView: BaseViewController {
         toggleButton.addTarget(self, action: #selector(toggleSwitchChanged(_:)), for: .valueChanged)
         saveButton.addTarget(self, action: #selector(saveValues), for: .touchUpInside)
         
+        AudioController.shared.setupAudioSession()
+        
         dropDownButton.menu = UIMenu(children: [
             UIAction(title: "알림음 1", handler: { [weak self] _ in
                 self?.buttonSetTitle("알림음 1", for: self?.dropDownButton)
@@ -274,11 +276,11 @@ class AlarmSettingView: BaseViewController {
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("하 선택됨")
+            print("하")
         case 1:
-            print("중 선택됨")
+            print("중")
         case 2:
-            print("상 선택됨")
+            print("상")
         default:
             break
         }
@@ -304,6 +306,8 @@ class AlarmSettingView: BaseViewController {
         alarmSettingController.setAlarm(alarmModel)
         
         alarmSettingController.getBackView(navigationController)
+        
+        AudioController.shared.soundName = dropDownButton.currentTitle ?? "알림음 1"
     }
 
     func buttonSetTitle(_ title: String, for button: UIButton?) {
