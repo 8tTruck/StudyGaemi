@@ -167,11 +167,13 @@ class CalendarViewController: BaseViewController {
         calendar.appearance.titleFont = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
         
         //날짜 선택시
+        calendar.today = nil
         calendar.appearance.todayColor = .clear
-        calendar.appearance.titleTodayColor = .pointOrange //Today에 표시되는 특정 글자색
-        calendar.appearance.todaySelectionColor = .fontBlack //오늘날짜 선택시 색상
+        //calendar.appearance.titleTodayColor = .pointOrange //Today에 표시되는 특정 글자색
+        //calendar.appearance.todaySelectionColor = .clear //오늘날짜 선택시 색상
         calendar.appearance.selectionColor = .clear // 사용자가 선택한 날짜
         calendar.appearance.titleSelectionColor = .fontBlack // 선택한 날짜 글자색
+        calendar.allowsSelection = false
         
         return calendar
     }()
@@ -381,7 +383,6 @@ class CalendarViewController: BaseViewController {
     //이달의 완벽개미, 공부개미, 기상개미 측정
     private func calculateThisMonthAnt(yearAndMonth: String) -> [[Date: status]] {
         
-        
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yy.MM"
@@ -507,6 +508,11 @@ class CalendarViewController: BaseViewController {
         }
     }
     
+    //timestamp를 date형식으로 변환
+    private func convertTimestampToDate(timestamp: Timestamp) -> Date {
+        return timestamp.dateValue()
+    }
+    
     //오늘 달과 날짜 계산
     private func calCurrentYearAndMonth(){
         let dateFormatter = DateFormatter()
@@ -589,6 +595,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         return 0
     }
     
+    //
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
         let today = Date()
         let calendar = Calendar.current
