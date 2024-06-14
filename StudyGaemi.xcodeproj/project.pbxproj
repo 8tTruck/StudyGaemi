@@ -48,7 +48,6 @@
 		FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071762C074E0C000AE7AA /* BaseViewController.swift */; };
 		FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */; };
 		FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717A2C075429000AE7AA /* AlarmViewController.swift */; };
-		FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717C2C075438000AE7AA /* StudyViewController.swift */; };
 		FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717E2C075446000AE7AA /* CalendarViewController.swift */; };
 		FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071802C075454000AE7AA /* SettingViewController.swift */; };
 		FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF0071862C0840D5000AE7AA /* Pretendard-Regular.otf */; };
@@ -74,6 +73,12 @@
 		FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A322C1AA26E00504C24 /* StudyModel.swift */; };
 		FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A342C1AA29900504C24 /* WakeUpModel.swift */; };
 		FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A362C1ABCFF00504C24 /* UserModel.swift */; };
+		FF254A3A2C1C1DA400504C24 /* RepeatingSecondsTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */; };
+		FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */; };
+		FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */; };
+		FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A412C1C1DC400504C24 /* CircularTimerView.swift */; };
+		FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A472C1C1EE300504C24 /* StudyViewController.swift */; };
+		FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
@@ -115,7 +120,6 @@
 		FF0071762C074E0C000AE7AA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarViewController.swift; sourceTree = "<group>"; };
 		FF00717A2C075429000AE7AA /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
-		FF00717C2C075438000AE7AA /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		FF00717E2C075446000AE7AA /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		FF0071802C075454000AE7AA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FF0071862C0840D5000AE7AA /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -140,6 +144,12 @@
 		FF254A322C1AA26E00504C24 /* StudyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyModel.swift; sourceTree = "<group>"; };
 		FF254A342C1AA29900504C24 /* WakeUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpModel.swift; sourceTree = "<group>"; };
 		FF254A362C1ABCFF00504C24 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingSecondsTimer.swift; sourceTree = "<group>"; };
+		FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTiemrVC.swift; sourceTree = "<group>"; };
+		FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerVC.swift; sourceTree = "<group>"; };
+		FF254A412C1C1DC400504C24 /* CircularTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
+		FF254A472C1C1EE300504C24 /* StudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
+		FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimer.swift; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
@@ -210,6 +220,7 @@
 		FF0071462C074D86000AE7AA /* StudyGaemi */ = {
 			isa = PBXGroup;
 			children = (
+				FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */,
 				FF0071842C082573000AE7AA /* Models */,
 				FF0071832C08256A000AE7AA /* Views */,
 				FF0071822C08255F000AE7AA /* Controllers */,
@@ -231,6 +242,9 @@
 		FF0071822C08255F000AE7AA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */,
+				FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */,
+				FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */,
 				FF6774012C0DACF800017E1F /* AlarmController.swift */,
 				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
 				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
@@ -245,12 +259,13 @@
 		FF0071832C08256A000AE7AA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FF254A412C1C1DC400504C24 /* CircularTimerView.swift */,
 				FF0071762C074E0C000AE7AA /* BaseViewController.swift */,
 				FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */,
 				FF00717A2C075429000AE7AA /* AlarmViewController.swift */,
-				FF00717C2C075438000AE7AA /* StudyViewController.swift */,
 				B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */,
 				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
+				FF254A472C1C1EE300504C24 /* StudyViewController.swift */,
 				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
 				5275296A2C0D95F10002513F /* CreateAccountViewController.swift */,
@@ -430,6 +445,7 @@
 				5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */,
 				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
+				FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
 				3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */,
 				FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */,
@@ -440,7 +456,6 @@
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
 				F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */,
-				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
 				5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */,
 				FF8746E32C19939300F63A86 /* AlarmCoreDataManager.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
@@ -448,18 +463,23 @@
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
 				5255F2B32C0E63CD006FEE4B /* EmailInputViewController.swift in Sources */,
+				FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */,
 				F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */,
 				FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */,
 				3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */,
+				FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
 				5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */,
 				5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */,
+				FF254A3A2C1C1DA400504C24 /* RepeatingSecondsTimer.swift in Sources */,
 				FF783CA12C17EC700008AE70 /* AudioController.swift in Sources */,
 				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
 				FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */,
+				FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */,
+				FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */,
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */,
