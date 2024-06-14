@@ -14,13 +14,11 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct wakeup {
-    let email: String
     let date: Date
     let success: Bool
 }
 
 struct study {
-    let email: String
     let date: Date
     let success: Bool
 }
@@ -239,34 +237,34 @@ class CalendarViewController: BaseViewController {
         self.constraintLayout()
         calCurrentYearAndMonth()
         
-        studies = [
-            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/05/05")!, success: true),
-            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/05/11")!, success: true),
-            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
-            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
-            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
-            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: false),
-            study(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: false),
-            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
-            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
-            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: true),
-            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: false),
-            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: false)
-        ]
-        wakeups = [
-            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
-            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
-            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
-            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: true),
-            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: true),
-            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
-            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
-            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: false),
-            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: true),
-            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: true)
-            
-        ]
-        updateData()
+//        studies = [
+//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/05/05")!, success: true),
+//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/05/11")!, success: true),
+//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
+//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
+//            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
+//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: false),
+//            study(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: false),
+//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
+//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
+//            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: true),
+//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: false),
+//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: false)
+//        ]
+//        wakeups = [
+//            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
+//            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
+//            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
+//            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: true),
+//            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: true),
+//            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
+//            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
+//            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: false),
+//            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: true),
+//            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: true)
+//            
+//        ]
+        //updateData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -275,24 +273,56 @@ class CalendarViewController: BaseViewController {
     
     //사용자 기반으로 data 불러오기
     private func setData() {
+        
+        var studiesData = [study]()
+        var wakeupsData = [wakeup]()
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
         firestoreManager.readStudyData { result in
+            defer { dispatchGroup.leave() }
             switch result {
-            case .success(let data):
+            case .success(let datas):
                 print("Study 데이터 불러오기 완료")
+                for data in datas{
+                    let study = study(
+                        date: self.removeTime(from: data.date.dateValue(), state: .study),
+                        success: data.success
+                    )
+                    studiesData.append(study)
+                }
             case .failure(let error):
                 print("Study 데이터 불러오기 에러: \(error)")
             }
         }
         
+        dispatchGroup.enter()
         firestoreManager.readWakeUpData { result in
+            defer { dispatchGroup.leave() }
             switch result {
-            case .success(let data):
+            case .success(let datas):
                 print("WakeUp 데이터 불러오기 완료")
+                for data in datas{
+                    let wakeup = wakeup(
+                        date: self.removeTime(from: data.date.dateValue(), state: .wakeup),
+                        success: data.success
+                    )
+                    wakeupsData.append(wakeup)
+                }
             case .failure(let error):
                 print("WakeUp 데이터 불러오기 에러: \(error)")
             }
         }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.studies = studiesData
+            self.wakeups = wakeupsData
+            self.updateData()
+            self.calendarView.reloadData()
+            self.badgeView.reloadData()
+        }
     }
+    
     
     // MARK: - method
     override func configureUI() {
@@ -393,6 +423,28 @@ class CalendarViewController: BaseViewController {
         calculateStraightForBadge(of: .wakeup)
     }
     
+    private func removeTime(from date: Date, state: status) -> Date{
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day], from: date)
+        
+        //5시 이전이면 전날로 설정
+        if state == .study {
+            let hour = calendar.component(.hour, from: date)
+
+            if hour < 5 {
+                guard let previousDay = calendar.date(byAdding: .day, value: -1, to: date) else {
+                    return calendar.date(from: components)!
+                }
+                components = calendar.dateComponents([.year, .month, .day], from: previousDay)
+            }
+            return calendar.date(from: components)!
+        } else {
+            return calendar.date(from: components)!
+        }
+        
+        
+    }
+    
     //이달의 완벽개미, 공부개미, 기상개미 측정
     private func calculateThisMonthAnt(yearAndMonth: String) -> [[Date: status]] {
         
@@ -411,7 +463,7 @@ class CalendarViewController: BaseViewController {
         let range = calendar.range(of: .day, in: .month, for: yearMonthDate)!
         var components = calendar.dateComponents([.year, .month], from: yearMonthDate)
         
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         
         for day in range {
@@ -450,6 +502,7 @@ class CalendarViewController: BaseViewController {
             return date1 < date2
         }
         
+        print("monthlyResultDict \(monthlyResultDict)")
         return monthlyResultDict
     }
     
@@ -586,8 +639,11 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         let calendar = Calendar.current
         
         for resultDict in monthlyResultDict {
+            print(resultDict)
             for (dat, status) in resultDict {
+                print((dat, status))
                 if calendar.isDate(dat, inSameDayAs: date) {
+                    print("=============================Stamp")
                     switch status {
                     case .perfect:
                         cell.badgeView.image = UIImage.perfectStamp
@@ -595,6 +651,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
                         cell.badgeView.image = UIImage.studyStamp
                     case .wakeup:
                         cell.badgeView.image = UIImage.wakeupStamp
+                        print("cell.badgeView.image = UIImage.wakeupStamp")
                     }
                 }
             }
