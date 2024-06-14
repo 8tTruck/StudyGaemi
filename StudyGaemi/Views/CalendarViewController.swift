@@ -264,8 +264,11 @@ class CalendarViewController: BaseViewController {
             wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: true)
             
         ]
-        setData()
         updateData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setData()
     }
     
     //사용자 기반으로 data 불러오기

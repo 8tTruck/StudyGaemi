@@ -335,6 +335,9 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         cancelAction.setValue(UIColor.gray, forKey: "titleTextColor")
         
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
+            let dispatchGroup = DispatchGroup()
+
+            dispatchGroup.enter()
             FirestoreManager.shared.deleteStudyData { result in
                 switch result {
                 case .success:
@@ -342,7 +345,10 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 case .failure(let error):
                     print("Study 데이터 삭제 에러: \(error)")
                 }
+                dispatchGroup.leave()
             }
+
+            dispatchGroup.enter()
             FirestoreManager.shared.deleteWakeUpData { result in
                 switch result {
                 case .success:
@@ -350,7 +356,10 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 case .failure(let error):
                     print("WakeUp 데이터 삭제 에러: \(error)")
                 }
+                dispatchGroup.leave()
             }
+
+            dispatchGroup.enter()
             FirestoreManager.shared.deleteUserData { result in
                 switch result {
                 case .success:
@@ -358,9 +367,15 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 case .failure(let error):
                     print("회원탈퇴 에러: \(error)")
                 }
+                dispatchGroup.leave()
             }
-            AuthenticationManager.shared.deleteUser()
-            AuthenticationManager.shared.signOut()
+
+            dispatchGroup.notify(queue: .main) {
+                print("모든 데이터 삭제 작업이 완료되었습니다.")
+                AuthenticationManager.shared.deleteUser()
+                AuthenticationManager.shared.signOut()
+            }
+            
         })
         confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
         

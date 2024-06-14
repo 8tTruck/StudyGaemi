@@ -18,11 +18,11 @@ final class FirestoreManager {
     private let db = Firestore.firestore()
     
     // MARK: - User 데이터 생성하기
-    func createUserData(email: String, nickName: String, userType: String) {
+    func createUserData(email: String, nickName: String, loginMethod: String) {
         let user = UserModel(
             email: email,
             nickName: nickName,
-            loginMethod: userType
+            loginMethod: loginMethod
         )
         
         do {
@@ -78,11 +78,9 @@ final class FirestoreManager {
             if let document = document, document.exists {
                 let user = try? document.data(as: UserModel.self)
                 completion(.success(user))
-            } else {
-                print("WakeUp 데이터 받아오기 에러: ")
-                if let error = error {
-                    completion(.failure(error))
-                }
+            } else if let error = error {
+                print("Study 데이터 받아오기 에러: \(error)")
+                completion(.failure(error))
             }
         }
     }
@@ -98,11 +96,9 @@ final class FirestoreManager {
                     return try? document.data(as: WakeUpModel.self)
                 }
                 completion(.success(wakeUpData))
-            } else {
-                print("WakeUp 데이터 받아오기 에러: ")
-                if let error = error {
-                    completion(.failure(error))
-                }
+            } else if let error = error {
+                print("Study 데이터 받아오기 에러: \(error)")
+                completion(.failure(error))
             }
         }
     }
@@ -118,25 +114,23 @@ final class FirestoreManager {
                     return try? document.data(as: StudyModel.self)
                 }
                 completion(.success(studyData))
-            } else {
-                print("Study 데이터 받아오기 에러: ")
-                if let error = error {
-                    completion(.failure(error))
-                }
+            } else if let error = error {
+                print("Study 데이터 받아오기 에러: \(error)")
+                completion(.failure(error))
             }
         }
     }
     
     // MARK: - User 데이터 업데이트하기
-    func updateUserData(email: String, nickName: String?, userType: String?) {
+    func updateUserData(email: String, nickName: String?, loginMethod: String?) {
         var updateData: [String: Any] = [:]
         
         if let nickName = nickName {
             updateData["nickName"] = nickName
         }
         
-        if let userType = userType {
-            updateData["userType"] = userType
+        if let loginMethod = loginMethod {
+            updateData["loginMethod"] = loginMethod
         }
         
         db.collection("User").document(email).updateData(updateData) { error in
