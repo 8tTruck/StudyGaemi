@@ -574,5 +574,6 @@ class MakePasswordViewController: UIViewController {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         present(alert, animated: true)
+        FirestoreManager.shared.createUserData(email: email, nickName: email, loginMethod: "Firebase")
     }
 }

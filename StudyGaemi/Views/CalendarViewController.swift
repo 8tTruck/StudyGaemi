@@ -264,17 +264,30 @@ class CalendarViewController: BaseViewController {
             wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: true)
             
         ]
-        setStudyData()
         updateData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setData()
+    }
+    
     //사용자 기반으로 data 불러오기
-    private func setStudyData(){
-        Task {
-            do {
-                try await firestoreManager.createWakeUpData(success: true)
-            } catch {
-                print("Error fetching wordbooks: \(error.localizedDescription)")
+    private func setData() {
+        firestoreManager.readStudyData { result in
+            switch result {
+            case .success(let data):
+                print("Study 데이터 불러오기 완료")
+            case .failure(let error):
+                print("Study 데이터 불러오기 에러: \(error)")
+            }
+        }
+        
+        firestoreManager.readWakeUpData { result in
+            switch result {
+            case .success(let data):
+                print("WakeUp 데이터 불러오기 완료")
+            case .failure(let error):
+                print("WakeUp 데이터 불러오기 에러: \(error)")
             }
         }
     }

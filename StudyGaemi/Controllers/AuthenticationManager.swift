@@ -175,7 +175,7 @@ class AuthenticationManager {
             try Auth.auth().signOut()
             print("로그아웃 완료")
         } catch let signOutError as NSError {
-            print("로그아웃 실패 에러: \(signOutError.localizedDescription)")
+            print("로그아웃 에러: \(signOutError.localizedDescription)")
         }
     }
     
@@ -185,7 +185,7 @@ class AuthenticationManager {
             user.delete { error in
                 if let error = error {
                     // 회원탈퇴 실패 처리
-                    print("회원탈퇴 실패 에러: \(error.localizedDescription)")
+                    print("회원탈퇴 에러: \(error.localizedDescription)")
                 } else {
                     // 회원탈퇴 성공 처리
                     print("회원탈퇴 성공")
