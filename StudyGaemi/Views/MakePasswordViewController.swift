@@ -42,7 +42,7 @@ class MakePasswordViewController: UIViewController {
     lazy var personalInfoDescriptionButton = createDescriptionButton(tag: 1)
     lazy var yakgwanDescriptionButton = createDescriptionButton(tag: 2)
     lazy var ageDescriptionButton = createDescriptionButton(tag: 3)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
@@ -65,7 +65,7 @@ class MakePasswordViewController: UIViewController {
         allAgreeSetting()
         descriptionButtonSetting()
         
-//        agreementSetting()
+        //        agreementSetting()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -114,7 +114,7 @@ class MakePasswordViewController: UIViewController {
         nicknameDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         nicknameDescriptionLabel.snp.makeConstraints { make in
-//            make.leading.equalToSuperview().offset(25)
+            //            make.leading.equalToSuperview().offset(25)
             make.leading.equalTo(mainImage.snp.leading).offset(-110)
             make.top.equalTo(nicknameTextField.snp.bottom).offset(4)
         }
@@ -133,7 +133,7 @@ class MakePasswordViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-
+    
     func passwordDescriptionLabelSetting() {
         view.addSubview(passwordDescriptionLabel)
         passwordDescriptionLabel.text = "영문,숫자 포함 8자리 이상의 비밀번호를 입력하세요"
@@ -386,16 +386,18 @@ class MakePasswordViewController: UIViewController {
             make.height.equalTo(60)
         }
     }
-
+    
     @objc func confirmButtonTapped() {
         confirmButton.addTouchAnimation()
         print("버튼 누름")
         
         var isValid = true
-        
-        // 닉네임이 비어있거나, 2자 미만, 8자 초과일 경우.
-        let email = isValidEmail(email: nicknameTextField.text ?? "")
-        if email {
+
+        // 이메일 텍스트 필드의 값을 가져옴
+        let emailText = nicknameTextField.text ?? ""
+
+        // 이메일 유효성 검사
+        if isValidEmail(email: emailText) {
             // 닉네임 조건을 만족하는 경우
             setCorrect(for: nicknameTextField, label: nicknameDescriptionLabel)
         } else {
@@ -451,29 +453,49 @@ class MakePasswordViewController: UIViewController {
             return
         }
         
-        if isValid, let email = nicknameTextField.text {
-            Auth.auth().fetchSignInMethods(forEmail: email) { signInMethods, error in
-                if let error = error {
-                    print("이메일 확인 오류: \(error.localizedDescription)")
-                    self.presentAlert(title: "오류", message: error.localizedDescription)
-                    return
-                }
-                
-                if let signInMethods = signInMethods, !signInMethods.isEmpty {
-                    // 이미 가입된 이메일인 경우
-                    self.setFailed(for: self.nicknameTextField, label: self.nicknameDescriptionLabel)
-                    self.presentAlert(title: "이메일 중복", message: "이미 가입된 이메일 주소입니다.")
-                    isValid = false
-                } else {
-                    isValid = true
-                }
-            }
-            
+        // 이메일이 서버에 존재하는지 확인
+//        AuthenticationManager.shared.checkIfEmailExists(email: emailText) { [weak self] exists in
+//            guard let self = self else { return }
+//            
+//            if exists {
+//                // 이메일이 존재하는 경우
+//                isValid = false
+//                self.showAlert(message: "해당 이메일로 가입된 계정이 존재합니다.")
+//                print("이미 계정 있다우")
+//                return
+//            }
+
+            // 이메일 존재 여부 확인이 끝난 후 isValid 상태를 검사하여 다음 단계를 진행
             if isValid == true {
+                // 추가적인 유효성 검사나 다음 단계로의 전환 등을 여기에 추가할 수 있습니다
                 self.moveNextVC()
-            }
+//            }
         }
     }
+
+        
+//        if isValid, let email = nicknameTextField.text {
+//            Auth.auth().fetchSignInMethods(forEmail: email) { signInMethods, error in
+//                if let error = error {
+//                    print("이메일 확인 오류: \(error.localizedDescription)")
+//                    self.presentAlert(title: "오류", message: error.localizedDescription)
+//                    return
+//                }
+//                
+//                if let signInMethods = signInMethods, !signInMethods.isEmpty {
+//                    // 이미 가입된 이메일인 경우
+//                    self.setFailed(for: self.nicknameTextField, label: self.nicknameDescriptionLabel)
+//                    self.presentAlert(title: "이메일 중복", message: "이미 가입된 이메일 주소입니다.")
+//                    isValid = false
+//                } else {
+//                    isValid = true
+//                }
+//            }
+//            
+//            if isValid == true {
+//                self.moveNextVC()
+//            }
+//        }
     
     func presentAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -535,10 +557,7 @@ class MakePasswordViewController: UIViewController {
     }
     
     func moveNextVC() {
-        let nextVC = EmailConfirmViewController()
-        nextVC.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(nextVC, animated: true)
-
+        
         guard let email = nicknameTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             // 입력 필드가 비어있는 경우 처리
@@ -546,5 +565,14 @@ class MakePasswordViewController: UIViewController {
         }
         
         AuthenticationManager.shared.createUser(email: email, password: password)
+        let nextVC = EmailConfirmViewController()
+        nextVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
 }

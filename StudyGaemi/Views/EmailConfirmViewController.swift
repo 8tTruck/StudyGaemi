@@ -31,6 +31,7 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
         mainImageSetting()
         mainLabelSetting()
+        subLabelSetting()
 //        textFieldSetting()
 //        confirmButtonSetting()
         
@@ -73,15 +74,15 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
             make.width.equalTo(208)
             make.height.equalTo(124)
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(40)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(80)
         }
     }
     
     func mainLabelSetting() {
         view.addSubview(mainLabel)
         mainLabel.text = "이메일 인증 대기중"
-        mainLabel.textColor = UIColor(named: "pointOrange")
-        mainLabel.font = UIFont(name: CustomFontType.bold.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        mainLabel.textColor = UIColor(named: "fontBlack")
+        mainLabel.font = UIFont(name: CustomFontType.bold.name, size: 24) ?? UIFont.systemFont(ofSize: 24)
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         
         mainLabel.snp.makeConstraints { make in
@@ -90,6 +91,23 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
 //            make.leading.equalTo(mainImage.snp.leading).offset(-65)
             make.centerX.equalToSuperview()
             make.top.equalTo(mainImage.snp.bottom).offset(40)
+        }
+    }
+    
+    func subLabelSetting() {
+        view.addSubview(subLabel)
+        subLabel.text = "앱의 원활한 사용을 위해\n이메일 인증이 필요합니다."
+        subLabel.textColor = UIColor(named: "fontGray")
+        subLabel.font = UIFont(name: CustomFontType.regular.name, size: 16)
+        subLabel.numberOfLines = 0
+        subLabel.lineBreakMode = .byWordWrapping
+        subLabel.textAlignment = .center
+        subLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        subLabel.snp.makeConstraints { make in
+            make.top.equalTo(mainLabel.snp.bottom).offset(40)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(208)
         }
     }
     
