@@ -79,6 +79,7 @@
 		FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A412C1C1DC400504C24 /* CircularTimerView.swift */; };
 		FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A472C1C1EE300504C24 /* StudyViewController.swift */; };
 		FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */; };
+		FF254A4F2C1C38B400504C24 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FF254A4E2C1C38B400504C24 /* FirebaseMessaging */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
@@ -150,6 +151,7 @@
 		FF254A412C1C1DC400504C24 /* CircularTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
 		FF254A472C1C1EE300504C24 /* StudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimer.swift; sourceTree = "<group>"; };
+		FF254A4D2C1C384300504C24 /* StudyGaemi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyGaemi.entitlements; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				FF0071732C074DFA000AE7AA /* FirebaseStorage in Frameworks */,
 				F4AF2A5F2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				FF00716D2C074DFA000AE7AA /* FirebaseAuthCombine-Community in Frameworks */,
+				FF254A4F2C1C38B400504C24 /* FirebaseMessaging in Frameworks */,
 				FF00716B2C074DFA000AE7AA /* FirebaseAuth in Frameworks */,
 				F4AF2A5D2C19944C00553A20 /* FirebaseAnalyticsSwift in Frameworks */,
 				FF0071632C074DB7000AE7AA /* Then in Frameworks */,
@@ -220,6 +223,7 @@
 		FF0071462C074D86000AE7AA /* StudyGaemi */ = {
 			isa = PBXGroup;
 			children = (
+				FF254A4D2C1C384300504C24 /* StudyGaemi.entitlements */,
 				FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */,
 				FF0071842C082573000AE7AA /* Models */,
 				FF0071832C08256A000AE7AA /* Views */,
@@ -365,6 +369,7 @@
 				F4AF2A5E2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				F4AF2A602C19944C00553A20 /* FirebaseAppCheck */,
 				F4EDEB4A2C1994D50038819D /* FirebaseFirestore */,
+				FF254A4E2C1C38B400504C24 /* FirebaseMessaging */,
 			);
 			productName = StudyGaemi;
 			productReference = FF0071442C074D86000AE7AA /* StudyGaemi.app */;
@@ -639,6 +644,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudyGaemi/StudyGaemi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -672,6 +678,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudyGaemi/StudyGaemi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -856,6 +863,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		FF254A4E2C1C38B400504C24 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;

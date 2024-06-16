@@ -8,6 +8,7 @@
 import AVFoundation
 import BackgroundTasks
 import FirebaseCore
+import FirebaseMessaging
 import UserNotifications
 import UIKit
 import CoreData
@@ -17,25 +18,33 @@ import FirebaseAppCheck
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UNUserNotificationCenter.current().delegate = self
+        
+        // Firebase 공유 인스턴스 구성 하는 부분과 등록 토큰 수신을 위해 메시지 delegate를 설정
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        Messaging.messaging().isAutoInitEnabled = true
+        
         // 알림 권한 요청
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
                 print("알림 권한이 수락되었습니다.")
             } else {
                 print("알림 권한이 거부되었습니다.")
             }
         }
+        application.registerForRemoteNotifications()
+        
+        // APNs에 기기 토큰을 요청
+        UIApplication.shared.registerForRemoteNotifications()
 
         AlarmCoreDataManager.shared.fetchAlarm()
         AudioController.shared.setupAudioSession()
-        registerBackgroundTasks()
         
         //Appcheck 인증제공자 설정
         let providerFactory = AppCheckDebugProviderFactory()
         AppCheck.setAppCheckProviderFactory(providerFactory)
 
-        FirebaseApp.configure()
         return true
     }
 
@@ -103,8 +112,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     // MARK: - 포그라운드에서도 알림을 받게하는 메소드
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
         print("포그라운드 알림 수신: \(notification.request.content.body)")
-        completionHandler([.banner, .sound])
+        let userInfo = notification.request.content.userInfo
+        
+        if let messageID = userInfo["viewControllerIdentifier"] {
+            print("MessageId: \(messageID)")
+        }
+        
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        if #available(iOS 14.0, *) {
+            completionHandler([.list, .banner, .sound])
+        } else {
+            completionHandler([.alert, .sound])
+        }
         AudioController.shared.playAlarmSound()
     }
     
@@ -121,33 +143,41 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 }
 
-extension AppDelegate {
+extension AppDelegate: MessagingDelegate {
     
-    func registerBackgroundTasks() {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.8ttruck.StudyGaemi", using: nil) { task in
-            self.handleAppRefresh(task: task as! BGAppRefreshTask)
-        }
+    // MARK: - 기기토큰 요청시 등록이 성공적이면 토큰을 받는 메소드
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02.2hX", $1)})
+        print(deviceTokenString)
+        
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("good: \(token)")
+        
+        Messaging.messaging().apnsToken = deviceToken
+    }
+
+    // MARK: - 기기토큰 요청시 등록이 실패하면 토큰을 받는 메소드
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("기기토큰 요청시 등록 실패 에러: \(error)")
     }
     
-    func handleAppRefresh(task: BGAppRefreshTask) {
-
+    // MARK: - 원격 알림 수신 메소드
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("원격 알림 수신: \(userInfo)")
         AudioController.shared.playAlarmSound()
-        print("백그라운드 작업 실행")
-        task.expirationHandler = {
-            task.setTaskCompleted(success: false)
-        }
-
-        task.setTaskCompleted(success: true)
+        completionHandler(.newData)
     }
     
-    func scheduleAppRefresh() {
-        let request = BGAppRefreshTaskRequest(identifier: "com.8ttruck.StudyGaemi")
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 1 * 60)
-
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        } catch {
-            print("백그라운드 작업 예약 실패: \(error)")
-        }
+    // MARK: - FCM 토큰 수신 메소드
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
+        )
     }
 }
+
