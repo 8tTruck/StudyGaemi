@@ -151,22 +151,25 @@ class CalendarViewController: BaseViewController {
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
         
         // 헤더뷰 설정
-        calendar.headerHeight = 45
+        calendar.headerHeight = 50
         calendar.appearance.headerDateFormat = "MM월"
         calendar.appearance.headerTitleColor = .black
         calendar.appearance.headerTitleAlignment = .left
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
         
         // 요일 UI 설정
-        calendar.weekdayHeight = 0
+        calendar.weekdayHeight = 16
+        calendar.appearance.weekdayFont = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
+        calendar.appearance.weekdayTextColor = .darkGray
         
         // 날짜 UI 설정
         calendar.appearance.titleTodayColor = .black
-        calendar.appearance.titleFont = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
+        calendar.appearance.titleFont = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
         
         //날짜 선택시
         calendar.today = nil
-        calendar.appearance.todayColor = .clear
+        //calendar.appearance.borderRadius = 5
+        //calendar.appearance.todayColor = .pointYellow
         //calendar.appearance.titleTodayColor = .pointOrange //Today에 표시되는 특정 글자색
         //calendar.appearance.todaySelectionColor = .clear //오늘날짜 선택시 색상
         calendar.appearance.selectionColor = .clear // 사용자가 선택한 날짜
@@ -283,7 +286,6 @@ class CalendarViewController: BaseViewController {
             defer { dispatchGroup.leave() }
             switch result {
             case .success(let datas):
-                print("Study 데이터 불러오기 완료")
                 for data in datas{
                     let study = study(
                         date: self.removeTime(from: data.date.dateValue(), state: .study),
@@ -375,11 +377,12 @@ class CalendarViewController: BaseViewController {
         calendarbackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(400)
+            make.height.equalTo(410)
         }
         
         calendarView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
+            make.trailing.equalToSuperview().inset(5)
             make.top.bottom.equalToSuperview().inset(10)
         }
         
@@ -502,7 +505,7 @@ class CalendarViewController: BaseViewController {
             return date1 < date2
         }
         
-        print("monthlyResultDict \(monthlyResultDict)")
+
         return monthlyResultDict
     }
     
@@ -639,11 +642,8 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         let calendar = Calendar.current
         
         for resultDict in monthlyResultDict {
-            print(resultDict)
             for (dat, status) in resultDict {
-                print((dat, status))
                 if calendar.isDate(dat, inSameDayAs: date) {
-                    print("=============================Stamp")
                     switch status {
                     case .perfect:
                         cell.badgeView.image = UIImage.perfectStamp
@@ -651,10 +651,17 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
                         cell.badgeView.image = UIImage.studyStamp
                     case .wakeup:
                         cell.badgeView.image = UIImage.wakeupStamp
-                        print("cell.badgeView.image = UIImage.wakeupStamp")
                     }
                 }
             }
+        }
+        
+        // 오늘 날짜를 확인하여 배경 색상을 설정
+        let today = Date()
+        if Calendar.current.isDate(today, inSameDayAs: date) {
+            cell.backgroundColor = .pointYellow.withAlphaComponent(0.2)
+        } else {
+            cell.backgroundColor = .clear
         }
         
         return cell
@@ -675,11 +682,13 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         if todayComponents.year == dateComponents.year &&
             todayComponents.month == dateComponents.month &&
             todayComponents.day == dateComponents.day {
-            return .systemBlue
+            return .fontBlack
         } else {
             return .fontBlack
         }
     }
+    
+
     
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
