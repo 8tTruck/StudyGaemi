@@ -104,6 +104,7 @@
 		5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePasswordViewController.swift; sourceTree = "<group>"; };
 		5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountSuccessViewController.swift; sourceTree = "<group>"; };
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		52D479782C213177000B7D6F /* StudyGaemi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyGaemi.entitlements; sourceTree = "<group>"; };
 		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
@@ -220,6 +221,7 @@
 		FF0071462C074D86000AE7AA /* StudyGaemi */ = {
 			isa = PBXGroup;
 			children = (
+				52D479782C213177000B7D6F /* StudyGaemi.entitlements */,
 				FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */,
 				FF0071842C082573000AE7AA /* Models */,
 				FF0071832C08256A000AE7AA /* Views */,
@@ -639,6 +641,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudyGaemi/StudyGaemi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -672,6 +675,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudyGaemi/StudyGaemi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
