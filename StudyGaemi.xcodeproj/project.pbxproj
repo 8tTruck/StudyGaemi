@@ -80,7 +80,6 @@
 		FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A472C1C1EE300504C24 /* StudyViewController.swift */; };
 		FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */; };
 		FF254A4F2C1C38B400504C24 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FF254A4E2C1C38B400504C24 /* FirebaseMessaging */; };
-		FF254A512C2007E900504C24 /* SilentPushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A502C2007E900504C24 /* SilentPushNotificationManager.swift */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
@@ -153,7 +152,6 @@
 		FF254A472C1C1EE300504C24 /* StudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimer.swift; sourceTree = "<group>"; };
 		FF254A4D2C1C384300504C24 /* StudyGaemi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyGaemi.entitlements; sourceTree = "<group>"; };
-		FF254A502C2007E900504C24 /* SilentPushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentPushNotificationManager.swift; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 				FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */,
 				FF783CA02C17EC700008AE70 /* AudioController.swift */,
 				FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */,
-				FF254A502C2007E900504C24 /* SilentPushNotificationManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -497,7 +494,6 @@
 				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
 				3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */,
 				3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */,
-				FF254A512C2007E900504C24 /* SilentPushNotificationManager.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

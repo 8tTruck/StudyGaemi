@@ -167,7 +167,6 @@ extension AppDelegate: MessagingDelegate {
     // MARK: - 기기토큰 요청시 등록이 성공적이면 토큰을 받는 메소드
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02.2hX", $1)})
-        SilentPushNotificationManager.shared.deviceToken = deviceTokenString
         print(deviceTokenString)
         
         Messaging.messaging().apnsToken = deviceToken

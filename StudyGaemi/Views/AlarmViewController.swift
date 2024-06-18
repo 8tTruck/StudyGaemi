@@ -36,6 +36,18 @@ class AlarmViewController: BaseViewController {
         $0.textAlignment = .center
     }
     
+    private var toggleState = false
+    private lazy var toggleButton = UISwitch().then {
+        $0.onTintColor = UIColor(named: "pointOrange")
+        self.toggleState = $0.isOn
+    }
+    
+    private lazy var stackView = UIStackView(arrangedSubviews: [alarmLabel, toggleButton]).then {
+        $0.axis = .horizontal
+        $0.alignment = .center
+        $0.spacing = 10
+    }
+    
     private var alarmButton = AlarmButton().then {
         $0.setImage(UIImage(named: "alarmButton"),for: .normal)
     }
@@ -103,7 +115,7 @@ class AlarmViewController: BaseViewController {
     override func configureUI() {
         view.backgroundColor = UIColor(named: "viewBackgroundColor") ?? .systemBackground
         self.navigationItem.titleView = titleView
-        view.addSubview(alarmLabel)
+        view.addSubview(stackView)
         view.addSubview(alarmButton)
         view.addSubview(alarmView)
         alarmView.addSubview(notificationStackView)
@@ -136,14 +148,14 @@ class AlarmViewController: BaseViewController {
             make.width.height.equalTo(22)
         }
         
-        alarmLabel.snp.makeConstraints { make in
+        stackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(73)
-            make.height.equalTo(27)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(92)
+            make.height.equalTo(47)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(72)
         }
         
         alarmButton.snp.makeConstraints { make in
-            make.top.equalTo(alarmLabel.snp.bottom).offset(60)
+            make.top.equalTo(stackView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.width.equalTo(312)
             make.height.equalTo(312)
