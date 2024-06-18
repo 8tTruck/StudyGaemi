@@ -3,6 +3,16 @@
     {
       "filename" : "alarmButton.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "alarmButtonDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

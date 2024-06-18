@@ -13,13 +13,13 @@ class AlarmButton: UIButton {
 
     private let overlayLabel = UILabel().then {
         $0.textAlignment = .center
-        $0.textColor = UIColor(named: "viewBackgroundColor")
+        $0.textColor = .white
         $0.font = UIFont(name: CustomFontType.black.name, size: 50)
     }
     
     private let amPmLabel = UILabel().then {
         $0.textAlignment = .center
-        $0.textColor = UIColor(named: "viewBackgroundColor")
+        $0.textColor = .white
         $0.font = UIFont(name: CustomFontType.regular.name, size: 18)
     }
     

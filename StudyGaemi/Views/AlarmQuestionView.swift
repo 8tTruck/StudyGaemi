@@ -8,6 +8,7 @@
 import SnapKit
 import Then
 import UIKit
+import MediaPlayer
 
 class AlarmQuestionView: BaseViewController {
     
@@ -78,6 +79,19 @@ class AlarmQuestionView: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.customTextField.becomeFirstResponder()
+        // 현재 표시 중인 모든 알림을 제거
+        UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
+            let identifiers = notifications.map { $0.request.identifier }
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
+        }
+        // 예약된 모든 알림을 제거
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            let identifier = "기상하개미"
+            let identifiers = requests.filter { $0.identifier.hasPrefix(identifier) }.map { $0.identifier }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        }
+        AudioController.shared.playAlarmSound()
+        self.setSystemVolume(to: 1.0)
     }
     
     override func configureUI() {
@@ -135,6 +149,16 @@ class AlarmQuestionView: BaseViewController {
         }
     }
     
+    private func setSystemVolume(to value: Float) {
+        let volumeView = MPVolumeView(frame: .zero)
+        self.view.addSubview(volumeView)
+        if let view = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider {
+            view.value = value
+            print("볼륨값: \(value)")
+        }
+        volumeView.removeFromSuperview()
+    }
+    
     private func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
     }
@@ -166,5 +190,4 @@ class AlarmQuestionView: BaseViewController {
     @objc func textFieldEditingDidBegin(_ textField: UITextField) {
         textField.text = ""
     }
-
 }

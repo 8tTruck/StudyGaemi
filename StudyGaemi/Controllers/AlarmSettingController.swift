@@ -32,7 +32,19 @@ class AlarmSettingController {
         navigationController.popViewController(animated: true)
     }
     
+    func setSecondsToZero(date: Date) -> Date? {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        components.second = 0
+        return calendar.date(from: components)
+    }
+    
     private func scheduleAlarm(time: Date, sound: String, repeatEnabled: Bool, repeatInterval: String?, repeatCount: String?) {
+        guard let time = setSecondsToZero(date: time) else {
+            print("시간 설정 오류")
+            return
+        }
+        
         let identifier = "기상하개미"
         let content = UNMutableNotificationContent()
         content.title = "일어나개미!"
@@ -41,8 +53,8 @@ class AlarmSettingController {
         content.userInfo = ["viewControllerIdentifier": "AlarmQuestionView"]
         
         let calendar = Calendar.current
+        let interval: TimeInterval = 5
         let dateComponents = calendar.dateComponents([.hour, .minute], from: time)
-//        let interval: TimeInterval = 5
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
@@ -50,23 +62,34 @@ class AlarmSettingController {
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
                 print("알림 추가 오류: \(error.localizedDescription)")
+            } else {
+                let delay = time.timeIntervalSinceNow
+                let dispatchTime = DispatchTime.now() + delay + 90
+                DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+                    UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
+                        let identifiers = notifications.map { $0.request.identifier }
+                        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
+                    }
+                }
             }
         }
         
-//        for i in 0...11 {
-//            let triggerTime = time.addingTimeInterval(interval * Double(i))
-//            let triggerComponents = calendar.dateComponents([.hour, .minute, .second], from: triggerTime)
-//            let intervalTrigger = UNCalendarNotificationTrigger(dateMatching: triggerComponents, repeats: false)
-//            
-//            let intervalRequest = UNNotificationRequest(identifier: identifier + "_\(i)", content: content, trigger: intervalTrigger)
-//            
-//            UNUserNotificationCenter.current().add(intervalRequest) { (error) in
-//                if let error = error {
-//                    print("알림 추가 오류: \(error.localizedDescription)")
-//                }
-//            }
-//        }
+        // 최초 알림 설정
+        for i in 1...11 {
+            let triggerTime = time.addingTimeInterval(interval * Double(i))
+            let triggerComponents = calendar.dateComponents([.hour, .minute, .second], from: triggerTime)
+            let intervalTrigger = UNCalendarNotificationTrigger(dateMatching: triggerComponents, repeats: true)
+            
+            let intervalRequest = UNNotificationRequest(identifier: identifier + "_\(i)", content: content, trigger: intervalTrigger)
+            
+            UNUserNotificationCenter.current().add(intervalRequest) { (error) in
+                if let error = error {
+                    print("알림 추가 오류: \(error.localizedDescription)")
+                }
+            }
+        }
         
+        // 반복 알림 설정
         if repeatEnabled, let repeatInterval = repeatInterval, let repeatCount = repeatCount, let repeatCountInt = Int(repeatCount.replacingOccurrences(of: "회 반복", with: "")) {
             let repeatTimeInterval: TimeInterval
             switch repeatInterval {
@@ -85,27 +108,37 @@ class AlarmSettingController {
                 let repeatComponents = calendar.dateComponents([.hour, .minute], from: repeatTime)
                 let repeatTrigger = UNCalendarNotificationTrigger(dateMatching: repeatComponents, repeats: true)
                 
-                let repeatRequest = UNNotificationRequest(identifier: identifier + String(i), content: content, trigger: repeatTrigger)
+                let repeatRequest = UNNotificationRequest(identifier: identifier + "_repeat_\(i)", content: content, trigger: repeatTrigger)
                 UNUserNotificationCenter.current().add(repeatRequest) { (error) in
                     if let error = error {
                         print("반복 알림 추가 오류: \(error.localizedDescription)")
+                    } else {
+                        let delay = repeatTime.timeIntervalSinceNow
+                        let dispatchTime = DispatchTime.now() + delay + 90
+                        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+                            UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
+                                let identifiers = notifications.map { $0.request.identifier }
+                                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
+                            }
+                        }
                     }
                 }
-//                for j in 0...11 {
-//                    let triggerTime = repeatTime.addingTimeInterval(interval * Double(i))
-//                    let repeatComponents = calendar.dateComponents([.hour, .minute, .second], from: triggerTime)
-//                    let repeatTrigger = UNCalendarNotificationTrigger(dateMatching: repeatComponents, repeats: false)
-//                    
-//                    let repeatRequest = UNNotificationRequest(identifier: identifier + "_repeat_\(i)_\(j)", content: content, trigger: repeatTrigger)
-//                    UNUserNotificationCenter.current().add(repeatRequest) { (error) in
-//                        if let error = error {
-//                            print("반복 알림 추가 오류: \(error.localizedDescription)")
-//                        }
-//                    }
-//                }
+                
+                for j in 1...11 {
+                    let repeatTime = time.addingTimeInterval(Double(i) * repeatTimeInterval + interval * Double(j))
+                    let repeatComponents = calendar.dateComponents([.hour, .minute, .second], from: repeatTime)
+                    let repeatTrigger = UNCalendarNotificationTrigger(dateMatching: repeatComponents, repeats: true)
+                    
+                    let repeatRequest = UNNotificationRequest(identifier: identifier + "_repeat_\(i)_\(j)", content: content, trigger: repeatTrigger)
+                    
+                    UNUserNotificationCenter.current().add(repeatRequest) { (error) in
+                        if let error = error {
+                            print("반복 알림 추가 오류: \(error.localizedDescription)")
+                        }
+                    }
+                }
             }
         }
-        
         print("알람이 설정되었습니다.")
     }
 }
