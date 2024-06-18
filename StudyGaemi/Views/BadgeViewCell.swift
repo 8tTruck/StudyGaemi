@@ -71,12 +71,16 @@ class BadgeViewCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
         contentView.layer.cornerRadius = 8
         contentView.layer.borderColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0).cgColor
-        contentView.layer.borderWidth = 1
+        contentView.layer.borderWidth = 0
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOpacity = 0.25
+        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        contentView.layer.shadowRadius = 5
         
     }
     
     func configureUI() {
-        self.contentView.backgroundColor = UIColor(named: "viewBackgroundColor")
+        self.contentView.backgroundColor = UIColor(named: "viewBackgroundColor2")
         
         self.contentView.addSubview(antImageView)
         self.contentView.addSubview(badgeTitleLabel)

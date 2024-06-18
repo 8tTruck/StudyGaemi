@@ -117,10 +117,10 @@ class CalendarViewController: BaseViewController {
     
     private let calendarbackView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "viewBackgroundColor")
+        view.backgroundColor = UIColor(named: "viewBackgroundColor2")
         view.layer.cornerRadius = 16
         view.layer.borderColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0).cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 0
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.25
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -160,7 +160,7 @@ class CalendarViewController: BaseViewController {
         // 요일 UI 설정
         calendar.weekdayHeight = 16
         calendar.appearance.weekdayFont = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
-        calendar.appearance.weekdayTextColor = .darkGray
+        calendar.appearance.weekdayTextColor = .fontBlack
         
         // 날짜 UI 설정
         calendar.appearance.titleTodayColor = .black
@@ -199,7 +199,7 @@ class CalendarViewController: BaseViewController {
     
     private lazy var customHeaderView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "viewBackgroundColor")
+        view.backgroundColor = UIColor(named: "viewBackgroundColor2")
         return view
     }()
     
@@ -239,35 +239,6 @@ class CalendarViewController: BaseViewController {
         self.configureUI()
         self.constraintLayout()
         calCurrentYearAndMonth()
-        
-//        studies = [
-//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/05/05")!, success: true),
-//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/05/11")!, success: true),
-//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
-//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
-//            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
-//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: false),
-//            study(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: false),
-//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
-//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
-//            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: true),
-//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: false),
-//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: false)
-//        ]
-//        wakeups = [
-//            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
-//            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
-//            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
-//            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: true),
-//            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: true),
-//            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
-//            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
-//            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: false),
-//            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: true),
-//            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: true)
-//            
-//        ]
-        //updateData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -303,7 +274,6 @@ class CalendarViewController: BaseViewController {
             defer { dispatchGroup.leave() }
             switch result {
             case .success(let datas):
-                print("WakeUp 데이터 불러오기 완료")
                 for data in datas{
                     let wakeup = wakeup(
                         date: self.removeTime(from: data.date.dateValue(), state: .wakeup),

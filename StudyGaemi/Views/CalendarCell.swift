@@ -55,8 +55,8 @@ class CalendarCell: FSCalendarCell {
     
     // 셀의 높이와 너비 중 작은 값 리턴
     func minSize() -> CGFloat {
-        let width = contentView.bounds.width - 20
-        let height = contentView.bounds.height - 20
+        let width = contentView.bounds.width - 25
+        let height = contentView.bounds.height - 25
 
         return (width > height) ? height : width
     }
