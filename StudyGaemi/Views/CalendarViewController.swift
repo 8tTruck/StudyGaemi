@@ -23,12 +23,6 @@ struct study {
     let success: Bool
 }
 
-enum badgeStatus{
-    case perfect
-    case study
-    case wakeup
-}
-
 enum status{
     case perfect
     case study
@@ -38,8 +32,8 @@ enum status{
 class CalendarViewController: BaseViewController {
     
     // MARK: - properties
-    // 예시 리스트
-    let dateFormatter: DateFormatter = {
+    
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
         return formatter
@@ -54,7 +48,7 @@ class CalendarViewController: BaseViewController {
     private var perfectAntCount = 0
     private var studyAntCount = 0
     private var wakeupAntCount = 0
-    private var result: [badgeStatus] = []
+    private var result: [status] = []
     private var currentPageYearAndMonth: String = ""
     private var monthlyResultDict: [[Date: status]] = []
     private var tableHeight = 300 {
@@ -62,7 +56,7 @@ class CalendarViewController: BaseViewController {
             badgeView.snp.removeConstraints()
             badgeView.snp.makeConstraints { make in
                 make.top.equalTo(calendarbackView.snp.bottom).offset(15)
-                make.leading.trailing.equalToSuperview().inset(20)
+                make.leading.trailing.equalToSuperview()
                 make.height.equalTo(tableHeight)
                 make.bottom.equalToSuperview().inset(10)
             }
@@ -95,19 +89,15 @@ class CalendarViewController: BaseViewController {
         $0.spacing = 8
     }
     
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.backgroundColor = .clear
-        scrollView.bounces = false
-        return scrollView
-    }()
+    private let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.backgroundColor = .clear
+        $0.bounces = false
+    }
     
-    private let scrollContentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
+    private let scrollContentView = UIView().then {
+        $0.backgroundColor = .clear
+    }
     
     //    private let advView: UIView = {
     //        let view = UIView()
@@ -115,119 +105,103 @@ class CalendarViewController: BaseViewController {
     //        return view
     //    }()
     
-    private let calendarbackView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "viewBackgroundColor")
-        view.layer.cornerRadius = 16
-        view.layer.borderColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0).cgColor
-        view.layer.borderWidth = 1
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.25
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.layer.shadowRadius = 5
-        view.clipsToBounds = false
-        return view
-    }()
+    private let calendarbackView = UIView().then {
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
+        $0.layer.cornerRadius = 16
+        $0.layer.borderColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0).cgColor
+        $0.layer.borderWidth = 0
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOpacity = 0.25
+        $0.layer.shadowOffset = CGSize(width: 0, height: 0)
+        $0.layer.shadowRadius = 5
+        $0.clipsToBounds = false
+    }
     
-    private lazy var calendarView: FSCalendar = {
-        let calendar = FSCalendar()
-        calendar.dataSource = self
-        calendar.delegate = self
+    private lazy var calendarView = FSCalendar().then {
+        $0.dataSource = self
+        $0.delegate = self
         
         //셀등록
-        calendar.register(CalendarCell.self, forCellReuseIdentifier: "CalendarCell")
+        $0.register(CalendarCell.self, forCellReuseIdentifier: "CalendarCell")
         
         // 첫 열을 월요일로 설정
-        calendar.firstWeekday = 2
-        calendar.scope = .month
+        $0.firstWeekday = 2
+        $0.scope = .month
         
-        calendar.scrollDirection = .horizontal
-        calendar.locale = Locale(identifier: "ko_KR")
+        $0.scrollDirection = .horizontal
+        $0.locale = Locale(identifier: "ko_KR")
         
         // 현재 달의 날짜들만 표기하도록 설정
-        calendar.placeholderType = .none
+        $0.placeholderType = .none
         
         // 양옆 년도, 월 지우기
-        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        $0.appearance.headerMinimumDissolvedAlpha = 0.0
         
         // 헤더뷰 설정
-        calendar.headerHeight = 45
-        calendar.appearance.headerDateFormat = "MM월"
-        calendar.appearance.headerTitleColor = .black
-        calendar.appearance.headerTitleAlignment = .left
-        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        $0.headerHeight = 50
+        $0.appearance.headerDateFormat = "MM월"
+        $0.appearance.headerTitleColor = .black
+        $0.appearance.headerTitleAlignment = .left
+        $0.appearance.headerMinimumDissolvedAlpha = 0.0
         
         // 요일 UI 설정
-        calendar.weekdayHeight = 0
+        $0.weekdayHeight = 16
+        $0.appearance.weekdayFont = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
+        $0.appearance.weekdayTextColor = .fontBlack
         
         // 날짜 UI 설정
-        calendar.appearance.titleTodayColor = .black
-        calendar.appearance.titleFont = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.appearance.titleTodayColor = .black
+        $0.appearance.titleFont = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
         
         //날짜 선택시
-        calendar.today = nil
-        calendar.appearance.todayColor = .clear
-        //calendar.appearance.titleTodayColor = .pointOrange //Today에 표시되는 특정 글자색
-        //calendar.appearance.todaySelectionColor = .clear //오늘날짜 선택시 색상
-        calendar.appearance.selectionColor = .clear // 사용자가 선택한 날짜
-        calendar.appearance.titleSelectionColor = .fontBlack // 선택한 날짜 글자색
-        calendar.allowsSelection = false
+        $0.today = nil
+        $0.appearance.selectionColor = .clear // 사용자가 선택한 날짜
+        $0.appearance.titleSelectionColor = .fontBlack // 선택한 날짜 글자색
+        $0.allowsSelection = false
         
-        return calendar
-    }()
+    }
     
-    private lazy var badgeView: UITableView = {
-        let view = UITableView()
-        view.backgroundColor = UIColor(named: "viewBackgroundColor")
-        view.dataSource = self
-        view.delegate = self
-        view.register(BadgeViewCell.self, forCellReuseIdentifier: "BadgeViewCell")
-        view.separatorStyle = .none
-        view.bounces = false
-        return view
-    }()
+    private lazy var badgeView = UITableView().then {
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor")
+        $0.dataSource = self
+        $0.delegate = self
+        $0.register(BadgeViewCell.self, forCellReuseIdentifier: "BadgeViewCell")
+        $0.separatorStyle = .none
+        $0.bounces = false
+    }
     
     
-    let headerDateFormatter = DateFormatter().then {
+    private let headerDateFormatter = DateFormatter().then {
         $0.dateFormat = "YYYY년 MM월"
         $0.locale = Locale(identifier: "ko_kr")
         $0.timeZone = TimeZone(identifier: "KST")
     }
     
-    private lazy var customHeaderView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "viewBackgroundColor")
-        return view
-    }()
+    private lazy var customHeaderView = UIView().then {
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
+    }
     
-    let monthLabel: UILabel = {
-        let label = UILabel()
+    private let monthLabel = UILabel().then {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy년 MM월"
         
         let currentDate = Date()
-        label.text = dateFormatter.string(from: currentDate)
+        $0.text = dateFormatter.string(from: currentDate)
         
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     
-    let totalLabel: UILabel = {
-        let label = UILabel()
+    private let totalLabel = UILabel().then {
         let calendar = Calendar.current
         let currentDate = Date()
-        guard let range = calendar.range(of: .day, in: .month, for: currentDate) else {
-            label.text = "Error calculating days"
-            return label
-        }
+        guard let range = calendar.range(of: .day, in: .month, for: currentDate) else { return  }
         let numberOfDays = range.count
-        label.text = "/\(numberOfDays)"
-        label.textAlignment = .right
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+        $0.text = "/\(numberOfDays)"
+        $0.textAlignment = .right
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     
     // MARK: - lifecycle
@@ -236,93 +210,11 @@ class CalendarViewController: BaseViewController {
         self.configureUI()
         self.constraintLayout()
         calCurrentYearAndMonth()
-        
-//        studies = [
-//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/05/05")!, success: true),
-//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/05/11")!, success: true),
-//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
-//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
-//            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
-//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: false),
-//            study(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: false),
-//            study(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
-//            study(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
-//            study(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: true),
-//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: false),
-//            study(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: false)
-//        ]
-//        wakeups = [
-//            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/01")!, success: true),
-//            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/02")!, success: true),
-//            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/03")!, success: true),
-//            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/04")!, success: true),
-//            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/05")!, success: true),
-//            wakeup(email: "user6@example.com", date: dateFormatter.date(from: "2024/06/06")!, success: true),
-//            wakeup(email: "user7@example.com", date: dateFormatter.date(from: "2024/06/07")!, success: true),
-//            wakeup(email: "user8@example.com", date: dateFormatter.date(from: "2024/06/08")!, success: false),
-//            wakeup(email: "user9@example.com", date: dateFormatter.date(from: "2024/06/09")!, success: true),
-//            wakeup(email: "user10@example.com", date: dateFormatter.date(from: "2024/06/10")!, success: true)
-//            
-//        ]
-        //updateData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setData()
     }
-    
-    //사용자 기반으로 data 불러오기
-    private func setData() {
-        
-        var studiesData = [study]()
-        var wakeupsData = [wakeup]()
-        let dispatchGroup = DispatchGroup()
-        
-        dispatchGroup.enter()
-        firestoreManager.readStudyData { result in
-            defer { dispatchGroup.leave() }
-            switch result {
-            case .success(let datas):
-                print("Study 데이터 불러오기 완료")
-                for data in datas{
-                    let study = study(
-                        date: self.removeTime(from: data.date.dateValue(), state: .study),
-                        success: data.success
-                    )
-                    studiesData.append(study)
-                }
-            case .failure(let error):
-                print("Study 데이터 불러오기 에러: \(error)")
-            }
-        }
-        
-        dispatchGroup.enter()
-        firestoreManager.readWakeUpData { result in
-            defer { dispatchGroup.leave() }
-            switch result {
-            case .success(let datas):
-                print("WakeUp 데이터 불러오기 완료")
-                for data in datas{
-                    let wakeup = wakeup(
-                        date: self.removeTime(from: data.date.dateValue(), state: .wakeup),
-                        success: data.success
-                    )
-                    wakeupsData.append(wakeup)
-                }
-            case .failure(let error):
-                print("WakeUp 데이터 불러오기 에러: \(error)")
-            }
-        }
-        
-        dispatchGroup.notify(queue: .main) {
-            self.studies = studiesData
-            self.wakeups = wakeupsData
-            self.updateData()
-            self.calendarView.reloadData()
-            self.badgeView.reloadData()
-        }
-    }
-    
     
     // MARK: - method
     override func configureUI() {
@@ -375,17 +267,18 @@ class CalendarViewController: BaseViewController {
         calendarbackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(400)
+            make.height.equalTo(410)
         }
         
         calendarView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
+            make.trailing.equalToSuperview().inset(5)
             make.top.bottom.equalToSuperview().inset(10)
         }
         
         badgeView.snp.makeConstraints { make in
             make.top.equalTo(calendarbackView.snp.bottom).offset(15)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(tableHeight)
             make.bottom.equalToSuperview().inset(10)
         }
@@ -412,6 +305,56 @@ class CalendarViewController: BaseViewController {
     private func updateCustomHeaderView(_ month: Date, _ days: Int){
         monthLabel.text = headerDateFormatter.string(from: month)
         totalLabel.text = "\(perfectAntTotalCount)/\(days)"
+    }
+    
+    //사용자 기반으로 data 불러오기
+    private func setData() {
+        
+        var studiesData = [study]()
+        var wakeupsData = [wakeup]()
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        firestoreManager.readStudyData { result in
+            defer { dispatchGroup.leave() }
+            switch result {
+            case .success(let datas):
+                for data in datas{
+                    let study = study(
+                        date: self.removeTime(from: data.date.dateValue(), state: .study),
+                        success: data.success
+                    )
+                    studiesData.append(study)
+                }
+            case .failure(let error):
+                print("Study 데이터 불러오기 에러: \(error)")
+            }
+        }
+        
+        dispatchGroup.enter()
+        firestoreManager.readWakeUpData { result in
+            defer { dispatchGroup.leave() }
+            switch result {
+            case .success(let datas):
+                for data in datas{
+                    let wakeup = wakeup(
+                        date: self.removeTime(from: data.date.dateValue(), state: .wakeup),
+                        success: data.success
+                    )
+                    wakeupsData.append(wakeup)
+                }
+            case .failure(let error):
+                print("WakeUp 데이터 불러오기 에러: \(error)")
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.studies = studiesData
+            self.wakeups = wakeupsData
+            self.updateData()
+            self.calendarView.reloadData()
+            self.badgeView.reloadData()
+        }
     }
     
     private func updateData(){
@@ -501,13 +444,11 @@ class CalendarViewController: BaseViewController {
             }
             return date1 < date2
         }
-        
-        print("monthlyResultDict \(monthlyResultDict)")
         return monthlyResultDict
     }
     
     //연속일 계산
-    private func calculateStraightForBadge(of type: badgeStatus) {
+    private func calculateStraightForBadge(of type: status) {
         var max = 0
         var temp = 0
         var badgeCount = 0
@@ -639,11 +580,8 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         let calendar = Calendar.current
         
         for resultDict in monthlyResultDict {
-            print(resultDict)
             for (dat, status) in resultDict {
-                print((dat, status))
                 if calendar.isDate(dat, inSameDayAs: date) {
-                    print("=============================Stamp")
                     switch status {
                     case .perfect:
                         cell.badgeView.image = UIImage.perfectStamp
@@ -651,10 +589,17 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
                         cell.badgeView.image = UIImage.studyStamp
                     case .wakeup:
                         cell.badgeView.image = UIImage.wakeupStamp
-                        print("cell.badgeView.image = UIImage.wakeupStamp")
                     }
                 }
             }
+        }
+        
+        // 오늘 날짜를 확인하여 배경 색상을 설정
+        let today = Date()
+        if Calendar.current.isDate(today, inSameDayAs: date) {
+            cell.backgroundColor = .pointYellow.withAlphaComponent(0.2)
+        } else {
+            cell.backgroundColor = .clear
         }
         
         return cell
@@ -675,12 +620,11 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         if todayComponents.year == dateComponents.year &&
             todayComponents.month == dateComponents.month &&
             todayComponents.day == dateComponents.day {
-            return .systemBlue
+            return .fontBlack
         } else {
             return .fontBlack
         }
     }
-    
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentPage = calendarView.currentPage

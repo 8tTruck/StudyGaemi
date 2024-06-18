@@ -61,7 +61,7 @@ class MemberInfoViewController: BaseViewController {
         setupTextField(confirmPasswordField, placeholder: "새 비밀번호를 한 번 더 입력해주세요")
         setupLabel(confirmPasswordLabel, text: "영문 + 숫자 6자리 이상")
         
-        errorLabel.textColor = .red
+        errorLabel.textColor = UIColor(named: "fontRed")
         errorLabel.textAlignment = .center
         errorLabel.text = ""
         
@@ -131,10 +131,11 @@ class MemberInfoViewController: BaseViewController {
     
     private func setupTextField(_ textField: UITextField, placeholder: String) {
         textField.placeholder = placeholder
+        textField.backgroundColor = UIColor(named: "textFieldColor")
         textField.textColor = .gray
         textField.borderStyle = .roundedRect
         textField.delegate = self
-        textField.isSecureTextEntry = false
+        textField.isSecureTextEntry = true
         textField.isUserInteractionEnabled = true // 터치 이벤트를 받을 수 있도록 설정
     }
     

@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Rectangle.pdf",
+      "filename" : "Frame 10621.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Frame 10622.pdf",
       "idiom" : "universal"
     }
   ],

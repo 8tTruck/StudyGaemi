@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Layer 2-1 1.png",
+      "filename" : "Frame 10619.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Frame 10620.pdf",
       "idiom" : "universal"
     }
   ],

@@ -9,8 +9,12 @@ import UIKit
 import SnapKit
 import Firebase
 import FirebaseFirestore
+import AuthenticationServices
+import KakaoSDKCommon
+import KakaoSDKAuth
+import KakaoSDKUser
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     var firestore: Firestore!
     let db = Firestore.firestore()
@@ -28,6 +32,7 @@ class LoginViewController: UIViewController {
     let findPWButton = UIButton()
     let separatorView = UIView()
     let orLabel = UILabel()
+//    let loginAppleButton = ASAuthorizationAppleIDButton(type: .default, style: .black)
     let appleLoginButton = UIButton()
     let kakaoLoginButton = UIButton()
     let signupLabel = UILabel()
@@ -56,6 +61,7 @@ class LoginViewController: UIViewController {
         loginTextFieldSetting()
         autoLoginSetting()
         loginButtonSetting()
+//        loginAppleButtonSetting()
         findAccountSetting()
         createAccountSetting()
         separatorViewSetting()
@@ -64,13 +70,100 @@ class LoginViewController: UIViewController {
         kakaoLoginButtonSetting()
     }
     
+    @objc func appleLoginButtonTapped() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+//    func loginAppleButtonSetting() {
+//        view.addSubview(loginAppleButton)
+//        loginAppleButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
+//    }
+    
+    // MARK: - ASAuthorizationControllerDelegate Methods
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            guard let identityTokenData = appleIDCredential.identityToken else {
+                print("Unable to fetch identity token")
+                return
+            }
+            
+            guard let identityTokenString = String(data: identityTokenData, encoding: .utf8) else {
+                print("Unable to convert identity token to string")
+                return
+            }
+            
+            // 사용자 고유 식별자
+            let userIdentifier = appleIDCredential.user
+            
+            // 이메일
+            let email = appleIDCredential.email
+            
+            // Firebase로 애플 사용자 인증
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: identityTokenString, rawNonce: nil)
+            
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                if let error = error {
+                    // 만약 사용자가 없다면 새로운 사용자 생성
+                    if (error as NSError).code == AuthErrorCode.userNotFound.rawValue {
+                        Auth.auth().createUser(withEmail: email ?? "\(userIdentifier)@example.com", password: "some_secure_password") { authResult, error in
+                            if let error = error {
+                                print("Error during Firebase sign-up: \(error.localizedDescription)")
+                                return
+                            }
+                            
+                            // 새로 생성된 사용자 로그인
+                            Auth.auth().signIn(with: credential) { (authResult, error) in
+                                if let error = error {
+                                    print("Error during Firebase sign-in: \(error.localizedDescription)")
+                                    return
+                                }
+                                
+                                // 사용자가 성공적으로 로그인됨
+                                print("애플 로그인 성공")
+                                self.navigateToMainScreen()
+                            }
+                        }
+                    } else {
+                        print("Error during Firebase sign-in: \(error.localizedDescription)")
+                    }
+                    return
+                }
+                
+                // 사용자가 성공적으로 로그인됨
+                print("애플 로그인 성공")
+                self.navigateToMainScreen()
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+        print("Authorization failed: \(error.localizedDescription)")
+    }
+    
+    // MARK: - ASAuthorizationControllerPresentationContextProviding Methods
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
     func loginImageSetting() {
         loginImage.image = UIImage(named: "heartAnt")
         view.addSubview(loginImage)
         
         loginImage.snp.makeConstraints { make in
-            make.width.equalTo(208)
-            make.height.equalTo(124)
+//            make.width.equalTo(208)
+//            make.height.equalTo(124)
+            make.width.equalToSuperview().multipliedBy(0.6) // 슈퍼뷰 너비의 80%
+            make.height.equalTo(loginImage.snp.width).multipliedBy(1 / 1.6) // 가로세로 비율 1.8:1 유지
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
         }
@@ -89,14 +182,18 @@ class LoginViewController: UIViewController {
         emailTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(loginImage.snp.bottom).offset(28)
-            make.width.equalTo(342)
+//            make.width.equalTo(342)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(60)
         }
         
         passwordTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(emailTextField.snp.bottom).offset(12)
-            make.width.equalTo(342)
+//            make.width.equalTo(342)
+            make.leading.equalTo(emailTextField.snp.leading)
+            make.trailing.equalTo(emailTextField.snp.trailing)
             make.height.equalTo(60)
         }
     }
@@ -131,7 +228,9 @@ class LoginViewController: UIViewController {
         loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(autoLoginButton.snp.bottom).offset(12)
-            make.width.equalTo(342)
+//            make.width.equalTo(342)
+            make.leading.equalTo(emailTextField.snp.leading)
+            make.trailing.equalTo(emailTextField.snp.trailing)
             make.height.equalTo(60)
         }
         
@@ -327,7 +426,9 @@ class LoginViewController: UIViewController {
         separatorView.snp.makeConstraints { make in
             make.top.equalTo(signupLabel.snp.bottom).offset(20.5)
             make.centerX.equalToSuperview()
-            make.width.equalTo(335)
+//            make.width.equalTo(335)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(1)
         }
     }
@@ -361,8 +462,10 @@ class LoginViewController: UIViewController {
         appleLoginButton.setBackgroundImage(backgroundImage, for: .normal)
         appleLoginButton.layer.borderWidth = 1
         applyCommonSettings(to: appleLoginButton)
+        
+        appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
     }
-    
+        
     func kakaoLoginButtonSetting() {
         view.addSubview(kakaoLoginButton)
         kakaoLoginButton.snp.makeConstraints { make in
@@ -376,7 +479,74 @@ class LoginViewController: UIViewController {
         let backgroundImage = UIImage(named: "kakao")
         kakaoLoginButton.setBackgroundImage(backgroundImage, for: .normal)
         applyCommonSettings(to: kakaoLoginButton)
+
+        kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
     }
+    
+    @objc func kakaoLoginButtonTapped() {
+        // Kakao SDK를 사용하여 로그인 세션을 열고 이메일 정보를 요청합니다.
+        UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
+            if let error = error {
+                print("Kakao login error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let oauthToken = oauthToken else {
+                print("Kakao login failed: no OAuth token received")
+                return
+            }
+            
+            // Kakao SDK를 사용하여 사용자 정보를 가져옵니다.
+            UserApi.shared.me { (user, error) in
+                if let error = error {
+                    print("Failed to get user info: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let user = user,
+                      let email = user.kakaoAccount?.email else {
+                    print("User or email is nil")
+                    return
+                }
+                
+                // 이메일로 Firebase에 로그인을 시도합니다.
+                let credential = EmailAuthProvider.credential(withEmail: email, password: "some_secure_password")
+                Auth.auth().signIn(with: credential) { (authResult, error) in
+                    if let error = error {
+                        // 만약 사용자가 없다면 새로운 사용자 생성
+                        if (error as NSError).code == AuthErrorCode.userNotFound.rawValue {
+                            Auth.auth().createUser(withEmail: email, password: "some_secure_password") { authResult, error in
+                                if let error = error {
+                                    print("Error during Firebase sign-up: \(error.localizedDescription)")
+                                    return
+                                }
+                                
+                                // 새로 생성된 사용자 로그인
+                                Auth.auth().signIn(with: credential) { (authResult, error) in
+                                    if let error = error {
+                                        print("Error during Firebase sign-in: \(error.localizedDescription)")
+                                        return
+                                    }
+                                    
+                                    // 사용자가 성공적으로 로그인됨
+                                    print("Kakao 로그인 성공")
+                                    self?.navigateToMainScreen()
+                                }
+                            }
+                        } else {
+                            print("Error during Firebase sign-in: \(error.localizedDescription)")
+                        }
+                        return
+                    }
+                    
+                    // 사용자가 성공적으로 로그인됨
+                    print("Kakao 로그인 성공")
+                    self?.navigateToMainScreen()
+                }
+            }
+        }
+    }
+
 
     func applyCommonSettings(to button: UIButton) {
         button.titleLabel?.adjustsFontForContentSizeCategory = true

@@ -33,6 +33,7 @@ class MakePasswordViewController: UIViewController {
     let ageButton = UIButton()
     let ageLabel = UILabel()
     var ageAgree = false
+    var separatorView = UIView()
     let allAgreeButton = UIButton()
     let allAgreeLabel = UILabel()
     var allAgree = false
@@ -64,6 +65,7 @@ class MakePasswordViewController: UIViewController {
         yakgwanSetting()
         ageSetting()
         allAgreeSetting()
+        separatorViewSetting()
         descriptionButtonSetting()
         
         //        agreementSetting()
@@ -102,8 +104,10 @@ class MakePasswordViewController: UIViewController {
         nicknameTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(mainImage.snp.bottom).offset(20)
-            make.width.equalTo(342)
+//            make.width.equalTo(342)
             make.height.equalTo(50)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
         }
     }
     
@@ -116,7 +120,7 @@ class MakePasswordViewController: UIViewController {
         
         nicknameDescriptionLabel.snp.makeConstraints { make in
             //            make.leading.equalToSuperview().offset(25)
-            make.leading.equalTo(mainImage.snp.leading).offset(-110)
+            make.leading.equalTo(nicknameTextField.snp.leading)
             make.top.equalTo(nicknameTextField.snp.bottom).offset(4)
         }
     }
@@ -130,8 +134,10 @@ class MakePasswordViewController: UIViewController {
         passwordTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(nicknameDescriptionLabel.snp.bottom).offset(10)
-            make.width.equalTo(342)
+//            make.width.equalTo(342)
             make.height.equalTo(50)
+            make.leading.equalTo(nicknameTextField.snp.leading)
+            make.trailing.equalTo(nicknameTextField.snp.trailing)
         }
     }
     
@@ -157,8 +163,10 @@ class MakePasswordViewController: UIViewController {
         passwordCheckTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(passwordDescriptionLabel.snp.bottom).offset(10)
-            make.width.equalTo(342)
+//            make.width.equalTo(342)
             make.height.equalTo(50)
+            make.leading.equalTo(nicknameTextField.snp.leading)
+            make.trailing.equalTo(nicknameTextField.snp.trailing)
         }
     }
     
@@ -196,7 +204,7 @@ class MakePasswordViewController: UIViewController {
         // 버튼 제약 조건
         personalInfoButton.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
-            make.bottom.equalTo(confirmButton.snp.top).offset(-70)
+            make.bottom.equalTo(confirmButton.snp.top).offset(-10)
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
@@ -358,6 +366,20 @@ class MakePasswordViewController: UIViewController {
         updateConfirmButtonState()
     }
     
+    func separatorViewSetting() {
+        separatorView.backgroundColor = UIColor.lightGray
+        view.addSubview(separatorView)
+        
+        separatorView.snp.makeConstraints { make in
+            make.top.equalTo(allAgreeButton.snp.bottom).offset(1)
+            make.centerX.equalToSuperview()
+//            make.width.equalTo(335)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
+            make.height.equalTo(1)
+        }
+    }
+    
     func updateConfirmButtonState() {
         
         let isButtonEnabled = ageAgree && yakgwanAgree && personalInfoAgree
@@ -383,7 +405,9 @@ class MakePasswordViewController: UIViewController {
         confirmButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-17)
-            make.width.equalTo(342)
+//            make.width.equalTo(342)
+            make.leading.equalTo(nicknameTextField.snp.leading)
+            make.trailing.equalTo(nicknameTextField.snp.trailing)
             make.height.equalTo(60)
         }
     }
@@ -539,9 +563,14 @@ class MakePasswordViewController: UIViewController {
     
     func createDescriptionButton(tag: Int) -> UIButton {
         let button = UIButton(type: .system)
-        button.setTitle(title, for: .normal)
         button.tag = tag
         button.addTarget(self, action: #selector(descriptionButtonTapped(_:)), for: .touchUpInside)
+        
+        // 꺾쇠 이미지를 시스템 아이콘으로 설정하고, 색상을 검정색으로 변경
+        if let chevronImage = UIImage(systemName: "chevron.black")?.withTintColor(.black, renderingMode: .alwaysOriginal) {
+            button.setImage(chevronImage, for: .normal)
+        }
+        
         return button
     }
     

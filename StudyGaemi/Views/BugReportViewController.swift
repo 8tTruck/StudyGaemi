@@ -1,10 +1,3 @@
-//
-//  BugReportViewController.swift
-//  StudyGaemi
-//
-//  Created by 강태영 on 6/9/24.
-//
-
 import SnapKit
 import Then
 import UIKit
@@ -13,13 +6,11 @@ import MessageUI
 class BugReportViewController: BaseViewController, MFMailComposeViewControllerDelegate {
     private let bugReportView = UIView()
     private let textView = UITextView()
-    private let fixedHeaderView = UIView()
     private let submitButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackButton()
-        setupFixedHeaderView()
         configureBugReportView()
         configureTextView()
         configureSubmitButton()
@@ -44,30 +35,6 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
         navigationController?.popViewController(animated: true)
     }
     
-    private func setupFixedHeaderView() {
-        view.addSubview(fixedHeaderView)
-        fixedHeaderView.backgroundColor = .white
-        fixedHeaderView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(44) // 고정된 높이 설정
-        }
-        
-        // submitButton을 fixedHeaderView에 추가합니다.
-        fixedHeaderView.addSubview(submitButton)
-        submitButton.backgroundColor = UIColor(named: "pointOrange")
-        submitButton.layer.cornerRadius = 24
-        submitButton.setTitle("제출", for: .normal)
-        submitButton.setTitleColor(.white, for: .normal)
-        
-        submitButton.snp.makeConstraints { make in
-            make.width.equalTo(342)
-            make.height.equalTo(48)
-            make.centerX.equalToSuperview() // 가운데 정렬
-            make.bottom.equalToSuperview().offset(-10) // fixedHeaderView에 대해 bottom에 추가
-        }
-    }
-    
     private func configureBugReportView() {
         view.addSubview(bugReportView)
         bugReportView.backgroundColor = .white
@@ -78,9 +45,8 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
         bugReportView.layer.shadowRadius = 4
         
         bugReportView.snp.makeConstraints { make in
-            make.top.equalTo(fixedHeaderView.snp.bottom).offset(15)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalTo(submitButton.snp.top).offset(-50) // submitButton과의 간격 설정
         }
     }
     
@@ -94,6 +60,7 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
         bugReportView.addSubview(textView)
         textView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
+            make.height.equalTo(200) // 고정된 높이 설정
         }
     }
     
@@ -106,9 +73,9 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
         submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
         
         submitButton.snp.makeConstraints { make in
-            make.width.equalTo(342)
+            make.top.equalTo(bugReportView.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(48)
-            make.leading.trailing.equalToSuperview().inset(44)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
     }
@@ -126,23 +93,10 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
             
             present(alertController, animated: true, completion: nil)
         } else {
-            // sendEmail(withContent: textView.text)
-            let alertController = UIAlertController(title: "오류 및 버그 신고", message: "성공적으로 제출되었습니다.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
-                self.clearTextView()
-            })
-            confirmAction.setValue(UIColor.orange, forKey: "titleTextColor")
-            alertController.addAction(confirmAction)
-            
-            // 뒷 배경을 하얗게 설정
-            let backgroundView = alertController.view.subviews.first?.subviews.first?.subviews.first
-            backgroundView?.backgroundColor = UIColor.white
-            
-            self.present(alertController, animated: true, completion: nil)
+            sendEmail(withContent: textView.text)
         }
     }
     
-    /*
     private func sendEmail(withContent content: String) {
         guard MFMailComposeViewController.canSendMail() else {
             let alertController = UIAlertController(title: "이메일 설정 오류", message: "이메일 계정이 설정되어 있지 않습니다. 설정 후 다시 시도해주세요.", preferredStyle: .alert)
@@ -154,7 +108,7 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
         
         let mailComposeViewController = MFMailComposeViewController()
         mailComposeViewController.mailComposeDelegate = self
-        mailComposeViewController.setToRecipients(["taengdev@gamial.com"])
+        mailComposeViewController.setToRecipients(["taengdev@gmail.com"])
         mailComposeViewController.setSubject("오류 및 버그 신고")
         mailComposeViewController.setMessageBody(content, isHTML: false)
         
@@ -186,7 +140,6 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
             }
         }
     }
-    */
     
     private func clearTextView() {
         textView.text = "오류 및 버그를 작성 후 제출버튼을 눌러주세요."
@@ -214,7 +167,9 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-keyboardHeight - 30)
         }
         
-        bugReportView.snp.updateConstraints { make in
+        bugReportView.snp.remakeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalTo(submitButton.snp.top).offset(-28)
         }
         
