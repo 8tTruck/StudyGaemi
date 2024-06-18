@@ -61,6 +61,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        // 로컬 알림 내용 설정
+        let content = UNMutableNotificationContent()
+        content.title = "⏰ 공부하개미를 다시 켜 주세요 ⏰"
+        content.body = "공부하개미를 종료하면 공부타이머와 알람이 정상적으로 동작하지 않습니다."
+        content.sound = .default
+
+        // 트리거 시간 설정 (예: 1초 후)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+
+        // 알림 요청 생성
+        let request = UNNotificationRequest(identifier: "terminateNotification", content: content, trigger: trigger)
+
+        // 알림 센터에 추가
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
 
     // MARK: - Core Data stack
 
@@ -115,7 +132,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         print("포그라운드 알림 수신: \(notification.request.content.body)")
         let userInfo = notification.request.content.userInfo
-        
+        if let viewControllerIdentifier = userInfo["viewControllerIdentifier"] as? String {
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                sceneDelegate.navigateToViewController(withIdentifier: viewControllerIdentifier)
+            }
+        }
         if let messageID = userInfo["viewControllerIdentifier"] {
             print("MessageId: \(messageID)")
         }
@@ -127,7 +148,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         } else {
             completionHandler([.alert, .sound])
         }
-        AudioController.shared.playAlarmSound()
     }
     
     // MARK: - 알림을 터치했을 때 호출되는 메소드
@@ -139,7 +159,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             }
         }
         completionHandler()
-        AudioController.shared.playAlarmSound()
     }
 }
 
@@ -148,11 +167,8 @@ extension AppDelegate: MessagingDelegate {
     // MARK: - 기기토큰 요청시 등록이 성공적이면 토큰을 받는 메소드
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02.2hX", $1)})
+        SilentPushNotificationManager.shared.deviceToken = deviceTokenString
         print(deviceTokenString)
-        
-        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-        let token = tokenParts.joined()
-        print("good: \(token)")
         
         Messaging.messaging().apnsToken = deviceToken
     }

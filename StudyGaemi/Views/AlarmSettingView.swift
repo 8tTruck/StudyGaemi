@@ -141,7 +141,7 @@ class AlarmSettingView: BaseViewController {
     }
     
     private let numberButton = UIButton().then {
-        $0.setTitle("1회반복", for: .normal)
+        $0.setTitle("1회 반복", for: .normal)
         $0.titleLabel?.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
         $0.setTitleColor(UIColor(named: "fontBlack") ?? .white, for: .normal)
         $0.backgroundColor = UIColor(named: "navigationBarLine") ?? UIColor.systemGray
@@ -217,13 +217,13 @@ class AlarmSettingView: BaseViewController {
         ])
         
         numberButton.menu = UIMenu(children: [
-            UIAction(title: "1회반복", handler: { [weak self] _ in
+            UIAction(title: "1회 반복", handler: { [weak self] _ in
                 self?.buttonSetTitle("1회 반복", for: self?.numberButton)
             }),
-            UIAction(title: "2회반복", handler: { [weak self] _ in
+            UIAction(title: "2회 반복", handler: { [weak self] _ in
                 self?.buttonSetTitle("2회 반복", for: self?.numberButton)
             }),
-            UIAction(title: "3회반복", handler: { [weak self] _ in
+            UIAction(title: "3회 반복", handler: { [weak self] _ in
                 self?.buttonSetTitle("3회 반복", for: self?.numberButton)
             })
         ])
