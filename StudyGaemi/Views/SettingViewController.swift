@@ -8,12 +8,13 @@
 import SnapKit
 import Then
 import UIKit
+import FirebaseAuth
 
 class SettingViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     private let titleLabel = UILabel().then {
         $0.text = "개Me"
-        $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.font = UIFont(name: "Pretendard-Regular", size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
     
@@ -38,26 +39,29 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private let userImageView = UIImageView().then {
         $0.image = UIImage(named: "heartAnt")
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 23
+        $0.layer.masksToBounds = true
     }
+
     
     private let userLabel = UILabel().then {
         $0.text = "User Name"
-        $0.font = UIFont.systemFont(ofSize: 17)
+        $0.font = UIFont(name: "Pretendard-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17)
         $0.textColor = UIColor.fontBlack
         $0.backgroundColor = .clear
     }
     
     private let emailLabel = UILabel().then {
         $0.text = "example123@naver.com"
-        $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
         $0.textColor = .lightGray
     }
     
     private let editButton = UIButton(type: .system).then {
         $0.setImage(UIImage(systemName: "pencil.line"), for: .normal)
         $0.tintColor = .gray
-        $0.addTarget(SettingViewController.self, action: #selector(editButtonTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
     private let separatorView = UIView().then {
@@ -66,13 +70,13 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private let totalStudyLabel = UILabel().then {
         $0.text = "총 공부개미"
-        $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
         $0.textColor = .lightGray
     }
     
     private let totalTimeLabel = UILabel().then {
         $0.text = "33시간 51분"
-        $0.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        $0.font = UIFont(name: "Pretendard-Regular", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
     
@@ -81,11 +85,12 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         $0.separatorStyle = .none
     }
-    let settingItems = ["비밀번호 변경", "개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "로그아웃", "회원탈퇴"]
+    
+    private let settingItems = ["비밀번호 변경", "개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "로그아웃", "회원탈퇴"]
     
     private let accumulatedLabel = UILabel().then {
         $0.text = "10일 누적"
-        $0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
         $0.textColor = .white
         $0.backgroundColor = .orange
         $0.textAlignment = .center
@@ -100,11 +105,42 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.configureUI()
         self.constraintLayout()
         self.setupTableView()
+        setupNotifications()
+        fetchUserDetails()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(nicknameDidUpdate(notification:)), name: .nicknameDidUpdate, object: nil)
+    }
+    
+    @objc private func nicknameDidUpdate(notification: Notification) {
+        if let nickname = notification.userInfo?["nickname"] as? String {
+            userLabel.text = nickname
+            AuthenticationManager.shared.saveNickname(nickname) { success, error in
+                if success {
+                    print("닉네임 저장 성공")
+                } else {
+                    print("닉네임 저장 실패: \(error?.localizedDescription ?? "")")
+                }
+            }
+        }
+    }
+    
+    private func fetchUserDetails() {
+        AuthenticationManager.shared.fetchNickname { [weak self] nickname, error in
+            if let error = error {
+                print("닉네임 불러오기 실패: \(error.localizedDescription)")
+            } else {
+                self?.userLabel.text = nickname
+                if let email = Auth.auth().currentUser?.email {
+                    self?.emailLabel.text = email
+                }
+            }
+        }
+    }
     
     override func configureUI() {
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
@@ -140,15 +176,15 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         userView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(17)
-            make.leading.equalTo(view.safeAreaLayoutGuide).inset(17)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(17)
+            make.leading.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(169)
         }
         
         userImageView.snp.makeConstraints { make in
             make.top.equalTo(userView.snp.top).offset(22)
             make.leading.equalTo(userView.snp.leading).offset(22)
-            make.width.height.equalTo(46) // 이미지뷰의 크기를 설정합니다.
+            make.width.height.equalTo(46)
         }
         
         userLabel.snp.makeConstraints { make in
@@ -170,7 +206,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         separatorView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(userView).inset(5)
             make.top.equalTo(userImageView.snp.bottom).offset(15)
-            make.height.equalTo(1) // 두께 조절
+            make.height.equalTo(1)
         }
         
         totalStudyLabel.snp.makeConstraints { make in
@@ -187,12 +223,12 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             make.centerY.equalTo(totalTimeLabel)
             make.trailing.equalTo(userView.snp.trailing).offset(-22)
             make.height.equalTo(30)
-            make.width.equalTo(80) // 적절한 크기로 조절
+            make.width.equalTo(80)
         }
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(userView.snp.bottom).offset(10)
-            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
     }
     
@@ -214,6 +250,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = settingItems[indexPath.row]
+        cell.textLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
         cell.backgroundColor = UIColor(named: "viewBackgroundColor")
         if settingItems[indexPath.row] == "회원탈퇴" {
             cell.textLabel?.textColor = UIColor(named: "fontRed")
@@ -231,11 +268,26 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         return 44
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let titleString = NSAttributedString(string: "설정", attributes: [
-            .font: UIFont.systemFont(ofSize: 12, weight: .regular)
-        ])
-        return titleString.string
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor(named: "viewBackgroundColor")
+        
+        let headerLabel = UILabel()
+        headerLabel.text = "설정"
+        headerLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
+        headerLabel.textColor = UIColor(named: "fontBlack")
+        
+        headerView.addSubview(headerLabel)
+        headerLabel.snp.makeConstraints { make in
+            make.leading.equalTo(headerView).offset(22)
+            make.bottom.equalTo(headerView).offset(-8)
+        }
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
