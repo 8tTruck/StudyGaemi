@@ -41,7 +41,7 @@ class AlertView: UIViewController {
         // 처음 생성 될 때, 살짝 커지는 효과(viewWillAppear, viewWillDisappear에서 애니메이션 효과를 만들어 줌)
         self.alertView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         
-        alertView.backgroundColor = .white
+        alertView.backgroundColor = UIColor(named: "viewBackgroundColor")
         alertView.layer.cornerRadius = 15
         alertView.clipsToBounds = true
         
@@ -84,6 +84,7 @@ extension AlertView {
         imageView.image = logImage
         titleLabel.text = titleText
         customButton.setTitle(doneButtonTitle, for: .normal)
+        customButton.setFontColor(.fontBlack, for: .normal)
 
         self.modalTransitionStyle = .crossDissolve
         self.modalPresentationStyle = .overFullScreen

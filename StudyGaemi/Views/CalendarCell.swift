@@ -17,7 +17,6 @@ class CalendarCell: FSCalendarCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        //view.image = UIImage.studyStamp
         return view
     }()
     
@@ -28,13 +27,12 @@ class CalendarCell: FSCalendarCell {
         self.titleLabel.textColor = .fontBlack
         
         self.titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(contentView)
+            make.top.leading.equalTo(contentView).inset(5)
         }
         
         contentView.insertSubview(badgeView, at: 0)
         badgeView.snp.makeConstraints { make in
-            make.centerX.equalTo(contentView)
-            make.bottom.equalTo(contentView).inset(10)
+            make.trailing.bottom.equalTo(contentView).inset(3)
             make.size.equalTo(minSize())
         }
         badgeView.layer.cornerRadius = minSize()/2
