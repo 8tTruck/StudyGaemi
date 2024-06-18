@@ -6,46 +6,44 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class BadgeViewCell: UITableViewCell {
     
     // MARK: - properties
-    private lazy var antImageView: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "bookAnt")
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
+    private let backView = UIView().then {
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOpacity = 0.25
+        $0.layer.shadowOffset = CGSize(width: 0, height: 0)
+        $0.layer.shadowRadius = 3
+        $0.layer.cornerRadius = 8
+    }
     
-    private let straightBackView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.backgroundColor = .pointOrange
-        return view
-    }()
+    private lazy var antImageView = UIImageView().then {
+        $0.image = UIImage(named: "bookAnt")
+        $0.contentMode = .scaleAspectFit
+    }
     
-    private let straightLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: CustomFontType.bold.name, size: 10) ?? UIFont.systemFont(ofSize: 10, weight: .bold)
-        label.textColor = .white
-        label.text = "10일 연속"
-        return label
-    }()
+    private let straightBackView = UIView().then() {
+        $0.layer.cornerRadius = 10
+        $0.backgroundColor = .pointOrange
+    }
     
-    private lazy var badgeTitleLabel: UILabel = {
-        let view = UILabel()
-        //view.text = "공부개미 달성"
-        view.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
-        return view
-    }()
+    private let straightLabel = UILabel().then {
+        $0.font = UIFont(name: CustomFontType.bold.name, size: 10) ?? UIFont.systemFont(ofSize: 10, weight: .bold)
+        $0.textColor = .white
+    }
     
-    private let dateLabel: UILabel = {
-        let view = UILabel()
-        view.text = "24.05"
-        view.font = UIFont(name: CustomFontType.bold.name, size: 10) ?? UIFont.systemFont(ofSize: 10, weight: .bold)
-        view.textColor = .lightGray
-        return view
-    }()
+    private lazy var badgeTitleLabel = UILabel().then {
+        $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
+    }
+    
+    private let dateLabel = UILabel().then {
+        $0.font = UIFont(name: CustomFontType.bold.name, size: 10) ?? UIFont.systemFont(ofSize: 10, weight: .bold)
+        $0.textColor = .lightGray
+    }
     
     // MARK: - methods
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -68,29 +66,35 @@ class BadgeViewCell: UITableViewCell {
         // 테이블 뷰 셀 사이의 간격
         super.layoutSubviews()
         self.backgroundColor = .clear
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0))
         contentView.layer.cornerRadius = 8
         contentView.layer.borderColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0).cgColor
         contentView.layer.borderWidth = 0
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 0.25
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        contentView.layer.shadowRadius = 5
+        contentView.backgroundColor = .clear
+//        contentView.layer.shadowColor = UIColor.black.cgColor
+//        contentView.layer.shadowOpacity = 0.25
+//        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        contentView.layer.shadowRadius = 5
         
     }
     
     func configureUI() {
-        self.contentView.backgroundColor = UIColor(named: "viewBackgroundColor2")
-        
-        self.contentView.addSubview(antImageView)
-        self.contentView.addSubview(badgeTitleLabel)
-        self.contentView.addSubview(straightBackView)
+        self.contentView.backgroundColor = .clear
+        self.contentView.addSubview(backView)
+        self.backView.addSubview(antImageView)
+        self.backView.addSubview(badgeTitleLabel)
+        self.backView.addSubview(straightBackView)
         self.straightBackView.addSubview(straightLabel)
-        self.contentView.addSubview(dateLabel)
+        self.backView.addSubview(dateLabel)
         
     }
     
     func constraintLayout() {
+        backView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+        
         antImageView.snp.makeConstraints { make in
             make.height.equalTo(32)
             make.width.equalTo(51)
