@@ -103,7 +103,16 @@ class BottomSheetViewController: UIViewController {
     }
     
     @objc private func confirmButtonTapped() {
-        // 닉네임 변경 로직 추가
+        if let nickname = textField.text, !nickname.isEmpty {
+            NotificationCenter.default.post(name: .nicknameDidUpdate, object: nil, userInfo: ["nickname": nickname])
+            AuthenticationManager.shared.saveNickname(nickname) { success, error in
+                if let error = error {
+                    print("닉네임 저장 실패: \(error.localizedDescription)")
+                } else {
+                    print("닉네임 저장 성공")
+                }
+            }
+        }
         dismissBottomSheet()
     }
     
@@ -126,7 +135,7 @@ class BottomSheetViewController: UIViewController {
     
     func adjustForKeyboard(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         let keyboardHeight = keyboardFrame.height
         
         containerView.snp.updateConstraints { make in
@@ -154,4 +163,8 @@ extension BottomSheetViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+extension Notification.Name {
+    static let nicknameDidUpdate = Notification.Name("nicknameDidUpdate")
 }

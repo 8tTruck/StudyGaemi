@@ -15,6 +15,8 @@ class AuthenticationManager {
     
     private init() { }
     
+    private let db = Firestore.firestore()
+    
     // MARK: - 회원가입
     func createUser(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -31,35 +33,34 @@ class AuthenticationManager {
         }
     }
     
-    
     // 이스케이핑 불리언
     // return false or true ?
     // MPVC에서 createUesr 호출
     // 반환값 true일때만 넘어갈 수 있도록
     
-//    func createUser(email: String, password: String) {
-//        // Firebase Authentication을 이용하여 신규 사용자 등록
-//        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-//            if let error = error as NSError? {
-//                // 사용자가 이미 가입된 경우
-//                if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
-//                    // 이메일이 이미 사용 중임을 사용자에게 알림
-//                    print("이미 사용 중인 이메일입니다. 다른 이메일을 시도하세요.")
-//                    self.showAlert(message: "이미 사용중인 이메일입니다.")
-//                    return
-//                } else {
-//                    // 기타 오류 처리
-//                    print("오류 발생: \(error.localizedDescription)")
-//                    return
-//                }
-//            } else {
-//                // 가입이 성공한 경우
-//                print("가입 성공!")
-//                self.signIn(email: email, password: password)
-//                self.sendEmail(authResult: authResult)
-//            }
-//        }
-//    }
+    // func createUser(email: String, password: String) {
+    //     // Firebase Authentication을 이용하여 신규 사용자 등록
+    //     Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+    //         if let error = error as NSError? {
+    //             // 사용자가 이미 가입된 경우
+    //             if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
+    //                 // 이메일이 이미 사용 중임을 사용자에게 알림
+    //                 print("이미 사용 중인 이메일입니다. 다른 이메일을 시도하세요.")
+    //                 self.showAlert(message: "이미 사용중인 이메일입니다.")
+    //                 return
+    //             } else {
+    //                 // 기타 오류 처리
+    //                 print("오류 발생: \(error.localizedDescription)")
+    //                 return
+    //             }
+    //         } else {
+    //             // 가입이 성공한 경우
+    //             print("가입 성공!")
+    //             self.signIn(email: email, password: password)
+    //             self.sendEmail(authResult: authResult)
+    //         }
+    //     }
+    // }
     
     // MARK: - 로그인
     func signIn(email: String, password: String) {
@@ -96,8 +97,6 @@ class AuthenticationManager {
         }
     }
     
-    
-    
     // 이미 가입된 회원인지 조회하는 메서드
     func checkIfUserExists(email: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().fetchSignInMethods(forEmail: email) { (signInMethods, error) in
@@ -118,10 +117,6 @@ class AuthenticationManager {
             }
         }
     }
-
-
-
-
     
     // MARK: - 이메일 인증 전송
     func sendEmail(authResult: AuthDataResult?) {
@@ -217,5 +212,40 @@ class AuthenticationManager {
                 }
             })
         })
+    }
+    
+    // MARK: - 닉네임 저장
+    func saveNickname(_ nickname: String, completion: @escaping (Bool, Error?) -> Void) {
+        guard let userID = Auth.auth().currentUser?.email else {
+            completion(false, NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User not logged in"]))
+            return
+        }
+        
+        let userData: [String: Any] = ["nickName": nickname]
+        
+        db.collection("User").document(userID).setData(userData, merge: true) { error in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+    
+    // MARK: - 닉네임 불러오기
+    func fetchNickname(completion: @escaping (String?, Error?) -> Void) {
+        guard let userID = Auth.auth().currentUser?.email else {
+            completion(nil, NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User not logged in"]))
+            return
+        }
+        
+        db.collection("User").document(userID).getDocument { document, error in
+            if let document = document, document.exists {
+                let nickname = document.data()?["nickName"] as? String
+                completion(nickname, nil)
+            } else {
+                completion(nil, error)
+            }
+        }
     }
 }
