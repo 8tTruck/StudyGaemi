@@ -10,7 +10,7 @@ import FirebaseAuth
 import UIKit
 import SnapKit
 
-class MakePasswordViewController: UIViewController {
+class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     
     let db = Firestore.firestore()
     // 입력 부분
@@ -48,6 +48,10 @@ class MakePasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
+        nicknameTextField.delegate = self
+        passwordTextField.delegate = self
+        passwordCheckTextField.delegate = self
+        
         // 입력 부분
         mainImageSetting()
         nicknameTextFieldSetting()
@@ -96,6 +100,11 @@ class MakePasswordViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).offset(14)
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     func nicknameTextFieldSetting() {
@@ -607,24 +616,30 @@ class MakePasswordViewController: UIViewController {
     }
 
     func isValidPassword(_ password: String) -> Bool {
-        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
+        // 비밀번호 유효성 검사를 위한 정규식 패턴
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{8,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
+
     
     func moveNextVC() {
-        
         guard let email = nicknameTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             // 입력 필드가 비어있는 경우 처리
             return
         }
-        
+
         FirestoreManager.shared.createUserData(email: email, nickName: email, loginMethod: "Firebase")
-        
         AuthenticationManager.shared.createUser(email: email, password: password)
+//        AuthenticationManager.shared.signIn(email: email, password: password)
+//        AuthenticationManager.shared.signIn(email: email, password: password)
+        
         let nextVC = EmailConfirmViewController()
         nextVC.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        // 뷰 컨트롤러가 나타날 때 뒤로가기 버튼을 숨깁니다.
+        navigationController?.pushViewController(nextVC, animated: true)
+        nextVC.navigationItem.hidesBackButton = true
     }
     
     func showAlert(message: String) {

@@ -3,6 +3,16 @@
     {
       "filename" : "heartAnt.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Rectangle (2).pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

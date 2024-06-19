@@ -27,6 +27,7 @@
 		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
 		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
 		F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E050002C0EA02900802477 /* CalendarCell.swift */; };
+		F4E69C652C22AA9D00289A8F /* TimerResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */; };
 		F4EDEB4B2C1994D50038819D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F4EDEB4A2C1994D50038819D /* FirebaseFirestore */; };
 		F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */; };
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
@@ -105,11 +106,11 @@
 		5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePasswordViewController.swift; sourceTree = "<group>"; };
 		5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountSuccessViewController.swift; sourceTree = "<group>"; };
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		52D479782C213177000B7D6F /* StudyGaemi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyGaemi.entitlements; sourceTree = "<group>"; };
 		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerResultViewController.swift; sourceTree = "<group>"; };
 		F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +293,7 @@
 				3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */,
 				3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */,
 				3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */,
+				F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -491,6 +493,7 @@
 				B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */,
 				FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */,
 				FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */,
+				F4E69C652C22AA9D00289A8F /* TimerResultViewController.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
 				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
 				3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */,

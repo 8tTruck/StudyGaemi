@@ -52,16 +52,24 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
     
     @objc private func updateProgress() {
         elapsedTime += 1
-        print("이메일 인증 감지")
-        AuthenticationManager.shared.checkEmailVerified(timer: self.timer, navigationController: navigationController)
+        print("\(elapsedTime)초 째 이메일 인증 감지 중")
+//        AuthenticationManager.shared.checkEmailVerified(timer: self.timer, navigationController: navigationController)
         
-        if elapsedTime >= totalTime {
+        AuthenticationManager.shared.checkEmailVerifiedForSignIn(timer: self.timer, navigationController: navigationController) { isVerified in
+            if isVerified {
+                print("이메일 인증에 성공했습니다.")
+                let moveVC = CreateAccountSuccessViewController()
+                moveVC.modalPresentationStyle = .fullScreen
+                self.navigationController?.pushViewController(moveVC, animated: true)
+                moveVC.navigationItem.hidesBackButton = true
+            } else {
+                print("이메일 인증에 실패했습니다.")
+            }
+        }
+        
+        if elapsedTime > totalTime {
             timer?.invalidate()
             timer = nil
-            // 시간 초과 시 계정 탈퇴 하는 메소드 추가
-            AuthenticationManager.shared.deleteUser()
-            // 시간 초과 시 로그아웃 하는 메소드 추가
-            AuthenticationManager.shared.signOut()
             // 시간 초과 시 데이터베이스에서 계정 삭제 및 데이터 삭제
             FirestoreManager.shared.deleteUserData { result in
                 switch result {
@@ -70,6 +78,27 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
                 case .failure(let error):
                     print("User 데이터베이스 삭제 에러: \(error)")
                 }
+            }
+            // 시간 초과 시 로그아웃 하는 메소드 추가
+            AuthenticationManager.shared.signOut()
+//            print("로그아웃 시도")
+//            // 시간 초과 시 계정 탈퇴 하는 메소드 추가
+//            AuthenticationManager.shared.deleteUser()
+//            print("계정 탈퇴 시도")
+            AuthenticationManager.shared.deleteUser()
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(title: "인증 시간이 만료되었습니다.", message: nil, preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+                    AuthenticationManager.shared.signOut()
+                    let loginVC = UINavigationController(rootViewController: LoginViewController())
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let window = windowScene.windows.first {
+                        window.rootViewController = loginVC
+                        window.makeKeyAndVisible()
+                    }
+                }
+                alertController.addAction(confirmAction)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -178,6 +207,7 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
         let createAccountSuccessVC = CreateAccountSuccessViewController()
         createAccountSuccessVC.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(createAccountSuccessVC, animated: true)
+        createAccountSuccessVC.navigationItem.hidesBackButton = true
 
 //        let makePasswordVC = MakePasswordViewController()
 //        makePasswordVC.modalPresentationStyle = .fullScreen

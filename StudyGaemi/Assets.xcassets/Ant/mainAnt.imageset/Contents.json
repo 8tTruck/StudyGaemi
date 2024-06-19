@@ -3,6 +3,16 @@
     {
       "filename" : "mainAnt.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Layer 1 1@2x 1 (1)2 1.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
