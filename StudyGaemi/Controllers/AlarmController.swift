@@ -48,4 +48,16 @@ class AlarmController {
             return "PM"
         }
     }
+    
+    func updateNotificationSettings(isOn: Bool) {
+        if isOn {
+            print("알림 켜기")
+            AlarmSettingController.shared.setAlarm()
+            UserDefaults.standard.set(isOn, forKey: "toggleButtonState")
+        } else {
+            print("알림 끄기")
+            AlarmSettingController.shared.removeScheduleAlarm()
+            UserDefaults.standard.set(isOn, forKey: "toggleButtonState")
+        }
+    }
 }

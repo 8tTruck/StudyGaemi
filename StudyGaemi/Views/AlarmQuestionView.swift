@@ -79,17 +79,8 @@ class AlarmQuestionView: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.customTextField.becomeFirstResponder()
-        // 현재 표시 중인 모든 알림을 제거
-        UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
-            let identifiers = notifications.map { $0.request.identifier }
-            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
-        }
-        // 예약된 모든 알림을 제거
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-            let identifier = "기상하개미"
-            let identifiers = requests.filter { $0.identifier.hasPrefix(identifier) }.map { $0.identifier }
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-        }
+        AlarmSettingController.shared.removeScheduleAlarm()
+        AlarmSettingController.shared.resetAlarm()
         AudioController.shared.playAlarmSound()
         self.setSystemVolume(to: 1.0)
     }
