@@ -50,7 +50,7 @@ class BottomTabBarViewController: UITabBarController {
         alarmViewController.tabBarItem.image = UIImage(systemName: "alarm")
         alarmViewController.tabBarItem.title = "기상하개미"
         
-        let studyViewController = UINavigationController(rootViewController: StudyViewController())
+        let studyViewController = UINavigationController(rootViewController: SettingTimerVC())
         studyViewController.tabBarItem.image = UIImage(systemName: "timer")
         studyViewController.tabBarItem.title = "공부하개미"
         

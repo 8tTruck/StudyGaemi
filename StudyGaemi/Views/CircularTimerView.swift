@@ -8,25 +8,10 @@ import UIKit
 import Foundation
 
 
-extension Int {
-    var degreesToRadians: CGFloat {
-        return CGFloat(self) * .pi / 180
-    }
-}
-extension TimeInterval {
-    /// %02d: 빈자리를 0으로 채우고, 2자리 정수로 표현
-    var time: String {
-        let minutes = Int(self) / 60
-        let seconds = Int(self) % 60
-        
-        return String(format: "%02d:%02d", minutes, seconds)
-        
-        
-    }
-}
+
 protocol CircularTimerViewDelegate: AnyObject {
     func didFinishTimer()
-    func showModal()
+    //func showModal()
 }
 
 struct ProgressColors {
@@ -37,8 +22,6 @@ struct ProgressColors {
 }
 
 class CircularTimerView: UIView {
-    
-   
     
     private let progressColors: ProgressColors
     private let startDate: Date
@@ -51,7 +34,7 @@ class CircularTimerView: UIView {
     
     private lazy var circularPath: UIBezierPath = {
         return UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY),
-                            radius: 100,
+                            radius: 150,
                             startAngle: CGFloat.pi / 2 ,
                             endAngle: CGFloat.pi / 2 + 2 * .pi,
                             clockwise: true)
@@ -76,7 +59,16 @@ class CircularTimerView: UIView {
         layer.strokeEnd = 0
         return layer
     }()
-    
+    private lazy var timeLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: frame.midX - 50,
+                                          y: frame.midY - 25,
+                                          width: 100,
+                                          height: 50))
+        label.textAlignment = .center
+        label.textColor = .label
+        return label
+    }()
+    /*
     private lazy var timeLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: frame.midX - 50,
                                           y: frame.midY - 25,
@@ -89,7 +81,7 @@ class CircularTimerView: UIView {
         label.addGestureRecognizer(tapGesture)
         return label
     }()
-    
+    */
     private lazy var movingCircleLayer: CAShapeLayer = {
             let circleRadius: CGFloat = 20
             let path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0),
@@ -105,10 +97,10 @@ class CircularTimerView: UIView {
     
    
     
-    private lazy var pauseButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: frame.midX - 50, y: frame.midY + 100, width: 100, height: 50))
+    private lazy var pauseButton: CustomButton = {
+        let button = CustomButton()
         button.setTitle("Pause", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(pauseOrResumeTimer), for: .touchUpInside)
         return button
     }()
@@ -141,7 +133,7 @@ class CircularTimerView: UIView {
         addSubview(pauseButton)
         pauseButton.translatesAutoresizingMaskIntoConstraints = false
         pauseButton.centerXAnchor.constraint(equalTo: self.centerXAnchor) .isActive = true
-        pauseButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50) .isActive = true
+        pauseButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100) .isActive = true
     }
     
     private func setupViews() {
@@ -165,19 +157,26 @@ class CircularTimerView: UIView {
     func pauseTimer() {
         guard isRunning else { return }
         
-        timer?.invalidate()
-        pausedTime = leftSeconds
+        if let timer = timer {
+            timer.invalidate()
+            self.timer = nil
+        }
+        
+        pausedTime = endSeconds?.timeIntervalSinceNow
         pauseLayer(layer: barLayer)
         pauseLayer(layer: movingCircleLayer)
-        timeLabel.text = leftSeconds.time
-
+        if let pausedTime = pausedTime {
+            leftSeconds = pausedTime
+            timeLabel.text = leftSeconds.time
+        }
         isRunning = false
     }
+
     
     func resumeTimer() {
         guard let pausedTime = pausedTime else { return }
         
-        leftSeconds = pausedTime
+        endSeconds = Date().addingTimeInterval(leftSeconds)
         startTimer()
         resumeLayer(layer: barLayer)
         resumeLayer(layer: movingCircleLayer)
@@ -220,26 +219,26 @@ class CircularTimerView: UIView {
         }
         
     @objc private func updateTime() {
-            if leftSeconds > 0 {
-                leftSeconds = endSeconds!.timeIntervalSinceNow
-                timeLabel.text = leftSeconds.time
-            } else {
-                timer?.invalidate()
-                timer = nil
-                timeLabel.text = "00:00"
-                delegate?.didFinishTimer()
-            }
-        }
-        
-        deinit {
+        if let endSeconds = endSeconds, leftSeconds > 0 {
+            leftSeconds = endSeconds.timeIntervalSinceNow
+            timeLabel.text = leftSeconds.time
+        } else {
             timer?.invalidate()
+            timer = nil
+            timeLabel.text = "00:00"
+            delegate?.didFinishTimer()
         }
+        /*deinit {
+            timer?.invalidate()
+        }*/
+    }
+        
 
     
-    
+    /*
     @objc private func showModal() {
         delegate?.showModal()
-    }
+     } */
     
     @objc private func pauseOrResumeTimer() {
         if isRunning {
@@ -250,7 +249,7 @@ class CircularTimerView: UIView {
             pauseButton.setTitle("Pause", for: .normal)
         }
     }
-    
+   
    
 
     private func pauseLayer(layer: CALayer) {
@@ -258,7 +257,7 @@ class CircularTimerView: UIView {
         layer.speed = 0.0
         layer.timeOffset = pausedTime
     }
-    
+
     private func resumeLayer(layer: CALayer) {
         let pausedTime = layer.timeOffset
         layer.speed = 1.0
@@ -267,6 +266,23 @@ class CircularTimerView: UIView {
         let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
         layer.beginTime = timeSincePause
     }
+
 }
 
 
+extension Int {
+    var degreesToRadians: CGFloat {
+        return CGFloat(self) * .pi / 180
+    }
+}
+extension TimeInterval {
+    /// %02d: 빈자리를 0으로 채우고, 2자리 정수로 표현
+    var time: String {
+        let minutes = Int(self) / 60
+        let seconds = Int(self) % 60
+        
+        return String(format: "%02d:%02d", minutes, seconds)
+        
+        
+    }
+}

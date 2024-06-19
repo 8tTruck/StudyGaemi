@@ -9,7 +9,7 @@ import UIKit
 
 class SettingTimerVC: UIViewController {
     
-    private let repeatingSecondsTimer: RepeatingSecondsTimer
+    private let repeatingSecondsTimer: RepeatingSecondsTimer = RepeatingSecondsTimerImpl()
     
     private lazy var countDownDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -17,16 +17,17 @@ class SettingTimerVC: UIViewController {
         return picker
     }()
     
-    private lazy var confirmButton: UIButton = {
-        let button = UIButton()
+    private lazy var confirmButton: CustomButton = {
+        let button = CustomButton(x: 50, y: 50, width: 334, height: 53, radius: 10, title: "확인")
         button.setTitle("확인", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitleColor(.blue, for: .highlighted)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.white, for: .highlighted)
         button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
+        //Users/;kimjuncheol/Documents/GitHub/StudyGaemi/StudyGaemi/Views/BottomSheetViewController.swift
         super.viewDidLoad()
         
         setupViews()
@@ -53,6 +54,7 @@ class SettingTimerVC: UIViewController {
         confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
+    /*
     init(repeatingSecondsTimer: RepeatingSecondsTimer) {
         self.repeatingSecondsTimer = repeatingSecondsTimer
         super.init(nibName: nil, bundle: nil)
@@ -61,6 +63,7 @@ class SettingTimerVC: UIViewController {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    */
     
     @objc private func didTapConfirmButton() {
         startTimer()
