@@ -192,7 +192,6 @@ class CalendarViewController: BaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    
     private let totalLabel = UILabel().then {
         let calendar = Calendar.current
         let currentDate = Date()
@@ -202,7 +201,7 @@ class CalendarViewController: BaseViewController {
         $0.textAlignment = .right
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -386,6 +385,12 @@ class CalendarViewController: BaseViewController {
         }
         
         
+    }
+    
+    //총 공부개미 누적일 계산
+    private func calculateStudyAntCount(){
+        //먼저 유저의 studyData 조회
+        //count
     }
     
     //이달의 완벽개미, 공부개미, 기상개미 측정
