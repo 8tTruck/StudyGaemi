@@ -14,7 +14,7 @@ import KakaoSDKCommon
 import KakaoSDKAuth
 import KakaoSDKUser
 
-class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding, UITextFieldDelegate {
     
     var firestore: Firestore!
     let db = Firestore.firestore()
@@ -43,12 +43,29 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         if let user = Auth.auth().currentUser {
             // 사용자가 이미 로그인된 상태
-            print("자동 로그인 성공: \(user.email ?? "")")
-            navigateToMainScreen()
+            AuthenticationManager.shared.checkEmailVerifiedForLogin { isEmailVerified in
+                if isEmailVerified {
+                    print("자동 로그인 성공: \(user.email ?? "")")
+                    self.navigateToMainScreen()
+                } else {
+                    print("이메일 인증이 필요합니다. 이메일을 확인해주세요.")
+                    self.showEmailVerificationAlert()
+                    self.navigateToLoginScreen()
+                }
+            }
         } else {
             // 로그인 화면으로 이동
             navigateToLoginScreen()
         }
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+    }
+    
+    func showEmailVerificationAlert() {
+        let alert = UIAlertController(title: "이메일 인증 필요", message: "이메일 인증이 필요합니다. 이메일을 확인해주세요.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func navigateToMainScreen() {
@@ -68,6 +85,11 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         orLabelSetting()
         appleLoginButtonSetting()
         kakaoLoginButtonSetting()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @objc func appleLoginButtonTapped() {
@@ -582,8 +604,20 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
                 // 로그인 실패 시 에러 메시지 출력
                 self.showAlert(message: "로그인에 실패했습니다. \(error.localizedDescription)")
             } else if let _ = authResult?.user {
-                // 로그인 성공 시 BottomTabBarViewController로 이동
-                self.moveToBottomTabBarController()
+                AuthenticationManager.shared.checkEmailVerifiedForLogin { isEmailVerified in
+                    if isEmailVerified {
+                        // 로그인 성공 시 BottomTabBarViewController로 이동
+                        self.moveToBottomTabBarController()
+                    } else {
+                        // 이메일 인증이 필요하다는 알림 표시
+                        self.showEmailVerificationAlert()
+                        do {
+                            try Auth.auth().signOut()
+                        } catch let signOutError as NSError {
+                            print("Error signing out: \(signOutError.localizedDescription)")
+                        }
+                    }
+                }
             }
         }
     }
