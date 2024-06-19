@@ -68,7 +68,20 @@ class AuthenticationManager {
             if let error = error {
                 print("로그인 실패 에러: \(error.localizedDescription)")
             } else if let user = authResult?.user {
-                print("로그인 성공: \(user.email ?? "")")
+                self.checkEmailVerifiedForLogin { isEmailVerified in
+                    if isEmailVerified {
+                        print("로그인 성공: \(user.email ?? "")")
+                        // 인증이 완료된 사용자를 위한 추가 로직
+                    } else {
+                        print("이메일 인증이 필요합니다. 이메일을 확인해주세요.")
+                        // 로그아웃 처리
+                        do {
+                            try Auth.auth().signOut()
+                        } catch let signOutError as NSError {
+                            print("Error signing out: \(signOutError.localizedDescription)")
+                        }
+                    }
+                }
             }
         }
     }
@@ -148,6 +161,47 @@ class AuthenticationManager {
             } else {
                 // 이메일 인증 실패 처리
                 print("이메일 인증 실패")
+            }
+        }
+    }
+    
+    func checkEmailVerifiedForLogin(completion: @escaping (Bool) -> Void) {
+        if let user = Auth.auth().currentUser {
+            user.reload { error in
+                if let error = error {
+                    print("Error reloading user: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                completion(user.isEmailVerified)
+            }
+        } else {
+            completion(false)
+        }
+    }
+    
+    func checkEmailVerifiedForSignIn(timer: Timer?, navigationController: UINavigationController?, completion: @escaping (Bool) -> Void) {
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user {
+                user.reload { error in
+                    if let error = error {
+                        print("이메일 인증 실패: \(error.localizedDescription)")
+                        completion(false)
+                        return
+                    }
+
+                    if user.isEmailVerified {
+                        print("이메일 인증 완료")
+                        timer?.invalidate()
+                        completion(true)
+                    } else {
+                        print("이메일 인증 실패")
+                        completion(false)
+                    }
+                }
+            } else {
+                print("이메일 인증 실패")
+                completion(false)
             }
         }
     }
