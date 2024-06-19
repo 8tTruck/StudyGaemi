@@ -42,9 +42,10 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private let userImageView = UIImageView().then {
         $0.image = UIImage(named: "heartAnt")
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .center // 이미지가 가운데 오도록 설정
         $0.layer.cornerRadius = 23
         $0.layer.masksToBounds = true
+        $0.image = $0.image?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -1, bottom: 0, right: 1)) // 이미지를 오른쪽으로 이동
     }
 
     
@@ -313,21 +314,25 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         switch pageIndex {
         case 0:
             pageViewController = MemberInfoViewController()
+            pageViewController.hidesBottomBarWhenPushed = true
             pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
             pageViewController.title = settingItems[pageIndex]
             navigationController?.pushViewController(pageViewController, animated: true)
         case 1:
             pageViewController = PrivacyPolicyViewController()
+            pageViewController.hidesBottomBarWhenPushed = true
             pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
             pageViewController.title = settingItems[pageIndex]
             navigationController?.pushViewController(pageViewController, animated: true)
         case 2:
             pageViewController = BugReportViewController()
+            pageViewController.hidesBottomBarWhenPushed = true
             pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
             pageViewController.title = settingItems[pageIndex]
             navigationController?.pushViewController(pageViewController, animated: true)
         case 3:
             pageViewController = AnnouncementViewController()
+            pageViewController.hidesBottomBarWhenPushed = true
             pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
             pageViewController.title = settingItems[pageIndex]
             navigationController?.pushViewController(pageViewController, animated: true)

@@ -12,6 +12,7 @@ import UIKit
 class PrivacyPolicyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "viewBackgroundColor")
         setupBackButton()
         configureScrollView()
     }
@@ -36,7 +37,9 @@ class PrivacyPolicyViewController: UIViewController {
 
     private func configureScrollView() {
         let scrollView = UIScrollView()
+        scrollView.backgroundColor = UIColor(named: "viewBackgroundColor")
         let contentView = UIView()
+        contentView.backgroundColor = UIColor(named: "viewBackgroundColor")
         let textView = UILabel().then {
             $0.text = """
                 개인정보 보호 담당부서
@@ -146,6 +149,7 @@ class PrivacyPolicyViewController: UIViewController {
             $0.numberOfLines = 0
             $0.font = UIFont(name: "Pretendard-Regular", size: 16)
             $0.textColor = UIColor(named: "fontBlack")
+            $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         }
         
         view.addSubview(scrollView)

@@ -12,9 +12,9 @@ import Firebase
 class MemberInfoViewController: BaseViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private let currentPasswordField = UITextField()
-    private let newPasswordField = UITextField()
-    private let confirmPasswordField = UITextField()
+    private let currentPasswordField = CustomTextField(text: "기존 비밀번호를 입력해주세요")
+    private let newPasswordField = CustomTextField(text: "새로운 비밀번호를 입력해주세요")
+    private let confirmPasswordField = CustomTextField(text: "새 비밀번호를 한 번 더 입력해주세요")
     private let confirmButton = UIButton()
     private let errorLabel = UILabel()
     private let currentPasswordLabel = UILabel()
@@ -33,7 +33,7 @@ class MemberInfoViewController: BaseViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "viewBackgroundColor")
         
         // 네비게이션 바 설정
         navigationItem.title = "비밀번호 변경"
@@ -54,12 +54,9 @@ class MemberInfoViewController: BaseViewController {
             make.height.equalTo(800) // 충분한 높이 설정
         }
         
-        setupTextField(currentPasswordField, placeholder: "기존 비밀번호를 입력해주세요")
-        setupLabel(currentPasswordLabel, text: "영문 + 숫자 6자리 이상")
-        setupTextField(newPasswordField, placeholder: "새로운 비밀번호를 입력해주세요")
-        setupLabel(newPasswordLabel, text: "영문 + 숫자 6자리 이상")
-        setupTextField(confirmPasswordField, placeholder: "새 비밀번호를 한 번 더 입력해주세요")
-        setupLabel(confirmPasswordLabel, text: "영문 + 숫자 6자리 이상")
+        setupLabel(currentPasswordLabel, text: "영문 + 숫자 8자리 이상")
+        setupLabel(newPasswordLabel, text: "영문 + 숫자 8자리 이상")
+        setupLabel(confirmPasswordLabel, text: "영문 + 숫자 8자리 이상")
         
         errorLabel.textColor = UIColor(named: "fontRed")
         errorLabel.textAlignment = .center
@@ -68,6 +65,7 @@ class MemberInfoViewController: BaseViewController {
         confirmButton.backgroundColor = UIColor(named: "pointOrange")
         confirmButton.layer.cornerRadius = 24
         confirmButton.setTitle("확인", for: .normal)
+        confirmButton.titleLabel?.font = UIFont(name: "Pretendard-Semibold", size: 16)
         confirmButton.setTitleColor(.white, for: .normal)
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         
@@ -125,24 +123,15 @@ class MemberInfoViewController: BaseViewController {
         }
         
         [currentPasswordField, newPasswordField, confirmPasswordField].forEach { textField in
+            textField.isSecureTextEntry = true
             textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         }
     }
     
-    private func setupTextField(_ textField: UITextField, placeholder: String) {
-        textField.placeholder = placeholder
-        textField.backgroundColor = UIColor(named: "textFieldColor")
-        textField.textColor = .gray
-        textField.borderStyle = .roundedRect
-        textField.delegate = self
-        textField.isSecureTextEntry = true
-        textField.isUserInteractionEnabled = true // 터치 이벤트를 받을 수 있도록 설정
-    }
-    
     private func setupLabel(_ label: UILabel, text: String) {
         label.text = text
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .gray
+        label.font = UIFont(name: "Pretendard-Regular", size: 12)
+        label.textColor = UIColor(named: "fontGray")
     }
     
     private func setupKeyboardNotifications() {
@@ -191,48 +180,64 @@ class MemberInfoViewController: BaseViewController {
         
         if newPassword != confirmPassword {
             confirmPasswordLabel.text = "비밀번호가 일치하지 않습니다."
-            confirmPasswordLabel.textColor = .red
+            confirmPasswordLabel.textColor = UIColor(named: "fontRed")
+        } else if !isPasswordValid(newPassword) {
+            newPasswordLabel.text = "비밀번호는 영문 + 숫자 8자리 이상이어야 합니다."
+            newPasswordLabel.textColor = UIColor(named: "fontRed")
         } else {
-            confirmPasswordLabel.textColor = .gray
+            confirmPasswordLabel.textColor = UIColor(named: "fontGray")
             errorLabel.text = ""
             
             AuthenticationManager.shared.updatePassword(currentPassword: currentPassword, newPassword: newPassword) { success, error in
                 if success {
                     let alertController = UIAlertController(title: "비밀번호 변경", message: "비밀번호가 성공적으로 변경되었습니다.", preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-                    confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
+                    confirmAction.setValue(UIColor(named: "fontRed"), forKey: "titleTextColor")
+                    alertController.addAction(confirmAction)
+                    self.present(alertController, animated: true, completion: nil)
+                } else if error == "비밀번호가 일치하지 않습니다." {
+                    let alertController = UIAlertController(title: "비밀번호 변경 오류", message: "비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
+                    let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                    confirmAction.setValue(UIColor(named: "fontRed"), forKey: "titleTextColor")
                     alertController.addAction(confirmAction)
                     self.present(alertController, animated: true, completion: nil)
                 } else {
                     self.errorLabel.text = error
-                    self.errorLabel.textColor = .red
+                    self.errorLabel.textColor = UIColor(named: "fontRed")
                 }
             }
         }
     }
     
     @objc private func textFieldEditingChanged(_ textField: UITextField) {
-        updatePasswordLabels()
+        // 현재 텍스트 필드가 currentPasswordField일 때는 newPasswordLabel의 색상을 변경하지 않음
+        if textField == currentPasswordField {
+            updatePasswordLabels(ignoreNewPasswordField: true)
+        } else {
+            updatePasswordLabels(ignoreNewPasswordField: false)
+        }
     }
     
-    private func updatePasswordLabels() {
+    private func updatePasswordLabels(ignoreNewPasswordField: Bool) {
         let currentPasswordValid = isPasswordValid(currentPasswordField.text ?? "")
         let newPasswordValid = isPasswordValid(newPasswordField.text ?? "")
         let confirmPasswordValid = newPasswordField.text == confirmPasswordField.text
         
-        currentPasswordLabel.textColor = currentPasswordValid ? .gray : .red
-        newPasswordLabel.textColor = newPasswordValid ? .gray : .red
-        confirmPasswordLabel.textColor = confirmPasswordValid ? .gray : .red
+        currentPasswordLabel.textColor = currentPasswordValid ? UIColor(named: "fontGray") : UIColor(named: "fontRed")
+        if !ignoreNewPasswordField {
+            newPasswordLabel.textColor = newPasswordValid ? UIColor(named: "fontGray") : UIColor(named: "fontRed")
+        }
+        confirmPasswordLabel.textColor = confirmPasswordValid ? UIColor(named: "fontGray") : UIColor(named: "fontRed")
         
         if !confirmPasswordValid {
             confirmPasswordLabel.text = "비밀번호가 일치하지 않습니다."
         } else {
-            confirmPasswordLabel.text = "영문 + 숫자 6자리 이상"
+            confirmPasswordLabel.text = "영문 + 숫자 8자리 이상"
         }
     }
     
     private func isPasswordValid(_ password: String) -> Bool {
-        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d).{6,}$")
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d).{8,}$")
         return passwordPredicate.evaluate(with: password)
     }
     
@@ -240,9 +245,9 @@ class MemberInfoViewController: BaseViewController {
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        backButton.tintColor = .black // 이미지 색상을 검은색으로 설정
-        backButton.setTitleColor(.black, for: .normal) // 텍스트 색상을 검은색으로 설정
+        backButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
+        backButton.tintColor = UIColor(named: "fontBlack")
+        backButton.setTitleColor(UIColor(named: "fontBlack"), for: .normal)
         backButton.sizeToFit()
         backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
@@ -261,12 +266,12 @@ class MemberInfoViewController: BaseViewController {
 
 extension MemberInfoViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.textColor = .black
+        textField.textColor = UIColor(named: "fontBlack")
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text?.isEmpty == true {
-            textField.textColor = .gray
+            textField.textColor = UIColor(named: "fontGray")
         }
     }
 }
