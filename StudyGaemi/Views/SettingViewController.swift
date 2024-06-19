@@ -382,6 +382,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
             AuthenticationManager.shared.signOut()
+            UserDefaults.standard.removeObject(forKey: "toggleButtonState")
             DispatchQueue.main.async {
                 let loginVC = UINavigationController(rootViewController: LoginViewController())
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -420,6 +421,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             let dispatchGroup = DispatchGroup()
 
             dispatchGroup.enter()
+            UserDefaults.standard.removeObject(forKey: "toggleButtonState")
             FirestoreManager.shared.deleteStudyData { result in
                 switch result {
                 case .success:

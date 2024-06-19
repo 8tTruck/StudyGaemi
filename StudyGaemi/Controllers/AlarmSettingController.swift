@@ -10,17 +10,20 @@ import UIKit
 
 class AlarmSettingController {
     
+    static let shared = AlarmSettingController()
+    
+    private init() { }
+    
     private var alarmModel: AlarmModel = AlarmCoreDataManager.shared.getAlarmData()
     
-    func setAlarm(_ alarmModel: AlarmModel) {
-        AlarmCoreDataManager.shared.saveAlarm(alarm: alarmModel)
-        AlarmCoreDataManager.shared.fetchAlarm()
+    func setAlarm() {
+        
         self.alarmModel = AlarmCoreDataManager.shared.getAlarmData()
         
         // 알림 권한 요청
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             if granted {
-                self.scheduleAlarm(time: alarmModel.time, sound: alarmModel.sound, repeatEnabled: alarmModel.setRepeatEnabled(), repeatInterval: alarmModel.setRepeatInterval(), repeatCount: alarmModel.setRepeatCount())
+                self.scheduleAlarm(time: self.alarmModel.time, sound: self.alarmModel.sound, repeatEnabled: self.alarmModel.setRepeatEnabled(), repeatInterval: self.alarmModel.setRepeatInterval(), repeatCount: self.alarmModel.setRepeatCount())
             } else {
                 print("알림 권한이 거부되었습니다.")
             }
@@ -29,7 +32,14 @@ class AlarmSettingController {
     
     func getBackView(_ navigationController: UINavigationController?) {
         guard let navigationController = navigationController else { return }
-        navigationController.popViewController(animated: true)
+        for viewController in navigationController.viewControllers {
+            if let alarmViewController = viewController as? AlarmViewController {
+                alarmViewController.toggleButton.isOn = true
+                UserDefaults.standard.set(true, forKey: "toggleButtonState")
+                navigationController.popToViewController(alarmViewController, animated: true)
+                return
+            }
+        }
     }
     
     func setSecondsToZero(date: Date) -> Date? {
@@ -140,5 +150,28 @@ class AlarmSettingController {
             }
         }
         print("알람이 설정되었습니다.")
+    }
+    
+    func removeScheduleAlarm() {
+        // 현재 표시 중인 모든 알림을 제거
+        UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
+            let identifiers = notifications.map { $0.request.identifier }
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
+        }
+        // 예약된 모든 알림을 제거
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            let identifier = "기상하개미"
+            let identifiers = requests.filter { $0.identifier.hasPrefix(identifier) }.map { $0.identifier }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        }
+    }
+    
+    func resetAlarm() {
+        let dispatchTime = DispatchTime.now() + 490
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+            UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
+                AlarmSettingController.shared.setAlarm()
+            }
+        }
     }
 }

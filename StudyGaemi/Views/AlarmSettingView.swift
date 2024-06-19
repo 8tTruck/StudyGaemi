@@ -11,8 +11,6 @@ import UIKit
 
 class AlarmSettingView: BaseViewController {
     
-    private let alarmSettingController = AlarmSettingController()
-    
     private let titleLabel = UILabel().then {
         $0.text = "몇시에 일어날개미"
         $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -293,7 +291,6 @@ class AlarmSettingView: BaseViewController {
     }
     
     @objc private func saveValues() {
-        print(timekPicker.date)
         let alarmModel = AlarmModel(
             time: timekPicker.date,
             difficulty: segmentButton.titleForSegment(at: segmentButton.selectedSegmentIndex) ?? "중",
@@ -303,9 +300,11 @@ class AlarmSettingView: BaseViewController {
             repeatCount: toggleButton.isOn ? numberButton.currentTitle : nil
         )
         
-        alarmSettingController.setAlarm(alarmModel)
+        AlarmCoreDataManager.shared.saveAlarm(alarm: alarmModel)
+        AlarmCoreDataManager.shared.fetchAlarm()
         
-        alarmSettingController.getBackView(navigationController)
+        AlarmSettingController.shared.setAlarm()
+        AlarmSettingController.shared.getBackView(navigationController)
         
         AudioController.shared.soundName = dropDownButton.currentTitle ?? "알림음 1"
     }

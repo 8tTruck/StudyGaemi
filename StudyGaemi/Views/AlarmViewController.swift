@@ -36,10 +36,15 @@ class AlarmViewController: BaseViewController {
         $0.textAlignment = .center
     }
     
-    private var toggleState = false
-    private lazy var toggleButton = UISwitch().then {
+    private var toggleState = UserDefaults.standard.bool(forKey: "toggleButtonState") {
+        didSet {
+            alarmController.updateNotificationSettings(isOn: toggleState)
+        }
+    }
+    lazy var toggleButton = UISwitch().then {
         $0.onTintColor = UIColor(named: "pointOrange")
-        self.toggleState = $0.isOn
+        $0.isOn = self.toggleState
+        $0.addTarget(self, action: #selector(toggleChanged(_:)), for: .valueChanged)
     }
     
     private lazy var stackView = UIStackView(arrangedSubviews: [alarmLabel, toggleButton]).then {
@@ -194,5 +199,8 @@ class AlarmViewController: BaseViewController {
     @objc private func tappedAlarmButton() {
         alarmController.goAheadView(navigationController)
     }
-
+    
+    @objc private func toggleChanged(_ sender: UISwitch) {
+        self.toggleState = sender.isOn
+    }
 }
