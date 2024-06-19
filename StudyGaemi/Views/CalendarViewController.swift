@@ -192,7 +192,6 @@ class CalendarViewController: BaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    
     private let totalLabel = UILabel().then {
         let calendar = Calendar.current
         let currentDate = Date()
@@ -202,7 +201,7 @@ class CalendarViewController: BaseViewController {
         $0.textAlignment = .right
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     
     // MARK: - lifecycle
     override func viewDidLoad() {
