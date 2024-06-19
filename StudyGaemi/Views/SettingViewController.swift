@@ -9,8 +9,11 @@ import SnapKit
 import Then
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class SettingViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    
+    private let firestoreManager = FirestoreManager.shared
     
     private let titleLabel = UILabel().then {
         $0.text = "개Me"
@@ -107,6 +110,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.setupTableView()
         setupNotifications()
         fetchUserDetails()
+        getStudyData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -235,6 +239,18 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func getStudyData() {
+        firestoreManager.readStudyData { result in
+            switch result {
+            case .success(let datas):
+                let accumulatedDays = datas.count
+                self.accumulatedLabel.text = "\(accumulatedDays)일 누적"
+            case .failure(let error):
+                print("Study 데이터 불러오기 에러: \(error)")
+            }
+        }
     }
     
     // MARK: - UITableViewDataSource

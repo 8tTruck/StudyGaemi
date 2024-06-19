@@ -3,6 +3,16 @@
     {
       "filename" : "kingAnt.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Layer 222 1.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -388,6 +388,12 @@ class CalendarViewController: BaseViewController {
         
     }
     
+    //총 공부개미 누적일 계산
+    private func calculateStudyAntCount(){
+        //먼저 유저의 studyData 조회
+        //count
+    }
+    
     //이달의 완벽개미, 공부개미, 기상개미 측정
     private func calculateThisMonthAnt(yearAndMonth: String) -> [[Date: status]] {
         
