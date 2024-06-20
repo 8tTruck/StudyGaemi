@@ -142,6 +142,7 @@ final class FirestoreManager {
         }
     }
     
+    
     // MARK: - WakeUp 데이터 업데이트하기
     func updateWakeUpData(documentId: String, success: Bool) {
         let wakeUpData: [String: Any] = [

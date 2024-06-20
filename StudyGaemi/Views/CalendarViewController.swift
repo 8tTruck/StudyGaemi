@@ -44,6 +44,7 @@ class CalendarViewController: BaseViewController {
     //특정달의 정보만
     var studies: [study] = []
     var wakeups: [wakeup] = []
+    var isPerfect: Bool?
     
     private var perfectAntCount = 0
     private var studyAntCount = 0
@@ -206,13 +207,20 @@ class CalendarViewController: BaseViewController {
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("================viewDidLoad")
+        print("=============\(self.isPerfect)")
+        showPerfectAlert()
         self.configureUI()
         self.constraintLayout()
         calCurrentYearAndMonth()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setData()
+       
+        //showPerfectAlert()
     }
     
     // MARK: - method
@@ -300,6 +308,12 @@ class CalendarViewController: BaseViewController {
         }
     }
     
+    func showPerfectAlert() {
+        let customAlert = AlertView(logImage: UIImage(named: "kingAnt")!,
+                                    titleText: "완벽개미 획득!",
+                                    doneButtonTitle: "확인")
+        self.present(customAlert, animated: true)
+    }
     
     private func updateCustomHeaderView(_ month: Date, _ days: Int){
         monthLabel.text = headerDateFormatter.string(from: month)

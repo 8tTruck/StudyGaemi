@@ -218,7 +218,7 @@ class TimerResultViewController: BaseViewController {
         case .fail:
             antImageView.image = UIImage(named: "failAnt")
             resultLabel.text = "공부개미 획득 실패"
-            resultDescriptLabel.text = "수고하셨습니다. 공부개미 획득에 실패하셨습니다."
+            resultDescriptLabel.text = "수고하셨습니다."
             bottomBackView.layer.borderColor = UIColor.red.cgColor
             todayTimeLabel.textColor = UIColor.red
         case .success:

@@ -633,7 +633,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     }
     
     func moveToBottomTabBarController() {
-        let bottomTabBarVC = BottomTabBarViewController()
+        let bottomTabBarVC = BottomTabBarViewController.shared
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first {
             window.rootViewController = bottomTabBarVC

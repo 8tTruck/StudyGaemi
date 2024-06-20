@@ -10,6 +10,8 @@ import UIKit
 
 class BottomTabBarViewController: UITabBarController {
     
+    static let shared = BottomTabBarViewController()
+    
     private let customTabBarView = UIView()
 
     override func viewDidLoad() {
