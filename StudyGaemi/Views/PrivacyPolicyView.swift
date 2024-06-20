@@ -1,5 +1,5 @@
 //
-//  PrivacyPolicyViewController.swift
+//  PrivacyPolicyView.swift
 //  StudyGaemi
 //
 //  Created by 강태영 on 6/9/24.
@@ -9,38 +9,16 @@ import SnapKit
 import Then
 import UIKit
 
-class PrivacyPolicyViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "viewBackgroundColor")
-        setupBackButton()
-        configureScrollView()
-    }
+class PrivacyPolicyView: UIView {
     
-    private func setupBackButton() {
-        let backButton = UIButton(type: .system)
-        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
-        backButton.tintColor = UIColor(named: "fontBlack") // 이미지 색상을 설정
-        backButton.setTitleColor(UIColor(named: "fontBlack"), for: .normal) // 텍스트 색상을 설정
-        backButton.sizeToFit()
-        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
-        let backButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backButtonItem
-    }
-
-    @objc private func goBack() {
-        navigationController?.popViewController(animated: true)
-    }
-
-    private func configureScrollView() {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = UIColor(named: "viewBackgroundColor")
-        let contentView = UIView()
-        contentView.backgroundColor = UIColor(named: "viewBackgroundColor")
-        let textView = UILabel().then {
+    let scrollView: UIScrollView
+    let contentView: UIView
+    let textView: UILabel
+    
+    override init(frame: CGRect) {
+        scrollView = UIScrollView()
+        contentView = UIView()
+        textView = UILabel().then {
             $0.text = """
                 개인정보 보호 담당부서
 
@@ -152,14 +130,27 @@ class PrivacyPolicyViewController: UIViewController {
             $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         }
         
-        view.addSubview(scrollView)
+        super.init(frame: frame)
+        
+        setupViews()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupViews() {
+        addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(textView)
-        
+    }
+    
+    private func setupConstraints() {
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(29)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide).offset(16)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(29)
+            make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
         contentView.snp.makeConstraints { make in

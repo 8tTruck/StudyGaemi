@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F6270A32C23C54000BBA2D2 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A22C23C54000BBA2D2 /* BottomSheetView.swift */; };
+		3F6270A52C23C5E300BBA2D2 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A42C23C5E300BBA2D2 /* AnnouncementView.swift */; };
+		3F6270A72C23C64900BBA2D2 /* BugReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A62C23C64900BBA2D2 /* BugReportView.swift */; };
+		3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */; };
+		3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */; };
+		3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */; };
 		3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */; };
 		3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */; };
 		3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */; };
@@ -96,6 +102,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F6270A22C23C54000BBA2D2 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		3F6270A42C23C5E300BBA2D2 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
+		3F6270A62C23C64900BBA2D2 /* BugReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportView.swift; sourceTree = "<group>"; };
+		3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoView.swift; sourceTree = "<group>"; };
+		3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController.swift; sourceTree = "<group>"; };
 		3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +260,12 @@
 		FF0071822C08255F000AE7AA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */,
+				3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */,
+				3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */,
+				3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */,
+				3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */,
+				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 				FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */,
 				FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */,
 				FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */,
@@ -272,7 +290,6 @@
 				B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */,
 				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
 				FF254A472C1C1EE300504C24 /* StudyViewController.swift */,
-				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
 				5275296A2C0D95F10002513F /* CreateAccountViewController.swift */,
 				5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */,
@@ -288,12 +305,13 @@
 				F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */,
 				FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */,
 				FF931A632C12BC4700AD1513 /* AlarmResultView.swift */,
-				3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */,
-				3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */,
-				3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */,
-				3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */,
-				3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */,
 				F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */,
+				3F6270A42C23C5E300BBA2D2 /* AnnouncementView.swift */,
+				3F6270A22C23C54000BBA2D2 /* BottomSheetView.swift */,
+				3F6270A62C23C64900BBA2D2 /* BugReportView.swift */,
+				3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */,
+				3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */,
+				3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -462,6 +480,7 @@
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
+				3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */,
 				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
 				F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */,
 				5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */,
@@ -470,6 +489,7 @@
 				FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
+				3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */,
 				5255F2B32C0E63CD006FEE4B /* EmailInputViewController.swift in Sources */,
 				FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
@@ -491,13 +511,17 @@
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */,
+				3F6270A32C23C54000BBA2D2 /* BottomSheetView.swift in Sources */,
 				FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */,
+				3F6270A52C23C5E300BBA2D2 /* AnnouncementView.swift in Sources */,
 				FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */,
 				F4E69C652C22AA9D00289A8F /* TimerResultViewController.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
+				3F6270A72C23C64900BBA2D2 /* BugReportView.swift in Sources */,
 				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
 				3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */,
 				3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */,
+				3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
