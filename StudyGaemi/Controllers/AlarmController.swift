@@ -51,9 +51,31 @@ class AlarmController {
     
     func updateNotificationSettings(isOn: Bool) {
         if isOn {
-            print("알림 켜기")
-            AlarmSettingController.shared.setAlarm()
-            UserDefaults.standard.set(isOn, forKey: "toggleButtonState")
+            let time = AlarmCoreDataManager.shared.getAlarmData().time
+            let calendar = Calendar.current
+            let currentDate = Date()
+            let components = calendar.dateComponents([.minute], from: time, to: currentDate)
+            
+            guard let count = Int(AlarmCoreDataManager.shared.getAlarmData().setRepeatCount().replacingOccurrences(of: "회 반복", with: "")),
+                  let minute = Int(AlarmCoreDataManager.shared.getAlarmData().setRepeatInterval().replacingOccurrences(of: "분마다", with: "")) else {
+                
+                if let minuteDifference = components.minute, minuteDifference >= 2 {
+                    print("알림 켜기")
+                    AlarmSettingController.shared.setAlarm()
+                    UserDefaults.standard.set(isOn, forKey: "toggleButtonState")
+                } else {
+                    print("정해진 시간이 다 지나지 않았습니다.")
+                }
+                return
+            }
+            
+            if let minuteDifference = components.minute, minuteDifference >= (count * minute) {
+                print("알림 켜기")
+                AlarmSettingController.shared.setAlarm()
+                UserDefaults.standard.set(isOn, forKey: "toggleButtonState")
+            } else {
+                print("정해진 시간이 다 지나지 않았습니다.")
+            }
         } else {
             print("알림 끄기")
             AlarmSettingController.shared.removeScheduleAlarm()

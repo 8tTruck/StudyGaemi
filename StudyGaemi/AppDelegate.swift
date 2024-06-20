@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // APNs에 기기 토큰을 요청
 //        UIApplication.shared.registerForRemoteNotifications()
 
+        AlarmSettingController.shared.removeNotification()
         AlarmCoreDataManager.shared.fetchAlarm()
         AudioController.shared.setupAudioSession()
         

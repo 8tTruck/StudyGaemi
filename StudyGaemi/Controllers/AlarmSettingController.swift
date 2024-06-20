@@ -153,16 +153,19 @@ class AlarmSettingController {
     }
     
     func removeScheduleAlarm() {
-        // 현재 표시 중인 모든 알림을 제거
-        UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
-            let identifiers = notifications.map { $0.request.identifier }
-            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
-        }
         // 예약된 모든 알림을 제거
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             let identifier = "기상하개미"
             let identifiers = requests.filter { $0.identifier.hasPrefix(identifier) }.map { $0.identifier }
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        }
+    }
+    
+    func removeNotification() {
+        // 현재 표시 중인 모든 알림을 제거
+        UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
+            let identifiers = notifications.map { $0.request.identifier }
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
         }
     }
     
