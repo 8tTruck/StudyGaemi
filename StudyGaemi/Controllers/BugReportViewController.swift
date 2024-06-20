@@ -2,7 +2,7 @@
 //  BugReportViewController.swift
 //  StudyGaemi
 //
-//  Created by 강태영 on 6/9/24.
+//  Created by 강태영 on 6/20/24.
 //
 
 import SnapKit
@@ -11,87 +11,21 @@ import UIKit
 import MessageUI
 
 class BugReportViewController: BaseViewController, MFMailComposeViewControllerDelegate {
-    private let bugReportView = UIView()
-    private let textView = UITextView()
-    private let submitButton = UIButton()
+    
+    private let bugReportView = BugReportView()
+    
+    override func loadView() {
+        view = bugReportView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "viewBackgroundColor")
-        setupBackButton()
-        configureBugReportView()
-        configureTextView()
-        configureSubmitButton()
         setupKeyboardNotifications()
-    }
-    
-    private func setupBackButton() {
-        let backButton = UIButton(type: .system)
-        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
-        backButton.tintColor = UIColor(named: "fontBlack")
-        backButton.setTitleColor(UIColor(named: "fontBlack"), for: .normal)
-        backButton.sizeToFit()
-        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
-        let backButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backButtonItem
+        bugReportView.textView.delegate = self
     }
 
-    @objc private func goBack() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    private func configureBugReportView() {
-        view.addSubview(bugReportView)
-        bugReportView.backgroundColor = UIColor(named: "viewBackgroundColor")
-        bugReportView.layer.cornerRadius = 10
-        bugReportView.layer.shadowColor = UIColor.black.cgColor
-        bugReportView.layer.shadowOpacity = 0.1
-        bugReportView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        bugReportView.layer.shadowRadius = 4
-        
-        bugReportView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
-            make.leading.trailing.equalToSuperview().inset(20)
-        }
-    }
-    
-    private func configureTextView() {
-        textView.text = "오류 및 버그를 작성 후 제출버튼을 눌러주세요."
-        textView.textColor = UIColor(named: "fontGray")
-        textView.font = UIFont(name: "Pretendard-Regular", size: 16)
-        textView.backgroundColor = UIColor(named: "viewBackgroundColor")
-        textView.delegate = self
-        textView.isScrollEnabled = true
-        
-        bugReportView.addSubview(textView)
-        textView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
-            make.height.equalTo(200)
-        }
-    }
-    
-    private func configureSubmitButton() {
-        view.addSubview(submitButton)
-        submitButton.backgroundColor = UIColor(named: "pointOrange")
-        submitButton.layer.cornerRadius = 24
-        submitButton.setTitle("제출", for: .normal)
-        submitButton.titleLabel?.font = UIFont(name: "Pretendard-Semibold", size: 16)
-        submitButton.setTitleColor(.white, for: .normal)
-        submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
-        
-        submitButton.snp.makeConstraints { make in
-            make.top.equalTo(bugReportView.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(48)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
-        }
-    }
-    
-    @objc private func submitButtonTapped() {
-        if textView.text.isEmpty || textView.textColor == UIColor(named: "fontGray") {
+    @objc func submitButtonTapped() {
+        if bugReportView.textView.text.isEmpty || bugReportView.textView.textColor == UIColor(named: "fontGray") {
             let alertController = UIAlertController(title: "경고", message: "내용을 입력해주개미.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
             confirmAction.setValue(UIColor.orange, forKey: "titleTextColor")
@@ -102,7 +36,7 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
             
             present(alertController, animated: true, completion: nil)
         } else {
-            sendEmail(withContent: textView.text)
+            sendEmail(withContent: bugReportView.textView.text)
         }
     }
     
@@ -150,8 +84,8 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
     }
     
     private func clearTextView() {
-        textView.text = "오류 및 버그를 작성 후 제출버튼을 눌러주세요."
-        textView.textColor = UIColor(named: "fontGray")
+        bugReportView.textView.text = "오류 및 버그를 작성 후 제출버튼을 눌러주세요."
+        bugReportView.textView.textColor = UIColor(named: "fontGray")
     }
     
     private func setupKeyboardNotifications() {
@@ -171,14 +105,14 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
     }
     
     private func updateConstraintsForKeyboardAppearance(keyboardHeight: CGFloat) {
-        submitButton.snp.updateConstraints { make in
+        bugReportView.submitButton.snp.updateConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-keyboardHeight - 30)
         }
         
-        bugReportView.snp.remakeConstraints { make in
+        bugReportView.bugReportView.snp.remakeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalTo(submitButton.snp.top).offset(-28)
+            make.bottom.equalTo(bugReportView.submitButton.snp.top).offset(-28)
         }
         
         UIView.animate(withDuration: 0.3) {

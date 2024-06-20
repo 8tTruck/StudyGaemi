@@ -3,6 +3,16 @@
     {
       "filename" : "Checkboxes (1).pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "userlmn_abc012f86b7d10f4f59ae40faab88f39 1.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

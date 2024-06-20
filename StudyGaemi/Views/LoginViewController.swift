@@ -25,8 +25,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     let loginImage = UIImageView()
     let emailTextField = CustomTextField(text: "E-mail")
     let passwordTextField = CustomTextField(text: "Password")
-    let autoLoginButton = UIButton()
-    let autoLoginLabel = UILabel()
+//    let autoLoginButton = UIButton()
+//    let autoLoginLabel = UILabel()
     let loginButton = CustomButton(title: "Login")
     let findIDButton = UIButton()
     let findPWButton = UIButton()
@@ -57,6 +57,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             // 로그인 화면으로 이동
             navigateToLoginScreen()
         }
+        hideKeyboardWhenTappedAround()
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -76,7 +77,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
         loginImageSetting()
         loginTextFieldSetting()
-        autoLoginSetting()
+//        autoLoginSetting()
         loginButtonSetting()
 //        loginAppleButtonSetting()
         findAccountSetting()
@@ -88,9 +89,18 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if textField == emailTextField {
+            // nicknameTextField에서 리턴 키를 눌렀을 때 passwordTextField로 이동
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            // passwordCheckTextField에서 리턴 키를 눌렀을 때 키보드 숨기기
+            passwordTextField.resignFirstResponder()
+        }
         return true
     }
+    
+//    FirestoreManager.shared.createUserData(email: email, nickName: email, loginMethod: "apple")
+//    AuthenticationManager.shared.createUser(email: email, password: password)
     
     @objc func appleLoginButtonTapped() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -102,23 +112,26 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-    
-//    func loginAppleButtonSetting() {
-//        view.addSubview(loginAppleButton)
-//        loginAppleButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
-//    }
-    
+
+    //    func loginAppleButtonSetting() {
+    //        view.addSubview(loginAppleButton)
+    //        loginAppleButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
+    //    }
+
     // MARK: - ASAuthorizationControllerDelegate Methods
-    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        print("인증 완료: \(authorization)")
+        
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            print("애플 ID 자격 증명 수신")
+            
             guard let identityTokenData = appleIDCredential.identityToken else {
-                print("Unable to fetch identity token")
+                print("ID 토큰을 가져올 수 없음")
                 return
             }
             
             guard let identityTokenString = String(data: identityTokenData, encoding: .utf8) else {
-                print("Unable to convert identity token to string")
+                print("ID 토큰을 문자열로 변환할 수 없음")
                 return
             }
             
@@ -126,25 +139,36 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             let userIdentifier = appleIDCredential.user
             
             // 이메일
-            let email = appleIDCredential.email
+            let email = appleIDCredential.email ?? "\(userIdentifier)@example.com"
+            
+            // 닉네임
+            let nickName = appleIDCredential.fullName?.givenName ?? "Unknown"
             
             // Firebase로 애플 사용자 인증
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: identityTokenString, rawNonce: nil)
             
+            // Firestore에 사용자 데이터 생성
+            FirestoreManager.shared.createUserData(email: email, nickName: nickName, loginMethod: "apple")
+            
             Auth.auth().signIn(with: credential) { (authResult, error) in
-                if let error = error {
+                if let error = error as NSError? {
+                    print("Firebase 로그인 중 오류: \(error.localizedDescription)")
+
+                    // 모든 오류 코드 출력
+                    print("오류 코드: \(error.code)")
+
                     // 만약 사용자가 없다면 새로운 사용자 생성
-                    if (error as NSError).code == AuthErrorCode.userNotFound.rawValue {
-                        Auth.auth().createUser(withEmail: email ?? "\(userIdentifier)@example.com", password: "some_secure_password") { authResult, error in
+                    if error.code == AuthErrorCode.userNotFound.rawValue {
+                        Auth.auth().createUser(withEmail: email, password: "some_secure_password") { authResult, error in
                             if let error = error {
-                                print("Error during Firebase sign-up: \(error.localizedDescription)")
+                                print("Firebase 가입 중 오류: \(error.localizedDescription)")
                                 return
                             }
                             
                             // 새로 생성된 사용자 로그인
                             Auth.auth().signIn(with: credential) { (authResult, error) in
                                 if let error = error {
-                                    print("Error during Firebase sign-in: \(error.localizedDescription)")
+                                    print("Firebase 로그인 중 오류: \(error.localizedDescription)")
                                     return
                                 }
                                 
@@ -154,28 +178,32 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
                             }
                         }
                     } else {
-                        print("Error during Firebase sign-in: \(error.localizedDescription)")
+                        print("다른 오류 발생: \(error.localizedDescription)")
                     }
                     return
                 }
                 
                 // 사용자가 성공적으로 로그인됨
-                print("애플 로그인 성공")
+                print("final 애플 로그인 성공")
                 self.navigateToMainScreen()
             }
+        } else {
+            print("인증 자격 증명이 ASAuthorizationAppleIDCredential 타입이 아님")
         }
     }
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // Handle error.
-        print("Authorization failed: \(error.localizedDescription)")
+        // 오류 처리
+        print("인증 실패: \(error.localizedDescription)")
     }
-    
+
     // MARK: - ASAuthorizationControllerPresentationContextProviding Methods
-    
+
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
+
+
     
     func loginImageSetting() {
         loginImage.image = UIImage(named: "heartAnt")
@@ -220,27 +248,27 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         }
     }
     
-    func autoLoginSetting() {
-        view.addSubview(autoLoginButton)
-        view.addSubview(autoLoginLabel)
-        
-        autoLoginButton.setImage(offImage, for: .normal)
-        autoLoginButton.addTarget(self, action: #selector(autoLoginButtonTapped), for: .touchUpInside)
-        autoLoginLabel.text = "자동 로그인"
-        autoLoginLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
-        
-        autoLoginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
-            make.leading.equalTo(passwordTextField.snp.leading)
-            make.height.equalTo(40)
-            make.width.equalTo(40)
-        }
-        
-        autoLoginLabel.snp.makeConstraints { make in
-            make.leading.equalTo(autoLoginButton.snp.trailing)
-            make.centerY.equalTo(autoLoginButton.snp.centerY)
-        }
-    }
+//    func autoLoginSetting() {
+//        view.addSubview(autoLoginButton)
+//        view.addSubview(autoLoginLabel)
+//        
+//        autoLoginButton.setImage(offImage, for: .normal)
+//        autoLoginButton.addTarget(self, action: #selector(autoLoginButtonTapped), for: .touchUpInside)
+//        autoLoginLabel.text = "자동 로그인"
+//        autoLoginLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+//        
+//        autoLoginButton.snp.makeConstraints { make in
+//            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
+//            make.leading.equalTo(passwordTextField.snp.leading)
+//            make.height.equalTo(40)
+//            make.width.equalTo(40)
+//        }
+//        
+//        autoLoginLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(autoLoginButton.snp.trailing)
+//            make.centerY.equalTo(autoLoginButton.snp.centerY)
+//        }
+//    }
     
     func loginButtonSetting() {
         view.addSubview(loginButton)
@@ -249,7 +277,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(autoLoginButton.snp.bottom).offset(12)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
 //            make.width.equalTo(342)
             make.leading.equalTo(emailTextField.snp.leading)
             make.trailing.equalTo(emailTextField.snp.trailing)
@@ -579,15 +607,15 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         button.contentHorizontalAlignment = .center
     }
     
-    @objc func autoLoginButtonTapped() {
-        
-        if autoLoginButton.imageView?.image == offImage {
-            autoLoginButton.setImage(onImage, for: .normal)
-        } else {
-            autoLoginButton.setImage(offImage, for: .normal)
-        }
-        
-    }
+//    @objc func autoLoginButtonTapped() {
+//        
+//        if autoLoginButton.imageView?.image == offImage {
+//            autoLoginButton.setImage(onImage, for: .normal)
+//        } else {
+//            autoLoginButton.setImage(offImage, for: .normal)
+//        }
+//        
+//    }
     
     @objc func loginButtonTapped() {
         guard let email = emailTextField.text, !email.isEmpty,
@@ -639,5 +667,17 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             window.rootViewController = bottomTabBarVC
             window.makeKeyAndVisible()
         }
+    }
+}
+
+extension LoginViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
