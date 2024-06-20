@@ -112,6 +112,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         setupNotifications()
         fetchUserDetails()
         getStudyData()
+        tableView.isScrollEnabled = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)

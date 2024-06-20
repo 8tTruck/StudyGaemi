@@ -47,6 +47,10 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
+        nicknameTextField.returnKeyType = .next
+        passwordTextField.returnKeyType = .next
+        passwordCheckTextField.returnKeyType = .done
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
         nicknameTextField.delegate = self
         passwordTextField.delegate = self
@@ -82,11 +86,15 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     
     func descriptionButtonSetting() {
         let configuration = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold)
-        let chevronRightImage = UIImage(systemName: "chevron.right", withConfiguration: configuration)?.withTintColor(.lightGray)
+        let chevronRightImage = UIImage(systemName: "chevron.right", withConfiguration: configuration)?.withRenderingMode(.alwaysTemplate)
         personalInfoDescriptionButton.setImage(chevronRightImage, for: .normal)
-        yakgwanDescriptionButton.setImage(chevronRightImage, for: .normal)
-        ageDescriptionButton.setImage(chevronRightImage, for: .normal)
+        personalInfoDescriptionButton.tintColor = .orange
         
+        yakgwanDescriptionButton.setImage(chevronRightImage, for: .normal)
+        yakgwanDescriptionButton.tintColor = .orange
+        
+        ageDescriptionButton.setImage(chevronRightImage, for: .normal)
+        ageDescriptionButton.tintColor = .orange
     }
     
     func mainImageSetting() {
@@ -103,7 +111,16 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if textField == nicknameTextField {
+            // nicknameTextField에서 리턴 키를 눌렀을 때 passwordTextField로 이동
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            // passwordTextField에서 리턴 키를 눌렀을 때 passwordCheckTextField로 이동
+            passwordCheckTextField.becomeFirstResponder()
+        } else if textField == passwordCheckTextField {
+            // passwordCheckTextField에서 리턴 키를 눌렀을 때 키보드 숨기기
+            passwordCheckTextField.resignFirstResponder()
+        }
         return true
     }
     
@@ -487,30 +504,39 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        // 이메일 중복 검사 전에 유효성 상태 확인
+//        if !isValid {
+//            self.showAlert(message: "입력한 정보를 다시 확인해주세요.")
+//            return
+//        }
+        
         let dispatchGroup = DispatchGroup()
 
         // 이메일 중복 검사
-        dispatchGroup.enter()
-        emailCheck(email: emailText) { isEmailValid in
-            if !isEmailValid {
-                isValid = false
-                self.setFailed(for: self.nicknameTextField, label: self.nicknameDescriptionLabel)
+        if isValid {
+            dispatchGroup.enter()
+            emailCheck(email: emailText) { isEmailValid in
+                if !isEmailValid {
+                    isValid = false
+                    self.setFailed(for: self.nicknameTextField, label: self.nicknameDescriptionLabel)
+                }
+                dispatchGroup.leave()
             }
-            dispatchGroup.leave()
-        }
-
-        // 모든 비동기 작업이 완료된 후 호출
-        dispatchGroup.notify(queue: .main) {
-            // 이메일 존재 여부 확인이 끝난 후 isValid 상태를 검사하여 다음 단계를 진행
-            if isValid {
-                // 추가적인 유효성 검사나 다음 단계로의 전환 등을 여기에 추가할 수 있습니다
-                self.moveNextVC()
-            } else {
-                // 실패 메시지를 출력
-                self.showAlert(message: "이미 가입된 이메일입니다.")
+            
+            // 모든 비동기 작업이 완료된 후 호출
+            dispatchGroup.notify(queue: .main) {
+                // 이메일 존재 여부 확인이 끝난 후 isValid 상태를 검사하여 다음 단계를 진행
+                if isValid {
+                    // 추가적인 유효성 검사나 다음 단계로의 전환 등을 여기에 추가할 수 있습니다
+                    self.moveNextVC()
+                } else {
+                    // 실패 메시지를 출력
+                    self.showAlert(message: "이미 가입된 이메일입니다.")
+                }
             }
         }
     }
+
 
     func emailCheck(email: String, completion: @escaping (Bool) -> Void) {
         let userDB = db.collection("User")
@@ -646,5 +672,17 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         present(alert, animated: true)
+    }
+}
+
+extension MakePasswordViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
