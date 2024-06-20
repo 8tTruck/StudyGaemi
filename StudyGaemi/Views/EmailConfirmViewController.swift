@@ -80,7 +80,7 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             // 시간 초과 시 로그아웃 하는 메소드 추가
-            AuthenticationManager.shared.signOut()
+//            AuthenticationManager.shared.signOut()
 //            print("로그아웃 시도")
 //            // 시간 초과 시 계정 탈퇴 하는 메소드 추가
 //            AuthenticationManager.shared.deleteUser()

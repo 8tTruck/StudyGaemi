@@ -9,7 +9,7 @@ import UIKit
 
 class SettingTimerVC: UIViewController {
     
-//    private let repeatingSecondsTimer: RepeatingSecondsTimer = RepeatingSecondsTimerImpl()
+    private let repeatingSecondsTimer: RepeatingSecondsTimer = RepeatingSecondsTimerImpl()
     
     private lazy var countDownDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -73,9 +73,9 @@ class SettingTimerVC: UIViewController {
     }
     
     private func startTimer() {
-//        repeatingSecondsTimer.start(durationSeconds: countDownDatePicker.countDownDuration, repeatingExecution: nil) {
-//            print("완료")
-//        }
+        repeatingSecondsTimer.start(durationSeconds: countDownDatePicker.countDownDuration, repeatingExecution: nil) {
+            print("완료")
+        }
     }
 }
 

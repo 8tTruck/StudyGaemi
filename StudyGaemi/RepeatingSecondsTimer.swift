@@ -99,8 +99,8 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     
     private func removeTimer() {
         // cancel()을 한번 실행하면 timer를 다시 사용할 수 없는 상태임을 주의
-        timers.repeatTimer?.cancel()
-        timers.nonRepeatTimer?.cancel()
+        timers.repeatTimer?.resume()
+        timers.nonRepeatTimer?.resume()
         initTimer()
     }
 }

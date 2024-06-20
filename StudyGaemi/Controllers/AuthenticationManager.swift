@@ -26,7 +26,13 @@ class AuthenticationManager {
                 return
             }
             // 로그인
-            self.signIn(email: email, password: password)
+            Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+                if let error = error {
+                    print("로그인 실패 에러: \(error.localizedDescription)")
+                } else if let user = authResult?.user {
+                    print("로그인 성공: \(user.email ?? "")")
+                }
+            }
             
             // 이메일 인증 코드 전송
             self.sendEmail(authResult: authResult)

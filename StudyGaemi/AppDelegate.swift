@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Firebase 공유 인스턴스 구성 하는 부분과 등록 토큰 수신을 위해 메시지 delegate를 설정
         FirebaseApp.configure()
-        Messaging.messaging().delegate = self
-        Messaging.messaging().isAutoInitEnabled = true
+//        Messaging.messaging().delegate = self
+//        Messaging.messaging().isAutoInitEnabled = true
         
         // 알림 권한 요청
         UNUserNotificationCenter.current().delegate = self
@@ -33,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("알림 권한이 거부되었습니다.")
             }
         }
-        application.registerForRemoteNotifications()
+//        application.registerForRemoteNotifications()
         
         // APNs에 기기 토큰을 요청
-        UIApplication.shared.registerForRemoteNotifications()
+//        UIApplication.shared.registerForRemoteNotifications()
 
         AlarmCoreDataManager.shared.fetchAlarm()
         AudioController.shared.setupAudioSession()
@@ -143,11 +143,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
-        if #available(iOS 14.0, *) {
-            completionHandler([.list, .banner, .sound])
-        } else {
-            completionHandler([.alert, .sound])
-        }
+//        if #available(iOS 14.0, *) {
+//            completionHandler([.list, .banner, .sound])
+//        } else {
+//            completionHandler([.alert, .sound])
+//        }
+//        completionHandler()
     }
     
     // MARK: - 알림을 터치했을 때 호출되는 메소드
