@@ -8,7 +8,6 @@
 import AVFoundation
 import BackgroundTasks
 import FirebaseCore
-import FirebaseMessaging
 import UserNotifications
 import UIKit
 import CoreData
@@ -21,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Firebase 공유 인스턴스 구성 하는 부분과 등록 토큰 수신을 위해 메시지 delegate를 설정
         FirebaseApp.configure()
-//        Messaging.messaging().delegate = self
-//        Messaging.messaging().isAutoInitEnabled = true
         
         // 알림 권한 요청
         UNUserNotificationCenter.current().delegate = self
@@ -33,14 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("알림 권한이 거부되었습니다.")
             }
         }
-//        application.registerForRemoteNotifications()
-        
-        // APNs에 기기 토큰을 요청
-//        UIApplication.shared.registerForRemoteNotifications()
 
         AlarmSettingController.shared.removeNotification()
         AlarmCoreDataManager.shared.fetchAlarm()
         AudioController.shared.setupAudioSession()
+        
+        UINavigationBar.appearance().tintColor = .pointOrange
         
         //Appcheck 인증제공자 설정
         let providerFactory = AppCheckDebugProviderFactory()
@@ -141,15 +136,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let messageID = userInfo["viewControllerIdentifier"] {
             print("MessageId: \(messageID)")
         }
-        
-        Messaging.messaging().appDidReceiveMessage(userInfo)
-        
-//        if #available(iOS 14.0, *) {
-//            completionHandler([.list, .banner, .sound])
-//        } else {
-//            completionHandler([.alert, .sound])
-//        }
-//        completionHandler()
     }
     
     // MARK: - 알림을 터치했을 때 호출되는 메소드
@@ -161,40 +147,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             }
         }
         completionHandler()
-    }
-}
-
-extension AppDelegate: MessagingDelegate {
-    
-    // MARK: - 기기토큰 요청시 등록이 성공적이면 토큰을 받는 메소드
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02.2hX", $1)})
-        print(deviceTokenString)
-        
-        Messaging.messaging().apnsToken = deviceToken
-    }
-
-    // MARK: - 기기토큰 요청시 등록이 실패하면 토큰을 받는 메소드
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("기기토큰 요청시 등록 실패 에러: \(error)")
-    }
-    
-    // MARK: - 원격 알림 수신 메소드
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("원격 알림 수신: \(userInfo)")
-        AudioController.shared.playAlarmSound()
-        completionHandler(.newData)
-    }
-    
-    // MARK: - FCM 토큰 수신 메소드
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        let dataDict: [String: String] = ["token": fcmToken ?? ""]
-        
-        NotificationCenter.default.post(
-            name: Notification.Name("FCMToken"),
-            object: nil,
-            userInfo: dataDict
-        )
     }
 }
 

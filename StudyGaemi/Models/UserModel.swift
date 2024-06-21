@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserModel: Codable {
+    let UID: String
     let email: String
     let nickName: String
     let loginMethod: String

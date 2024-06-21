@@ -763,8 +763,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.8.4;
+				kind = exactVersion;
+				version = 2.8.4;
 			};
 		};
 		FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
