@@ -11,11 +11,28 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>kakaoKey</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakaof744ef369b471d9b70024a99ff6a9cb5</string>
+				<string>kakao86a4ac0a6c62845182e5b5745722c617</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>kakaoKey</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao86a4ac0a6c62845182e5b5745722c617</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakaokompassauth</string>
+		<string>kakaolink</string>
 	</array>
 	<key>UIAppFonts</key>
 	<array>

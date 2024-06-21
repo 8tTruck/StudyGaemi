@@ -12,6 +12,8 @@ import UserNotifications
 import UIKit
 import CoreData
 import FirebaseAppCheck
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Firebase 공유 인스턴스 구성 하는 부분과 등록 토큰 수신을 위해 메시지 delegate를 설정
         FirebaseApp.configure()
+        // Kakao SDK 초기화
+        KakaoSDK.initSDK(appKey: "86a4ac0a6c62845182e5b5745722c617")
         
         // 알림 권한 요청
         UNUserNotificationCenter.current().delegate = self
@@ -42,6 +46,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppCheck.setAppCheckProviderFactory(providerFactory)
 
         return true
+    }
+    
+    // URL 스킴을 통해 앱이 열릴 때 호출되는 메소드
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.scheme == "kakao86a4ac0a6c62845182e5b5745722c617" {
+            if AuthApi.isKakaoTalkLoginUrl(url) {
+                return AuthController.handleOpenUrl(url: url)
+            }
+        }
+        return false
     }
 
     // MARK: UISceneSession Lifecycle
