@@ -141,25 +141,34 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             // 이메일
             let email = appleIDCredential.email ?? "\(userIdentifier)@example.com"
             
-            // 닉네임
-            let nickName = appleIDCredential.fullName?.givenName ?? "Unknown"
-            
-            // Firebase로 애플 사용자 인증
-            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: identityTokenString, rawNonce: nil)
-            
-            // Firestore에 사용자 데이터 생성
-            AuthenticationManager.shared.signInWithApple(credential: credential, email: email, nickName: nickName) { result in
+            // 이메일을 기반으로 닉네임 가져오기
+            AuthenticationManager.shared.readUserNickName(email: email) { result in
                 switch result {
-                case .success(_):
-                    self.navigateToMainScreen()
+                case .success(let nickName):
+                    // Firebase로 애플 사용자 인증
+                    let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: identityTokenString, rawNonce: nil)
+                    
+                    // Firestore에 사용자 데이터 생성
+                    AuthenticationManager.shared.signInWithApple(credential: credential, email: email, nickName: nickName) { result in
+                        switch result {
+                        case .success(_):
+                            self.navigateToMainScreen()
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                    
                 case .failure(let error):
-                    print(error)
+                    // 에러 처리
+                    print("Error retrieving nickname: \(error)")
                 }
             }
+            
         } else {
             print("인증 자격 증명이 ASAuthorizationAppleIDCredential 타입이 아님")
         }
     }
+
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // 오류 처리
