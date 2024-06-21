@@ -5,12 +5,14 @@
 //  Created by t2023-m0056 on 5/29/24.
 //
 
-import SnapKit
 import UIKit
+import SnapKit
 
 class BottomTabBarViewController: UITabBarController {
     
     private let customTabBarView = UIView()
+    		
+    private var originalImages: [UIImage?] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,7 @@ class BottomTabBarViewController: UITabBarController {
         self.configureUI()
         self.constraintLayout()
         self.configureTabBarItemFonts()
+        self.setupTabBarItems()
     }
     
     private func setupTabBar() {
@@ -28,10 +31,6 @@ class BottomTabBarViewController: UITabBarController {
         
         customTabBarView.backgroundColor = UIColor(named: "tabBarBackground")
         customTabBarView.layer.cornerRadius = 16
-        customTabBarView.layer.shadowColor = UIColor(named: "pointDarkgray")?.cgColor
-        customTabBarView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        customTabBarView.layer.shadowRadius = 3.0
-        customTabBarView.layer.shadowOpacity = 0.7
         
         // 탭바에 customTabBarView 추가
         self.tabBar.addSubview(customTabBarView)
@@ -46,24 +45,26 @@ class BottomTabBarViewController: UITabBarController {
     }
     
     private func configureUI() {
+        let alarmImage = UIImage(systemName: "alarm")?.resized(to: CGSize(width: 30, height: 30)) // 초기 크기 설정
+        let studyImage = UIImage(systemName: "timer")?.resized(to: CGSize(width: 30, height: 30)) // 초기 크기 설정
+        let calendarImage = UIImage(systemName: "calendar")?.resized(to: CGSize(width: 30, height: 30)) // 초기 크기 설정
+        let settingImage = UIImage(systemName: "person")?.resized(to: CGSize(width: 30, height: 30)) // 초기 크기 설정
+        
+        originalImages = [alarmImage, studyImage, calendarImage, settingImage]
+        
         let alarmViewController = UINavigationController(rootViewController: AlarmViewController())
-        alarmViewController.tabBarItem.image = UIImage(systemName: "alarm")
-        alarmViewController.tabBarItem.title = "기상하개미"
+        alarmViewController.tabBarItem = UITabBarItem(title: "기상하개미", image: alarmImage, tag: 0)
         
         let studyViewController = UINavigationController(rootViewController: SettingTimerVC())
-        studyViewController.tabBarItem.image = UIImage(systemName: "timer")
-        studyViewController.tabBarItem.title = "공부하개미"
+        studyViewController.tabBarItem = UITabBarItem(title: "공부하개미", image: studyImage, tag: 1)
         
         let calendarViewController = UINavigationController(rootViewController: CalendarViewController())
-        calendarViewController.tabBarItem.image = UIImage(systemName: "calendar")
-        calendarViewController.tabBarItem.title = "월간개미"
+        calendarViewController.tabBarItem = UITabBarItem(title: "월간개미", image: calendarImage, tag: 2)
         
         let settingViewController = UINavigationController(rootViewController: SettingViewController())
-        settingViewController.tabBarItem.image = UIImage(systemName: "person")
-        settingViewController.tabBarItem.title = "개Me"
+        settingViewController.tabBarItem = UITabBarItem(title: "개Me", image: settingImage, tag: 3)
         
         viewControllers = [alarmViewController, studyViewController, calendarViewController, settingViewController]
-        
     }
     
     private func constraintLayout() {
@@ -91,6 +92,42 @@ class BottomTabBarViewController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes(normalAttributes, for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: .selected)
     }
+    
+    private func setupTabBarItems() {
+        guard let tabBarItems = tabBar.items else { return }
+        
+        for (index, item) in tabBarItems.enumerated() {
+            if let originalImage = originalImages[index] {
+                item.image = originalImage
+            }
+        }
+    }
+    
+    // 탭바 아이템 선택 시 처리
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let index = tabBar.items?.firstIndex(of: item) else { return }
+        
+        if let originalImage = originalImages[index] {
+            item.image = originalImage.highlightedImage(to: CGSize(width: 30, height: 30)) // 터치 시 크기 조정된 이미지 설정
+            
+            // 0.3초 뒤에 원래 이미지로 돌아오기
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                item.image = originalImage
+            }
+        }
+    }
 }
 
-
+extension UIImage {
+    func resized(to newSize: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: newSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    
+    func highlightedImage(to size: CGSize) -> UIImage? {
+        let scaledSize = CGSize(width: size.width * 1.2, height: size.height * 1.2) // 1.2배 크기로 설정
+        return resized(to: scaledSize)
+    }
+}
