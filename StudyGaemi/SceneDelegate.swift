@@ -55,10 +55,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first?.url {
-            if url.scheme == "kakao86a4ac0a6c62845182e5b5745722c617" {
-                if AuthApi.isKakaoTalkLoginUrl(url) {
-                    _ = AuthController.handleOpenUrl(url: url)
+        if let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String {
+            if let url = URLContexts.first?.url {
+                if url.scheme == "kakao\(apiKey)" {
+                    if AuthApi.isKakaoTalkLoginUrl(url) {
+                        _ = AuthController.handleOpenUrl(url: url)
+                    }
                 }
             }
         }

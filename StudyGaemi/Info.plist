@@ -2,32 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>API_KEY</key>
+	<string>$(API_KEY)</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>com.8ttruck.StudyGaemi</string>
-	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>kakaoKey</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>kakao86a4ac0a6c62845182e5b5745722c617</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>kakaoKey</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>kakao86a4ac0a6c62845182e5b5745722c617</string>
-			</array>
-		</dict>
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
