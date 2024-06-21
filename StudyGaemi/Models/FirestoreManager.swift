@@ -74,8 +74,8 @@ final class FirestoreManager {
     
     // MARK: - Alert 데이터 생성하기
     func createAlertData(state: Int) {
-        if let email = Auth.auth().currentUser?.email {
-            let userRef = db.collection("User").document(email)
+        if let UID = Auth.auth().currentUser?.uid {
+            let userRef = db.collection("User").document(UID)
             let alert = AlertModel(
                 state: state,
                 userRef: userRef,
@@ -144,8 +144,8 @@ final class FirestoreManager {
     
     // MARK: - Alert 데이터 받아오기
     func readAlertData(completion: @escaping (Result<[AlertModel], Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else { return }
-        let userRef = db.collection("User").document(email)
+        guard let UID = Auth.auth().currentUser?.uid else { return }
+        let userRef = db.collection("User").document(UID)
         
         db.collection("Alert").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
             if let querySnapshot = querySnapshot {
@@ -217,8 +217,8 @@ final class FirestoreManager {
     
     // MARK: - Alert 데이터 업데이트하기
     func updateAlertData(state: Int) {
-        guard let email = Auth.auth().currentUser?.email else { return }
-        let userRef = db.collection("User").document(email)
+        guard let UID = Auth.auth().currentUser?.uid else { return }
+        let userRef = db.collection("User").document(UID)
         
         let alertData: [String: Any] = [
             "state": state,
@@ -340,12 +340,12 @@ final class FirestoreManager {
     
     // MARK: - Alert 데이터 삭제하기
     func deleteAlertData(completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else {
+        guard let UID = Auth.auth().currentUser?.uid else {
             completion(.failure(NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "현재 로그인이 되어있지 않습니다."])))
             return
         }
 
-        let userRef = db.collection("User").document(email)
+        let userRef = db.collection("User").document(UID)
         
         db.collection("Alert").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
             if let error = error {

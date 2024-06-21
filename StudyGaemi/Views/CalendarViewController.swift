@@ -244,10 +244,8 @@ class CalendarViewController: BaseViewController {
                 self.showPerfectAlert()
                 self.firestoreManager.updateAlertData(state: 1)
             }
-            
         }
-        
-        
+
     }
 
     private func statusForToday() -> status? {
@@ -366,7 +364,6 @@ class CalendarViewController: BaseViewController {
         var studiesData = [study]()
         var wakeupsData = [wakeup]()
         let dispatchGroup = DispatchGroup()
-        print("SetDAta")
         dispatchGroup.enter()
         firestoreManager.readStudyData { result in
             defer { dispatchGroup.leave() }
@@ -400,6 +397,7 @@ class CalendarViewController: BaseViewController {
                 print("WakeUp 데이터 불러오기 에러: \(error)")
             }
         }
+        
         
         dispatchGroup.notify(queue: .main) {
             self.studies = studiesData
