@@ -14,16 +14,33 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let firestoreManager = FirestoreManager.shared
     private let settingView = SettingView()
 
-    private let settingItems = ["비밀번호 변경", "개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "로그아웃", "회원탈퇴"]
+    private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "로그아웃", "회원탈퇴"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setupView()
         setupTableView()
         fetchUserDetails()
         getStudyData()
         setupNotifications()
+        getTotalStudyTime()
     }
+
+    private func setupNavigationBar() {
+            navigationItem.titleView = settingView.titleView
+            
+            if #available(iOS 13.0, *) {
+                let appearance = UINavigationBarAppearance().then {
+                    $0.configureWithOpaqueBackground()
+                    $0.backgroundColor = UIColor(named: "viewBackgroundColor") ?? .systemBackground
+                    $0.shadowColor = UIColor(named: "navigationBarLine")
+                }
+                
+                navigationController?.navigationBar.standardAppearance = appearance
+                navigationController?.navigationBar.scrollEdgeAppearance = appearance
+            }
+        }
 
     private func setupView() {
         view.addSubview(settingView)
@@ -36,6 +53,8 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private func setupTableView() {
         settingView.tableView.delegate = self
         settingView.tableView.dataSource = self
+        settingView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        settingView.tableView.isScrollEnabled = false
     }
 
     private func setupNotifications() {
@@ -45,44 +64,77 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     @objc private func nicknameDidUpdate(notification: Notification) {
         if let nickname = notification.userInfo?["nickname"] as? String {
             settingView.userLabel.text = nickname
-            AuthenticationManager.shared.saveNickname(nickname) { success, error in
-                if success {
-                    print("닉네임 저장 성공")
-                } else {
-                    print("닉네임 저장 실패: \(error?.localizedDescription ?? "")")
-                }
+            saveNicknameToFirestore(nickname)
+        }
+    }
+
+    private func saveNicknameToFirestore(_ nickname: String) {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let userRef = firestoreManager.getDatabase().collection("User").document(userID)
+
+        userRef.updateData(["nickName": nickname]) { error in
+            if let error = error {
+                print("닉네임 저장 실패: \(error.localizedDescription)")
+            } else {
+                print("닉네임 저장 성공")
             }
         }
     }
 
     private func fetchUserDetails() {
-        guard let email = Auth.auth().currentUser?.email else { return }
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let userRef = firestoreManager.getDatabase().collection("User").document(userID)
 
-        firestoreManager.readUserData { [weak self] result in
-            switch result {
-            case .success(let userData):
-                self?.settingView.userLabel.text = userData?.nickName ?? "User"
-                if userData?.loginMethod == "Firebase" {
+        userRef.getDocument { [weak self] document, error in
+            if let document = document, document.exists {
+                let data = document.data()
+                let nickname = data?["nickName"] as? String ?? "Unknown"
+                let email = data?["email"] as? String ?? "Unknown"
+                self?.settingView.userLabel.text = nickname
+
+                if data?["loginMethod"] as? String == "Firebase" {
+                    self?.settingItems.insert("비밀번호 변경", at: 0)
                     self?.settingView.emailLabel.text = email
-                } else if userData?.loginMethod == "apple" {
+                } else if data?["loginMethod"] as? String == "apple" {
                     self?.settingView.emailLabel.text = "Apple Login"
-                } else if userData?.loginMethod == "kakao" {
+                } else if data?["loginMethod"] as? String == "kakao" {
                     self?.settingView.emailLabel.text = "Kakao Login"
                 }
-            case .failure(let error):
-                print("사용자 정보 불러오기 실패: \(error)")
+                self?.settingView.tableView.reloadData()
+            } else {
+                if let error = error {
+                    print("사용자 정보 불러오기 실패: \(error)")
+                }
             }
         }
     }
 
     private func getStudyData() {
-        firestoreManager.readStudyData { result in
-            switch result {
-            case .success(let datas):
-                let accumulatedDays = datas.count
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let userRef = firestoreManager.getDatabase().collection("User").document(userID)
+
+        firestoreManager.getDatabase().collection("Study").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
+            if let querySnapshot = querySnapshot {
+                let accumulatedDays = querySnapshot.documents.count
                 self.settingView.accumulatedLabel.text = "\(accumulatedDays)일 누적"
-            case .failure(let error):
+            } else if let error = error {
                 print("Study 데이터 불러오기 에러: \(error)")
+            }
+        }
+    }
+
+    private func getTotalStudyTime() {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let userRef = firestoreManager.getDatabase().collection("User").document(userID)
+
+        firestoreManager.getDatabase().collection("Study").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
+            if let querySnapshot = querySnapshot {
+                let totalDuring = querySnapshot.documents.reduce(0) { $0 + ($1.data()["during"] as? Int ?? 0) }
+                let hours = totalDuring / 3600
+                let minutes = (totalDuring % 3600) / 60
+                self.settingView.totalTimeLabel.text = "\(hours)시간 \(minutes)분"
+            } else if let error = error {
+                print("총 공부 시간 불러오기 에러: \(error)")
             }
         }
     }
@@ -154,39 +206,31 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         let pageIndex = indexPath.row
         let pageViewController: UIViewController
 
-        switch pageIndex {
-        case 0:
+        if settingItems[pageIndex] == "비밀번호 변경" {
             pageViewController = MemberInfoViewController()
-            pageViewController.hidesBottomBarWhenPushed = true
-            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
-            pageViewController.title = settingItems[pageIndex]
-            navigationController?.pushViewController(pageViewController, animated: true)
-        case 1:
-            pageViewController = PrivacyPolicyViewController()
-            pageViewController.hidesBottomBarWhenPushed = true
-            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
-            pageViewController.title = settingItems[pageIndex]
-            navigationController?.pushViewController(pageViewController, animated: true)
-        case 2:
-            pageViewController = BugReportViewController()
-            pageViewController.hidesBottomBarWhenPushed = true
-            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
-            pageViewController.title = settingItems[pageIndex]
-            navigationController?.pushViewController(pageViewController, animated: true)
-        case 3:
-            pageViewController = AnnouncementViewController()
-            pageViewController.hidesBottomBarWhenPushed = true
-            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
-            pageViewController.title = settingItems[pageIndex]
-            navigationController?.pushViewController(pageViewController, animated: true)
-        case 4:
-            showLogoutAlert()
-        case 5:
-            showDeleteAlert()
-
-        default:
-            return
+        } else {
+            switch settingItems[pageIndex] {
+            case "개인정보 처리 및 방침":
+                pageViewController = PrivacyPolicyViewController()
+            case "오류 및 버그 신고":
+                pageViewController = BugReportViewController()
+            case "공지사항":
+                pageViewController = AnnouncementViewController()
+            case "로그아웃":
+                showLogoutAlert()
+                return
+            case "회원탈퇴":
+                showDeleteAlert()
+                return
+            default:
+                return
+            }
         }
+
+        pageViewController.hidesBottomBarWhenPushed = true
+        pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
+        pageViewController.title = settingItems[pageIndex]
+        navigationController?.pushViewController(pageViewController, animated: true)
     }
 
     private func showLogoutAlert() {
@@ -218,6 +262,8 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
             }
         })
+        confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
+
         alertController.addAction(cancelAction)
         alertController.addAction(confirmAction)
         self.present(alertController, animated: true, completion: nil)
@@ -273,9 +319,9 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             FirestoreManager.shared.deleteUserData { result in
                 switch result {
                 case .success:
-                    print("User 데이터가 삭제되었습니다.")
+                    print("회원탈퇴가 완료되었습니다.")
                 case .failure(let error):
-                    print("User 데이터 삭제 에러: \(error)")
+                    print("회원탈퇴 에러: \(error)")
                 }
                 dispatchGroup.leave()
             }
