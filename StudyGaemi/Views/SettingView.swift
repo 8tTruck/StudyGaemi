@@ -10,23 +10,24 @@ import Then
 import UIKit
 
 class SettingView: UIView {
-    
+
     let titleLabel = UILabel().then {
         $0.text = "개Me"
         $0.font = UIFont(name: "Pretendard-Regular", size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
-    
+
     let imageView = UIImageView().then {
         $0.image = UIImage(named: "mainAnt")
         $0.contentMode = .scaleAspectFit
     }
-    
+
     lazy var titleView = UIStackView(arrangedSubviews: [imageView, titleLabel]).then {
         $0.axis = .horizontal
         $0.spacing = 8
+        $0.alignment = .center
     }
-    
+
     let userView = UIView().then {
         $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         $0.layer.cornerRadius = 23
@@ -35,7 +36,7 @@ class SettingView: UIView {
         $0.layer.shadowRadius = 5.0
         $0.layer.shadowOpacity = 0.3
     }
-    
+
     let userImageView = UIImageView().then {
         $0.image = UIImage(named: "heartAnt")
         $0.contentMode = .center // 이미지가 가운데 오도록 설정
@@ -50,40 +51,40 @@ class SettingView: UIView {
         $0.textColor = UIColor(named: "fontBlack")
         $0.backgroundColor = .clear
     }
-    
+
     let emailLabel = UILabel().then {
         $0.text = "example123@naver.com"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
         $0.textColor = .lightGray
     }
-    
+
     let editButton = UIButton(type: .system).then {
         $0.setImage(UIImage(systemName: "pencil.line"), for: .normal)
         $0.tintColor = .gray
     }
-    
+
     let separatorView = UIView().then {
         $0.backgroundColor = .gray
     }
-    
+
     let totalStudyLabel = UILabel().then {
         $0.text = "총 공부개미"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
         $0.textColor = .lightGray
     }
-    
+
     let totalTimeLabel = UILabel().then {
-        $0.text = "33시간 51분"
+        $0.text = "8시간 0분"
         $0.font = UIFont(name: "Pretendard-Regular", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
-    
+
     let tableView = UITableView().then {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         $0.backgroundColor = UIColor(named: "viewBackgroundColor")
         $0.separatorStyle = .none
     }
-    
+
     let accumulatedLabel = UILabel().then {
         $0.text = "0일 누적"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -95,20 +96,21 @@ class SettingView: UIView {
         $0.setContentHuggingPriority(.required, for: .horizontal)
         $0.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
         constraintLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func configureUI() {
         backgroundColor = UIColor(named: "viewBackgroundColor")
         
+        addSubview(titleView)
         addSubview(userView)
         userView.addSubview(userImageView)
         userView.addSubview(userLabel)
@@ -120,14 +122,19 @@ class SettingView: UIView {
         userView.addSubview(accumulatedLabel)
         addSubview(tableView)
     }
-    
+
     func constraintLayout() {
         imageView.snp.makeConstraints { make in
             make.width.height.equalTo(22)
         }
         
+        titleView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        
         userView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(17)
+            make.top.equalTo(safeAreaLayoutGuide).offset(40)
             make.leading.equalTo(safeAreaLayoutGuide).inset(24)
             make.trailing.equalTo(safeAreaLayoutGuide).inset(24)
             make.height.equalTo(169)

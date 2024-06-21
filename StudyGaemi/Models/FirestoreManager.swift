@@ -17,6 +17,11 @@ final class FirestoreManager {
     
     private let db = Firestore.firestore()
     
+    // 외부에서 Firestore 데이터베이스에 접근할 수 있도록 메서드 추가
+        func getDatabase() -> Firestore {
+            return db
+        }
+    
     // MARK: - User 데이터 생성하기
     func createUserData(email: String, nickName: String, loginMethod: String) {
         if let UID = Auth.auth().currentUser?.uid {
