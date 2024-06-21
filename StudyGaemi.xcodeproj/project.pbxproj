@@ -30,6 +30,7 @@
 		F4AF2A5D2C19944C00553A20 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5C2C19944C00553A20 /* FirebaseAnalyticsSwift */; };
 		F4AF2A5F2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5E2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		F4AF2A612C19944C00553A20 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A602C19944C00553A20 /* FirebaseAppCheck */; };
+		F4DFDB662C24509000564A51 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DFDB652C24509000564A51 /* AlertModel.swift */; };
 		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
 		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
 		F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E050002C0EA02900802477 /* CalendarCell.swift */; };
@@ -120,6 +121,7 @@
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		F4DFDB652C24509000564A51 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerResultViewController.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				FF254A322C1AA26E00504C24 /* StudyModel.swift */,
 				FF254A342C1AA29900504C24 /* WakeUpModel.swift */,
 				FF254A362C1ABCFF00504C24 /* UserModel.swift */,
+				F4DFDB652C24509000564A51 /* AlertModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
 				FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */,
+				F4DFDB662C24509000564A51 /* AlertModel.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
 				3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */,
 				FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */,

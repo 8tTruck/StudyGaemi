@@ -23,18 +23,13 @@ class AlarmResultController {
     func moveToCalendar() {
         let bottomTabBarVC = BottomTabBarViewController.shared
         bottomTabBarVC.selectedIndex = 2
-        
-        if let calendarVC = bottomTabBarVC.viewControllers?[2] as? CalendarViewController {
-            calendarVC.isPerfect = true
-        }
-        
+ 
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first {
             window.rootViewController = bottomTabBarVC
             window.makeKeyAndVisible()
         }
-        
-        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+ 
         
     }
 }
