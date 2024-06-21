@@ -92,12 +92,12 @@ class CalendarViewController: BaseViewController {
     
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
-        $0.backgroundColor = .yellow
+        $0.backgroundColor = .clear
         $0.bounces = false
     }
     
     private let scrollContentView = UIView().then {
-        $0.backgroundColor = .red
+        $0.backgroundColor = .clear
     }
     
     //    private let advView: UIView = {
