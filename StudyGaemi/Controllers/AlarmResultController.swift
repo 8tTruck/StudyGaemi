@@ -21,7 +21,7 @@ class AlarmResultController {
     }
     
     func moveToCalendar() {
-        let bottomTabBarVC = BottomTabBarViewController.shared
+        let bottomTabBarVC = BottomTabBarViewController()
         bottomTabBarVC.selectedIndex = 2
  
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

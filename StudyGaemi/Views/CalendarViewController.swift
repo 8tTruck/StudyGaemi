@@ -92,12 +92,12 @@ class CalendarViewController: BaseViewController {
     
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .yellow
         $0.bounces = false
     }
     
     private let scrollContentView = UIView().then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .red
     }
     
     //    private let advView: UIView = {
@@ -571,6 +571,8 @@ class CalendarViewController: BaseViewController {
                 wakeupAntCount = max
             }
         }
+        
+        tableHeight = Int(CGFloat(result.count) * 100.0)
     }
     
     //timestamp를 date형식으로 변환
@@ -593,7 +595,6 @@ class CalendarViewController: BaseViewController {
 // MARK: - extension
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return result.count
     }
     
@@ -619,7 +620,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 94
+        return CGFloat(tableHeight)
     }
 }
 
