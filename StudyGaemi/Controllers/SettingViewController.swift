@@ -21,8 +21,11 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         setupView()
         setupTableView()
         fetchUserDetails()
-        getStudyData()
         setupNotifications()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getStudyData()
     }
 
     private func setupView() {

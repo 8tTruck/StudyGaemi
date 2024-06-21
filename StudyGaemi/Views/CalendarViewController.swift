@@ -48,6 +48,7 @@ class CalendarViewController: BaseViewController {
     private var perfectAntCount = 0
     private var studyAntCount = 0
     private var wakeupAntCount = 0
+    private var stateForData = 1
     private var result: [status] = []
     private var currentPageYearAndMonth: String = ""
     private var monthlyResultDict: [[Date: status]] = []
@@ -214,6 +215,7 @@ class CalendarViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         setData()
     }
+
     
     // MARK: - method
     override func configureUI() {
@@ -300,6 +302,56 @@ class CalendarViewController: BaseViewController {
         }
     }
     
+    private func checkUserAlertStatus(){
+        
+        var isNew = false
+        
+        //먼저 alert 조회해서 userAlert있는지 확읺
+        firestoreManager.readAlertData { result in
+            switch result {
+            case .success(let data):
+                print("Alert Data \(data)")
+                if data.count == 0 { //없으면 빈거 생성
+                    isNew = true
+                    if isNew {
+                        self.firestoreManager.createAlertData(state: 0)
+                        self.stateForData = 0
+                    }
+                } else { //있으면
+                    self.stateForData = data[0].state
+                }
+            case .failure(let error):
+                print("Study 데이터 불러오기 에러: \(error)")
+            }
+            let isPerfect = self.statusForToday()
+            
+            //db 상태 0-완벽개미상태가 아님 1-완벽개미 상태임
+            if isPerfect == .perfect && self.stateForData == 0{
+                self.showPerfectAlert()
+                self.firestoreManager.updateAlertData(state: 1)
+            }
+        }
+
+    }
+
+    private func statusForToday() -> status? {
+        let today = Calendar.current.startOfDay(for: Date())
+        
+        for dict in monthlyResultDict {
+            if let status = dict[today] {
+                return status
+            }
+        }
+        
+        return nil
+    }
+    
+    func showPerfectAlert() {
+        let customAlert = AlertView(logImage: UIImage(named: "kingAnt")!,
+                                    titleText: "완벽개미 획득!",
+                                    doneButtonTitle: "확인")
+        self.present(customAlert, animated: true)
+    }
     
     private func updateCustomHeaderView(_ month: Date, _ days: Int){
         monthLabel.text = headerDateFormatter.string(from: month)
@@ -312,7 +364,6 @@ class CalendarViewController: BaseViewController {
         var studiesData = [study]()
         var wakeupsData = [wakeup]()
         let dispatchGroup = DispatchGroup()
-        
         dispatchGroup.enter()
         firestoreManager.readStudyData { result in
             defer { dispatchGroup.leave() }
@@ -347,10 +398,12 @@ class CalendarViewController: BaseViewController {
             }
         }
         
+        
         dispatchGroup.notify(queue: .main) {
             self.studies = studiesData
             self.wakeups = wakeupsData
             self.updateData()
+            self.checkUserAlertStatus()
             self.calendarView.reloadData()
             self.badgeView.reloadData()
         }
