@@ -276,9 +276,9 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             FirestoreManager.shared.deleteUserData { result in
                 switch result {
                 case .success:
-                    print("회원탈퇴가 완료되었습니다.")
+                    print("User 데이터가 삭제되었습니다.")
                 case .failure(let error):
-                    print("회원탈퇴 에러: \(error)")
+                    print("User 데이터 삭제 에러: \(error)")
                 }
                 dispatchGroup.leave()
             }

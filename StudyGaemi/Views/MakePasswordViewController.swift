@@ -654,11 +654,8 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
             // 입력 필드가 비어있는 경우 처리
             return
         }
-
-        FirestoreManager.shared.createUserData(email: email, nickName: email, loginMethod: "Firebase")
+        
         AuthenticationManager.shared.createUser(email: email, password: password)
-//        AuthenticationManager.shared.signIn(email: email, password: password)
-//        AuthenticationManager.shared.signIn(email: email, password: password)
         
         let nextVC = EmailConfirmViewController()
         nextVC.modalPresentationStyle = .fullScreen

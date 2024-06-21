@@ -50,7 +50,7 @@ class AlarmQuestionView: BaseViewController {
             return
         }
         $0.text = alarmQuestionController.getQuestionAlgorithm(difficulty: difficulty)
-        $0.font = UIFont(name: CustomFontType.bold.name, size: 50) ?? UIFont.systemFont(ofSize: 50)
+        $0.font = UIFont(name: CustomFontType.bold.name, size: 40) ?? UIFont.systemFont(ofSize: 40)
         $0.textColor = UIColor(named: "fontBlack")
     }
     
@@ -80,6 +80,7 @@ class AlarmQuestionView: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.customTextField.becomeFirstResponder()
         AlarmSettingController.shared.removeScheduleAlarm()
+        AlarmSettingController.shared.removeNotification()
         AlarmSettingController.shared.resetAlarm()
         AudioController.shared.playAlarmSound()
         self.setSystemVolume(to: 1.0)

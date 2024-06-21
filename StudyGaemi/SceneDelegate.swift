@@ -15,13 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-      
-        UINavigationController(rootViewController: LoginViewController())
-        let bottomTabBarController = EmailInputViewController()
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UINavigationController(rootViewController: LoginViewController())
-//        window.rootViewController = UINavigationController(rootViewController: EmailConfirmViewController())
         window.makeKeyAndVisible()
         self.window = window
     }
@@ -83,9 +79,18 @@ extension SceneDelegate {
     private func createViewController(withIdentifier identifier: String) -> UIViewController {
         switch identifier {
         case "AlarmQuestionView":
-            return AlarmQuestionView()
+            let time = AlarmCoreDataManager.shared.getAlarmData().time
+            let calendar = Calendar.current
+            let currentDate = Date()
+            
+            let components = calendar.dateComponents([.minute], from: time, to: currentDate)
+            if let minuteDifference = components.minute, minuteDifference >= 2 {
+                return LoginViewController()
+            } else {
+                return AlarmQuestionView()
+            }
         default:
-            return AlarmViewController()
+            return LoginViewController()
         }
     }
 }

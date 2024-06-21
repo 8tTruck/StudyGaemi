@@ -19,23 +19,26 @@ final class FirestoreManager {
     
     // MARK: - User 데이터 생성하기
     func createUserData(email: String, nickName: String, loginMethod: String) {
-        let user = UserModel(
-            email: email,
-            nickName: nickName,
-            loginMethod: loginMethod
-        )
-        
-        do {
-            try db.collection("User").document(email).setData(from: user, merge: true)
-        } catch let error {
-            print("Firestore 데이터 생성 에러: \(error)")
+        if let UID = Auth.auth().currentUser?.uid {
+            let user = UserModel(
+                UID: UID,
+                email: email,
+                nickName: nickName,
+                loginMethod: loginMethod
+            )
+            
+            do {
+                try db.collection("User").document(UID).setData(from: user, merge: true)
+            } catch let error {
+                print("Firestore 데이터 생성 에러: \(error)")
+            }
         }
     }
     
     // MARK: - WakeUp 데이터 생성하기
     func createWakeUpData(success: Bool) {
-        if let email = Auth.auth().currentUser?.email {
-            let userRef = db.collection("User").document(email)
+        if let UID = Auth.auth().currentUser?.uid {
+            let userRef = db.collection("User").document(UID)
             let wakeUp = WakeUpModel(
                 userRef: userRef,
                 success: success,
@@ -52,8 +55,8 @@ final class FirestoreManager {
     
     // MARK: - Study 데이터 생성하기
     func createStudyData(success: Bool, during: Int) {
-        if let email = Auth.auth().currentUser?.email {
-            let userRef = db.collection("User").document(email)
+        if let UID = Auth.auth().currentUser?.uid {
+            let userRef = db.collection("User").document(UID)
             let study = StudyModel(
                 userRef: userRef,
                 success: success,
@@ -89,15 +92,15 @@ final class FirestoreManager {
     
     // MARK: - User 데이터 받아오기
     func readUserData(completion: @escaping (Result<UserModel?, Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else { return }
-        let userRef = db.collection("User").document(email)
+        guard let UID = Auth.auth().currentUser?.uid else { return }
+        let userRef = db.collection("User").document(UID)
         
         userRef.getDocument { document, error in
             if let document = document, document.exists {
                 let user = try? document.data(as: UserModel.self)
                 completion(.success(user))
             } else if let error = error {
-                print("Study 데이터 받아오기 에러: \(error)")
+                print("User 데이터 받아오기 에러: \(error)")
                 completion(.failure(error))
             }
         }
@@ -105,8 +108,8 @@ final class FirestoreManager {
     
     // MARK: - WakeUp 데이터 받아오기
     func readWakeUpData(completion: @escaping (Result<[WakeUpModel], Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else { return }
-        let userRef = db.collection("User").document(email)
+        guard let UID = Auth.auth().currentUser?.uid else { return }
+        let userRef = db.collection("User").document(UID)
         
         db.collection("WakeUp").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
             if let querySnapshot = querySnapshot {
@@ -115,7 +118,7 @@ final class FirestoreManager {
                 }
                 completion(.success(wakeUpData))
             } else if let error = error {
-                print("Study 데이터 받아오기 에러: \(error)")
+                print("WakeUp 데이터 받아오기 에러: \(error)")
                 completion(.failure(error))
             }
         }
@@ -123,8 +126,8 @@ final class FirestoreManager {
     
     // MARK: - Study 데이터 받아오기
     func readStudyData(completion: @escaping (Result<[StudyModel], Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else { return }
-        let userRef = db.collection("User").document(email)
+        guard let UID = Auth.auth().currentUser?.uid else { return }
+        let userRef = db.collection("User").document(UID)
         
         db.collection("Study").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
             if let querySnapshot = querySnapshot {
@@ -247,12 +250,12 @@ final class FirestoreManager {
     
     // MARK: - User 데이터 삭제하기
     func deleteUserData(completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else {
+        guard let UID = Auth.auth().currentUser?.uid else {
             completion(.failure(NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "현재 로그인이 되어있지 않습니다."])))
             return
         }
 
-        let userRef = db.collection("User").document(email)
+        let userRef = db.collection("User").document(UID)
         
         userRef.delete { error in
             if let error = error {
@@ -265,12 +268,12 @@ final class FirestoreManager {
     
     // MARK: - WakeUp 데이터 삭제하기
     func deleteWakeUpData(completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else {
+        guard let UID = Auth.auth().currentUser?.uid else {
             completion(.failure(NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "현재 로그인이 되어있지 않습니다."])))
             return
         }
 
-        let userRef = db.collection("User").document(email)
+        let userRef = db.collection("User").document(UID)
         
         db.collection("WakeUp").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
             if let error = error {
@@ -301,12 +304,12 @@ final class FirestoreManager {
     
     // MARK: - Study 데이터 삭제하기
     func deleteStudyData(completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else {
+        guard let UID = Auth.auth().currentUser?.uid else {
             completion(.failure(NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "현재 로그인이 되어있지 않습니다."])))
             return
         }
 
-        let userRef = db.collection("User").document(email)
+        let userRef = db.collection("User").document(UID)
         
         db.collection("Study").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
             if let error = error {
