@@ -31,6 +31,7 @@ class AuthenticationManager {
                     print("로그인 실패 에러: \(error.localizedDescription)")
                 } else if let user = authResult?.user {
                     print("로그인 성공: \(user.email ?? "")")
+                    FirestoreManager.shared.createUserData(email: email, nickName: email, loginMethod: "Firebase")
                 }
             }
             
@@ -88,6 +89,46 @@ class AuthenticationManager {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    // MARK: - Apple 로그인
+    func signInWithApple(credential: OAuthCredential, email: String, nickName: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error as NSError? {
+                print("Firebase 로그인 에러: \(error.localizedDescription)")
+                print("오류 코드: \(error.code)")
+                
+                // 만약 사용자가 없다면 새로운 사용자 생성
+                if error.code == AuthErrorCode.userNotFound.rawValue {
+                    Auth.auth().createUser(withEmail: email, password: "some_secure_password") { authResult, error in
+                        if let error = error {
+                            print("Firebase 가입 에러: \(error.localizedDescription)")
+                            completion(.failure(error))
+                        } else {
+                            // 새로 생성된 사용자 로그인
+                            Auth.auth().signIn(with: credential) { (authResult, error) in
+                                if let error = error {
+                                    print("Firebase 로그인 에러: \(error.localizedDescription)")
+                                    completion(.failure(error))
+                                } else {
+                                    
+                                    print("애플 로그인 성공")
+                                    FirestoreManager.shared.createUserData(email: email, nickName: nickName, loginMethod: "apple")
+                                    completion(.success(()))
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print("다른 에러 발생: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
+            } else {
+                print("애플 로그인 성공")
+                FirestoreManager.shared.createUserData(email: email, nickName: nickName, loginMethod: "apple")
+                completion(.success(()))
             }
         }
     }
@@ -276,14 +317,14 @@ class AuthenticationManager {
     
     // MARK: - 닉네임 저장
     func saveNickname(_ nickname: String, completion: @escaping (Bool, Error?) -> Void) {
-        guard let userID = Auth.auth().currentUser?.email else {
+        guard let UID = Auth.auth().currentUser?.uid else {
             completion(false, NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User not logged in"]))
             return
         }
         
         let userData: [String: Any] = ["nickName": nickname]
         
-        db.collection("User").document(userID).setData(userData, merge: true) { error in
+        db.collection("User").document(UID).setData(userData, merge: true) { error in
             if let error = error {
                 completion(false, error)
             } else {
@@ -294,12 +335,12 @@ class AuthenticationManager {
     
     // MARK: - 닉네임 불러오기
     func fetchNickname(completion: @escaping (String?, Error?) -> Void) {
-        guard let userID = Auth.auth().currentUser?.email else {
+        guard let UID = Auth.auth().currentUser?.uid else {
             completion(nil, NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User not logged in"]))
             return
         }
         
-        db.collection("User").document(userID).getDocument { document, error in
+        db.collection("User").document(UID).getDocument { document, error in
             if let document = document, document.exists {
                 let nickname = document.data()?["nickName"] as? String
                 completion(nickname, nil)

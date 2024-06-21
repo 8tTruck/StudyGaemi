@@ -148,44 +148,13 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: identityTokenString, rawNonce: nil)
             
             // Firestore에 사용자 데이터 생성
-            FirestoreManager.shared.createUserData(email: email, nickName: nickName, loginMethod: "apple")
-            
-            Auth.auth().signIn(with: credential) { (authResult, error) in
-                if let error = error as NSError? {
-                    print("Firebase 로그인 중 오류: \(error.localizedDescription)")
-
-                    // 모든 오류 코드 출력
-                    print("오류 코드: \(error.code)")
-
-                    // 만약 사용자가 없다면 새로운 사용자 생성
-                    if error.code == AuthErrorCode.userNotFound.rawValue {
-                        Auth.auth().createUser(withEmail: email, password: "some_secure_password") { authResult, error in
-                            if let error = error {
-                                print("Firebase 가입 중 오류: \(error.localizedDescription)")
-                                return
-                            }
-                            
-                            // 새로 생성된 사용자 로그인
-                            Auth.auth().signIn(with: credential) { (authResult, error) in
-                                if let error = error {
-                                    print("Firebase 로그인 중 오류: \(error.localizedDescription)")
-                                    return
-                                }
-                                
-                                // 사용자가 성공적으로 로그인됨
-                                print("애플 로그인 성공")
-                                self.navigateToMainScreen()
-                            }
-                        }
-                    } else {
-                        print("다른 오류 발생: \(error.localizedDescription)")
-                    }
-                    return
+            AuthenticationManager.shared.signInWithApple(credential: credential, email: email, nickName: nickName) { result in
+                switch result {
+                case .success(_):
+                    self.navigateToMainScreen()
+                case .failure(let error):
+                    print(error)
                 }
-                
-                // 사용자가 성공적으로 로그인됨
-                print("final 애플 로그인 성공")
-                self.navigateToMainScreen()
             }
         } else {
             print("인증 자격 증명이 ASAuthorizationAppleIDCredential 타입이 아님")

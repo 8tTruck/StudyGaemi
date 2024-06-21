@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 struct StudyModel: Codable {
-    var userRef: DocumentReference
+    let userRef: DocumentReference
     let success: Bool
     let date: Timestamp
     let during: Int

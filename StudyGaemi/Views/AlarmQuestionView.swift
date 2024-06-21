@@ -50,7 +50,7 @@ class AlarmQuestionView: BaseViewController {
             return
         }
         $0.text = alarmQuestionController.getQuestionAlgorithm(difficulty: difficulty)
-        $0.font = UIFont(name: CustomFontType.bold.name, size: 50) ?? UIFont.systemFont(ofSize: 50)
+        $0.font = UIFont(name: CustomFontType.bold.name, size: 40) ?? UIFont.systemFont(ofSize: 40)
         $0.textColor = UIColor(named: "fontBlack")
     }
     
