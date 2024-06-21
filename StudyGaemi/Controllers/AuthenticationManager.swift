@@ -349,4 +349,30 @@ class AuthenticationManager {
             }
         }
     }
+    
+    func readUserNickName(email: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let usersRef = db.collection("User")
+        let query = usersRef.whereField("email", isEqualTo: email)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                completion(.failure(error))
+                return
+            }
+            
+            if let document = querySnapshot?.documents.first, document.exists {
+                if let nickName = document.data()["nickName"] as? String {
+                    completion(.success(nickName))
+                } else {
+                    completion(.success("Unknown")) // 닉네임이 없을 경우 기본값 "Unknown" 반환
+                }
+            } else {
+                completion(.success("Unknown")) // 해당 이메일에 대한 사용자 정보가 없을 경우 기본값 "Unknown" 반환
+            }
+        }
+    }
+
 }
+
+
