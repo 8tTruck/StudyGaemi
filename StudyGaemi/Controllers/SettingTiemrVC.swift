@@ -7,27 +7,57 @@
 
 import UIKit
 
+
 class SettingTimerVC: UIViewController {
     
     private let repeatingSecondsTimer: RepeatingSecondsTimer = RepeatingSecondsTimerImpl()
+
     
     private lazy var countDownDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .countDownTimer
         return picker
     }()
+
     
     private lazy var confirmButton: CustomButton = {
         let button = CustomButton(x: 50, y: 50, width: 334, height: 53, radius: 10, title: "확인")
-        button.setTitle("확인", for: .normal)
+        button.setTitle("공부 시작하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
         button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
         return button
     }()
     
+    private lazy var timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00:00"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.textColor = UIColor(hex: "#F68657")
+        label.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTimeLabel))
+        label.addGestureRecognizer(tapGesture)
+        return label
+    }()
+    
+    private lazy var trackLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.path = circularPath.cgPath
+        layer.fillColor = UIColor.clear.cgColor
+        layer.strokeColor = UIColor(hex: "#FFE3D8").cgColor
+        layer.lineWidth = 30
+        return layer
+    }()
+    private var circularPath: UIBezierPath {
+        let center = view.center
+        let radius: CGFloat = 150
+        return UIBezierPath(arcCenter: center, radius: radius, startAngle: -CGFloat.pi / 2, endAngle: 1.5 * CGFloat.pi, clockwise: true)
+    }
+    
+    private var selectedDuration: TimeInterval = 0
+    
     override func viewDidLoad() {
-        //Users/;kimjuncheol/Documents/GitHub/StudyGaemi/StudyGaemi/Views/BottomSheetViewController.swift
         super.viewDidLoad()
         
         setupViews()
@@ -40,42 +70,51 @@ class SettingTimerVC: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(countDownDatePicker)
+        
         view.addSubview(confirmButton)
+        view.layer.addSublayer(trackLayer)
+        view.addSubview(timeLabel)
     }
     
     private func setupLayout() {
-        countDownDatePicker.translatesAutoresizingMaskIntoConstraints = false
-        countDownDatePicker.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        countDownDatePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
-        confirmButton.topAnchor.constraint(equalTo: countDownDatePicker.bottomAnchor, constant: 56).isActive = true
-        confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
-    
-    /*
-    init(repeatingSecondsTimer: RepeatingSecondsTimer) {
-        self.repeatingSecondsTimer = repeatingSecondsTimer
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    */
-    
-    @objc private func didTapConfirmButton() {
-        startTimer()
+        NSLayoutConstraint.activate([
+            confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
         
-        let circularTimerVC = CircularTimerVC(startDate: Date(), countDownDurationSeconds: countDownDatePicker.countDownDuration)
+    }
+    @objc private func didTapConfirmButton() {
+        guard selectedDuration > 0 else {
+            // 선택된 시간이 없을 경우 경고 메시지를 표시할 수 있습니다.
+            let alert = UIAlertController(title: "경고", message: "시간을 선택해주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        startTimer(with: selectedDuration)
+        let circularTimerVC = CircularTimerVC(startDate: Date(), countDownDurationSeconds: selectedDuration)
         navigationController?.pushViewController(circularTimerVC, animated: true)
     }
     
-    private func startTimer() {
-        repeatingSecondsTimer.start(durationSeconds: countDownDatePicker.countDownDuration, repeatingExecution: nil) {
+    @objc private func didTapTimeLabel() {
+        let datePickerModalVC = DatePickerModalVC()
+        datePickerModalVC.onDatePicked = { [weak self] duration in
+            let hours = Int(duration) / 3600
+            let minutes = (Int(duration) % 3600) / 60
+            self?.timeLabel.text = String(format: "%02d:%02d", hours, minutes)
+            self?.selectedDuration = duration
+        }
+        datePickerModalVC.modalPresentationStyle = .overFullScreen
+        present(datePickerModalVC, animated: true, completion: nil)
+    }
+    
+    private func startTimer(with duration: TimeInterval) {
+        repeatingSecondsTimer.start(durationSeconds: duration, repeatingExecution: nil) {
             print("완료")
         }
     }
 }
-

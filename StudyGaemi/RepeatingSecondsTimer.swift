@@ -32,6 +32,9 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     private var completion: (() -> Void)?
     private var timers: (repeatTimer: DispatchSourceTimer?, nonRepeatTimer: DispatchSourceTimer?) = (DispatchSource.makeTimerSource(),
                                                                                                      DispatchSource.makeTimerSource())
+    private var remainingSeconds: Double = 0
+    private var durationSeconds: Double = 0
+    private var startTime: Date?
     
     deinit {
         removeTimer()
@@ -40,6 +43,10 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     func start(durationSeconds: Double,
                repeatingExecution: (() -> Void)? = nil,
                completion: (() -> Void)? = nil) {
+        self.durationSeconds = durationSeconds
+        self.remainingSeconds = durationSeconds
+        self.startTime = Date()
+        
         setTimer(durationSeconds: durationSeconds,
                  repeatingExecution: repeatingExecution,
                  completion: completion)
@@ -49,6 +56,15 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     
     func resume() {
         guard timerState == .suspended else { return }
+        
+        if let startTime = startTime {
+            remainingSeconds -= Date().timeIntervalSince(startTime)
+        }
+        
+        setTimer(durationSeconds: remainingSeconds,
+                 repeatingExecution: repeatingExecution,
+                 completion: completion)
+        
         timerState = .resumed
         timers.repeatTimer?.resume()
         timers.nonRepeatTimer?.resume()
@@ -56,9 +72,16 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
 
     func suspend() {
         guard timerState == .resumed else { return }
-        timerState = .suspended
+        
         timers.repeatTimer?.suspend()
         timers.nonRepeatTimer?.suspend()
+        
+        if let startTime = startTime {
+            remainingSeconds -= Date().timeIntervalSince(startTime)
+        }
+        
+        startTime = Date()
+        timerState = .suspended
     }
 
     func cancel() {
@@ -101,6 +124,7 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
         // cancel()을 한번 실행하면 timer를 다시 사용할 수 없는 상태임을 주의
         timers.repeatTimer?.resume()
         timers.nonRepeatTimer?.resume()
+
         initTimer()
     }
 }
