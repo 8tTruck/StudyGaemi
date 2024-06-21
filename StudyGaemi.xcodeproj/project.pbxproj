@@ -41,7 +41,6 @@
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
 		FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */; };
-		FF0071542C074D88000AE7AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF0071532C074D88000AE7AA /* Assets.xcassets */; };
 		FF0071572C074D88000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF0071562C074D88000AE7AA /* Base */; };
 		FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF00715F2C074DAD000AE7AA /* SnapKit */; };
 		FF0071632C074DB7000AE7AA /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071622C074DB7000AE7AA /* Then */; };
@@ -88,6 +87,9 @@
 		FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A472C1C1EE300504C24 /* StudyViewController.swift */; };
 		FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */; };
 		FF254A4F2C1C38B400504C24 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FF254A4E2C1C38B400504C24 /* FirebaseMessaging */; };
+		FF2B9ABA2C25A33900E231DE /* DatePickerModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */; };
+		FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */; };
+		FF2B9ABE2C25A42400E231DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2B9ABD2C25A42400E231DE /* Assets.xcassets */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
@@ -131,7 +133,6 @@
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FF00714E2C074D86000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF0071512C074D86000AE7AA /* StudyGaemi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyGaemi.xcdatamodel; sourceTree = "<group>"; };
-		FF0071532C074D88000AE7AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF0071562C074D88000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF0071582C074D88000AE7AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0071762C074E0C000AE7AA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +169,10 @@
 		FF254A472C1C1EE300504C24 /* StudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimer.swift; sourceTree = "<group>"; };
 		FF254A4D2C1C384300504C24 /* StudyGaemi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyGaemi.entitlements; sourceTree = "<group>"; };
+		FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerModalVC.swift; sourceTree = "<group>"; };
+		FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		FF2B9ABD2C25A42400E231DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
@@ -240,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				FF254A4D2C1C384300504C24 /* StudyGaemi.entitlements */,
+				FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */,
 				FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */,
 				FF0071842C082573000AE7AA /* Models */,
 				FF0071832C08256A000AE7AA /* Views */,
@@ -249,12 +255,13 @@
 				FF00714D2C074D86000AE7AA /* Main.storyboard */,
 				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
 				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
-				FF0071532C074D88000AE7AA /* Assets.xcassets */,
 				FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */,
 				FF0071582C074D88000AE7AA /* Info.plist */,
+				FF2B9ABD2C25A42400E231DE /* Assets.xcassets */,
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
 				FF0071982C08432E000AE7AA /* CustomFontType.swift */,
 				FF03F9012C16D55600134B54 /* GoogleService-Info.plist */,
+				FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */,
 			);
 			path = StudyGaemi;
 			sourceTree = "<group>";
@@ -270,6 +277,7 @@
 				FF0071802C075454000AE7AA /* SettingViewController.swift */,
 				FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */,
 				FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */,
+				FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */,
 				FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */,
 				FF6774012C0DACF800017E1F /* AlarmController.swift */,
 				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
@@ -446,11 +454,11 @@
 			files = (
 				FF0071922C0840D6000AE7AA /* Pretendard-ExtraLight.otf in Resources */,
 				FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */,
-				FF0071542C074D88000AE7AA /* Assets.xcassets in Resources */,
 				FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */,
 				FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */,
 				FF0071572C074D88000AE7AA /* Base in Resources */,
 				FF03F8FC2C169F8D00134B54 /* 알림음 4.wav in Resources */,
+				FF2B9ABE2C25A42400E231DE /* Assets.xcassets in Resources */,
 				FF03F8FA2C169F8D00134B54 /* 알림음 2.wav in Resources */,
 				FF00714F2C074D86000AE7AA /* Base in Resources */,
 				FF0071962C0840D6000AE7AA /* Pretendard-ExtraBold.otf in Resources */,
@@ -482,6 +490,7 @@
 				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
 				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
+				FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */,
 				FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */,
@@ -524,6 +533,7 @@
 				3F6270A72C23C64900BBA2D2 /* BugReportView.swift in Sources */,
 				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
 				3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */,
+				FF2B9ABA2C25A33900E231DE /* DatePickerModalVC.swift in Sources */,
 				3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */,
 				3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
@@ -673,6 +683,7 @@
 		};
 		FF00715C2C074D88000AE7AA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -707,6 +718,7 @@
 		};
 		FF00715D2C074D88000AE7AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

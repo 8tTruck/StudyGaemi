@@ -7,6 +7,7 @@
 
 import BackgroundTasks
 import UIKit
+import KakaoSDKAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -51,6 +52,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String {
+            if let url = URLContexts.first?.url {
+                if url.scheme == "kakao\(apiKey)" {
+                    if AuthApi.isKakaoTalkLoginUrl(url) {
+                        _ = AuthController.handleOpenUrl(url: url)
+                    }
+                }
+            }
+        }
     }
 }
 

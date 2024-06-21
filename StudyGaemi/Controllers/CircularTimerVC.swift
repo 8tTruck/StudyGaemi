@@ -9,11 +9,18 @@ import UIKit
 
 class CircularTimerVC: UIViewController {
     
+    
     private let countDownDurationSeconds: TimeInterval
     private let startDate: Date
     
+    private var timer: RepeatingSecondsTimerImpl!
+    private var isPaused = false
+    private var pauseButton: UIButton!
+    private var stopButton: UIButton!
+    
+    
     private lazy var circularTimerView: CircularTimerView = {
-        let progressColors = ProgressColors(trackLayerStrokeColor: UIColor.lightGray.cgColor,
+        let progressColors = ProgressColors(trackLayerStrokeColor: UIColor(hex: "#FFE3D8").cgColor,
                                             barLayerStrokeColor: UIColor.orange.cgColor)
         let view = CircularTimerView(progressColors: progressColors,
                                      duration: countDownDurationSeconds, startDate: startDate )
@@ -56,8 +63,8 @@ class CircularTimerVC: UIViewController {
         circularTimerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         circularTimerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         circularTimerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
-
-
+        
+        
+        
     }
 }

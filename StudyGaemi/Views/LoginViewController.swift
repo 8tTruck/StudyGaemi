@@ -41,26 +41,40 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        autoLogin()
+        hideKeyboardWhenTappedAround()
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+    }
+    
+    func autoLogin() {
         if let user = Auth.auth().currentUser {
-            // 사용자가 이미 로그인된 상태
             AuthenticationManager.shared.checkEmailVerifiedForLogin { isEmailVerified in
                 if isEmailVerified {
                     print("자동 로그인 성공: \(user.email ?? "")")
                     self.navigateToMainScreen()
                 } else {
-                    print("이메일 인증이 필요합니다. 이메일을 확인해주세요.")
-                    self.showEmailVerificationAlert()
-                    self.navigateToLoginScreen()
+                    FirestoreManager.shared.readUserData(completion: { result in
+                        switch result {
+                        case .success(let data):
+                            if data?.loginMethod == "kakao" {
+                                self.navigateToMainScreen()
+                            } else {
+                                self.showEmailVerificationAlert()
+                                self.navigateToLoginScreen()
+                            }
+                        case .failure(let error):
+                            print("로그인 되어있지 않은 에러: \(error)")
+                            self.showEmailVerificationAlert()
+                            self.navigateToLoginScreen()
+                        }
+                    })
                 }
             }
         } else {
-            // 로그인 화면으로 이동
             navigateToLoginScreen()
         }
-        hideKeyboardWhenTappedAround()
-        
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
     }
     
     func showEmailVerificationAlert() {
@@ -512,69 +526,16 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     }
     
     @objc func kakaoLoginButtonTapped() {
-        // Kakao SDK를 사용하여 로그인 세션을 열고 이메일 정보를 요청합니다.
-        UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
-            if let error = error {
-                print("Kakao login error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let oauthToken = oauthToken else {
-                print("Kakao login failed: no OAuth token received")
-                return
-            }
-            
-            // Kakao SDK를 사용하여 사용자 정보를 가져옵니다.
-            UserApi.shared.me { (user, error) in
-                if let error = error {
-                    print("Failed to get user info: \(error.localizedDescription)")
-                    return
-                }
-                
-                guard let user = user,
-                      let email = user.kakaoAccount?.email else {
-                    print("User or email is nil")
-                    return
-                }
-                
-                // 이메일로 Firebase에 로그인을 시도합니다.
-                let credential = EmailAuthProvider.credential(withEmail: email, password: "some_secure_password")
-                Auth.auth().signIn(with: credential) { (authResult, error) in
-                    if let error = error {
-                        // 만약 사용자가 없다면 새로운 사용자 생성
-                        if (error as NSError).code == AuthErrorCode.userNotFound.rawValue {
-                            Auth.auth().createUser(withEmail: email, password: "some_secure_password") { authResult, error in
-                                if let error = error {
-                                    print("Error during Firebase sign-up: \(error.localizedDescription)")
-                                    return
-                                }
-                                
-                                // 새로 생성된 사용자 로그인
-                                Auth.auth().signIn(with: credential) { (authResult, error) in
-                                    if let error = error {
-                                        print("Error during Firebase sign-in: \(error.localizedDescription)")
-                                        return
-                                    }
-                                    
-                                    // 사용자가 성공적으로 로그인됨
-                                    print("Kakao 로그인 성공")
-                                    self?.navigateToMainScreen()
-                                }
-                            }
-                        } else {
-                            print("Error during Firebase sign-in: \(error.localizedDescription)")
-                        }
-                        return
-                    }
-                    
-                    // 사용자가 성공적으로 로그인됨
-                    print("Kakao 로그인 성공")
-                    self?.navigateToMainScreen()
-                }
+        AuthenticationManager.shared.kakaoAuthSignIn { result in
+            switch result {
+            case .success(_):
+                print("카카오 로그인 성공")
+                self.navigateToMainScreen()
+            case .failure(let error):
+                print("카카오 로그인 에러: \(error)")
             }
         }
     }
-
 
     func applyCommonSettings(to button: UIButton) {
         button.titleLabel?.adjustsFontForContentSizeCategory = true

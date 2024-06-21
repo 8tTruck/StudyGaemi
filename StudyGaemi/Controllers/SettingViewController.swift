@@ -254,6 +254,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         cancelAction.setValue(UIColor.gray, forKey: "titleTextColor")
 
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
+            AuthenticationManager.shared.kakaoAuthSignOut()
             AuthenticationManager.shared.signOut()
             UserDefaults.standard.removeObject(forKey: "toggleButtonState")
             DispatchQueue.main.async {
@@ -335,6 +336,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "회원탈퇴 처리되었습니다.", message: nil, preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+                        AuthenticationManager.shared.kakaoUnlinkAndSignOut()
                         AuthenticationManager.shared.signOut()
                         let loginVC = UINavigationController(rootViewController: LoginViewController())
                         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
