@@ -137,6 +137,8 @@ class TimerResultViewController: BaseViewController {
         
         
         print("goalTime \(goalTime) elaspedTime \(elapsedTime)")
+        print("formattedTime goalTime \(goalTime.formattedTime) formattedTime elaspedTime \(elapsedTime.formattedTime)")
+
         
     }
     
@@ -236,9 +238,9 @@ class TimerResultViewController: BaseViewController {
     
     private func setTimeData(){
         
-        print("\(elapsedTime.formattedTime)")
-        goalTimeLabel.text = "\(goalTime.formattedTime)"
-        todayTimeLabel.text = "\(elapsedTime.formattedTime)"
+        //print("\(elapsedTime.formattedTime)")
+        goalTimeLabel.text = "\(goalTime.time)"
+        todayTimeLabel.text = "\(elapsedTime.time)"
         
         
         if goalTime <= elapsedTime {    //성공
@@ -267,16 +269,18 @@ class TimerResultViewController: BaseViewController {
     }
     
     @objc func didTappedCustomButton(){
-//        let bottomTabBarVC = BottomTabBarViewController()
-//        bottomTabBarVC.selectedIndex = 2
-// 
-//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//           let window = windowScene.windows.first {
-//            window.rootViewController = bottomTabBarVC
-//            window.makeKeyAndVisible()
-//        }
-        
         self.dismiss(animated: true)
+
+        
+        let bottomTabBarVC = BottomTabBarViewController()
+        bottomTabBarVC.selectedIndex = 2
+ 
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = bottomTabBarVC
+            window.makeKeyAndVisible()
+        }
+        
     }
     
     private func saveTimeData(){

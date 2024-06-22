@@ -35,6 +35,8 @@ class CircularTimerView: UIView {
     private var endSeconds: Date?
     private var isRunning = false
     private var pausedTime: TimeInterval?
+    private var goalTime: TimeInterval
+    private var elapsedTime: TimeInterval = 0
     weak var delegate: CircularTimerViewDelegate?
     
     
@@ -135,6 +137,7 @@ class CircularTimerView: UIView {
         self.progressColors = progressColors
         self.leftSeconds = duration
         self.startDate = startDate
+        self.goalTime = duration
         super.init(frame: .zero)
         startTimer()
         
@@ -207,18 +210,12 @@ class CircularTimerView: UIView {
     
     @objc func stopButtonTapped(){
         print("멈췄음")
-        pauseTimer()
         timer?.invalidate()
         timer = nil
         
-        //목표시간
-        let goalTime = leftSeconds
-        //남은 시간
-        let remainingTime = endSeconds?.timeIntervalSinceNow ?? 0
-        // 실제로 타이머가 돌아간 시간
-        let elapsedTime = goalTime - remainingTime
+        let elapsedTime = goalTime - leftSeconds
         
-        delegate?.showTimerResult(goalTime: remainingTime, elapsedTime: elapsedTime)
+        delegate?.showTimerResult(goalTime: goalTime, elapsedTime: elapsedTime)
         
         resetTimer()
     }
