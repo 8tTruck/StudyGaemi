@@ -11,12 +11,12 @@ import UIKit
 import Foundation
 
 protocol TimeResulteDelegate: AnyObject {
-    func showTimerResult()
+    func showTimerResult(goalTime: TimeInterval, elapsedTime: TimeInterval)
 }
 
 protocol CircularTimerViewDelegate: AnyObject {
     func didFinishTimer()
-    func showTimerResult()
+    func showTimerResult(goalTime: TimeInterval, elapsedTime: TimeInterval)
 }
 
 struct ProgressColors {
@@ -207,6 +207,7 @@ class CircularTimerView: UIView {
     
     @objc func stopButtonTapped(){
         print("멈췄음")
+        pauseTimer()
         timer?.invalidate()
         timer = nil
         
@@ -217,13 +218,23 @@ class CircularTimerView: UIView {
         // 실제로 타이머가 돌아간 시간
         let elapsedTime = goalTime - remainingTime
         
-        delegate?.showTimerResult()
+        delegate?.showTimerResult(goalTime: remainingTime, elapsedTime: elapsedTime)
+        
+        resetTimer()
+    }
+    
+    private func resetLayer(layer: CALayer) {
+        layer.speed = 0.0
+        layer.timeOffset = 0.0
+        layer.beginTime = 0.0
+        //layer.strokeEnd = 0.0 // reset strokeEnd for barLayer
     }
     
     func startTimer() {
         guard !isRunning else { return }
         
         endSeconds = Date().addingTimeInterval(leftSeconds)
+        
         timer = Timer.scheduledTimer(timeInterval: 0.1,
                                      target: self,
                                      selector: #selector(updateTime),
@@ -334,4 +345,11 @@ extension TimeInterval {
         
         
     }
+    
+    var formattedTime: String {
+            let hours = Int(self) / 3600
+            let minutes = Int(self) / 60 % 60
+            let seconds = Int(self) % 60
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }
 }
