@@ -10,7 +10,6 @@ import Firebase
 import Foundation
 import KakaoSDKUser
 import KakaoSDKAuth
-import KakaoSDKCommon
 
 class AuthenticationManager {
     
@@ -42,6 +41,35 @@ class AuthenticationManager {
             self.sendEmail(authResult: authResult)
         }
     }
+    
+    // 이스케이핑 불리언
+    // return false or true ?
+    // MPVC에서 createUesr 호출
+    // 반환값 true일때만 넘어갈 수 있도록
+    
+    // func createUser(email: String, password: String) {
+    //     // Firebase Authentication을 이용하여 신규 사용자 등록
+    //     Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+    //         if let error = error as NSError? {
+    //             // 사용자가 이미 가입된 경우
+    //             if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
+    //                 // 이메일이 이미 사용 중임을 사용자에게 알림
+    //                 print("이미 사용 중인 이메일입니다. 다른 이메일을 시도하세요.")
+    //                 self.showAlert(message: "이미 사용중인 이메일입니다.")
+    //                 return
+    //             } else {
+    //                 // 기타 오류 처리
+    //                 print("오류 발생: \(error.localizedDescription)")
+    //                 return
+    //             }
+    //         } else {
+    //             // 가입이 성공한 경우
+    //             print("가입 성공!")
+    //             self.signIn(email: email, password: password)
+    //             self.sendEmail(authResult: authResult)
+    //         }
+    //     }
+    // }
     
     // MARK: - 로그인
     func signIn(email: String, password: String) {
@@ -110,15 +138,15 @@ class AuthenticationManager {
     // MARK: - 카카오 로그인
     func kakaoAuthSignIn(completion: @escaping (Result<Void, Error>) -> Void) {
         if AuthApi.hasToken() {
-            UserApi.shared.accessTokenInfo { _, error in
-                if let error = error {
-                    if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true  {
-                        self.openKakaoService(completion: completion)                    }
-                    else {
+            UserApi.shared.accessTokenInfo { token, error in
+                if token != nil {
+                    self.loadingInfoDidKakaoAuth(completion: completion)
+                } else {
+                    if let error = error {
+                        print(error)
                         completion(.failure(error))
                     }
-                } else {
-                    self.loadingInfoDidKakaoAuth(completion: completion)
+                    self.openKakaoService(completion: completion)
                 }
             }
         } else {
@@ -126,79 +154,63 @@ class AuthenticationManager {
         }
     }
 
-    // MARK: - 카카오 서비스 이동
     func openKakaoService(completion: @escaping (Result<Void, Error>) -> Void) {
-        if UserApi.isKakaoTalkLoginAvailable() {
-            UserApi.shared.loginWithKakaoTalk { oauthToken, error in
-                if let error = error {
+        if UserApi.isKakaoTalkLoginAvailable() { // 카카오톡 앱 이용 가능한지 확인
+            UserApi.shared.loginWithKakaoTalk { oauthToken, error in // 카카오톡 앱으로 로그인
+                if let error = error { // 로그인 실패 -> 종료
+                    print("Kakao Sign In Error: ", error.localizedDescription)
                     completion(.failure(error))
-                } else {
-                    _ = oauthToken // 로그인 성공
-                    self.loadingInfoDidKakaoAuth(completion: completion) // 사용자 정보 불러와서 Firebase Auth 로그인하기
+                    return
                 }
+                
+                _ = oauthToken // 로그인 성공
+                self.loadingInfoDidKakaoAuth(completion: completion) // 사용자 정보 불러와서 Firebase Auth 로그인하기
             }
         } else { // 카카오톡 앱 이용 불가능한 사람
             UserApi.shared.loginWithKakaoAccount { oauthToken, error in // 카카오 웹으로 로그인
-                if let error = error {
+                if let error = error { // 로그인 실패 -> 종료
+                    print("Kakao Sign In Error: ", error.localizedDescription)
                     completion(.failure(error))
-                } else {
-                    _ = oauthToken // 로그인 성공
-                    self.loadingInfoDidKakaoAuth(completion: completion) // 사용자 정보 불러와서 Firebase Auth 로그인하기
+                    return
                 }
+                _ = oauthToken // 로그인 성공
+                self.loadingInfoDidKakaoAuth(completion: completion) // 사용자 정보 불러와서 Firebase Auth 로그인하기
             }
         }
     }
 
-    // MARK: - 카카오 정보로 Firebase 회원가입 및 로그인
-    func loadingInfoDidKakaoAuth(completion: @escaping (Result<Void, Error>) -> Void) {
-        func login(_ email: String, _ password: String, completion: @escaping (Result<Void, Error>) -> Void) {
-            Auth.auth().signIn(withEmail: email, password: password) { _, error in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(()))
-                }
-            }
-        }
-        
+    func loadingInfoDidKakaoAuth(completion: @escaping (Result<Void, Error>) -> Void) {  // 사용자 정보 불러오기
         UserApi.shared.me { kakaoUser, error in
             if let error = error {
+                print("카카오톡 사용자 정보 불러오는데 실패했습니다.")
                 completion(.failure(error))
                 return
             }
-            
-            guard let email = kakaoUser?.kakaoAccount?.email else {
-                completion(.failure(NSError(domain: "KakaoAuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "카카오 계정에서 이메일을 가져올 수 없습니다."])))
-                return
-            }
-            guard let password = kakaoUser?.id else {
-                completion(.failure(NSError(domain: "KakaoAuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "카카오 계정에서 ID를 가져올 수 없습니다."])))
-                return
-            }
-            guard let nickName = kakaoUser?.kakaoAccount?.profile?.nickname else {
-                completion(.failure(NSError(domain: "KakaoAuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "카카오 계정에서 닉네임을 가져올 수 없습니다."])))
-                return
-            }
+            guard let email = kakaoUser?.kakaoAccount?.email else { return }
+            guard let password = kakaoUser?.id else { return }
+            guard let nickName = kakaoUser?.kakaoAccount?.profile?.nickname else { return }
             
             Auth.auth().createUser(withEmail: email, password: String(password)) { authResult, error in
                 if let error = error {
                     print("회원가입 실패 에러: \(error.localizedDescription)")
-                    login(email, String(password)) { result in
-                        switch result {
-                        case .success:
-                            completion(.success(()))
-                        case .failure(let error):
+                    Auth.auth().signIn(withEmail: email, password: String(password)) { (authResult, error) in
+                        if let error = error {
+                            print("로그인 실패 에러: \(error.localizedDescription)")
                             completion(.failure(error))
+                        } else if let user = authResult?.user {
+                            print("로그인 성공: \(user.email ?? "")")
+                            completion(.success(()))
                         }
                     }
                 } else {
-                    login(email, String(password)) { result in
-                        switch result {
-                        case .success:
+                    Auth.auth().signIn(withEmail: email, password: String(password)) { (authResult, error) in
+                        if let error = error {
+                            print("로그인 실패 에러: \(error.localizedDescription)")
+                            completion(.failure(error))
+                        } else if let user = authResult?.user {
+                            print("로그인 성공: \(user.email ?? "")")
                             FirestoreManager.shared.createUserData(email: email, nickName: nickName, loginMethod: "kakao")
                             completion(.success(()))
-                        case .failure(let error):
-                            completion(.failure(error))
                         }
                     }
                 }
@@ -371,10 +383,9 @@ class AuthenticationManager {
             if let error = error {
                 print("카카오 로그아웃 실패: \(error.localizedDescription)")
                 return
-            } else {
-                print("카카오 로그아웃 성공")
-                return
             }
+            print("카카오 로그아웃 성공")
+            return
         }
     }
     
@@ -384,10 +395,9 @@ class AuthenticationManager {
             if let error = error {
                 print("카카오 연결 끊기 실패: \(error.localizedDescription)")
                 return
-            } else {
-                print("카카오 연결 끊기 성공")
-                return
             }
+            print("카카오 연결 끊기 성공")
+            return
         }
     }
     
