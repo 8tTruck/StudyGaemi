@@ -14,12 +14,13 @@ class MemberInfoViewController: BaseViewController {
     
     private var confirmButtonBottomConstraint: Constraint?
     private var originalConfirmButtonBottomOffset: CGFloat = -30
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupKeyboardNotifications()
         setupTapGesture()
+        setupBackButton()
     }
     
     private func setupUI() {
@@ -45,12 +46,12 @@ class MemberInfoViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     private func setupTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
-    
+
     @objc internal override func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -85,26 +86,6 @@ class MemberInfoViewController: BaseViewController {
               let newPassword = memberInfoView.newPasswordField.text,
               let confirmPassword = memberInfoView.confirmPasswordField.text else { return }
         
-        if currentPassword.isEmpty || newPassword.isEmpty || confirmPassword.isEmpty {
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-            
-            let titleString = NSAttributedString(string: "비밀번호 변경 실패", attributes: [
-                .font: UIFont(name: "Pretendard-SemiBold", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .semibold)
-            ])
-            
-            let messageString = NSAttributedString(string: "제대로 입력해주개미", attributes: [
-                .font: UIFont(name: "Pretendard-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
-            ])
-            
-            alertController.setValue(titleString, forKey: "attributedTitle")
-            alertController.setValue(messageString, forKey: "attributedMessage")
-            
-            let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-            alertController.addAction(confirmAction)
-            self.present(alertController, animated: true, completion: nil)
-            return
-        }
-        
         if newPassword != confirmPassword {
             let alertController = UIAlertController(title: "비밀번호 변경 오류", message: "비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
@@ -112,7 +93,7 @@ class MemberInfoViewController: BaseViewController {
             self.present(alertController, animated: true, completion: nil)
             return
         } else if !isPasswordValid(newPassword) {
-            memberInfoView.newPasswordLabel.text = "비밀번호는 영문 + 숫자 8자리 이상이어야 합니다."
+            memberInfoView.newPasswordLabel.text = "비밀번호는 영문 + 숫자 + 특수문자 8자리 이상이어야 합니다."
             memberInfoView.newPasswordLabel.textColor = UIColor(named: "fontRed")
         } else {
             memberInfoView.confirmPasswordLabel.textColor = UIColor(named: "fontGray")
@@ -136,7 +117,6 @@ class MemberInfoViewController: BaseViewController {
         }
     }
     
-    
     @objc private func textFieldEditingChanged(_ textField: UITextField) {
         if textField.text?.isEmpty ?? true {
             resetLabelsToDefaultState()
@@ -150,13 +130,13 @@ class MemberInfoViewController: BaseViewController {
     
     private func resetLabelsToDefaultState() {
         memberInfoView.currentPasswordLabel.textColor = UIColor(named: "fontGray")
-        memberInfoView.currentPasswordLabel.text = "영문 + 숫자 8자리 이상"
+        memberInfoView.currentPasswordLabel.text = "영문 + 숫자 + 특수문자 8자리 이상"
         
         memberInfoView.newPasswordLabel.textColor = UIColor(named: "fontGray")
-        memberInfoView.newPasswordLabel.text = "영문 + 숫자 8자리 이상"
+        memberInfoView.newPasswordLabel.text = "영문 + 숫자 + 특수문자 8자리 이상"
         
         memberInfoView.confirmPasswordLabel.textColor = UIColor(named: "fontGray")
-        memberInfoView.confirmPasswordLabel.text = "영문 + 숫자 8자리 이상"
+        memberInfoView.confirmPasswordLabel.text = "영문 + 숫자 + 특수문자 8자리 이상"
     }
     
     private func updatePasswordLabels(ignoreNewPasswordField: Bool) {
@@ -173,7 +153,7 @@ class MemberInfoViewController: BaseViewController {
         if !confirmPasswordValid {
             memberInfoView.confirmPasswordLabel.text = "비밀번호가 일치하지 않습니다."
         } else {
-            memberInfoView.confirmPasswordLabel.text = "영문 + 숫자 8자리 이상"
+            memberInfoView.confirmPasswordLabel.text = "영문 + 숫자 + 특수문자 8자리 이상"
         }
     }
     
@@ -182,6 +162,20 @@ class MemberInfoViewController: BaseViewController {
         return passwordPredicate.evaluate(with: password)
     }
     
+    private func setupBackButton() {
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.setTitle("Back", for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
+        backButton.tintColor = UIColor(named: "fontBlack")
+        backButton.setTitleColor(UIColor(named: "fontBlack"), for: .normal)
+        backButton.sizeToFit()
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        let backButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backButtonItem
+    }
+
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }

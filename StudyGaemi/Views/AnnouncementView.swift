@@ -41,7 +41,7 @@ class AnnouncementView: UIView {
     
     private func setupConstraints() {
         webView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(0)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
         }
         

@@ -51,9 +51,9 @@ class MemberInfoView: UIView {
             make.height.equalTo(800) // 충분한 높이 설정
         }
         
-        setupLabel(currentPasswordLabel, text: "영문 + 숫자 8자리 이상")
-        setupLabel(newPasswordLabel, text: "영문 + 숫자 8자리 이상")
-        setupLabel(confirmPasswordLabel, text: "영문 + 숫자 8자리 이상")
+        setupLabel(currentPasswordLabel, text: "영문 + 숫자 + 특수문자 8자리 이상")
+        setupLabel(newPasswordLabel, text: "영문 + 숫자 + 특수문자 8자리 이상")
+        setupLabel(confirmPasswordLabel, text: "영문 + 숫자 + 특수문자 8자리 이상")
         
         errorLabel.textColor = UIColor(named: "fontRed")
         errorLabel.textAlignment = .center
