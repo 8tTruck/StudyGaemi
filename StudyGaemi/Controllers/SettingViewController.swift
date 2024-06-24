@@ -338,12 +338,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                     let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
                         AuthenticationManager.shared.kakaoUnlinkAndSignOut()
                         AuthenticationManager.shared.signOut()
-                        let loginVC = UINavigationController(rootViewController: LoginViewController())
-                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                           let window = windowScene.windows.first {
-                            window.rootViewController = loginVC
-                            window.makeKeyAndVisible()
-                        }
+                        self.completeLogout()
                     }
                     alertController.addAction(confirmAction)
                     self.present(alertController, animated: true, completion: nil)
