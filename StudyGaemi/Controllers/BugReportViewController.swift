@@ -26,9 +26,8 @@ class BugReportViewController: BaseViewController, MFMailComposeViewControllerDe
 
     @objc func submitButtonTapped() {
         if bugReportView.textView.text.isEmpty || bugReportView.textView.textColor == UIColor(named: "fontGray") {
-            let alertController = UIAlertController(title: "경고", message: "내용을 입력해주개미.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "경고", message: "내용을 입력해주개미", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-            confirmAction.setValue(UIColor.orange, forKey: "titleTextColor")
             alertController.addAction(confirmAction)
             
             let backgroundView = alertController.view.subviews.first?.subviews.first?.subviews.first
