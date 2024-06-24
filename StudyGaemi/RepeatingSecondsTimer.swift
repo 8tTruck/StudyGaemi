@@ -36,6 +36,10 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     private var durationSeconds: Double = 0
     private var startTime: Date?
     
+    init() {
+        start(durationSeconds: 0)
+    }
+    
     deinit {
         removeTimer()
     }
@@ -121,11 +125,13 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     }
     
     private func removeTimer() {
-        // cancel()을 한번 실행하면 timer를 다시 사용할 수 없는 상태임을 주의
-        timers.repeatTimer?.resume()
-        timers.nonRepeatTimer?.resume()
-
-        initTimer()
+        if let repeatTimer = timers.repeatTimer {
+            repeatTimer.cancel()
+        }
+        
+        if let nonRepeatTimer = timers.nonRepeatTimer {
+            nonRepeatTimer.cancel()
+        }
     }
 }
 
