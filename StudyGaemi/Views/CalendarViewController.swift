@@ -613,14 +613,14 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let customAlert = AlertView(logImage: UIImage(named: "kingAnt")!,
-//                                    titleText: "완벽개미 획득!",
-//                                    doneButtonTitle: "확인")
-//        self.present(customAlert, animated: true)
+        let customAlert = AlertView(logImage: UIImage(named: "kingAnt")!,
+                                    titleText: "완벽개미 획득!",
+                                    doneButtonTitle: "확인")
+        self.present(customAlert, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 94
+        return CGFloat(tableHeight)
     }
 }
 
