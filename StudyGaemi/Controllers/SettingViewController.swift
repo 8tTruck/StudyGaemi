@@ -119,9 +119,25 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         firestoreManager.readStudyData { result in
             switch result {
             case .success(let studyData):
-                let validDates = studyData.compactMap { $0.date }
-                print("validDates\(validDates)")
-                self.settingView.accumulatedLabel.text = "\(validDates.count)일 누적"
+                let calendar = Calendar.current
+
+                        // 날짜 단위로 비교하기 위해 studyData의 date를 추출하여 Set에 추가
+                        var dateSet = Set<Date>()
+                        
+                        for study in studyData {
+                            
+                                let studyDate = study.date.dateValue()
+                                // 날짜 단위로만 비교하여 Set에 추가
+                                let components = calendar.dateComponents([.year, .month, .day], from: studyDate)
+                                if let dateOnly = calendar.date(from: components) {
+                                    dateSet.insert(dateOnly)
+                                }
+                            
+                        }
+
+                        // 유효한 날짜들 (중복되지 않은 날짜들) 출력 및 갯수 설정
+                        print("uniqueDates: \(dateSet)")
+                        self.settingView.accumulatedLabel.text = "\(dateSet.count)일 누적"
             case .failure(let error):
                 // 데이터를 받아오는 데 실패했을 때의 처리
                 print("Failed to fetch study data with error: \(error)")

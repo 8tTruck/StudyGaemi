@@ -29,7 +29,7 @@ class SettingView: UIView {
     }
 
     let userView = UIView().then {
-        $0.backgroundColor = UIColor(named: "viewBackgroundColor")
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
         $0.layer.cornerRadius = 23
         $0.layer.shadowColor = UIColor(named: "pointBlack")?.cgColor
         $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
@@ -41,6 +41,7 @@ class SettingView: UIView {
         $0.image = UIImage(named: "profileAnt")
         $0.contentMode = .center
         $0.layer.cornerRadius = 23
+        $0.layer.borderWidth = 1
         $0.layer.masksToBounds = true
     }
 
