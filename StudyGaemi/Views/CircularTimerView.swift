@@ -11,12 +11,12 @@ import UIKit
 import Foundation
 
 protocol TimeResulteDelegate: AnyObject {
-    func showTimerResult()
+    func showTimerResult(goalTime: TimeInterval, elapsedTime: TimeInterval)
 }
 
 protocol CircularTimerViewDelegate: AnyObject {
     func didFinishTimer()
-    func showTimerResult()
+    func showTimerResult(goalTime: TimeInterval, elapsedTime: TimeInterval)
 }
 
 struct ProgressColors {
@@ -35,6 +35,8 @@ class CircularTimerView: UIView {
     private var endSeconds: Date?
     private var isRunning = false
     private var pausedTime: TimeInterval?
+    private var goalTime: TimeInterval
+    private var elapsedTime: TimeInterval = 0
     weak var delegate: CircularTimerViewDelegate?
     
     
@@ -135,6 +137,7 @@ class CircularTimerView: UIView {
         self.progressColors = progressColors
         self.leftSeconds = duration
         self.startDate = startDate
+        self.goalTime = duration
         super.init(frame: .zero)
         startTimer()
         
@@ -210,20 +213,25 @@ class CircularTimerView: UIView {
         timer?.invalidate()
         timer = nil
         
-        //목표시간
-        let goalTime = leftSeconds
-        //남은 시간
-        let remainingTime = endSeconds?.timeIntervalSinceNow ?? 0
-        // 실제로 타이머가 돌아간 시간
-        let elapsedTime = goalTime - remainingTime
+        let elapsedTime = goalTime - leftSeconds
         
-        delegate?.showTimerResult()
+        delegate?.showTimerResult(goalTime: goalTime, elapsedTime: elapsedTime)
+        
+        resetTimer()
+    }
+    
+    private func resetLayer(layer: CALayer) {
+        layer.speed = 0.0
+        layer.timeOffset = 0.0
+        layer.beginTime = 0.0
+        //layer.strokeEnd = 0.0 // reset strokeEnd for barLayer
     }
     
     func startTimer() {
         guard !isRunning else { return }
         
         endSeconds = Date().addingTimeInterval(leftSeconds)
+        
         timer = Timer.scheduledTimer(timeInterval: 0.1,
                                      target: self,
                                      selector: #selector(updateTime),
@@ -334,4 +342,11 @@ extension TimeInterval {
         
         
     }
+    
+    var formattedTime: String {
+            let hours = Int(self) / 3600
+            let minutes = Int(self) / 60 % 60
+            let seconds = Int(self) % 60
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }
 }

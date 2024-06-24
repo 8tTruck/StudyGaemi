@@ -20,7 +20,13 @@ enum TimerResult{
 
 class TimerResultViewController: BaseViewController {
     
+    
     // MARK: - properties
+    private let firestoreManager = FirestoreManager.shared
+    private var goalTime: TimeInterval = TimeInterval()  //목표 공부 시간
+    private var elapsedTime: TimeInterval = TimeInterval()  //실제로 타이머가 돌아간 시간
+    private var result: TimerResult = .fail
+    
     private let titleLabel = UILabel().then {
         $0.text = "얼마나 공부했개미"
         $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -90,7 +96,7 @@ class TimerResultViewController: BaseViewController {
     private let goalTimeLabel = UILabel().then {
         $0.font = UIFont(name: CustomFontType.bold.name, size: 14) ?? UIFont.systemFont(ofSize: 10, weight: .bold)
         $0.textColor =  UIColor.fontBlack
-        $0.text = "09 : 30"
+        $0.text = "04 : 30"
     }
     
     private lazy var goalView = UIStackView(arrangedSubviews: [goalLabel, goalTimeLabel]).then {
@@ -127,8 +133,13 @@ class TimerResultViewController: BaseViewController {
         super.viewDidLoad()
         self.configureUI()
         self.constraintLayout()
-        setData(for: .fail)
-       
+        setTimeData()
+        
+        
+        print("goalTime \(goalTime) elaspedTime \(elapsedTime)")
+        print("formattedTime goalTime \(goalTime.formattedTime) formattedTime elaspedTime \(elapsedTime.formattedTime)")
+
+        
     }
     
     // MARK: - method
@@ -156,14 +167,16 @@ class TimerResultViewController: BaseViewController {
         goalTimeBackView.addSubview(goalView)
         //bottomBackView.addSubview(todayView)
         
-     
+        
     }
     
     override func constraintLayout() {
+        customButton.addTarget(self, action: #selector(didTappedCustomButton), for: .touchUpInside)
+        
         imageView.snp.makeConstraints { make in
             make.width.height.equalTo(22)
         }
-
+        
         resultView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalTo(UIScreen.main.bounds.width - 50)
@@ -194,7 +207,7 @@ class TimerResultViewController: BaseViewController {
             make.height.equalTo(30)
             make.width.equalTo(162)
             make.centerX.equalToSuperview()
-//            make.top.equalToSuperview().offset(30)
+            //            make.top.equalToSuperview().offset(30)
         }
         
         bottomView.snp.makeConstraints { make in
@@ -205,12 +218,36 @@ class TimerResultViewController: BaseViewController {
             make.centerX.centerY.equalToSuperview()
         }
         
+        todayTimeLabel.snp.makeConstraints { make in
+            make.width.equalTo(200)
+        }
+        
         todayView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
+            make.width.equalToSuperview()
         }
         
         
+    }
+    
+    func bind(goalT: TimeInterval, elapsedT: TimeInterval){
+        self.goalTime = goalT
+        self.elapsedTime = elapsedT
+    }
+    
+    private func setTimeData(){
+        
+        //print("\(elapsedTime.formattedTime)")
+        goalTimeLabel.text = "\(goalTime.time)"
+        todayTimeLabel.text = "\(elapsedTime.time)"
+        
+        
+        if goalTime <= elapsedTime {    //성공
+            result = .success
+        }
+        saveTimeData()
+        setData(for: result)
     }
     
     private func setData(for result: TimerResult) {
@@ -227,6 +264,30 @@ class TimerResultViewController: BaseViewController {
             resultDescriptLabel.text = "축하드립니다. 공부개미를 획득하셨습니다."
             bottomBackView.layer.borderColor = UIColor.green.cgColor
             todayTimeLabel.textColor = UIColor.green
+        }
+        
+    }
+    
+    @objc func didTappedCustomButton(){
+        self.dismiss(animated: true)
+
+        
+        let bottomTabBarVC = BottomTabBarViewController()
+        bottomTabBarVC.selectedIndex = 2
+ 
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = bottomTabBarVC
+            window.makeKeyAndVisible()
+        }
+        
+    }
+    
+    private func saveTimeData(){
+        if result == .success {
+            firestoreManager.createStudyData(success: true, during: Int(elapsedTime))
+        } else{
+            firestoreManager.createStudyData(success: false, during: Int(elapsedTime))
         }
         
     }
