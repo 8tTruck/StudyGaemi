@@ -69,6 +69,8 @@ class AlarmCoreDataManager {
         let fetchRequest: NSFetchRequest<Alarm> = Alarm.fetchRequest()
         
         do {
+            AlarmSettingController.shared.removeScheduleAlarm()
+            UserDefaults.standard.removeObject(forKey: "toggleButtonState")
             let alarms = try context.fetch(fetchRequest)
             
             for alarm in alarms {
