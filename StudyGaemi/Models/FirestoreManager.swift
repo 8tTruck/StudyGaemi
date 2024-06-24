@@ -378,4 +378,18 @@ final class FirestoreManager {
             }
         }
     }
+    
+    // MARK: - 로그인방식 확인 메소드
+    func getLoginMethod(completion: @escaping (String) -> Void) {
+        self.readUserData { result in
+            switch result {
+            case .success(let data):
+                let loginMethod = data?.loginMethod ?? "Firebase"
+                completion(loginMethod)
+            case .failure(let error):
+                print("로그인방식 받아오기 에러: \(error)")
+                completion("Firebase")
+            }
+        }
+    }
 }

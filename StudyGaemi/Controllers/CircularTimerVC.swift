@@ -27,7 +27,6 @@ class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
     private let countDownDurationSeconds: TimeInterval
     private let startDate: Date
     
-    private var timer: RepeatingSecondsTimerImpl!
     private var isPaused = false
     private var pauseButton: UIButton!
     private var stopButton: UIButton!
