@@ -36,9 +36,9 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     private var durationSeconds: Double = 0
     private var startTime: Date?
     
-    deinit {
-        removeTimer()
-    }
+//    deinit {
+//        removeTimer()
+//    }
     
     func start(durationSeconds: Double,
                repeatingExecution: (() -> Void)? = nil,
@@ -53,7 +53,7 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
         
         resume()
     }
-    
+    //이부분이 오류가 생긴다.
     func resume() {
         guard timerState == .suspended else { return }
         
@@ -122,10 +122,11 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     
     private func removeTimer() {
         // cancel()을 한번 실행하면 timer를 다시 사용할 수 없는 상태임을 주의
-        timers.repeatTimer?.resume()
+        //timers.repeatTimer?.resume()
         timers.nonRepeatTimer?.resume()
 
         initTimer()
     }
 }
 
+//타이머 켜져있을때 예외처리 만들어야함
