@@ -125,7 +125,7 @@ class AuthenticationManager {
             self.openKakaoService(completion: completion)
         }
     }
-    
+
     // MARK: - 카카오 서비스 이동
     func openKakaoService(completion: @escaping (Result<Void, Error>) -> Void) {
         if UserApi.isKakaoTalkLoginAvailable() {
@@ -148,9 +148,9 @@ class AuthenticationManager {
             }
         }
     }
-    
+
     // MARK: - 카카오 정보로 Firebase 회원가입 및 로그인
-    func loadingInfoDidKakaoAuth(completion: @escaping (Result<Void, Error>) -> Void) {  // 사용자 정보 불러오기
+    func loadingInfoDidKakaoAuth(completion: @escaping (Result<Void, Error>) -> Void) {
         func login(_ email: String, _ password: String, completion: @escaping (Result<Void, Error>) -> Void) {
             Auth.auth().signIn(withEmail: email, password: password) { _, error in
                 if let error = error {
@@ -186,6 +186,16 @@ class AuthenticationManager {
                     login(email, String(password)) { result in
                         switch result {
                         case .success:
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                } else {
+                    login(email, String(password)) { result in
+                        switch result {
+                        case .success:
+                            FirestoreManager.shared.createUserData(email: email, nickName: nickName, loginMethod: "kakao")
                             completion(.success(()))
                         case .failure(let error):
                             completion(.failure(error))
@@ -299,7 +309,7 @@ class AuthenticationManager {
                         completion(false)
                         return
                     }
-                    
+
                     if user.isEmailVerified {
                         print("이메일 인증 완료")
                         timer?.invalidate()
@@ -461,5 +471,7 @@ class AuthenticationManager {
             }
         }
     }
+
 }
+
 
