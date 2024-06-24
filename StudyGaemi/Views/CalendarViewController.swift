@@ -148,7 +148,7 @@ class CalendarViewController: BaseViewController {
         // 요일 UI 설정
         $0.weekdayHeight = 16
         $0.appearance.weekdayFont = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
-        $0.appearance.weekdayTextColor = .fontBlack
+        $0.appearance.weekdayTextColor = .fontGray
         
         // 날짜 UI 설정
         $0.appearance.titleTodayColor = .black
@@ -292,12 +292,12 @@ class CalendarViewController: BaseViewController {
         
         monthLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().offset(15)
         }
         
         totalLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(15)
             make.width.equalTo(50)
         }
     }
@@ -661,14 +661,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
                 }
             }
         }
-        
-        // 오늘 날짜를 확인하여 배경 색상을 설정
-//        let today = Date()
-//        if Calendar.current.isDate(today, inSameDayAs: date) {
-//            cell.backgroundColor = .pointYellow.withAlphaComponent(0.2)
-//        } else {
-//            cell.backgroundColor = .clear
-//        }
+
         
         return cell
     }
@@ -690,7 +683,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
             todayComponents.day == dateComponents.day {
             return .pointOrange
         } else {
-            return .darkGray
+            return .fontGray
         }
     }
     

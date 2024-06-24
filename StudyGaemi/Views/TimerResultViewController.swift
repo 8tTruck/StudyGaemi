@@ -247,8 +247,8 @@ class TimerResultViewController: BaseViewController {
     private func setTimeData(){
         
         //print("\(elapsedTime.formattedTime)")
-        goalTimeLabel.text = "\(goalTime.time)"
-        todayTimeLabel.text = "\(elapsedTime.time)"
+        goalTimeLabel.text = "\(goalTime.formattedTime)"
+        todayTimeLabel.text = "\(elapsedTime.formattedTime)"
         
         
         if goalTime <= elapsedTime {    //성공

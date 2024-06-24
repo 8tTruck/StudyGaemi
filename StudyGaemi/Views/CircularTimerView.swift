@@ -35,9 +35,9 @@ class CircularTimerView: UIView {
     private var elapsedTime: TimeInterval = 0
     weak var delegate: CircularTimerViewDelegate?
     private let fixedRadius: CGFloat = 150 //반지름 절대값
-    private let fixedCenter: CGPoint = CGPoint(x: 196.5, y: 426) // bounds가 잡히기 전에 0,0으로 잡히는거 방지(15기준)
+    //private let fixedCenter: CGPoint = CGPoint(x: 196.5, y: 426) // bounds가 잡히기 전에 0,0으로 잡히는거 방지(15기준)
     private lazy var circularPath: UIBezierPath = {
-        return UIBezierPath(arcCenter: fixedCenter,
+        return UIBezierPath(arcCenter: center,
                             radius: fixedRadius,
                             startAngle: CGFloat.pi / 2 ,
                             endAngle: CGFloat.pi / 2 + 2 * .pi,
@@ -69,7 +69,7 @@ class CircularTimerView: UIView {
                                           height: 28))
         label.text = "00:00"
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 24) // 굵은 글씨체로 변경
+        label.font = UIFont.boldSystemFont(ofSize: 45) // 굵은 글씨체로 변경
         label.textColor = UIColor(hex: "#F68657") // 텍스트 색상 설정
         label.isUserInteractionEnabled = true
         return label
@@ -151,7 +151,7 @@ class CircularTimerView: UIView {
         stopButton.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     private func setupViews() {
-        timeLabel.frame = CGRect(x: bounds.midX - 50, y: bounds.midY - 25, width: 100, height: 50)
+        timeLabel.frame = CGRect(x: bounds.midX - 75, y: bounds.midY - 25, width: 150, height: 50)
         animateToBarLayer()
     }
     private func animateToBarLayer() {
@@ -272,16 +272,20 @@ extension Int {
     }
 }
 extension TimeInterval {
-    /// %02d: 빈자리를 0으로 채우고, 2자리 정수로 표현
-    var time: String {
-        let minutes = Int(self) / 60
-        let seconds = Int(self) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
-    var formattedTime: String {
+  var time: String {
+    let hours = Int(self) / 3600
+    let minutes = Int(self) / 60 % 60
+    return String(format: "%02d:%02d", hours, minutes)
+  }
+    
+    var hoursAndMinutes: (hours: Int, minutes: Int) {
         let hours = Int(self) / 3600
         let minutes = Int(self) / 60 % 60
-        let seconds = Int(self) % 60
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        return (hours, minutes)
     }
+    
+    var formattedTime: String {
+           let time = self.hoursAndMinutes
+           return String(format: "%02dh %02dm", time.hours, time.minutes)
+       }
 }
