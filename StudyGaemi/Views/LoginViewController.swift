@@ -55,13 +55,21 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
                     print("자동 로그인 성공: \(user.email ?? "")")
                     self.navigateToMainScreen()
                 } else {
-                    FirestoreManager.shared.getLoginMethod { loginMethod in
-                        if loginMethod == "kakao" {
-                            self.navigateToMainScreen()
-                        } else {
+                    FirestoreManager.shared.readUserData(completion: { result in
+                        switch result {
+                        case .success(let data):
+                            if data?.loginMethod == "kakao" {
+                                self.navigateToMainScreen()
+                            } else {
+                                self.showEmailVerificationAlert()
+                                self.navigateToLoginScreen()
+                            }
+                        case .failure(let error):
+                            print("로그인 되어있지 않은 에러: \(error)")
+                            self.showEmailVerificationAlert()
                             self.navigateToLoginScreen()
                         }
-                    }
+                    })
                 }
             }
         } else {

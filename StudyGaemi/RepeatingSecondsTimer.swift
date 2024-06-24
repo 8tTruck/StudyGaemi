@@ -57,7 +57,7 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
         
         resume()
     }
-    
+    //이부분이 오류가 생긴다.
     func resume() {
         guard timerState == .suspended else { return }
         
@@ -135,3 +135,4 @@ final class RepeatingSecondsTimerImpl: RepeatingSecondsTimer {
     }
 }
 
+//타이머 켜져있을때 예외처리 만들어야함

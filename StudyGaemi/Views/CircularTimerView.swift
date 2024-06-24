@@ -39,10 +39,10 @@ class CircularTimerView: UIView {
     
     
     private let fixedRadius: CGFloat = 150 //반지름 절대값
-    private let fixedCenter: CGPoint = CGPoint(x: 196.5, y: 426) // bounds가 잡히기 전에 0,0으로 잡히는거 방지(15기준)
+    //private let fixedCenter: CGPoint = CGPoint(x: 196.5, y: 426) // bounds가 잡히기 전에 0,0으로 잡히는거 방지(15기준)
     
     private lazy var circularPath: UIBezierPath = {
-        return UIBezierPath(arcCenter: fixedCenter,
+        return UIBezierPath(arcCenter: center,
                             radius: fixedRadius,
                             startAngle: CGFloat.pi / 2 ,
                             endAngle: CGFloat.pi / 2 + 2 * .pi,
