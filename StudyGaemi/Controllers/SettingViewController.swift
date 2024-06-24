@@ -115,15 +115,28 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private func getStudyData() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let userRef = firestoreManager.getDatabase().collection("User").document(userID)
-
-        firestoreManager.getDatabase().collection("Study").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
-            if let querySnapshot = querySnapshot {
-                let accumulatedDays = querySnapshot.documents.count
-                self.settingView.accumulatedLabel.text = "\(accumulatedDays)일 누적"
-            } else if let error = error {
-                print("Study 데이터 불러오기 에러: \(error)")
+        
+        firestoreManager.readStudyData { result in
+            switch result {
+            case .success(let studyData):
+                let validDates = studyData.compactMap { $0.date }
+                print("validDates\(validDates)")
+                self.settingView.accumulatedLabel.text = "\(validDates.count)일 누적"
+            case .failure(let error):
+                // 데이터를 받아오는 데 실패했을 때의 처리
+                print("Failed to fetch study data with error: \(error)")
+                // 여기서 적절한 UI 처리를 추가할 수 있습니다. 예를 들어, 에러를 사용자에게 알리는 경고창을 띄우거나 다른 작업을 수행할 수 있습니다.
             }
         }
+
+//        firestoreManager.getDatabase().collection("Study").whereField("userRef", isEqualTo: userRef).getDocuments { querySnapshot, error in
+//            if let querySnapshot = querySnapshot {
+//                let accumulatedDays = querySnapshot.documents.count
+//                self.settingView.accumulatedLabel.text = "\(accumulatedDays)일 누적"
+//            } else if let error = error {
+//                print("Study 데이터 불러오기 에러: \(error)")
+//            }
+//        }
     }
 
     private func getTotalStudyTime() {

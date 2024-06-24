@@ -15,7 +15,7 @@ class BadgeViewCell: UITableViewCell {
     private let backView = UIView().then {
         $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
         $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.25
+        $0.layer.shadowOpacity = 0.15
         $0.layer.shadowOffset = CGSize(width: 0, height: 0)
         $0.layer.shadowRadius = 3
         $0.layer.cornerRadius = 8

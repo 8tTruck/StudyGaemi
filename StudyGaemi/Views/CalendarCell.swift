@@ -27,12 +27,14 @@ class CalendarCell: FSCalendarCell {
         self.titleLabel.textColor = .fontBlack
         
         self.titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(contentView).inset(5)
+            make.top.equalTo(contentView).inset(5)
+            make.centerX.equalToSuperview()
         }
         
         contentView.insertSubview(badgeView, at: 0)
         badgeView.snp.makeConstraints { make in
-            make.trailing.bottom.equalTo(contentView).inset(3)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(contentView)
             make.size.equalTo(minSize())
         }
         badgeView.layer.cornerRadius = minSize()/2
