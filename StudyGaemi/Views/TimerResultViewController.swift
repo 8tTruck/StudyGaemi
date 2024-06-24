@@ -222,20 +222,20 @@ class TimerResultViewController: BaseViewController {
     
     @objc func didTappedCustomButton(){
         
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
         
         
         let bottomTabBarVC = BottomTabBarViewController()
         bottomTabBarVC.selectedIndex = 2
         
-        //            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-        //               let window = windowScene.windows.first {
-        //                window.rootViewController = bottomTabBarVC
-        //                window.makeKeyAndVisible()
-        //            }
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = bottomTabBarVC
+            window.makeKeyAndVisible()
+        }
         
-        //        bottomTabBarVC.modalPresentationStyle = .fullScreen
-        //        self.present(bottomTabBarVC, animated: true)
+        bottomTabBarVC.modalPresentationStyle = .fullScreen
+        self.present(bottomTabBarVC, animated: true)
         
     }
     

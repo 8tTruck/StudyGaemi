@@ -11,9 +11,9 @@ class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
     func showTimerResult(goalTime: TimeInterval, elapsedTime: TimeInterval) {
         print("showTimerResult")
         let timerResultVC = TimerResultViewController()
-        //timerResultVC.modalPresentationStyle = .
+        timerResultVC.modalPresentationStyle = .fullScreen
         timerResultVC.bind(goalT: goalTime, elapsedT: elapsedTime)
-        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
         self.present(timerResultVC, animated: true)
     }
     
