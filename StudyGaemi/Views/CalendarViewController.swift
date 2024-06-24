@@ -112,7 +112,7 @@ class CalendarViewController: BaseViewController {
         $0.layer.borderColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0).cgColor
         $0.layer.borderWidth = 0
         $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.25
+        $0.layer.shadowOpacity = 0.15
         $0.layer.shadowOffset = CGSize(width: 0, height: 0)
         $0.layer.shadowRadius = 5
         $0.clipsToBounds = false
@@ -148,7 +148,7 @@ class CalendarViewController: BaseViewController {
         // 요일 UI 설정
         $0.weekdayHeight = 16
         $0.appearance.weekdayFont = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
-        $0.appearance.weekdayTextColor = .fontBlack
+        $0.appearance.weekdayTextColor = .fontGray
         
         // 날짜 UI 설정
         $0.appearance.titleTodayColor = .black
@@ -202,7 +202,7 @@ class CalendarViewController: BaseViewController {
         $0.textAlignment = .right
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -215,7 +215,7 @@ class CalendarViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         setData()
     }
-
+    
     
     // MARK: - method
     override func configureUI() {
@@ -272,8 +272,8 @@ class CalendarViewController: BaseViewController {
         }
         
         calendarView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(15)
-            make.trailing.equalToSuperview().inset(5)
+            make.leading.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(10)
             make.top.bottom.equalToSuperview().inset(10)
         }
         
@@ -292,12 +292,12 @@ class CalendarViewController: BaseViewController {
         
         monthLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().offset(15)
         }
         
         totalLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(15)
             make.width.equalTo(50)
         }
     }
@@ -311,7 +311,17 @@ class CalendarViewController: BaseViewController {
             switch result {
             case .success(let data):
                 print("Alert Data \(data)")
-                if data.count == 0 { //없으면 빈거 생성
+                let today = Date()
+                let calendar = Calendar.current
+                
+                // 오늘의 날짜와 일치하는 data의 date 속성을 가진 항목만 필터링합니다.
+                let todayDataCount = data.filter { study in
+                    let studyTimestamp = study.date
+                    let studyDate = studyTimestamp.dateValue() // Timestamp를 Date로 변환
+                    return calendar.isDate(studyDate, inSameDayAs: today)
+                }.count
+                
+                if todayDataCount == 0 { //없으면 빈거 생성
                     isNew = true
                     if isNew {
                         self.firestoreManager.createAlertData(state: 0)
@@ -331,9 +341,9 @@ class CalendarViewController: BaseViewController {
                 self.firestoreManager.updateAlertData(state: 1)
             }
         }
-
+        
     }
-
+    
     private func statusForToday() -> status? {
         let today = Calendar.current.startOfDay(for: Date())
         
@@ -425,7 +435,7 @@ class CalendarViewController: BaseViewController {
         //5시 이전이면 전날로 설정
         if state == .study {
             let hour = calendar.component(.hour, from: date)
-
+            
             if hour < 5 {
                 guard let previousDay = calendar.date(byAdding: .day, value: -1, to: date) else {
                     return calendar.date(from: components)!
@@ -612,10 +622,10 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let customAlert = AlertView(logImage: UIImage(named: "kingAnt")!,
-                                    titleText: "완벽개미 획득!",
-                                    doneButtonTitle: "확인")
-        self.present(customAlert, animated: true)
+        //        let customAlert = AlertView(logImage: UIImage(named: "kingAnt")!,
+        //                                    titleText: "완벽개미 획득!",
+        //                                    doneButtonTitle: "확인")
+        //        self.present(customAlert, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -651,14 +661,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
                 }
             }
         }
-        
-        // 오늘 날짜를 확인하여 배경 색상을 설정
-        let today = Date()
-        if Calendar.current.isDate(today, inSameDayAs: date) {
-            cell.backgroundColor = .pointYellow.withAlphaComponent(0.2)
-        } else {
-            cell.backgroundColor = .clear
-        }
+
         
         return cell
     }
@@ -678,9 +681,9 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         if todayComponents.year == dateComponents.year &&
             todayComponents.month == dateComponents.month &&
             todayComponents.day == dateComponents.day {
-            return .fontBlack
+            return .pointOrange
         } else {
-            return .fontBlack
+            return .fontGray
         }
     }
     

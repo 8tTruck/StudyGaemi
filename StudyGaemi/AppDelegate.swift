@@ -44,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = .pointOrange
         
         //Appcheck 인증제공자 설정
-        let providerFactory = AppCheckDebugProviderFactory()
-        AppCheck.setAppCheckProviderFactory(providerFactory)
+//        let providerFactory = AppCheckDebugProviderFactory()
+//        AppCheck.setAppCheckProviderFactory(providerFactory)
 
         return true
     }
