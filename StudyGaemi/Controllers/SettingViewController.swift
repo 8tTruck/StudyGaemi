@@ -254,15 +254,14 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         cancelAction.setValue(UIColor.gray, forKey: "titleTextColor")
 
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
-            AuthenticationManager.shared.kakaoAuthSignOut()
-            AuthenticationManager.shared.signOut()
-            UserDefaults.standard.removeObject(forKey: "toggleButtonState")
-            DispatchQueue.main.async {
-                let loginVC = UINavigationController(rootViewController: LoginViewController())
-                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                   let window = windowScene.windows.first {
-                    window.rootViewController = loginVC
-                    window.makeKeyAndVisible()
+            FirestoreManager.shared.getLoginMethod { loginMethod in
+                if loginMethod == "kakao" {
+                    AuthenticationManager.shared.kakaoAuthSignOut()
+                    AuthenticationManager.shared.signOut()
+                    self.completeLogout()
+                } else {
+                    AuthenticationManager.shared.signOut()
+                    self.completeLogout()
                 }
             }
         })
@@ -296,8 +295,9 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
             let dispatchGroup = DispatchGroup()
 
+            AuthenticationManager.shared.kakaoUnlinkAndSignOut()
+            
             dispatchGroup.enter()
-            UserDefaults.standard.removeObject(forKey: "toggleButtonState")
             FirestoreManager.shared.deleteStudyData { result in
                 switch result {
                 case .success:
@@ -323,9 +323,9 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             FirestoreManager.shared.deleteUserData { result in
                 switch result {
                 case .success:
-                    print("회원탈퇴가 완료되었습니다.")
+                    print("User 데이터가 삭제되었습니다.")
                 case .failure(let error):
-                    print("회원탈퇴 에러: \(error)")
+                    print("User 데이터 삭제 에: \(error)")
                 }
                 dispatchGroup.leave()
             }
@@ -336,8 +336,8 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "회원탈퇴 처리되었습니다.", message: nil, preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
-                        AuthenticationManager.shared.kakaoUnlinkAndSignOut()
                         AuthenticationManager.shared.signOut()
+                        AlarmCoreDataManager.shared.deleteAlarm()
                         let loginVC = UINavigationController(rootViewController: LoginViewController())
                         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                            let window = windowScene.windows.first {
@@ -356,5 +356,17 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         alertController.addAction(confirmAction)
 
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func completeLogout() {
+        AlarmCoreDataManager.shared.deleteAlarm()
+        DispatchQueue.main.async {
+            let loginVC = UINavigationController(rootViewController: LoginViewController())
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first {
+                window.rootViewController = loginVC
+                window.makeKeyAndVisible()
+            }
+        }
     }
 }
