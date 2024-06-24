@@ -124,7 +124,6 @@
 		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F4DFDB652C24509000564A51 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
-		F4DFDB672C25AB6400564A51 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerResultViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +169,7 @@
 		FF254A472C1C1EE300504C24 /* StudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimer.swift; sourceTree = "<group>"; };
 		FF254A4D2C1C384300504C24 /* StudyGaemi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyGaemi.entitlements; sourceTree = "<group>"; };
+		FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerModalVC.swift; sourceTree = "<group>"; };
 		FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		FF2B9ABD2C25A42400E231DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
 				FF0071982C08432E000AE7AA /* CustomFontType.swift */,
 				FF03F9012C16D55600134B54 /* GoogleService-Info.plist */,
-				F4DFDB672C25AB6400564A51 /* Secret.xcconfig */,
+				FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */,
 			);
 			path = StudyGaemi;
 			sourceTree = "<group>";
@@ -683,6 +683,7 @@
 		};
 		FF00715C2C074D88000AE7AA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -717,6 +718,7 @@
 		};
 		FF00715D2C074D88000AE7AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

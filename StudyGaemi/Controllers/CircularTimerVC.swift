@@ -7,20 +7,7 @@
 import Foundation
 import UIKit
 
-class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
-    func didFinishTimer() {
-        print()
-    }
-    
-    
-    func showTimerResult(goalTime: TimeInterval, elapsedTime: TimeInterval) {
-        print("showTimerResult")
-        let timerResultVC = TimerResultViewController()
-        timerResultVC.modalPresentationStyle = .fullScreen
-        timerResultVC.bind(goalT: goalTime, elapsedT: elapsedTime)
-        present(timerResultVC, animated: true, completion: nil)
-    }
-    
+class CircularTimerVC: UIViewController {
     
     
     private let countDownDurationSeconds: TimeInterval
@@ -43,9 +30,6 @@ class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        circularTimerView.delegate = self
         
         setupViews()
         addSubviews()
@@ -79,6 +63,8 @@ class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
         circularTimerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         circularTimerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         circularTimerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        
         
     }
 }
