@@ -2,18 +2,7 @@
   "images" : [
     {
       "filename" : "stopIcon 2.pdf",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "stopIcon 1.pdf",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "stopIcon.pdf",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "universal"
     }
   ],
   "info" : {

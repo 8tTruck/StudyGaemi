@@ -4,10 +4,29 @@
 //
 //  Created by 김준철 on 6/14/24.
 //
-import Foundation
-import UIKit
 
-class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
+import UIKit
+import Then
+import SnapKit
+
+class CircularTimerVC: BaseViewController, CircularTimerViewDelegate {
+    
+    private let titleLabel = UILabel().then {
+        $0.text = "공부하개미"
+        $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.textColor = UIColor(named: "fontBlack")
+    }
+    
+    private let imageView = UIImageView().then {
+        $0.image = UIImage(named: "mainAnt")
+        $0.contentMode = .scaleAspectFit
+    }
+    
+    private lazy var titleView = UIStackView(arrangedSubviews: [imageView, titleLabel]).then {
+        $0.axis = .horizontal
+        $0.spacing = 8
+    }
+    
     func showTimerResult(goalTime: TimeInterval, elapsedTime: TimeInterval) {
         print("showTimerResult")
         let timerResultVC = TimerResultViewController()
@@ -21,9 +40,6 @@ class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
         print("didFinishTimer")
     }
   
-    
-    
-    
     private let countDownDurationSeconds: TimeInterval
     private let startDate: Date
     
@@ -44,6 +60,9 @@ class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureUI()
+        constraintLayout()
+        
         circularTimerView.delegate = self
         
         setupViews()
@@ -51,6 +70,27 @@ class CircularTimerVC: UIViewController, CircularTimerViewDelegate {
         makeConstraints()
     }
     
+    override func configureUI() {
+        view.backgroundColor = UIColor(named: "viewBackgroundColor")
+        self.navigationItem.titleView = titleView
+        
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance().then {
+                $0.configureWithOpaqueBackground()
+                $0.backgroundColor = UIColor(named: "viewBackgroundColor") ?? .systemBackground
+                $0.shadowColor = UIColor(named: "navigationBarLine")
+            }
+            
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        }
+    }
+    
+    override func constraintLayout() {
+        imageView.snp.makeConstraints { make in
+            make.width.height.equalTo(22)
+        }
+    }
     init(startDate: Date, countDownDurationSeconds: TimeInterval) {
         self.startDate = startDate
         self.countDownDurationSeconds = countDownDurationSeconds

@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 
-class SettingTimerVC: UIViewController {
+class SettingTimerVC: BaseViewController {
     
     private let repeatingSecondsTimer: RepeatingSecondsTimer = RepeatingSecondsTimerImpl()
 
@@ -19,12 +21,30 @@ class SettingTimerVC: UIViewController {
         return picker
     }()
 
+    private let titleLabel = UILabel().then {
+        $0.text = "공부하개미"
+        $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.textColor = UIColor(named: "fontBlack")
+    }
     
-    private lazy var confirmButton: CustomButton = {
-        let button = CustomButton(x: 50, y: 50, width: 334, height: 53, radius: 10, title: "확인")
-        button.setTitle("공부 시작하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.white, for: .highlighted)
+    private let imageView = UIImageView().then {
+        $0.image = UIImage(named: "mainAnt")
+        $0.contentMode = .scaleAspectFit
+    }
+    
+    private lazy var titleView = UIStackView(arrangedSubviews: [imageView, titleLabel]).then {
+        $0.axis = .horizontal
+        $0.spacing = 8
+    }
+    
+    private lazy var confirmButton: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: 50, y: 50, width: 334, height: 53)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        
+        button.setImage(UIImage(named: "Image"), for: .normal)
+       
         button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
         return button
     }()
@@ -59,10 +79,33 @@ class SettingTimerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureUI()
+        constraintLayout()
         setupViews()
         addSubviews()
         setupLayout()
+    }
+    
+    override func configureUI() {
+        view.backgroundColor = UIColor(named: "viewBackgroundColor")
+        self.navigationItem.titleView = titleView
+        
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance().then {
+                $0.configureWithOpaqueBackground()
+                $0.backgroundColor = UIColor(named: "viewBackgroundColor") ?? .systemBackground
+                $0.shadowColor = UIColor(named: "navigationBarLine")
+            }
+            
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        }
+    }
+    
+    override func constraintLayout() {
+        imageView.snp.makeConstraints { make in
+            make.width.height.equalTo(22)
+        }
     }
     
     private func setupViews() {

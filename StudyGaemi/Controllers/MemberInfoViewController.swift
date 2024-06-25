@@ -92,8 +92,15 @@ class MemberInfoViewController: BaseViewController {
             alertController.addAction(confirmAction)
             self.present(alertController, animated: true, completion: nil)
             return
+        } else if newPassword == currentPassword {
+            let alertController = UIAlertController(title: "비밀번호 변경 오류", message: "기존 비밀번호와 동일합니다.", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+            return
         } else if !isPasswordValid(newPassword) {
-            memberInfoView.newPasswordLabel.text = "비밀번호는 영문 + 숫자 8자리 이상이어야 합니다."
+
+            memberInfoView.newPasswordLabel.text = "비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다."
             memberInfoView.newPasswordLabel.textColor = UIColor(named: "fontRed")
         } else {
             memberInfoView.confirmPasswordLabel.textColor = UIColor(named: "fontGray")
@@ -116,6 +123,7 @@ class MemberInfoViewController: BaseViewController {
             }
         }
     }
+
     
     @objc private func textFieldEditingChanged(_ textField: UITextField) {
         if textField.text?.isEmpty ?? true {
@@ -130,13 +138,13 @@ class MemberInfoViewController: BaseViewController {
     
     private func resetLabelsToDefaultState() {
         memberInfoView.currentPasswordLabel.textColor = UIColor(named: "fontGray")
-        memberInfoView.currentPasswordLabel.text = "영문 + 숫자 8자리 이상"
+        memberInfoView.currentPasswordLabel.text = "비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다."
         
         memberInfoView.newPasswordLabel.textColor = UIColor(named: "fontGray")
-        memberInfoView.newPasswordLabel.text = "영문 + 숫자 8자리 이상"
+        memberInfoView.newPasswordLabel.text = "비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다."
         
         memberInfoView.confirmPasswordLabel.textColor = UIColor(named: "fontGray")
-        memberInfoView.confirmPasswordLabel.text = "영문 + 숫자 8자리 이상"
+        memberInfoView.confirmPasswordLabel.text = "비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다."
     }
     
     private func updatePasswordLabels(ignoreNewPasswordField: Bool) {
@@ -153,7 +161,7 @@ class MemberInfoViewController: BaseViewController {
         if !confirmPasswordValid {
             memberInfoView.confirmPasswordLabel.text = "비밀번호가 일치하지 않습니다."
         } else {
-            memberInfoView.confirmPasswordLabel.text = "영문 + 숫자 8자리 이상"
+            memberInfoView.confirmPasswordLabel.text = "비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다."
         }
     }
     
