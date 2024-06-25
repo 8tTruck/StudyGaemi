@@ -727,6 +727,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FTV7NTFFYN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyGaemi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "공부하개미";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -766,6 +767,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FTV7NTFFYN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyGaemi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "공부하개미";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
