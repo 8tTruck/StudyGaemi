@@ -199,7 +199,7 @@ class TimerResultViewController: BaseViewController {
         
         goalTimeBackView.snp.makeConstraints { make in
             make.height.equalTo(30)
-            make.width.equalTo(162)
+            make.width.equalTo(180)
             make.centerX.equalToSuperview()
             //            make.top.equalToSuperview().offset(30)
         }
@@ -215,6 +215,7 @@ class TimerResultViewController: BaseViewController {
         todayView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
+            make.width.equalToSuperview()
         }
         
         
@@ -222,20 +223,20 @@ class TimerResultViewController: BaseViewController {
     
     @objc func didTappedCustomButton(){
         
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
         
         
         let bottomTabBarVC = BottomTabBarViewController()
         bottomTabBarVC.selectedIndex = 2
         
-        //            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-        //               let window = windowScene.windows.first {
-        //                window.rootViewController = bottomTabBarVC
-        //                window.makeKeyAndVisible()
-        //            }
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = bottomTabBarVC
+            window.makeKeyAndVisible()
+        }
         
-        //        bottomTabBarVC.modalPresentationStyle = .fullScreen
-        //        self.present(bottomTabBarVC, animated: true)
+        bottomTabBarVC.modalPresentationStyle = .fullScreen
+        self.present(bottomTabBarVC, animated: true)
         
     }
     
@@ -246,10 +247,9 @@ class TimerResultViewController: BaseViewController {
     
     private func setTimeData(){
         
-        //print("\(elapsedTime.formattedTime)")
+        let elapsedTimeText = elapsedTime.formattedTime
         goalTimeLabel.text = "\(goalTime.formattedTime)"
-        todayTimeLabel.text = "\(elapsedTime.formattedTime)"
-        
+        todayTimeLabel.text = "\(elapsedTimeText)"
         
         if goalTime <= elapsedTime {    //성공
             result = .success
