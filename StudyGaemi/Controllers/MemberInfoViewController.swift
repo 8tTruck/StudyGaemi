@@ -99,6 +99,7 @@ class MemberInfoViewController: BaseViewController {
             self.present(alertController, animated: true, completion: nil)
             return
         } else if !isPasswordValid(newPassword) {
+
             memberInfoView.newPasswordLabel.text = "비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다."
             memberInfoView.newPasswordLabel.textColor = UIColor(named: "fontRed")
         } else {

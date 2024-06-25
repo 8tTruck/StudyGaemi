@@ -28,17 +28,17 @@ class BugReportView: UIView {
     private func setupViews() {
         backgroundColor = UIColor(named: "viewBackgroundColor")
         
-        bugReportView.backgroundColor = UIColor(named: "viewBackgroundColor")
+        bugReportView.backgroundColor = UIColor(named: "viewBackgroundColor2")
         bugReportView.layer.cornerRadius = 10
         bugReportView.layer.shadowColor = UIColor.black.cgColor
-        bugReportView.layer.shadowOpacity = 0.1
+        bugReportView.layer.shadowOpacity = 0.3
         bugReportView.layer.shadowOffset = CGSize(width: 0, height: 2)
         bugReportView.layer.shadowRadius = 4
         
         textView.text = "오류 및 버그를 작성 후 제출버튼을 눌러주세요."
         textView.textColor = UIColor(named: "fontGray")
         textView.font = UIFont(name: "Pretendard-Regular", size: 16)
-        textView.backgroundColor = UIColor(named: "viewBackgroundColor")
+        textView.backgroundColor = UIColor(named: "viewBackgroundColor2")
         textView.isScrollEnabled = true
         
         submitButton.addTarget(nil, action: #selector(BugReportViewController.submitButtonTapped), for: .touchUpInside)
