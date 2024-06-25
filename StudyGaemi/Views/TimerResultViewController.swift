@@ -199,7 +199,7 @@ class TimerResultViewController: BaseViewController {
         
         goalTimeBackView.snp.makeConstraints { make in
             make.height.equalTo(30)
-            make.width.equalTo(162)
+            make.width.equalTo(180)
             make.centerX.equalToSuperview()
             //            make.top.equalToSuperview().offset(30)
         }
@@ -215,6 +215,7 @@ class TimerResultViewController: BaseViewController {
         todayView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
+            make.width.equalToSuperview()
         }
         
         
@@ -246,10 +247,9 @@ class TimerResultViewController: BaseViewController {
     
     private func setTimeData(){
         
-        //print("\(elapsedTime.formattedTime)")
+        let elapsedTimeText = elapsedTime.formattedTime
         goalTimeLabel.text = "\(goalTime.formattedTime)"
-        todayTimeLabel.text = "\(elapsedTime.formattedTime)"
-        
+        todayTimeLabel.text = "\(elapsedTimeText)"
         
         if goalTime <= elapsedTime {    //성공
             result = .success

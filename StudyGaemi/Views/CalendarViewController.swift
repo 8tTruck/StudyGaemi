@@ -310,7 +310,6 @@ class CalendarViewController: BaseViewController {
         firestoreManager.readAlertData { result in
             switch result {
             case .success(let data):
-                print("Alert Data \(data)")
                 let today = Date()
                 let calendar = Calendar.current
                 
