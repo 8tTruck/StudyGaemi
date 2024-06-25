@@ -13,7 +13,7 @@ class SettingView: UIView {
     
     let titleLabel = UILabel().then {
         $0.text = "개ME"
-        $0.font = UIFont(name: "Pretendard-Regular", size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
     

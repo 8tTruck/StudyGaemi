@@ -34,7 +34,7 @@ class DatePickerModalVC: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "viewBackgroundColor")
     }
     
     private func addSubviews() {

@@ -141,6 +141,7 @@ class CircularTimerView: UIView {
         setupViews()
     }
     private func addSubviews() {
+        self.backgroundColor = UIColor(named: "viewBackgroundColor")
         layer.addSublayer(trackLayer)
         layer.addSublayer(barLayer)
         layer.addSublayer(movingCircleLayer)

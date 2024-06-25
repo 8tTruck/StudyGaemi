@@ -23,9 +23,9 @@ class BottomTabBarViewController: UITabBarController {
     customTabBarView.backgroundColor = UIColor(named: "tabBarBackground")
     customTabBarView.layer.cornerRadius = 16
     customTabBarView.layer.shadowColor = UIColor(named: "pointDarkgray")?.cgColor
-    customTabBarView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-    customTabBarView.layer.shadowRadius = 3.0
-    customTabBarView.layer.shadowOpacity = 0.7
+    customTabBarView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+    customTabBarView.layer.shadowRadius = 5.0
+    customTabBarView.layer.shadowOpacity = 0.15
     // 탭바에 customTabBarView 추가
     self.tabBar.addSubview(customTabBarView)
     // 탭바 아이템의 위치 설정

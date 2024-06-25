@@ -61,9 +61,9 @@ class AlarmViewController: BaseViewController {
         $0.backgroundColor = UIColor(named: "alertBackgroundColor")
         $0.layer.cornerRadius = 23
         $0.layer.shadowColor = UIColor(named: "pointBlack")?.cgColor
-        $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        $0.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         $0.layer.shadowRadius = 5.0
-        $0.layer.shadowOpacity = 0.3
+        $0.layer.shadowOpacity = 0.15
     }
     
     private let notificationStackView = UIStackView().then {
@@ -167,7 +167,7 @@ class AlarmViewController: BaseViewController {
         }
         
         alarmView.snp.makeConstraints { make in
-            make.top.equalTo(alarmButton.snp.bottom).offset(49)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(121)
             make.centerX.equalToSuperview()
             make.width.equalTo(312)
             make.height.equalTo(66)

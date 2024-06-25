@@ -7,6 +7,7 @@
 
 import AVFoundation
 import BackgroundTasks
+import FirebaseAuth
 import FirebaseCore
 import UserNotifications
 import UIKit
@@ -42,10 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AudioController.shared.setupAudioSession()
         
         UINavigationBar.appearance().tintColor = .pointOrange
-        
-        //Appcheck 인증제공자 설정
-//        let providerFactory = AppCheckDebugProviderFactory()
-//        AppCheck.setAppCheckProviderFactory(providerFactory)
 
         return true
     }

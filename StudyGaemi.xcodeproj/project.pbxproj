@@ -18,12 +18,10 @@
 		3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */; };
 		3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */; };
 		3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */; };
-		5255F2B32C0E63CD006FEE4B /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */; };
 		5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */; };
 		5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */; };
 		5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */; };
 		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
-		B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */; };
 		F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */; };
 		F4AF2A592C19944C00553A20 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A582C19944C00553A20 /* FirebaseAnalytics */; };
 		F4AF2A5B2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5A2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -116,12 +114,10 @@
 		3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportViewController.swift; sourceTree = "<group>"; };
 		3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
 		5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmViewController.swift; sourceTree = "<group>"; };
 		5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePasswordViewController.swift; sourceTree = "<group>"; };
 		5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountSuccessViewController.swift; sourceTree = "<group>"; };
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEndVirewController.swift; sourceTree = "<group>"; };
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F4DFDB652C24509000564A51 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
@@ -293,35 +289,15 @@
 		FF0071832C08256A000AE7AA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FF254A412C1C1DC400504C24 /* CircularTimerView.swift */,
+				FF2B9AC32C2A9CFC00E231DE /* Setting */,
+				FF2B9AC22C2A9CDF00E231DE /* Calendar */,
+				FF2B9AC12C2A9CBD00E231DE /* Study */,
+				FF2B9AC02C2A9C7E00E231DE /* Alarm */,
+				FF2B9ABF2C2A9C5B00E231DE /* Login */,
 				FF0071762C074E0C000AE7AA /* BaseViewController.swift */,
 				FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */,
-				FF00717A2C075429000AE7AA /* AlarmViewController.swift */,
-				B5FCAE132C0EFF5D00E24130 /* StudyEndVirewController.swift */,
-				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
-				FF254A472C1C1EE300504C24 /* StudyViewController.swift */,
-				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
-				5275296A2C0D95F10002513F /* CreateAccountViewController.swift */,
-				5255F2B22C0E63CD006FEE4B /* EmailInputViewController.swift */,
-				5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */,
-				5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */,
-				5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */,
 				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
 				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
-				FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */,
-				FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */,
-				F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */,
-				F4E050002C0EA02900802477 /* CalendarCell.swift */,
-				F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */,
-				FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */,
-				FF931A632C12BC4700AD1513 /* AlarmResultView.swift */,
-				F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */,
-				3F6270A42C23C5E300BBA2D2 /* AnnouncementView.swift */,
-				3F6270A22C23C54000BBA2D2 /* BottomSheetView.swift */,
-				3F6270A62C23C64900BBA2D2 /* BugReportView.swift */,
-				3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */,
-				3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */,
-				3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -353,6 +329,64 @@
 				FF00718A2C0840D5000AE7AA /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FF2B9ABF2C2A9C5B00E231DE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
+				5275296A2C0D95F10002513F /* CreateAccountViewController.swift */,
+				5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */,
+				5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */,
+				5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		FF2B9AC02C2A9C7E00E231DE /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				FF00717A2C075429000AE7AA /* AlarmViewController.swift */,
+				FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */,
+				FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */,
+				FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */,
+				FF931A632C12BC4700AD1513 /* AlarmResultView.swift */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
+		FF2B9AC12C2A9CBD00E231DE /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				FF254A412C1C1DC400504C24 /* CircularTimerView.swift */,
+				FF254A472C1C1EE300504C24 /* StudyViewController.swift */,
+				F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		FF2B9AC22C2A9CDF00E231DE /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
+				F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */,
+				F4E050002C0EA02900802477 /* CalendarCell.swift */,
+				F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		FF2B9AC32C2A9CFC00E231DE /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3F6270A42C23C5E300BBA2D2 /* AnnouncementView.swift */,
+				3F6270A22C23C54000BBA2D2 /* BottomSheetView.swift */,
+				3F6270A62C23C64900BBA2D2 /* BugReportView.swift */,
+				3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */,
+				3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */,
+				3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		FF875F642C10473600A5D534 /* Wavs */ = {
@@ -503,7 +537,6 @@
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
 				3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */,
-				5255F2B32C0E63CD006FEE4B /* EmailInputViewController.swift in Sources */,
 				FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */,
@@ -523,7 +556,6 @@
 				FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */,
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
-				B5FCAE142C0EFF5D00E24130 /* StudyEndVirewController.swift in Sources */,
 				3F6270A32C23C54000BBA2D2 /* BottomSheetView.swift in Sources */,
 				FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */,
 				3F6270A52C23C5E300BBA2D2 /* AnnouncementView.swift in Sources */,
@@ -710,9 +742,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Gaemi Dev";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -745,9 +781,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Gaemi Dev";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

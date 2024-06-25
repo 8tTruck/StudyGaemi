@@ -109,7 +109,7 @@ class SettingTimerVC: BaseViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "viewBackgroundColor")
     }
     
     private func addSubviews() {
