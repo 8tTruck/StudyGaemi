@@ -13,6 +13,7 @@ class BottomSheetView: UIView {
     let containerView = UIView()
     let titleLabel = UILabel()
     let textField = CustomTextField()
+    let deleteAccountButton = UIButton(type: .system)
     let confirmButton = CustomButton(title: "확인")
     let cancelButton = UIButton(type: .system)
     let dragBar = UIView()
@@ -41,6 +42,10 @@ class BottomSheetView: UIView {
         
         textField.placeholder = "변경할 닉네임을 입력해주개미"
         
+        deleteAccountButton.setTitle("회원탈퇴", for: .normal)
+                deleteAccountButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                deleteAccountButton.setTitleColor(.lightGray, for: .normal)
+        
         cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         cancelButton.tintColor = .gray
         
@@ -48,6 +53,7 @@ class BottomSheetView: UIView {
         containerView.addSubview(dragBar)
         containerView.addSubview(titleLabel)
         containerView.addSubview(textField)
+        containerView.addSubview(deleteAccountButton)
         containerView.addSubview(confirmButton)
         containerView.addSubview(cancelButton)
     }
@@ -55,7 +61,7 @@ class BottomSheetView: UIView {
     private func setupConstraints() {
         containerView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalTo(self).inset(10)
-            make.height.equalTo(200)
+            make.height.equalTo(250)
         }
         
         dragBar.snp.makeConstraints { make in
@@ -81,8 +87,13 @@ class BottomSheetView: UIView {
             make.height.equalTo(60)
         }
         
+        deleteAccountButton.snp.makeConstraints { make in
+            make.top.equalTo(textField.snp.bottom).offset(10)
+            make.leading.trailing.equalTo(containerView).inset(20)
+        }
+        
         confirmButton.snp.makeConstraints { make in
-            make.top.equalTo(textField.snp.bottom).offset(20)
+            make.top.equalTo(textField.snp.bottom).offset(40)
             make.leading.trailing.equalTo(containerView).inset(20)
             make.height.equalTo(44)
         }

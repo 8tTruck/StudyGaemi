@@ -47,7 +47,7 @@ class BottomTabBarViewController: UITabBarController {
     calendarViewController.tabBarItem.title = "월간개미"
     let settingViewController = UINavigationController(rootViewController: SettingViewController())
     settingViewController.tabBarItem.image = UIImage(systemName: "person")
-    settingViewController.tabBarItem.title = "개Me"
+    settingViewController.tabBarItem.title = "개ME"
     viewControllers = [alarmViewController, studyViewController, calendarViewController, settingViewController]
   }
   private func constraintLayout() {
