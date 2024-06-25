@@ -33,7 +33,9 @@ class StudyViewController: BaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad() // 호출되는 순서에 대해 생각해
-        
+        // UI 구성 및 제약 조건 설정
+        self.configureUI()
+        self.constraintLayout()
         
         // CircularTimerView 추가
         let circularTimerView = CircularTimerView(progressColors: .init(), duration: .zero, startDate: Date())
@@ -45,12 +47,6 @@ class StudyViewController: BaseViewController {
         circularTimerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         circularTimerView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
 
-        
-        // UI 구성 및 제약 조건 설정
-        self.configureUI()
-        self.constraintLayout()
-        
-        
     }
     
     
