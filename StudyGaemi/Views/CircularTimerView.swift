@@ -98,22 +98,31 @@ class CircularTimerView: UIView {
         layer.fillColor = progressColors.cutecircleColor.cgColor
         return layer
     }()
-    private lazy var pauseButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var pauseButton: UIButton = {
+        let button = UIButton()
         button.setTitle("Pause", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.setImage(UIImage(named: "Pause"), for: .normal)
+        
+        
+        
         button.addTarget(self, action: #selector(pauseOrResumeTimer), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 224, height: 70)
         return button
     }()
-    private lazy var stopButton: CustomButton = {
-        let button = CustomButton()
+    private lazy var stopButton: UIButton = {
+        let button = UIButton()
+        
         button.setTitle("Stop", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.setImage(UIImage(named: "Stop"), for: .normal)
+        
+        
         button.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
         return button
     }()
+
     init(progressColors: ProgressColors, duration: TimeInterval, startDate: Date) {
         self.progressColors = progressColors
         self.leftSeconds = duration
@@ -139,11 +148,13 @@ class CircularTimerView: UIView {
         addSubview(timeLabel)
         addSubview(pauseButton)
         addSubview(stopButton)
+        
         pauseButton.translatesAutoresizingMaskIntoConstraints = false
         pauseButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 50) .isActive = true
-        pauseButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100) .isActive = true
+        pauseButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -120) .isActive = true
         pauseButton.widthAnchor.constraint(equalToConstant: 224).isActive = true
         pauseButton.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        
         stopButton.translatesAutoresizingMaskIntoConstraints = false
         stopButton.trailingAnchor.constraint(equalTo: pauseButton.leadingAnchor, constant: -20).isActive = true
         stopButton.centerYAnchor.constraint(equalTo: pauseButton.centerYAnchor).isActive = true
@@ -243,15 +254,33 @@ class CircularTimerView: UIView {
          timer?.invalidate()
          }*/
     }
+//    @objc private func pauseOrResumeTimer() {
+//        if isRunning {
+//            pauseTimer()
+//            pauseButton.setTitle("Resume", for: .normal)
+//        } else {
+//            resumeTimer()
+//            pauseButton.setTitle("Pause", for: .normal)
+//        }
+//    }
     @objc private func pauseOrResumeTimer() {
         if isRunning {
             pauseTimer()
-            pauseButton.setTitle("Resume", for: .normal)
+            if let resumeImage = UIImage(named: "Resume") {
+                pauseButton.setImage(resumeImage, for: .normal)
+            } else {
+                print("Resume 이미지를 찾을 수 없습니다.")
+            }
         } else {
             resumeTimer()
-            pauseButton.setTitle("Pause", for: .normal)
+            if let pauseImage = UIImage(named: "Pause") {
+                pauseButton.setImage(pauseImage, for: .normal)
+            } else {
+                print("Pause 이미지를 찾을 수 없습니다.")
+            }
         }
     }
+
     private func pauseLayer(layer: CALayer) {
         let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
         layer.speed = 0.0

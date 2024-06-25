@@ -37,11 +37,14 @@ class SettingTimerVC: BaseViewController {
         $0.spacing = 8
     }
     
-    private lazy var confirmButton: CustomButton = {
-        let button = CustomButton(x: 50, y: 50, width: 334, height: 53, radius: 10, title: "확인")
-        button.setTitle("공부 시작하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.white, for: .highlighted)
+    private lazy var confirmButton: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: 50, y: 50, width: 334, height: 53)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        
+        button.setImage(UIImage(named: "Image"), for: .normal)
+       
         button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
         return button
     }()
