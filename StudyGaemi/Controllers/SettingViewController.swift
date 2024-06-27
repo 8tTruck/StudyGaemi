@@ -68,7 +68,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     @objc private func nicknameDidUpdate(notification: Notification) {
         if let nickname = notification.userInfo?["nickname"] as? String {
-            settingView.userLabel.text = nickname
+            settingView.userLabel.text = "\(nickname) \(AuthenticationManager.shared.generateNickNameCode())"
             saveNicknameToFirestore(nickname)
         }
     }
@@ -93,7 +93,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         userRef.getDocument { [weak self] document, error in
             if let document = document, document.exists {
                 let data = document.data()
-                let nickname = data?["nickName"] as? String ?? "Unknown"
+                let nickname = "\(data?["nickName"] ?? "User") \(AuthenticationManager.shared.generateNickNameCode())"
                 let email = data?["email"] as? String ?? "Unknown"
                 self?.settingView.userLabel.text = nickname
                 
