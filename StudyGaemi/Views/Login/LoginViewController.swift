@@ -25,14 +25,11 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     let loginImage = UIImageView()
     let emailTextField = CustomTextField(text: "E-mail")
     let passwordTextField = CustomTextField(text: "Password")
-//    let autoLoginButton = UIButton()
-//    let autoLoginLabel = UILabel()
     let loginButton = CustomButton(title: "Login")
     let findIDButton = UIButton()
     let findPWButton = UIButton()
     let separatorView = UIView()
     let orLabel = UILabel()
-//    let loginAppleButton = ASAuthorizationAppleIDButton(type: .default, style: .black)
     let appleLoginButton = UIButton()
     let kakaoLoginButton = UIButton()
     let signupLabel = UILabel()
@@ -40,33 +37,11 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        autoLogin()
+        navigateToLoginScreen()
         hideKeyboardWhenTappedAround()
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-    }
-    
-    func autoLogin() {
-        if let user = Auth.auth().currentUser {
-            AuthenticationManager.shared.checkEmailVerifiedForLogin { isEmailVerified in
-                if isEmailVerified {
-                    print("자동 로그인 성공: \(user.email ?? "")")
-                    self.navigateToMainScreen()
-                } else {
-                    FirestoreManager.shared.getLoginMethod { loginMethod in
-                        if loginMethod == "kakao" {
-                            self.navigateToMainScreen()
-                        } else {
-                            self.navigateToLoginScreen()
-                        }
-                    }
-                }
-            }
-        } else {
-            navigateToLoginScreen()
-        }
     }
     
     func showEmailVerificationAlert() {
@@ -75,23 +50,116 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         self.present(alert, animated: true, completion: nil)
     }
     
-    func navigateToMainScreen() {
-        moveToBottomTabBarController()
-    }
-    
     func navigateToLoginScreen() {
         view.backgroundColor = UIColor(named: "viewBackgroundColor")
-        loginImageSetting()
-        loginTextFieldSetting()
-//        autoLoginSetting()
-        loginButtonSetting()
-//        loginAppleButtonSetting()
+        
+        loginImage.image = UIImage(named: "heartAnt")
+        
+        view.addSubview(loginImage)
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(loginButton)
+        view.addSubview(separatorView)
+        view.addSubview(orLabel)
+        view.addSubview(appleLoginButton)
+        view.addSubview(kakaoLoginButton)
+        
+        loginImage.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.6) // 슈퍼뷰 너비의 80%
+            make.height.equalTo(loginImage.snp.width).multipliedBy(1 / 1.6) // 가로세로 비율 1.8:1 유지
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+        }
+        
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.textContentType = .oneTimeCode
+        
+        emailTextField.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        passwordTextField.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        
+        emailTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(loginImage.snp.bottom).offset(28)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
+            make.height.equalTo(60)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(emailTextField.snp.bottom).offset(12)
+            make.leading.equalTo(emailTextField.snp.leading)
+            make.trailing.equalTo(emailTextField.snp.trailing)
+            make.height.equalTo(60)
+        }
+        
+        // 애니메이션 추가
+        loginButton.addTouchAnimation()
+        
+        loginButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
+            make.leading.equalTo(emailTextField.snp.leading)
+            make.trailing.equalTo(emailTextField.snp.trailing)
+            make.height.equalTo(60)
+        }
+        
+        // 로그인 버튼에 액션 추가
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        
         findAccountSetting()
         createAccountSetting()
-        separatorViewSetting()
-        orLabelSetting()
-        appleLoginButtonSetting()
-        kakaoLoginButtonSetting()
+        
+        separatorView.backgroundColor = UIColor.lightGray
+        
+        separatorView.snp.makeConstraints { make in
+            make.top.equalTo(signupLabel.snp.bottom).offset(20.5)
+            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
+            make.height.equalTo(1)
+        }
+        
+        orLabel.text = "or"
+        orLabel.textColor = .lightGray
+        orLabel.backgroundColor = UIColor(named: "viewBackgroundColor")
+        orLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        orLabel.textAlignment = .center
+        
+        orLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(separatorView.snp.centerY)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(30)
+        }
+        
+        appleLoginButton.snp.makeConstraints { make in
+            make.top.equalTo(orLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(300)
+            make.height.equalTo(45)
+        }
+        appleLoginButton.addTouchAnimation()
+        appleLoginButton.layer.cornerRadius = 12
+        let appleLoginImage = UIImage(named: "apple")
+        appleLoginButton.setBackgroundImage(appleLoginImage, for: .normal)
+        appleLoginButton.layer.borderWidth = 1
+        applyCommonSettings(to: appleLoginButton)
+        
+        appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
+        
+        kakaoLoginButton.snp.makeConstraints { make in
+            make.width.equalTo(300)
+            make.height.equalTo(45)
+            make.top.equalTo(appleLoginButton.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        kakaoLoginButton.addTouchAnimation()
+        kakaoLoginButton.layer.cornerRadius = 12
+        let kakaoLoginImage = UIImage(named: "kakao")
+        kakaoLoginButton.setBackgroundImage(kakaoLoginImage, for: .normal)
+        applyCommonSettings(to: kakaoLoginButton)
+
+        kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -105,9 +173,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         return true
     }
     
-//    FirestoreManager.shared.createUserData(email: email, nickName: email, loginMethod: "apple")
-//    AuthenticationManager.shared.createUser(email: email, password: password)
-    
     @objc func appleLoginButtonTapped() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -118,11 +183,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-
-    //    func loginAppleButtonSetting() {
-    //        view.addSubview(loginAppleButton)
-    //        loginAppleButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
-    //    }
 
     // MARK: - ASAuthorizationControllerDelegate Methods
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
@@ -158,7 +218,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
                     AuthenticationManager.shared.signInWithApple(credential: credential, email: email, nickName: nickName) { result in
                         switch result {
                         case .success(_):
-                            self.navigateToMainScreen()
+                            self.moveToBottomTabBarController()
                         case .failure(let error):
                             print(error)
                         }
@@ -185,91 +245,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
 
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
-    }
-
-
-    
-    func loginImageSetting() {
-        loginImage.image = UIImage(named: "heartAnt")
-        view.addSubview(loginImage)
-        
-        loginImage.snp.makeConstraints { make in
-//            make.width.equalTo(208)
-//            make.height.equalTo(124)
-            make.width.equalToSuperview().multipliedBy(0.6) // 슈퍼뷰 너비의 80%
-            make.height.equalTo(loginImage.snp.width).multipliedBy(1 / 1.6) // 가로세로 비율 1.8:1 유지
-            make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
-        }
-    }
-    
-    func loginTextFieldSetting() {
-        view.addSubview(emailTextField)
-        view.addSubview(passwordTextField)
-        
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.textContentType = .oneTimeCode
-        
-        emailTextField.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
-        passwordTextField.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
-        
-        emailTextField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(loginImage.snp.bottom).offset(28)
-//            make.width.equalTo(342)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(60)
-        }
-        
-        passwordTextField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(emailTextField.snp.bottom).offset(12)
-//            make.width.equalTo(342)
-            make.leading.equalTo(emailTextField.snp.leading)
-            make.trailing.equalTo(emailTextField.snp.trailing)
-            make.height.equalTo(60)
-        }
-    }
-    
-//    func autoLoginSetting() {
-//        view.addSubview(autoLoginButton)
-//        view.addSubview(autoLoginLabel)
-//        
-//        autoLoginButton.setImage(offImage, for: .normal)
-//        autoLoginButton.addTarget(self, action: #selector(autoLoginButtonTapped), for: .touchUpInside)
-//        autoLoginLabel.text = "자동 로그인"
-//        autoLoginLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
-//        
-//        autoLoginButton.snp.makeConstraints { make in
-//            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
-//            make.leading.equalTo(passwordTextField.snp.leading)
-//            make.height.equalTo(40)
-//            make.width.equalTo(40)
-//        }
-//        
-//        autoLoginLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(autoLoginButton.snp.trailing)
-//            make.centerY.equalTo(autoLoginButton.snp.centerY)
-//        }
-//    }
-    
-    func loginButtonSetting() {
-        view.addSubview(loginButton)
-        // 애니메이션 추가
-        loginButton.addTouchAnimation()
-        
-        loginButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
-//            make.width.equalTo(342)
-            make.leading.equalTo(emailTextField.snp.leading)
-            make.trailing.equalTo(emailTextField.snp.trailing)
-            make.height.equalTo(60)
-        }
-        
-        // 로그인 버튼에 액션 추가
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
     func findAccountSetting() {
@@ -350,46 +325,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             }
         }
     }
-
-    
-//    @objc func findIDButtonTapped() {
-//        let alert = UIAlertController(title: "ID 찾기", message: "이메일 주소를 입력해 주세요.", preferredStyle: .alert)
-//        alert.addTextField { textField in
-//            textField.placeholder = "E-mail"
-//        }
-//        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
-//        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
-//            guard let email = alert.textFields?.first?.text, !email.isEmpty else {
-//                self?.showAlert(message: "이메일 주소를 입력해 주세요.")
-//                return
-//            }
-//            
-//            // 이메일이 서버에 존재하는지 확인
-//            AuthenticationManager.shared.checkIfUserExists(email: email) { [weak self] exists in
-//                guard let self = self else { return }
-//                
-//                if exists {
-//                    // 이미 가입된 계정이 있는 경우
-//                    self.showAlert(message: "해당 이메일로 이미 가입된 계정이 존재합니다.")
-//                    print("LoginVC : 해당 이메일로 가입된 계정이 있습니다.")
-//                } else {
-//                    // 가입된 계정이 없는 경우
-//                    self.showAlert(message: "해당 이메일로 가입된 계정을 찾을 수 없습니다.")
-//                    print("LoginVC : 해당 이메일로 가입된 계정이 없습니다.")
-//                }
-//            }
-//        }))
-//        present(alert, animated: true, completion: nil)
-//    }
-
-    func showAlert(message: String) {
-        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-
-
-
     
     @objc func findPWButtonTapped() {
         let alert = UIAlertController(title: "비밀번호 찾기", message: "이메일 주소를 입력해 주세요.", preferredStyle: .alert)
@@ -412,7 +347,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         }))
         present(alert, animated: true, completion: nil)
     }
-
     
     func createAccountSetting() {
         // 스택뷰 생성 및 설정
@@ -453,76 +387,12 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         createAccountButton.addTarget(self, action: #selector(createAccountButtonTapped), for: .touchUpInside)
     }
     
-    func separatorViewSetting() {
-        separatorView.backgroundColor = UIColor.lightGray
-        view.addSubview(separatorView)
-        
-        separatorView.snp.makeConstraints { make in
-            make.top.equalTo(signupLabel.snp.bottom).offset(20.5)
-            make.centerX.equalToSuperview()
-//            make.width.equalTo(335)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(1)
-        }
-    }
-    
-    func orLabelSetting() {
-        orLabel.text = "or"
-        orLabel.textColor = .lightGray
-        orLabel.backgroundColor = UIColor(named: "viewBackgroundColor")
-        orLabel.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
-        orLabel.textAlignment = .center
-        view.addSubview(orLabel)
-        
-        orLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(separatorView.snp.centerY)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(30)
-        }
-    }
-    
-    func appleLoginButtonSetting() {
-        view.addSubview(appleLoginButton)
-        appleLoginButton.snp.makeConstraints { make in
-            make.top.equalTo(orLabel.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(300)
-            make.height.equalTo(45)
-        }
-        appleLoginButton.addTouchAnimation()
-        appleLoginButton.layer.cornerRadius = 12
-        let backgroundImage = UIImage(named: "apple")
-        appleLoginButton.setBackgroundImage(backgroundImage, for: .normal)
-        appleLoginButton.layer.borderWidth = 1
-        applyCommonSettings(to: appleLoginButton)
-        
-        appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
-    }
-        
-    func kakaoLoginButtonSetting() {
-        view.addSubview(kakaoLoginButton)
-        kakaoLoginButton.snp.makeConstraints { make in
-            make.width.equalTo(300)
-            make.height.equalTo(45)
-            make.top.equalTo(appleLoginButton.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
-        }
-        kakaoLoginButton.addTouchAnimation()
-        kakaoLoginButton.layer.cornerRadius = 12
-        let backgroundImage = UIImage(named: "kakao")
-        kakaoLoginButton.setBackgroundImage(backgroundImage, for: .normal)
-        applyCommonSettings(to: kakaoLoginButton)
-
-        kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
-    }
-    
     @objc func kakaoLoginButtonTapped() {
         AuthenticationManager.shared.kakaoAuthSignIn { result in
             switch result {
             case .success(_):
                 print("카카오 로그인 성공")
-                self.navigateToMainScreen()
+                self.moveToBottomTabBarController()
             case .failure(let error):
                 print("카카오 로그인 에러: \(error)")
             }
@@ -537,16 +407,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .center
     }
-    
-//    @objc func autoLoginButtonTapped() {
-//        
-//        if autoLoginButton.imageView?.image == offImage {
-//            autoLoginButton.setImage(onImage, for: .normal)
-//        } else {
-//            autoLoginButton.setImage(offImage, for: .normal)
-//        }
-//        
-//    }
     
     @objc func loginButtonTapped() {
         guard let email = emailTextField.text, !email.isEmpty,
@@ -582,10 +442,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     }
     
     @objc func createAccountButtonTapped() {
-        moveNextVC()
-    }
-    
-    func moveNextVC() {
         let nextVC = MakePasswordViewController()
         nextVC.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -598,6 +454,12 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             window.rootViewController = bottomTabBarVC
             window.makeKeyAndVisible()
         }
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 
