@@ -132,9 +132,14 @@ extension SceneDelegate {
                     print("자동 로그인 실패. else 시작")
                     FirestoreManager.shared.getLoginMethod { loginMethod in
                         if loginMethod == "kakao" {
-                            print("카카오 계정임")
-                            self.isLogined = true
-                            self.navigateToMainScreen()
+                            if AuthApi.hasToken() {
+                                print("카카오 자동 로그인 성공")
+                                self.isLogined = true
+                                self.navigateToMainScreen()
+                            } else {
+                                self.navigateToLoginScreen()
+                            }
+                            
                         } else {
                             print("카카오 계정 이외의 알 수 없는 무언가")
                             self.navigateToLoginScreen()
