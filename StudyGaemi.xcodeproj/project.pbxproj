@@ -39,7 +39,6 @@
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
 		FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */; };
-		FF0071572C074D88000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF0071562C074D88000AE7AA /* Base */; };
 		FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF00715F2C074DAD000AE7AA /* SnapKit */; };
 		FF0071632C074DB7000AE7AA /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071622C074DB7000AE7AA /* Then */; };
 		FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071652C074DCD000AE7AA /* KakaoSDK */; };
@@ -129,7 +128,6 @@
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FF00714E2C074D86000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF0071512C074D86000AE7AA /* StudyGaemi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyGaemi.xcdatamodel; sourceTree = "<group>"; };
-		FF0071562C074D88000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF0071582C074D88000AE7AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0071762C074E0C000AE7AA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarViewController.swift; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 				FF00714D2C074D86000AE7AA /* Main.storyboard */,
 				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
 				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
-				FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */,
 				FF0071582C074D88000AE7AA /* Info.plist */,
 				FF2B9ABD2C25A42400E231DE /* Assets.xcassets */,
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
@@ -490,7 +487,6 @@
 				FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */,
 				FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */,
 				FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */,
-				FF0071572C074D88000AE7AA /* Base in Resources */,
 				FF03F8FC2C169F8D00134B54 /* 알림음 4.wav in Resources */,
 				FF2B9ABE2C25A42400E231DE /* Assets.xcassets in Resources */,
 				FF03F8FA2C169F8D00134B54 /* 알림음 2.wav in Resources */,
@@ -581,14 +577,6 @@
 				FF00714E2C074D86000AE7AA /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF0071562C074D88000AE7AA /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
