@@ -7,12 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F6270A32C23C54000BBA2D2 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A22C23C54000BBA2D2 /* BottomSheetView.swift */; };
+		3F6270A52C23C5E300BBA2D2 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A42C23C5E300BBA2D2 /* AnnouncementView.swift */; };
+		3F6270A72C23C64900BBA2D2 /* BugReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A62C23C64900BBA2D2 /* BugReportView.swift */; };
+		3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */; };
+		3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */; };
+		3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */; };
+		3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */; };
+		3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */; };
+		3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */; };
+		3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */; };
+		3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */; };
+		5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */; };
+		5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */; };
+		5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */; };
+		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
+		F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */; };
+		F4AF2A592C19944C00553A20 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A582C19944C00553A20 /* FirebaseAnalytics */; };
+		F4AF2A5B2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5A2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion */; };
+		F4AF2A5D2C19944C00553A20 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5C2C19944C00553A20 /* FirebaseAnalyticsSwift */; };
+		F4AF2A5F2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5E2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		F4AF2A612C19944C00553A20 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A602C19944C00553A20 /* FirebaseAppCheck */; };
+		F4DFDB662C24509000564A51 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DFDB652C24509000564A51 /* AlertModel.swift */; };
+		F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F4E04FFA2C0D8DE900802477 /* FSCalendar */; };
+		F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */; };
+		F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E050002C0EA02900802477 /* CalendarCell.swift */; };
+		F4E69C652C22AA9D00289A8F /* TimerResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */; };
+		F4EDEB4B2C1994D50038819D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F4EDEB4A2C1994D50038819D /* FirebaseFirestore */; };
+		F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */; };
 		FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071472C074D86000AE7AA /* AppDelegate.swift */; };
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
 		FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */; };
-		FF0071542C074D88000AE7AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF0071532C074D88000AE7AA /* Assets.xcassets */; };
-		FF0071572C074D88000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF0071562C074D88000AE7AA /* Base */; };
 		FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF00715F2C074DAD000AE7AA /* SnapKit */; };
 		FF0071632C074DB7000AE7AA /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071622C074DB7000AE7AA /* Then */; };
 		FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071652C074DCD000AE7AA /* KakaoSDK */; };
@@ -26,7 +52,6 @@
 		FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071762C074E0C000AE7AA /* BaseViewController.swift */; };
 		FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */; };
 		FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717A2C075429000AE7AA /* AlarmViewController.swift */; };
-		FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717C2C075438000AE7AA /* StudyViewController.swift */; };
 		FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00717E2C075446000AE7AA /* CalendarViewController.swift */; };
 		FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071802C075454000AE7AA /* SettingViewController.swift */; };
 		FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF0071862C0840D5000AE7AA /* Pretendard-Regular.otf */; };
@@ -40,21 +65,73 @@
 		FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */; };
 		FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071982C08432E000AE7AA /* CustomFontType.swift */; };
 		FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719A2C086809000AE7AA /* LoginViewController.swift */; };
+		FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719C2C09B96B000AE7AA /* CustomButton.swift */; };
+		FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */; };
+		FF03F8FA2C169F8D00134B54 /* 알림음 2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF03F8F62C169F8D00134B54 /* 알림음 2.wav */; };
+		FF03F8FB2C169F8D00134B54 /* 알림음 3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF03F8F72C169F8D00134B54 /* 알림음 3.wav */; };
+		FF03F8FC2C169F8D00134B54 /* 알림음 4.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF03F8F82C169F8D00134B54 /* 알림음 4.wav */; };
+		FF03F8FE2C16A01400134B54 /* 알림음 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF03F8FD2C16A01400134B54 /* 알림음 1.wav */; };
+		FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */; };
+		FF03F9022C16D55600134B54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF03F9012C16D55600134B54 /* GoogleService-Info.plist */; };
+		FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF03F9032C16D59700134B54 /* FirebaseAnalytics */; };
+		FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A322C1AA26E00504C24 /* StudyModel.swift */; };
+		FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A342C1AA29900504C24 /* WakeUpModel.swift */; };
+		FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A362C1ABCFF00504C24 /* UserModel.swift */; };
+		FF254A3A2C1C1DA400504C24 /* RepeatingSecondsTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */; };
+		FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */; };
+		FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */; };
+		FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A412C1C1DC400504C24 /* CircularTimerView.swift */; };
+		FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A472C1C1EE300504C24 /* StudyViewController.swift */; };
+		FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */; };
+		FF254A4F2C1C38B400504C24 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FF254A4E2C1C38B400504C24 /* FirebaseMessaging */; };
+		FF2B9ABA2C25A33900E231DE /* DatePickerModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */; };
+		FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */; };
+		FF2B9ABE2C25A42400E231DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2B9ABD2C25A42400E231DE /* Assets.xcassets */; };
+		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
+		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
+		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
+		FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */; };
+		FF783CA12C17EC700008AE70 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF783CA02C17EC700008AE70 /* AudioController.swift */; };
+		FF8746E32C19939300F63A86 /* AlarmCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */; };
+		FF8746EB2C19AE0600F63A86 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */; };
+		FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */; };
+		FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F622C0F4DC300A5D534 /* AlarmModel.swift */; };
+		FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */; };
+		FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */; };
+		FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF931A632C12BC4700AD1513 /* AlarmResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F6270A22C23C54000BBA2D2 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		3F6270A42C23C5E300BBA2D2 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
+		3F6270A62C23C64900BBA2D2 /* BugReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportView.swift; sourceTree = "<group>"; };
+		3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoView.swift; sourceTree = "<group>"; };
+		3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController.swift; sourceTree = "<group>"; };
+		3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportViewController.swift; sourceTree = "<group>"; };
+		3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
+		3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmViewController.swift; sourceTree = "<group>"; };
+		5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePasswordViewController.swift; sourceTree = "<group>"; };
+		5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountSuccessViewController.swift; sourceTree = "<group>"; };
+		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		F4DFDB652C24509000564A51 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
+		F4E050002C0EA02900802477 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerResultViewController.swift; sourceTree = "<group>"; };
+		F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		FF0071442C074D86000AE7AA /* StudyGaemi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyGaemi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0071472C074D86000AE7AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FF00714E2C074D86000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF0071512C074D86000AE7AA /* StudyGaemi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyGaemi.xcdatamodel; sourceTree = "<group>"; };
-		FF0071532C074D88000AE7AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FF0071562C074D88000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF0071582C074D88000AE7AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0071762C074E0C000AE7AA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarViewController.swift; sourceTree = "<group>"; };
 		FF00717A2C075429000AE7AA /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
-		FF00717C2C075438000AE7AA /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		FF00717E2C075446000AE7AA /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		FF0071802C075454000AE7AA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FF0071862C0840D5000AE7AA /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -68,6 +145,39 @@
 		FF00718E2C0840D6000AE7AA /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		FF0071982C08432E000AE7AA /* CustomFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontType.swift; sourceTree = "<group>"; };
 		FF00719A2C086809000AE7AA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FF00719C2C09B96B000AE7AA /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		FF03F8F62C169F8D00134B54 /* 알림음 2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 2.wav"; sourceTree = "<group>"; };
+		FF03F8F72C169F8D00134B54 /* 알림음 3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 3.wav"; sourceTree = "<group>"; };
+		FF03F8F82C169F8D00134B54 /* 알림음 4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 4.wav"; sourceTree = "<group>"; };
+		FF03F8FD2C16A01400134B54 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
+		FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultController.swift; sourceTree = "<group>"; };
+		FF03F9012C16D55600134B54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FF254A322C1AA26E00504C24 /* StudyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyModel.swift; sourceTree = "<group>"; };
+		FF254A342C1AA29900504C24 /* WakeUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpModel.swift; sourceTree = "<group>"; };
+		FF254A362C1ABCFF00504C24 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingSecondsTimer.swift; sourceTree = "<group>"; };
+		FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTiemrVC.swift; sourceTree = "<group>"; };
+		FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerVC.swift; sourceTree = "<group>"; };
+		FF254A412C1C1DC400504C24 /* CircularTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
+		FF254A472C1C1EE300504C24 /* StudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
+		FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimer.swift; sourceTree = "<group>"; };
+		FF254A4D2C1C384300504C24 /* StudyGaemi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyGaemi.entitlements; sourceTree = "<group>"; };
+		FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerModalVC.swift; sourceTree = "<group>"; };
+		FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		FF2B9ABD2C25A42400E231DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
+		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
+		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
+		FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		FF783CA02C17EC700008AE70 /* AudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
+		FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCoreDataManager.swift; sourceTree = "<group>"; };
+		FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingController.swift; sourceTree = "<group>"; };
+		FF875F622C0F4DC300A5D534 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
+		FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionView.swift; sourceTree = "<group>"; };
+		FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQuestionController.swift; sourceTree = "<group>"; };
+		FF931A632C12BC4700AD1513 /* AlarmResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,26 +186,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF0071712C074DFA000AE7AA /* FirebaseDatabaseSwift in Frameworks */,
+				F4AF2A612C19944C00553A20 /* FirebaseAppCheck in Frameworks */,
 				FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */,
+				FF8746EB2C19AE0600F63A86 /* FirebaseFirestoreSwift in Frameworks */,
+				FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */,
+				F4AF2A5B2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				F4EDEB4B2C1994D50038819D /* FirebaseFirestore in Frameworks */,
 				FF0071752C074DFA000AE7AA /* FirebaseStorageCombine-Community in Frameworks */,
+				F4AF2A592C19944C00553A20 /* FirebaseAnalytics in Frameworks */,
 				FF0071732C074DFA000AE7AA /* FirebaseStorage in Frameworks */,
+				F4AF2A5F2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				FF00716D2C074DFA000AE7AA /* FirebaseAuthCombine-Community in Frameworks */,
+				FF254A4F2C1C38B400504C24 /* FirebaseMessaging in Frameworks */,
 				FF00716B2C074DFA000AE7AA /* FirebaseAuth in Frameworks */,
+				F4AF2A5D2C19944C00553A20 /* FirebaseAnalyticsSwift in Frameworks */,
 				FF0071632C074DB7000AE7AA /* Then in Frameworks */,
 				FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */,
 				FF00716F2C074DFA000AE7AA /* FirebaseDatabase in Frameworks */,
 				FF0071682C074DCD000AE7AA /* KakaoSDKAuth in Frameworks */,
+				F4E04FFB2C0D8DE900802477 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F4EDEB492C1994D50038819D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FF00713B2C074D86000AE7AA = {
 			isa = PBXGroup;
 			children = (
 				FF0071462C074D86000AE7AA /* StudyGaemi */,
 				FF0071452C074D86000AE7AA /* Products */,
+				F4EDEB492C1994D50038819D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,18 +238,23 @@
 		FF0071462C074D86000AE7AA /* StudyGaemi */ = {
 			isa = PBXGroup;
 			children = (
+				FF254A4D2C1C384300504C24 /* StudyGaemi.entitlements */,
+				FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */,
+				FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */,
 				FF0071842C082573000AE7AA /* Models */,
 				FF0071832C08256A000AE7AA /* Views */,
 				FF0071822C08255F000AE7AA /* Controllers */,
-				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
 				FF0071852C0840B9000AE7AA /* Fonts */,
-				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
+				FF875F642C10473600A5D534 /* Wavs */,
 				FF00714D2C074D86000AE7AA /* Main.storyboard */,
-				FF0071532C074D88000AE7AA /* Assets.xcassets */,
-				FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */,
+				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
+				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
 				FF0071582C074D88000AE7AA /* Info.plist */,
+				FF2B9ABD2C25A42400E231DE /* Assets.xcassets */,
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
 				FF0071982C08432E000AE7AA /* CustomFontType.swift */,
+				FF03F9012C16D55600134B54 /* GoogleService-Info.plist */,
+				FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */,
 			);
 			path = StudyGaemi;
 			sourceTree = "<group>";
@@ -129,6 +262,23 @@
 		FF0071822C08255F000AE7AA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3F86FCA32C15B33000C6C8F3 /* AnnouncementViewController.swift */,
+				3F86FCA72C17F62700C6C8F3 /* BottomSheetViewController.swift */,
+				3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */,
+				3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */,
+				3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */,
+				FF0071802C075454000AE7AA /* SettingViewController.swift */,
+				FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */,
+				FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */,
+				FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */,
+				FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */,
+				FF6774012C0DACF800017E1F /* AlarmController.swift */,
+				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
+				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
+				FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */,
+				FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */,
+				FF783CA02C17EC700008AE70 /* AudioController.swift */,
+				FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -136,13 +286,15 @@
 		FF0071832C08256A000AE7AA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FF2B9AC32C2A9CFC00E231DE /* Setting */,
+				FF2B9AC22C2A9CDF00E231DE /* Calendar */,
+				FF2B9AC12C2A9CBD00E231DE /* Study */,
+				FF2B9AC02C2A9C7E00E231DE /* Alarm */,
+				FF2B9ABF2C2A9C5B00E231DE /* Login */,
 				FF0071762C074E0C000AE7AA /* BaseViewController.swift */,
 				FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */,
-				FF00717A2C075429000AE7AA /* AlarmViewController.swift */,
-				FF00717C2C075438000AE7AA /* StudyViewController.swift */,
-				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
-				FF0071802C075454000AE7AA /* SettingViewController.swift */,
-				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
+				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
+				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -150,6 +302,12 @@
 		FF0071842C082573000AE7AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FF875F622C0F4DC300A5D534 /* AlarmModel.swift */,
+				F4EDEB4C2C19974D0038819D /* FirestoreManager.swift */,
+				FF254A322C1AA26E00504C24 /* StudyModel.swift */,
+				FF254A342C1AA29900504C24 /* WakeUpModel.swift */,
+				FF254A362C1ABCFF00504C24 /* UserModel.swift */,
+				F4DFDB652C24509000564A51 /* AlertModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,6 +326,75 @@
 				FF00718A2C0840D5000AE7AA /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FF2B9ABF2C2A9C5B00E231DE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FF00719A2C086809000AE7AA /* LoginViewController.swift */,
+				5275296A2C0D95F10002513F /* CreateAccountViewController.swift */,
+				5255F2B42C0E7A76006FEE4B /* EmailConfirmViewController.swift */,
+				5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */,
+				5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		FF2B9AC02C2A9C7E00E231DE /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				FF00717A2C075429000AE7AA /* AlarmViewController.swift */,
+				FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */,
+				FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */,
+				FF875F672C10794C00A5D534 /* AlarmQuestionView.swift */,
+				FF931A632C12BC4700AD1513 /* AlarmResultView.swift */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
+		FF2B9AC12C2A9CBD00E231DE /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				FF254A412C1C1DC400504C24 /* CircularTimerView.swift */,
+				FF254A472C1C1EE300504C24 /* StudyViewController.swift */,
+				F4E69C642C22AA9D00289A8F /* TimerResultViewController.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		FF2B9AC22C2A9CDF00E231DE /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				FF00717E2C075446000AE7AA /* CalendarViewController.swift */,
+				F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */,
+				F4E050002C0EA02900802477 /* CalendarCell.swift */,
+				F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		FF2B9AC32C2A9CFC00E231DE /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3F6270A42C23C5E300BBA2D2 /* AnnouncementView.swift */,
+				3F6270A22C23C54000BBA2D2 /* BottomSheetView.swift */,
+				3F6270A62C23C64900BBA2D2 /* BugReportView.swift */,
+				3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */,
+				3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */,
+				3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		FF875F642C10473600A5D534 /* Wavs */ = {
+			isa = PBXGroup;
+			children = (
+				FF03F8FD2C16A01400134B54 /* 알림음 1.wav */,
+				FF03F8F62C169F8D00134B54 /* 알림음 2.wav */,
+				FF03F8F72C169F8D00134B54 /* 알림음 3.wav */,
+				FF03F8F82C169F8D00134B54 /* 알림음 4.wav */,
+			);
+			path = Wavs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +424,15 @@
 				FF0071702C074DFA000AE7AA /* FirebaseDatabaseSwift */,
 				FF0071722C074DFA000AE7AA /* FirebaseStorage */,
 				FF0071742C074DFA000AE7AA /* FirebaseStorageCombine-Community */,
+				F4E04FFA2C0D8DE900802477 /* FSCalendar */,
+				FF03F9032C16D59700134B54 /* FirebaseAnalytics */,
+				F4AF2A582C19944C00553A20 /* FirebaseAnalytics */,
+				F4AF2A5A2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion */,
+				F4AF2A5C2C19944C00553A20 /* FirebaseAnalyticsSwift */,
+				F4AF2A5E2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				F4AF2A602C19944C00553A20 /* FirebaseAppCheck */,
+				F4EDEB4A2C1994D50038819D /* FirebaseFirestore */,
+				FF254A4E2C1C38B400504C24 /* FirebaseMessaging */,
 			);
 			productName = StudyGaemi;
 			productReference = FF0071442C074D86000AE7AA /* StudyGaemi.app */;
@@ -231,6 +467,7 @@
 				FF0071612C074DB7000AE7AA /* XCRemoteSwiftPackageReference "Then" */,
 				FF0071642C074DCD000AE7AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = FF0071452C074D86000AE7AA /* Products */;
 			projectDirPath = "";
@@ -248,16 +485,20 @@
 			files = (
 				FF0071922C0840D6000AE7AA /* Pretendard-ExtraLight.otf in Resources */,
 				FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */,
-				FF0071542C074D88000AE7AA /* Assets.xcassets in Resources */,
 				FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */,
 				FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */,
-				FF0071572C074D88000AE7AA /* Base in Resources */,
+				FF03F8FC2C169F8D00134B54 /* 알림음 4.wav in Resources */,
+				FF2B9ABE2C25A42400E231DE /* Assets.xcassets in Resources */,
+				FF03F8FA2C169F8D00134B54 /* 알림음 2.wav in Resources */,
 				FF00714F2C074D86000AE7AA /* Base in Resources */,
 				FF0071962C0840D6000AE7AA /* Pretendard-ExtraBold.otf in Resources */,
 				FF0071902C0840D6000AE7AA /* Pretendard-Black.otf in Resources */,
 				FF0071952C0840D6000AE7AA /* Pretendard-SemiBold.otf in Resources */,
+				FF03F9022C16D55600134B54 /* GoogleService-Info.plist in Resources */,
 				FF0071912C0840D6000AE7AA /* Pretendard-Light.otf in Resources */,
+				FF03F8FE2C16A01400134B54 /* 알림음 1.wav in Resources */,
 				FF0071942C0840D6000AE7AA /* Pretendard-Medium.otf in Resources */,
+				FF03F8FB2C169F8D00134B54 /* 알림음 3.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,16 +509,61 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */,
 				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
+				FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */,
+				F4DFDB662C24509000564A51 /* AlertModel.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
-				FF00717D2C075438000AE7AA /* StudyViewController.swift in Sources */,
+				3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */,
+				FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */,
+				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
+				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
+				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
+				FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */,
+				FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */,
+				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
+				3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */,
+				FF875F632C0F4DC300A5D534 /* AlarmModel.swift in Sources */,
+				F4EDEB4D2C19974D0038819D /* FirestoreManager.swift in Sources */,
+				5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */,
+				FF8746E32C19939300F63A86 /* AlarmCoreDataManager.swift in Sources */,
 				FF00719B2C086809000AE7AA /* LoginViewController.swift in Sources */,
+				FF931A642C12BC4700AD1513 /* AlarmResultView.swift in Sources */,
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
+				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
+				3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */,
+				FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
+				3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */,
+				F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */,
+				FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */,
+				3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */,
+				FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
+				5255F2B52C0E7A76006FEE4B /* EmailConfirmViewController.swift in Sources */,
+				5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */,
+				FF254A3A2C1C1DA400504C24 /* RepeatingSecondsTimer.swift in Sources */,
+				FF783CA12C17EC700008AE70 /* AudioController.swift in Sources */,
+				FF00719D2C09B96B000AE7AA /* CustomButton.swift in Sources */,
+				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
+				FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */,
+				FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */,
+				FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */,
+				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
+				3F6270A32C23C54000BBA2D2 /* BottomSheetView.swift in Sources */,
+				FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */,
+				3F6270A52C23C5E300BBA2D2 /* AnnouncementView.swift in Sources */,
+				FF875F612C0F0DFF00A5D534 /* AlarmSettingController.swift in Sources */,
+				F4E69C652C22AA9D00289A8F /* TimerResultViewController.swift in Sources */,
 				FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */,
+				3F6270A72C23C64900BBA2D2 /* BugReportView.swift in Sources */,
+				F4E04FFF2C0DC08400802477 /* BadgeViewCell.swift in Sources */,
+				3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */,
+				FF2B9ABA2C25A33900E231DE /* DatePickerModalVC.swift in Sources */,
+				3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */,
+				3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,14 +577,6 @@
 				FF00714E2C074D86000AE7AA /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF0071562C074D88000AE7AA /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -425,21 +703,23 @@
 		};
 		FF00715C2C074D88000AE7AA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = StudyGaemi/StudyGaemi.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FTV7NTFFYN;
+				DEVELOPMENT_TEAM = FTV7NTFFYN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyGaemi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "공부하개미";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -449,30 +729,35 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.8ttruck.StudyGaemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Gaemi Dev";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		FF00715D2C074D88000AE7AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF2B9AB82C2598CC00E231DE /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = StudyGaemi/StudyGaemi.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FTV7NTFFYN;
+				DEVELOPMENT_TEAM = FTV7NTFFYN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyGaemi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "공부하개미";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -482,10 +767,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.8ttruck.StudyGaemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Gaemi Dev";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -513,6 +801,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.8.4;
+			};
+		};
 		FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -548,6 +844,41 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F4AF2A582C19944C00553A20 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F4AF2A5A2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		F4AF2A5C2C19944C00553A20 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		F4AF2A5E2C19944C00553A20 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		F4AF2A602C19944C00553A20 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		F4E04FFA2C0D8DE900802477 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4E04FF92C0D8DE900802477 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		F4EDEB4A2C1994D50038819D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		FF00715F2C074DAD000AE7AA /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FF00715E2C074DAD000AE7AA /* XCRemoteSwiftPackageReference "SnapKit" */;
@@ -597,6 +928,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		FF03F9032C16D59700134B54 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		FF254A4E2C1C38B400504C24 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		FF8746EA2C19AE0600F63A86 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0071692C074DFA000AE7AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

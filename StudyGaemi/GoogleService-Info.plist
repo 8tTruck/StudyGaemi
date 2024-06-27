@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCzli0XAYRKHQF5tegJqOX6F64F-hu01U0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>532877028351</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.8ttruck.StudyGaemi</string>
+	<key>PROJECT_ID</key>
+	<string>ttruck-13b6b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ttruck-13b6b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:532877028351:ios:86baf1efc4a779860555ca</string>
+</dict>
+</plist>

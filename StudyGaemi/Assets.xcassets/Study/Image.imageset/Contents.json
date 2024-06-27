@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Button Finish.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
