@@ -14,6 +14,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let firestoreManager = FirestoreManager.shared
     private let settingView = SettingView()
     
+    private var moreItems = ["친구초대", "개발자 정보"]
     private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항"]
     
     override func viewDidLoad() {
@@ -190,16 +191,31 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     // MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingItems.count
+        switch section {
+        case 0:
+            return moreItems.count
+        case 1:
+            return settingItems.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = settingItems[indexPath.row]
+        
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = moreItems[indexPath.row]
+        case 1:
+            cell.textLabel?.text = settingItems[indexPath.row]
+        default:
+            break
+        }
         cell.textLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
         cell.backgroundColor = UIColor(named: "viewBackgroundColor")
         cell.textLabel?.textColor = UIColor(named: "fontBlack")
@@ -214,11 +230,18 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        
         let headerView = UIView()
         headerView.backgroundColor = UIColor(named: "viewBackgroundColor")
-        
         let headerLabel = UILabel()
-        headerLabel.text = "설정"
+        
+        if section == 0 {
+            headerLabel.text = "더보기"
+        } else {
+            headerLabel.text = "설정"
+        }
+
         headerLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
         headerLabel.textColor = UIColor(named: "fontBlack")
         
@@ -232,32 +255,55 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        if section == 0 {
+            return 30
+        } else {
+            return 30
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let pageIndex = indexPath.row
         let pageViewController: UIViewController
         
-        if settingItems[pageIndex] == "비밀번호 변경" {
-            pageViewController = MemberInfoViewController()
-        } else {
-            switch settingItems[pageIndex] {
-            case "개인정보 처리 및 방침":
-                pageViewController = PrivacyPolicyViewController()
-            case "오류 및 버그 신고":
-                pageViewController = BugReportViewController()
-            case "공지사항":
-                pageViewController = AnnouncementViewController()
+        if indexPath.section == 0 {
+            switch moreItems[indexPath.row] {
+            case "친구초대":
+                let objectsToShare = ["https://apps.apple.com/kr/app/공부하개미/id6503416980"]
+    
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                activityVC.popoverPresentationController?.sourceView = self.view
+                self.present(activityVC, animated: true, completion: nil)
+            case "개발자 정보":
+                print("팀소개 페이지")
             default:
                 return
             }
+        } else {
+            if settingItems[pageIndex] == "비밀번호 변경" {
+                pageViewController = MemberInfoViewController()
+            } else {
+                switch settingItems[pageIndex] {
+                case "개인정보 처리 및 방침":
+                    pageViewController = PrivacyPolicyViewController()
+                case "오류 및 버그 신고":
+                    pageViewController = BugReportViewController()
+                case "공지사항":
+                    pageViewController = AnnouncementViewController()
+                default:
+                    return
+                }
+            }
+            pageViewController.hidesBottomBarWhenPushed = true
+            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
+            pageViewController.title = settingItems[pageIndex]
+            navigationController?.pushViewController(pageViewController, animated: true)
         }
         
-        pageViewController.hidesBottomBarWhenPushed = true
-        pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
-        pageViewController.title = settingItems[pageIndex]
-        navigationController?.pushViewController(pageViewController, animated: true)
     }
     
     private func showLogoutAlert() {
