@@ -92,6 +92,7 @@ class SettingView: UIView {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         $0.backgroundColor = UIColor.clear
         $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
     }
     
     let logoutButton = UIButton(type: .system).then {

@@ -14,7 +14,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let firestoreManager = FirestoreManager.shared
     private let settingView = SettingView()
     
-    private var moreItems = ["친구초대", "개발자 정보"]
+    private var moreItems = ["친구초대", "앱 정보"] //추후에 랭킹도 추가하면 될듯
     private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항"]
     
     override func viewDidLoad() {
@@ -274,12 +274,15 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             switch moreItems[indexPath.row] {
             case "친구초대":
                 let objectsToShare = ["https://apps.apple.com/kr/app/공부하개미/id6503416980"]
-    
                 let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                 activityVC.popoverPresentationController?.sourceView = self.view
                 self.present(activityVC, animated: true, completion: nil)
-            case "개발자 정보":
-                print("팀소개 페이지")
+            case "앱 정보":
+                pageViewController = TeamInfoViewController()
+                pageViewController.hidesBottomBarWhenPushed = true
+                pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
+                pageViewController.title = moreItems[pageIndex]
+                navigationController?.pushViewController(pageViewController, animated: true)
             default:
                 return
             }
