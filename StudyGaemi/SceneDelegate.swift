@@ -70,8 +70,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         func navigateToLoginScreen() {
             let bottomTabBarVC = LoginViewController()
+            // LoginViewController가 rootViewController에 속해있지 않아서 화면 전환이 안되었던 것.
+            // 아래처럼 포함시켜준 이후로는 잘 넘어가는 모습.
+            let navController = UINavigationController(rootViewController: bottomTabBarVC)
             if let window = self.window {
-                window.rootViewController = bottomTabBarVC
+                window.rootViewController = navController
                 window.makeKeyAndVisible()
             }
         }
