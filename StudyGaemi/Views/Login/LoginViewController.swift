@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     let passwordSecureButton = UIButton(type: .custom)
     
     func setupPasswordSecureButton() {
-        let eyeImage = UIImage(systemName: "eye")
+        let eyeImage = UIImage(systemName: "eye.slash")
         let orangeEyeImage = eyeImage?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
         passwordSecureButton.setImage(orangeEyeImage, for: .normal)
         passwordSecureButton.addTarget(self, action: #selector(passwordSecureButtonTapped), for: .touchUpInside)

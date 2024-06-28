@@ -47,7 +47,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
 //    lazy var ageDescriptionButton = createDescriptionButton(tag: 3)
     
     func setupPasswordSecureButton(for textField: UITextField, withPadding padding: CGFloat = 8.0) -> UIButton {
-        let eyeImage = UIImage(systemName: "eye")
+        let eyeImage = UIImage(systemName: "eye.slash")
         let orangeEyeImage = eyeImage?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
         let secureButton = UIButton(type: .custom)
         secureButton.setImage(orangeEyeImage, for: .normal)
