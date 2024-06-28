@@ -13,6 +13,8 @@
 		3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */; };
 		3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */; };
 		3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */; };
+		3F7779922C2E780300AE89D7 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7779912C2E780300AE89D7 /* SettingTableViewCell.swift */; };
+		3F7779942C2E832400AE89D7 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7779932C2E832400AE89D7 /* ImageHelper.swift */; };
 		3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */; };
 		3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */; };
 		3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */; };
@@ -111,6 +113,8 @@
 		3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoView.swift; sourceTree = "<group>"; };
 		3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		3F7779912C2E780300AE89D7 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		3F7779932C2E832400AE89D7 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController.swift; sourceTree = "<group>"; };
 		3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportViewController.swift; sourceTree = "<group>"; };
@@ -391,6 +395,8 @@
 				3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */,
 				3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */,
 				3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */,
+				3F7779912C2E780300AE89D7 /* SettingTableViewCell.swift */,
+				3F7779932C2E832400AE89D7 /* ImageHelper.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -532,6 +538,7 @@
 				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */,
+				3F7779922C2E780300AE89D7 /* SettingTableViewCell.swift in Sources */,
 				FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */,
@@ -544,6 +551,7 @@
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
 				3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */,
+				3F7779942C2E832400AE89D7 /* ImageHelper.swift in Sources */,
 				FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */,
@@ -721,9 +729,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = StudyGaemi/StudyGaemi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FTV7NTFFYN;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FTV7NTFFYN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyGaemi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "공부하개미";
@@ -741,6 +751,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.8ttruck.StudyGaemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Gaemi Dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -759,9 +770,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = StudyGaemi/StudyGaemi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FTV7NTFFYN;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FTV7NTFFYN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyGaemi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "공부하개미";
@@ -779,6 +792,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.8ttruck.StudyGaemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Gaemi Dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

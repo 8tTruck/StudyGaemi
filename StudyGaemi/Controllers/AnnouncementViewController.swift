@@ -69,12 +69,15 @@ extension AnnouncementViewController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url {
-            if url.host == "shard-chips-957.notion.site" {
-                decisionHandler(.allow)
-                return
-            }
+            decisionHandler(.allow)
         }
-        decisionHandler(.cancel)
     }
-}
+
+    extension AnnouncementViewController: WKUIDelegate {
+        func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+            if navigationAction.targetFrame == nil {
+                webView.load(navigationAction.request)
+            }
+            return nil
+        }
+    }
