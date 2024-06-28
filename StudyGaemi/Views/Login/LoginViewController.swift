@@ -55,7 +55,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     
     @objc func passwordSecureButtonTapped() {
         passwordTextField.isSecureTextEntry.toggle()
-        let eyeImage = passwordTextField.isSecureTextEntry ? UIImage(systemName: "eye") : UIImage(systemName: "eye.slash")
+        let eyeImage = passwordTextField.isSecureTextEntry ? UIImage(systemName: "eye.slash") : UIImage(systemName: "eye")
         let orangeEyeImage = eyeImage?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
         passwordSecureButton.setImage(orangeEyeImage, for: .normal)
     }

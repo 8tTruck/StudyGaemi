@@ -71,7 +71,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     @objc func passwordSecureButtonTapped(_ sender: UIButton) {
         guard let textField = sender.superview?.superview as? UITextField else { return }
         textField.isSecureTextEntry.toggle()
-        let eyeImage = textField.isSecureTextEntry ? UIImage(systemName: "eye") : UIImage(systemName: "eye.slash")
+        let eyeImage = textField.isSecureTextEntry ? UIImage(systemName: "eye.slash") : UIImage(systemName: "eye")
         let orangeEyeImage = eyeImage?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
         sender.setImage(orangeEyeImage, for: .normal)
     }

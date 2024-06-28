@@ -17,9 +17,10 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let settingView = SettingView()
   
     private var moreItems = ["친구초대", "앱 정보"] //추후에 랭킹도 추가하면 될듯
+    private var moreItemsIcons = ["paperplane", "info.circle"]
     private let imagePicker = UIImagePickerController()
     private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "도움말"]
-    private var settingItemIcons = ["lock.shield", "exclamationmark.triangle", "megaphone"]
+    private var settingItemIcons = ["lock.shield", "exclamationmark.triangle", "megaphone", "questionmark.circle"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -329,17 +330,19 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         switch indexPath.section {
         case 0:
-            cell.titleLabel?.text = moreItems[indexPath.row]
+            cell.titleLabel.text = moreItems[indexPath.row]
+            cell.iconImageView.image = UIImage(systemName: moreItemsIcons[indexPath.row])
+            cell.iconImageView.tintColor = UIColor(named: "fontGray")
         case 1:
-            cell.titleLabel?.text = settingItems[indexPath.row]
+            cell.titleLabel.text = settingItems[indexPath.row]
             cell.iconImageView.image = UIImage(systemName: settingItemIcons[indexPath.row])
             cell.iconImageView.tintColor = UIColor(named: "fontGray")
         default:
             break
         }
-        cell.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
+        cell.titleLabel.font = UIFont(name: "Pretendard-Regular", size: 17)
         cell.backgroundColor = UIColor(named: "viewBackgroundColor")
-        cell.titleLabel?.textColor = UIColor(named: "fontBlack")
+        cell.titleLabel.textColor = UIColor(named: "fontBlack")
         return cell
     }
     

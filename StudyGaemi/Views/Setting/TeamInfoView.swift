@@ -29,7 +29,7 @@ class TeamInfoView: UIView {
     }
     
     private let appInfoView = UILabel().then {
-        $0.text = "앱 버전 1.2.0  \n제작 ©8tTruck\n문의 이메일 : taengdev@gmail.com"
+        $0.text = "앱 버전 1.0.1  \n제작 ©8tTruck\n문의 이메일 : taengdev@gmail.com"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 12)
         $0.textColor = UIColor(named: "fontBlack")
         $0.backgroundColor = .clear
