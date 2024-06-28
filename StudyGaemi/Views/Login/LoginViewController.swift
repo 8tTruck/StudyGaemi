@@ -34,14 +34,41 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     let kakaoLoginButton = UIButton()
     let signupLabel = UILabel()
     let createAccountButton = UIButton()
+    let passwordSecureButton = UIButton(type: .custom)
+    
+    func setupPasswordSecureButton() {
+        let eyeImage = UIImage(systemName: "eye")
+        let orangeEyeImage = eyeImage?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
+        passwordSecureButton.setImage(orangeEyeImage, for: .normal)
+        passwordSecureButton.addTarget(self, action: #selector(passwordSecureButtonTapped), for: .touchUpInside)
+    }
+    
+    func addPasswordSecureButtonToTextField() {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: passwordTextField.frame.height))
+        passwordSecureButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        passwordSecureButton.center = CGPoint(x: paddingView.frame.width / 2, y: paddingView.frame.height / 2)
+        
+        paddingView.addSubview(passwordSecureButton)
+        passwordTextField.rightView = paddingView
+        passwordTextField.rightViewMode = .always
+    }
+    
+    @objc func passwordSecureButtonTapped() {
+        passwordTextField.isSecureTextEntry.toggle()
+        let eyeImage = passwordTextField.isSecureTextEntry ? UIImage(systemName: "eye") : UIImage(systemName: "eye.slash")
+        let orangeEyeImage = eyeImage?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
+        passwordSecureButton.setImage(orangeEyeImage, for: .normal)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigateToLoginScreen()
         hideKeyboardWhenTappedAround()
-        
+        emailTextField.keyboardType = .emailAddress
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        setupPasswordSecureButton()
+        addPasswordSecureButtonToTextField()
     }
     
     func showEmailVerificationAlert() {
@@ -442,9 +469,23 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     }
     
     @objc func createAccountButtonTapped() {
+        print("계정 생성버튼 누름")
+        // 1. 기존에 작동했던 모달 화면 전환 방식 (가장 이상적이라고 판단했었음)
         let nextVC = MakePasswordViewController()
-        nextVC.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(nextVC, animated: true)
+        // 아래 주석처럼 present로 쏠 경우 아래에서 올라오는 애니메이션이 됨
+//        self.present(nextVC, animated: true)
+//        nextVC.modalPresentationStyle = .fullScreen
+        
+        // 2. 네비게이션 스택을 활용, 코드로 화면 전환을 설정하고 뷰 컨트롤러 초기화 (먹통)
+//        let nextVC = MakePasswordViewController()
+//        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        // 3. 루트 뷰 컨트롤러 변경 (네비게이션 컨트롤러 활용이 불가함)
+//        let makePasswordViewController = MakePasswordViewController()
+//        let window = UIApplication.shared.windows.first
+//        window?.rootViewController = makePasswordViewController
+//        window?.makeKeyAndVisible()
     }
     
     func moveToBottomTabBarController() {
