@@ -104,11 +104,19 @@ class AlarmViewController: BaseViewController {
         $0.font = UIFont(name: CustomFontType.regular.name, size: 13) ?? UIFont.systemFont(ofSize: 13)
         $0.textColor = UIColor(named: "fontBlack")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
         self.constraintLayout()
+        
+        // 앱 설치 후 처음 실행 시에만 튜토리얼 보여주기
+        if !UserDefaults.standard.bool(forKey: "hasCompletedTutorial") {
+            let tutorialVC = TutorialPageViewController()
+            tutorialVC.modalPresentationStyle = .fullScreen
+            self.present(tutorialVC, animated: true, completion: nil)
+            UserDefaults.standard.set(true, forKey: "hasCompletedTutorial")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -204,3 +212,4 @@ class AlarmViewController: BaseViewController {
         self.toggleState = sender.isOn
     }
 }
+

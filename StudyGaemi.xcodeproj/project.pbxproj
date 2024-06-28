@@ -88,6 +88,8 @@
 		FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */; };
 		FF2B9ABE2C25A42400E231DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2B9ABD2C25A42400E231DE /* Assets.xcassets */; };
 		FF2B9AC52C2D16C400E231DE /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AC42C2D16C400E231DE /* LaunchScreenView.swift */; };
+		FF2B9AC72C2E3A8400E231DE /* TutorialPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AC62C2E3A8400E231DE /* TutorialPageView.swift */; };
+		FF2B9AC92C2E4AB400E231DE /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AC82C2E4AB400E231DE /* TutorialPageViewController.swift */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
@@ -169,6 +171,8 @@
 		FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		FF2B9ABD2C25A42400E231DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF2B9AC42C2D16C400E231DE /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		FF2B9AC62C2E3A8400E231DE /* TutorialPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageView.swift; sourceTree = "<group>"; };
+		FF2B9AC82C2E4AB400E231DE /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
 				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
 				FF2B9AC42C2D16C400E231DE /* LaunchScreenView.swift */,
+				FF2B9AC62C2E3A8400E231DE /* TutorialPageView.swift */,
+				FF2B9AC82C2E4AB400E231DE /* TutorialPageViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -512,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2B9AC92C2E4AB400E231DE /* TutorialPageViewController.swift in Sources */,
 				5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */,
 				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
@@ -521,6 +528,7 @@
 				3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */,
 				FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */,
 				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
+				FF2B9AC72C2E3A8400E231DE /* TutorialPageView.swift in Sources */,
 				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */,

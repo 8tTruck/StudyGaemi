@@ -163,9 +163,9 @@ extension SceneDelegate {
     }
     
     func navigateToLoginScreen() {
-        let bottomTabBarVC = LoginViewController()
+        let loginVC = LoginViewController()
         if let window = self.window {
-            window.rootViewController = bottomTabBarVC
+            window.rootViewController = loginVC
             window.makeKeyAndVisible()
         }
     }
