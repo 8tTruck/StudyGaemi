@@ -15,8 +15,9 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
 
     private let firestoreManager = FirestoreManager.shared
     private let settingView = SettingView()
+  
+    private var moreItems = ["친구초대", "앱 정보"] //추후에 랭킹도 추가하면 될듯
     private let imagePicker = UIImagePickerController()
-
     private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "도움말"]
     private var settingItemIcons = ["lock.shield", "exclamationmark.triangle", "megaphone"]
 
@@ -182,6 +183,12 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     @objc private func logoutButtonTapped() {
         showLogoutAlert()
     }
+    
+    // MARK: - UITableViewDataSource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
     @objc private func userImageTapped() {
         showImageSourceActionSheet()
@@ -305,7 +312,14 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingItems.count
+        switch section {
+        case 0:
+            return moreItems.count
+        case 1:
+            return settingItems.count
+        default:
+            return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -313,23 +327,41 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             return UITableViewCell()
         }
         
-        cell.iconImageView.image = UIImage(systemName: settingItemIcons[indexPath.row])
-        cell.iconImageView.tintColor = UIColor(named: "fontGray")
-            cell.titleLabel.text = settingItems[indexPath.row]
-            cell.backgroundColor = UIColor(named: "viewBackgroundColor")
-
-            return cell
+        switch indexPath.section {
+        case 0:
+            cell.titleLabel?.text = moreItems[indexPath.row]
+        case 1:
+            cell.titleLabel?.text = settingItems[indexPath.row]
+            cell.iconImageView.image = UIImage(systemName: settingItemIcons[indexPath.row])
+            cell.iconImageView.tintColor = UIColor(named: "fontGray")
+        default:
+            break
         }
+        cell.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
+        cell.backgroundColor = UIColor(named: "viewBackgroundColor")
+        cell.titleLabel?.textColor = UIColor(named: "fontBlack")
+        return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        
         let headerView = UIView()
         headerView.backgroundColor = UIColor(named: "viewBackgroundColor")
-        
         let headerLabel = UILabel()
-        headerLabel.text = "설정"
+        
+        if section == 0 {
+            headerLabel.text = "더보기"
+        } else {
+            headerLabel.text = "설정"
+        }
+
         headerLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
         headerLabel.textColor = UIColor(named: "fontBlack")
         
@@ -343,35 +375,59 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        if section == 0 {
+            return 30
+        } else {
+            return 30
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20 
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let pageIndex = indexPath.row
         let pageViewController: UIViewController
         
-        if settingItems[pageIndex] == "비밀번호 변경" {
-            pageViewController = MemberInfoViewController()
-        } else {
-            switch settingItems[pageIndex] {
-            case "개인정보 처리 및 방침":
-                pageViewController = PrivacyPolicyViewController()
-            case "오류 및 버그 신고":
-                pageViewController = BugReportViewController()
-            case "공지사항":
-                pageViewController = AnnouncementViewController()
-            case "도움말":
-                pageViewController = TutorialPageViewController()
+        if indexPath.section == 0 {
+            switch moreItems[indexPath.row] {
+            case "친구초대":
+                let objectsToShare = ["https://apps.apple.com/kr/app/공부하개미/id6503416980"]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                activityVC.popoverPresentationController?.sourceView = self.view
+                self.present(activityVC, animated: true, completion: nil)
+            case "앱 정보":
+                pageViewController = TeamInfoViewController()
+                pageViewController.hidesBottomBarWhenPushed = true
+                pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
+                pageViewController.title = moreItems[pageIndex]
+                navigationController?.pushViewController(pageViewController, animated: true)
             default:
                 return
             }
+        } else {
+            if settingItems[pageIndex] == "비밀번호 변경" {
+                pageViewController = MemberInfoViewController()
+            } else {
+                switch settingItems[pageIndex] {
+                case "개인정보 처리 및 방침":
+                    pageViewController = PrivacyPolicyViewController()
+                case "오류 및 버그 신고":
+                    pageViewController = BugReportViewController()
+                case "공지사항":
+                    pageViewController = AnnouncementViewController()
+                case "도움말":
+                    pageViewController = TutorialPageViewController()
+                default:
+                    return
+                }
+            }
+            pageViewController.hidesBottomBarWhenPushed = true
+            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
+            pageViewController.title = settingItems[pageIndex]
+            navigationController?.pushViewController(pageViewController, animated: true)
         }
-        
-        pageViewController.hidesBottomBarWhenPushed = true
-        pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
-        pageViewController.title = settingItems[pageIndex]
-        navigationController?.pushViewController(pageViewController, animated: true)
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

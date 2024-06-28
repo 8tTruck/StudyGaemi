@@ -24,6 +24,9 @@
 		5255F2B72C0E939F006FEE4B /* MakePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */; };
 		5255F2B92C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */; };
 		5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275296A2C0D95F10002513F /* CreateAccountViewController.swift */; };
+		F47AEE182C2E7AD60092AA69 /* TeamInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AEE172C2E7AD60092AA69 /* TeamInfoView.swift */; };
+		F47AEE1A2C2E83470092AA69 /* TeamInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AEE192C2E83470092AA69 /* TeamInfoCell.swift */; };
+		F47AEE1C2C2E83B20092AA69 /* TeamInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AEE1B2C2E83B20092AA69 /* TeamInfoViewController.swift */; };
 		F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */; };
 		F4AF2A592C19944C00553A20 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A582C19944C00553A20 /* FirebaseAnalytics */; };
 		F4AF2A5B2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F4AF2A5A2C19944C00553A20 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -124,6 +127,9 @@
 		5255F2B62C0E939F006FEE4B /* MakePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePasswordViewController.swift; sourceTree = "<group>"; };
 		5255F2B82C0ECD4D006FEE4B /* CreateAccountSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountSuccessViewController.swift; sourceTree = "<group>"; };
 		5275296A2C0D95F10002513F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		F47AEE172C2E7AD60092AA69 /* TeamInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoView.swift; sourceTree = "<group>"; };
+		F47AEE192C2E83470092AA69 /* TeamInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoCell.swift; sourceTree = "<group>"; };
+		F47AEE1B2C2E83B20092AA69 /* TeamInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoViewController.swift; sourceTree = "<group>"; };
 		F4AF2A1C2C12EC3E00553A20 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F4DFDB652C24509000564A51 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		F4E04FFE2C0DC08400802477 /* BadgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
@@ -289,6 +295,7 @@
 				FF783C9E2C17CFC30008AE70 /* AuthenticationManager.swift */,
 				FF783CA02C17EC700008AE70 /* AudioController.swift */,
 				FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */,
+				F47AEE1B2C2E83B20092AA69 /* TeamInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -395,6 +402,8 @@
 				3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */,
 				3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */,
 				3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */,
+				F47AEE172C2E7AD60092AA69 /* TeamInfoView.swift */,
+				F47AEE192C2E83470092AA69 /* TeamInfoCell.swift */,
 				3F7779912C2E780300AE89D7 /* SettingTableViewCell.swift */,
 				3F7779932C2E832400AE89D7 /* ImageHelper.swift */,
 			);
@@ -531,6 +540,7 @@
 				FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */,
 				F4DFDB662C24509000564A51 /* AlertModel.swift in Sources */,
 				FF00717B2C075429000AE7AA /* AlarmViewController.swift in Sources */,
+				F47AEE1C2C2E83B20092AA69 /* TeamInfoViewController.swift in Sources */,
 				3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */,
 				FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */,
 				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
@@ -538,6 +548,8 @@
 				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */,
+				F47AEE1A2C2E83470092AA69 /* TeamInfoCell.swift in Sources */,
+				F47AEE182C2E7AD60092AA69 /* TeamInfoView.swift in Sources */,
 				3F7779922C2E780300AE89D7 /* SettingTableViewCell.swift in Sources */,
 				FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
