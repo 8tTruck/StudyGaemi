@@ -471,7 +471,21 @@ class AuthenticationManager {
             }
         }
     }
+    
+    // MARK: - 닉네임 코드 생성하기
+    func generateNickNameCode() -> String {
+        // Firebase에서 현재 사용자의 UID 가져오기
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return ""
+        }
+        
+        // UID에서 4자리 숫자 추출하기
+        let uidDigits = Array(uid.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression))
+        let fourDigits = String(uidDigits.prefix(4))
+        
+        // 닉네임 코드 형식으로 변환하기
+        return "#\(fourDigits)"
+    }
 
 }
-
 

@@ -185,19 +185,21 @@ class AlarmSettingView: BaseViewController {
         toggleButton.addTarget(self, action: #selector(toggleSwitchChanged(_:)), for: .valueChanged)
         saveButton.addTarget(self, action: #selector(saveValues), for: .touchUpInside)
         
-        AudioController.shared.setupAudioSession()
-        
         dropDownButton.menu = UIMenu(children: [
             UIAction(title: "알림음 1", handler: { [weak self] _ in
+                AudioController.shared.previewSound(soundName: "알림음 1")
                 self?.buttonSetTitle("알림음 1", for: self?.dropDownButton)
             }),
             UIAction(title: "알림음 2", handler: { [weak self] _ in
+                AudioController.shared.previewSound(soundName: "알림음 2")
                 self?.buttonSetTitle("알림음 2", for: self?.dropDownButton)
             }),
             UIAction(title: "알림음 3", handler: { [weak self] _ in
+                AudioController.shared.previewSound(soundName: "알림음 3")
                 self?.buttonSetTitle("알림음 3", for: self?.dropDownButton)
             }),
             UIAction(title: "알림음 4", handler: { [weak self] _ in
+                AudioController.shared.previewSound(soundName: "알림음 4")
                 self?.buttonSetTitle("알림음 4", for: self?.dropDownButton)
             })
         ])
@@ -309,7 +311,7 @@ class AlarmSettingView: BaseViewController {
         AudioController.shared.soundName = dropDownButton.currentTitle ?? "알림음 1"
     }
 
-    func buttonSetTitle(_ title: String, for button: UIButton?) {
+    private func buttonSetTitle(_ title: String, for button: UIButton?) {
         guard let button = button else { return }
         button.setTitle(title, for: .normal)
     }
