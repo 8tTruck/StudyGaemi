@@ -14,7 +14,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let firestoreManager = FirestoreManager.shared
     private let settingView = SettingView()
     
-    private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항"]
+    private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "도움말"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -249,6 +249,8 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 pageViewController = BugReportViewController()
             case "공지사항":
                 pageViewController = AnnouncementViewController()
+            case "도움말":
+                pageViewController = TutorialPageViewController()
             default:
                 return
             }
