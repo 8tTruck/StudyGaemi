@@ -13,6 +13,8 @@
 		3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */; };
 		3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */; };
 		3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */; };
+		3F7779922C2E780300AE89D7 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7779912C2E780300AE89D7 /* SettingTableViewCell.swift */; };
+		3F7779942C2E832400AE89D7 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7779932C2E832400AE89D7 /* ImageHelper.swift */; };
 		3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */; };
 		3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */; };
 		3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */; };
@@ -42,7 +44,6 @@
 		FF00714A2C074D86000AE7AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0071492C074D86000AE7AA /* SceneDelegate.swift */; };
 		FF00714F2C074D86000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF00714E2C074D86000AE7AA /* Base */; };
 		FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */; };
-		FF0071572C074D88000AE7AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FF0071562C074D88000AE7AA /* Base */; };
 		FF0071602C074DAD000AE7AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF00715F2C074DAD000AE7AA /* SnapKit */; };
 		FF0071632C074DB7000AE7AA /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071622C074DB7000AE7AA /* Then */; };
 		FF0071662C074DCD000AE7AA /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = FF0071652C074DCD000AE7AA /* KakaoSDK */; };
@@ -91,6 +92,9 @@
 		FF2B9ABA2C25A33900E231DE /* DatePickerModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */; };
 		FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */; };
 		FF2B9ABE2C25A42400E231DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2B9ABD2C25A42400E231DE /* Assets.xcassets */; };
+		FF2B9AC52C2D16C400E231DE /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AC42C2D16C400E231DE /* LaunchScreenView.swift */; };
+		FF2B9AC72C2E3A8400E231DE /* TutorialPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AC62C2E3A8400E231DE /* TutorialPageView.swift */; };
+		FF2B9AC92C2E4AB400E231DE /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2B9AC82C2E4AB400E231DE /* TutorialPageViewController.swift */; };
 		FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */; };
 		FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774012C0DACF800017E1F /* AlarmController.swift */; };
 		FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */; };
@@ -112,6 +116,8 @@
 		3F6270A82C23C74800BBA2D2 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		3F6270AA2C23C7C800BBA2D2 /* MemberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoView.swift; sourceTree = "<group>"; };
 		3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		3F7779912C2E780300AE89D7 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		3F7779932C2E832400AE89D7 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		3F86FC9D2C15AE7200C6C8F3 /* MemberInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController.swift; sourceTree = "<group>"; };
 		3F86FC9F2C15B28800C6C8F3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		3F86FCA12C15B2DA00C6C8F3 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +141,6 @@
 		FF0071492C074D86000AE7AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FF00714E2C074D86000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF0071512C074D86000AE7AA /* StudyGaemi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyGaemi.xcdatamodel; sourceTree = "<group>"; };
-		FF0071562C074D88000AE7AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF0071582C074D88000AE7AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0071762C074E0C000AE7AA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +180,9 @@
 		FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerModalVC.swift; sourceTree = "<group>"; };
 		FF2B9ABB2C25A37800E231DE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		FF2B9ABD2C25A42400E231DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF2B9AC42C2D16C400E231DE /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		FF2B9AC62C2E3A8400E231DE /* TutorialPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageView.swift; sourceTree = "<group>"; };
+		FF2B9AC82C2E4AB400E231DE /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		FF6773FF2C0D96AE00017E1F /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		FF6774012C0DACF800017E1F /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
 		FF6774032C0DB07E00017E1F /* AlarmSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingView.swift; sourceTree = "<group>"; };
@@ -257,7 +265,6 @@
 				FF00714D2C074D86000AE7AA /* Main.storyboard */,
 				FF0071492C074D86000AE7AA /* SceneDelegate.swift */,
 				FF0071472C074D86000AE7AA /* AppDelegate.swift */,
-				FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */,
 				FF0071582C074D88000AE7AA /* Info.plist */,
 				FF2B9ABD2C25A42400E231DE /* Assets.xcassets */,
 				FF0071502C074D86000AE7AA /* StudyGaemi.xcdatamodeld */,
@@ -305,6 +312,9 @@
 				FF0071782C0750B7000AE7AA /* BottomTabBarViewController.swift */,
 				FF00719C2C09B96B000AE7AA /* CustomButton.swift */,
 				FF00719E2C09FFA6000AE7AA /* CustomTextField.swift */,
+				FF2B9AC42C2D16C400E231DE /* LaunchScreenView.swift */,
+				FF2B9AC62C2E3A8400E231DE /* TutorialPageView.swift */,
+				FF2B9AC82C2E4AB400E231DE /* TutorialPageViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -394,6 +404,8 @@
 				3F6270AC2C23C8D100BBA2D2 /* SettingView.swift */,
 				F47AEE172C2E7AD60092AA69 /* TeamInfoView.swift */,
 				F47AEE192C2E83470092AA69 /* TeamInfoCell.swift */,
+				3F7779912C2E780300AE89D7 /* SettingTableViewCell.swift */,
+				3F7779932C2E832400AE89D7 /* ImageHelper.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -499,7 +511,6 @@
 				FF0071972C0840D6000AE7AA /* Pretendard-Bold.otf in Resources */,
 				FF00718F2C0840D6000AE7AA /* Pretendard-Regular.otf in Resources */,
 				FF0071932C0840D6000AE7AA /* Pretendard-Thin.otf in Resources */,
-				FF0071572C074D88000AE7AA /* Base in Resources */,
 				FF03F8FC2C169F8D00134B54 /* 알림음 4.wav in Resources */,
 				FF2B9ABE2C25A42400E231DE /* Assets.xcassets in Resources */,
 				FF03F8FA2C169F8D00134B54 /* 알림음 2.wav in Resources */,
@@ -522,6 +533,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2B9AC92C2E4AB400E231DE /* TutorialPageViewController.swift in Sources */,
 				5275296B2C0D95F10002513F /* CreateAccountViewController.swift in Sources */,
 				FF0071792C0750B7000AE7AA /* BottomTabBarViewController.swift in Sources */,
 				FF0071772C074E0C000AE7AA /* BaseViewController.swift in Sources */,
@@ -532,11 +544,13 @@
 				3F86FCA42C15B33000C6C8F3 /* AnnouncementViewController.swift in Sources */,
 				FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */,
 				FF875F682C10794D00A5D534 /* AlarmQuestionView.swift in Sources */,
+				FF2B9AC72C2E3A8400E231DE /* TutorialPageView.swift in Sources */,
 				FF931A622C12B74C00AD1513 /* AlarmQuestionController.swift in Sources */,
 				FF6774002C0D96AE00017E1F /* AlarmButton.swift in Sources */,
 				FF2B9ABC2C25A37800E231DE /* UIColor+Extensions.swift in Sources */,
 				F47AEE1A2C2E83470092AA69 /* TeamInfoCell.swift in Sources */,
 				F47AEE182C2E7AD60092AA69 /* TeamInfoView.swift in Sources */,
+				3F7779922C2E780300AE89D7 /* SettingTableViewCell.swift in Sources */,
 				FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */,
 				F4AF2A1D2C12EC3E00553A20 /* AlertView.swift in Sources */,
 				3F6270AB2C23C7C800BBA2D2 /* MemberInfoView.swift in Sources */,
@@ -549,11 +563,13 @@
 				FF0071812C075454000AE7AA /* SettingViewController.swift in Sources */,
 				FF6774042C0DB07E00017E1F /* AlarmSettingView.swift in Sources */,
 				3F6270AD2C23C8D100BBA2D2 /* SettingView.swift in Sources */,
+				3F7779942C2E832400AE89D7 /* ImageHelper.swift in Sources */,
 				FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */,
 				FF0071482C074D86000AE7AA /* AppDelegate.swift in Sources */,
 				3F86FCA02C15B28800C6C8F3 /* PrivacyPolicyViewController.swift in Sources */,
 				F4E050012C0EA02900802477 /* CalendarCell.swift in Sources */,
 				FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */,
+				FF2B9AC52C2D16C400E231DE /* LaunchScreenView.swift in Sources */,
 				3F86FCA22C15B2DA00C6C8F3 /* BugReportViewController.swift in Sources */,
 				FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */,
 				FF00717F2C075446000AE7AA /* CalendarViewController.swift in Sources */,
@@ -593,14 +609,6 @@
 				FF00714E2C074D86000AE7AA /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FF0071552C074D88000AE7AA /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF0071562C074D88000AE7AA /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

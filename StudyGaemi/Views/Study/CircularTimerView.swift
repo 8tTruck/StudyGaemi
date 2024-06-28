@@ -301,6 +301,7 @@ extension Int {
         return CGFloat(self) * .pi / 180
     }
 }
+/*
 extension TimeInterval {
   var time: String {
     let hours = Int(self) / 3600
@@ -318,4 +319,33 @@ extension TimeInterval {
            let time = self.hoursAndMinutes
            return String(format: "%02dh %02dm", time.hours, time.minutes)
        }
+}*/
+extension TimeInterval {
+    var time: String {
+        let hours = Int(self) / 3600
+        let minutes = Int(self) / 60 % 60
+        let seconds = Int(self) % 60
+        
+        if hours > 0 {
+            return String(format: "%02d:%02d", hours, minutes)
+        } else {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
+    }
+    
+    var hoursAndMinutes: (hours: Int, minutes: Int) {
+        let hours = Int(self) / 3600
+        let minutes = Int(self) / 60 % 60
+        return (hours, minutes)
+    }
+    
+    var formattedTime: String {
+        let time = self.hoursAndMinutes
+        if time.hours > 0 {
+            return String(format: "%02dh %02dm", time.hours, time.minutes)
+        } else {
+            return String(format: "%02dm", time.minutes)
+        }
+    }
 }
+

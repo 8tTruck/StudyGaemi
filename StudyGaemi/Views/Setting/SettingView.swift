@@ -49,7 +49,7 @@ class SettingView: UIView {
     
     let userImageView = UIImageView().then {
         $0.image = UIImage(named: "profileAnt")
-        $0.contentMode = .center
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 23
         $0.layer.masksToBounds = true
     }
@@ -84,7 +84,7 @@ class SettingView: UIView {
     
     let totalTimeLabel = UILabel().then {
         $0.text = "8시간 0분"
-        $0.font = UIFont(name: "Pretendard-Regular", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
+        $0.font = UIFont(name: CustomFontType.semiBold.name, size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
     
@@ -109,8 +109,8 @@ class SettingView: UIView {
     let accumulatedLabel = UILabel().then {
         $0.text = "0일 누적"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
-        $0.textColor = .white
-        $0.backgroundColor = .orange
+        $0.textColor = UIColor(named: "fontBlack")
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
         $0.textAlignment = .center
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true

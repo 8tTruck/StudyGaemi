@@ -8,20 +8,78 @@
 import BackgroundTasks
 import UIKit
 import KakaoSDKAuth
+import FirebaseAuth
+import SnapKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var isLogined = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
+
+        let launchScreenView = LaunchScreenView()
+
+        // Create a new UIWindow
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = UINavigationController(rootViewController: LoginViewController())
+        window.rootViewController = launchScreenView
         window.makeKeyAndVisible()
         self.window = window
+
+        // 로그인 상태 확인 및 적절한 ViewController 설정
+        checkLogin()
+        
+        func checkLogin() {
+            print("로그인 유저인지 확인")
+            if let user = Auth.auth().currentUser {
+                print("currentUser임")
+                AuthenticationManager.shared.checkEmailVerifiedForLogin { isEmailVerified in
+                    if isEmailVerified {
+                        self.isLogined = true
+                        print("애플 또는 이메일 자동 로그인 성공: \(user.email ?? "")")
+                        navigateToMainScreen()
+                    } else {
+                        print("자동 로그인 실패. else 시작")
+                        FirestoreManager.shared.getLoginMethod { loginMethod in
+                            if loginMethod == "kakao" {
+                                print("카카오 계정임")
+                                self.isLogined = true
+                                navigateToMainScreen()
+                            } else {
+                                print("카카오 계정 이외의 알 수 없는 무언가")
+                                navigateToLoginScreen()
+                            }
+                        }
+                    }
+                }
+            } else {
+                print("최종 else 진입")
+                navigateToLoginScreen()
+            }
+        }
+        
+        
+        func navigateToMainScreen() {
+            let bottomTabBarVC = BottomTabBarViewController()
+            if let window = self.window {
+                window.rootViewController = bottomTabBarVC
+                window.makeKeyAndVisible()
+            }
+        }
+        
+        func navigateToLoginScreen() {
+            let bottomTabBarVC = LoginViewController()
+            // LoginViewController가 rootViewController에 속해있지 않아서 화면 전환이 안되었던 것.
+            // 아래처럼 포함시켜준 이후로는 잘 넘어가는 모습.
+            let navController = UINavigationController(rootViewController: bottomTabBarVC)
+            if let window = self.window {
+                window.rootViewController = navController
+                window.makeKeyAndVisible()
+            }
+        }
     }
+
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -104,6 +162,60 @@ extension SceneDelegate {
             }
         default:
             return LoginViewController()
+        }
+    }
+}
+
+extension SceneDelegate {
+    
+    func checkLogin() {
+        print("로그인 유저인지 확인")
+        if let user = Auth.auth().currentUser {
+            print("currentUser임")
+            AuthenticationManager.shared.checkEmailVerifiedForLogin { isEmailVerified in
+                if isEmailVerified {
+                    self.isLogined = true
+                    print("애플 또는 이메일 자동 로그인 성공: \(user.email ?? "")")
+                    self.navigateToMainScreen()
+                } else {
+                    print("자동 로그인 실패. else 시작")
+                    FirestoreManager.shared.getLoginMethod { loginMethod in
+                        if loginMethod == "kakao" {
+                            if AuthApi.hasToken() {
+                                print("카카오 자동 로그인 성공")
+                                self.isLogined = true
+                                self.navigateToMainScreen()
+                            } else {
+                                self.navigateToLoginScreen()
+                            }
+                            
+                        } else {
+                            print("카카오 계정 이외의 알 수 없는 무언가")
+                            self.navigateToLoginScreen()
+                        }
+                    }
+                }
+            }
+        } else {
+            print("최종 else 진입")
+            self.navigateToLoginScreen()
+        }
+    }
+    
+    
+    func navigateToMainScreen() {
+        let bottomTabBarVC = BottomTabBarViewController()
+        if let window = self.window {
+            window.rootViewController = bottomTabBarVC
+            window.makeKeyAndVisible()
+        }
+    }
+    
+    func navigateToLoginScreen() {
+        let loginVC = LoginViewController()
+        if let window = self.window {
+            window.rootViewController = loginVC
+            window.makeKeyAndVisible()
         }
     }
 }

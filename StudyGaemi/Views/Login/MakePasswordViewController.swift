@@ -40,10 +40,42 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     let offImage = UIImage(named: "checkboxOff")
     let onImage = UIImage(named: "checkboxOn")
     let offColor = UIColor(red: 209/255, green: 211/255, blue: 217/255, alpha: 1.0)
+    let passwordSecureButton = UIButton(type: .custom)
     
     lazy var personalInfoDescriptionButton = createDescriptionButton(tag: 1)
     lazy var yakgwanDescriptionButton = createDescriptionButton(tag: 2)
 //    lazy var ageDescriptionButton = createDescriptionButton(tag: 3)
+    
+    func setupPasswordSecureButton(for textField: UITextField, withPadding padding: CGFloat = 8.0) -> UIButton {
+        let eyeImage = UIImage(systemName: "eye")
+        let orangeEyeImage = eyeImage?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
+        let secureButton = UIButton(type: .custom)
+        secureButton.setImage(orangeEyeImage, for: .normal)
+        secureButton.addTarget(self, action: #selector(passwordSecureButtonTapped(_:)), for: .touchUpInside)
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: textField.frame.height))
+        secureButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        secureButton.center = CGPoint(x: paddingView.frame.width / 2, y: paddingView.frame.height / 2)
+        paddingView.addSubview(secureButton)
+        
+        textField.rightView = paddingView
+        textField.rightViewMode = .always
+        return secureButton
+    }
+
+    func addPasswordSecureButtonToTextField() {
+        let passwordSecureButton = setupPasswordSecureButton(for: passwordTextField)
+        let passwordCheckSecureButton = setupPasswordSecureButton(for: passwordCheckTextField)
+    }
+
+    @objc func passwordSecureButtonTapped(_ sender: UIButton) {
+        guard let textField = sender.superview?.superview as? UITextField else { return }
+        textField.isSecureTextEntry.toggle()
+        let eyeImage = textField.isSecureTextEntry ? UIImage(systemName: "eye") : UIImage(systemName: "eye.slash")
+        let orangeEyeImage = eyeImage?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
+        sender.setImage(orangeEyeImage, for: .normal)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +87,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         nicknameTextField.delegate = self
         passwordTextField.delegate = self
         passwordCheckTextField.delegate = self
+        nicknameTextField.keyboardType = .emailAddress
         
         // 입력 부분
         mainImageSetting()
@@ -64,6 +97,8 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         passwordDescriptionLabelSetting()
         passwordCheckTextFieldSetting()
         passwordCheckDescriptionLabelSetting()
+        
+        addPasswordSecureButtonToTextField()
         
         confirmButtonSetting()
         
