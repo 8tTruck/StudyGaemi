@@ -17,9 +17,8 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let settingView = SettingView()
     private let imagePicker = UIImagePickerController()
 
-    private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항"]
+    private var settingItems = ["개인정보 처리 및 방침", "오류 및 버그 신고", "공지사항", "도움말"]
     private var settingItemIcons = ["lock.shield", "exclamationmark.triangle", "megaphone"]
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +79,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
 
     @objc private func nicknameDidUpdate(notification: Notification) {
         if let nickname = notification.userInfo?["nickname"] as? String {
-            settingView.userLabel.text = nickname
+            settingView.userLabel.text = "\(nickname) \(AuthenticationManager.shared.generateNickNameCode())"
             saveNicknameToFirestore(nickname)
         }
     }
@@ -105,7 +104,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         userRef.getDocument { [weak self] document, error in
             if let document = document, document.exists {
                 let data = document.data()
-                let nickname = data?["nickName"] as? String ?? "Unknown"
+                let nickname = "\(data?["nickName"] ?? "User") \(AuthenticationManager.shared.generateNickNameCode())"
                 let email = data?["email"] as? String ?? "Unknown"
                 self?.settingView.userLabel.text = nickname
                 
@@ -361,6 +360,8 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 pageViewController = BugReportViewController()
             case "공지사항":
                 pageViewController = AnnouncementViewController()
+            case "도움말":
+                pageViewController = TutorialPageViewController()
             default:
                 return
             }

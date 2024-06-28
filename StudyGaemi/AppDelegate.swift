@@ -30,13 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 알림 권한 요청
         UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-            if granted {
-                print("알림 권한이 수락되었습니다.")
-            } else {
-                print("알림 권한이 거부되었습니다.")
-            }
-        }
 
         AlarmSettingController.shared.removeNotification()
         AlarmCoreDataManager.shared.fetchAlarm()

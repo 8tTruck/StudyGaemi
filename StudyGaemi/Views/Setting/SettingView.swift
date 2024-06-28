@@ -74,7 +74,7 @@ class SettingView: UIView {
     
     let totalTimeLabel = UILabel().then {
         $0.text = "8시간 0분"
-        $0.font = UIFont(name: "Pretendard-Regular", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
+        $0.font = UIFont(name: CustomFontType.semiBold.name, size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
     
