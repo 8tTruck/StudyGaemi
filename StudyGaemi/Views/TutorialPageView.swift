@@ -132,7 +132,7 @@ class TutorialPageView: BaseViewController {
     }
                              
     @objc func dismissView() {
-        if let presentingViewController = self.presentingViewController {
+        if self.presentingViewController != nil {
             // present 방식으로 열린 경우
             self.dismiss(animated: true, completion: nil)
         } else if let navigationController = self.navigationController {
