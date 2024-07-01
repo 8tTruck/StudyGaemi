@@ -26,7 +26,7 @@ class CustomButton: UIButton {
         self.clipsToBounds = true
         self.setTitle(title, for: .normal)
         self.titleLabel?.font = UIFont(name: CustomFontType.regular.name, size: 20) ?? UIFont.systemFont(ofSize: 20)
-        self.setTitleColor(UIColor(named: "fontWhite") ?? .white, for: .normal)
+        self.setTitleColor(.white, for: .normal)
     }
     
     required init?(coder: NSCoder) {

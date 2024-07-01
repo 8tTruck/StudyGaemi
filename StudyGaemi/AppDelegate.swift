@@ -67,20 +67,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        // 로컬 알림 내용 설정
-        let content = UNMutableNotificationContent()
-        content.title = "⏰ 공부하개미를 다시 켜 주세요 ⏰"
-        content.body = "공부하개미를 종료하면 공부타이머와 알람이 정상적으로 동작하지 않습니다."
-        content.sound = .default
-
-        // 트리거 시간 설정 (예: 1초 후)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-
-        // 알림 요청 생성
-        let request = UNNotificationRequest(identifier: "terminateNotification", content: content, trigger: trigger)
-
-        // 알림 센터에 추가
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        if UserDefaults.standard.bool(forKey: "toggleButtonState") || SettingTimerVC.repeatingSecondsTimer.timerState == .resumed {
+            // 로컬 알림 내용 설정
+            let content = UNMutableNotificationContent()
+            content.title = "⏰ 공부하개미를 다시 켜 주세요 ⏰"
+            content.body = "공부하개미를 종료하면 공부타이머와 알람이 정상적으로 동작하지 않습니다."
+            content.sound = .default
+            
+            // 트리거 시간 설정 (예: 1초 후)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            
+            // 알림 요청 생성
+            let request = UNNotificationRequest(identifier: "terminateNotification", content: content, trigger: trigger)
+            
+            // 알림 센터에 추가
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
     }
 
     // MARK: - Core Data stack

@@ -12,7 +12,7 @@ import SnapKit
 
 class SettingTimerVC: BaseViewController {
     
-    private let repeatingSecondsTimer: RepeatingSecondsTimer = RepeatingSecondsTimerImpl()
+    static let repeatingSecondsTimer: RepeatingSecondsTimer = RepeatingSecondsTimerImpl()
 
     
     private lazy var countDownDatePicker: UIDatePicker = {
@@ -156,7 +156,7 @@ class SettingTimerVC: BaseViewController {
     }
     
     private func startTimer(with duration: TimeInterval) {
-        repeatingSecondsTimer.start(durationSeconds: duration, repeatingExecution: nil) {
+        SettingTimerVC.repeatingSecondsTimer.start(durationSeconds: duration, repeatingExecution: nil) {
             print("완료")
         }
     }
