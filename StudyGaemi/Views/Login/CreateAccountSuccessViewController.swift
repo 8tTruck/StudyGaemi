@@ -12,7 +12,7 @@ class CreateAccountSuccessViewController: UIViewController {
     
     let mainImage = UIImageView()
     let mainLabel = UILabel()
-    let goLoginButton = CustomButton(title: "로그인 하러가기")
+    let goLoginButton = CustomButton(title: "홈으로 이동")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class CreateAccountSuccessViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-34)
             make.width.equalTo(342)
-            make.height.equalTo(60)
+            make.height.equalTo(52)
         }
     }
     

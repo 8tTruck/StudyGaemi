@@ -23,7 +23,7 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
 //    let confirmButton = CustomButton(title: "인증")
     
     private var timer: Timer?
-    private let totalTime: TimeInterval = 30
+    private let totalTime: TimeInterval = 60
     private var elapsedTime: TimeInterval = 0
 
     override func viewDidLoad() {
@@ -87,7 +87,7 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
 //            print("계정 탈퇴 시도")
             AuthenticationManager.shared.deleteUser()
             DispatchQueue.main.async {
-                let alertController = UIAlertController(title: "인증 시간이 만료되었습니다.", message: nil, preferredStyle: .alert)
+                let alertController = UIAlertController(title: "인증 시간이 만료되었습니다.\n입력하신 정보를 모두 삭제합니다.", message: nil, preferredStyle: .alert)
                 let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
                     AuthenticationManager.shared.signOut()
                     let loginVC = UINavigationController(rootViewController: LoginViewController())
@@ -118,7 +118,7 @@ class EmailConfirmViewController: UIViewController, UITextFieldDelegate {
     
     func mainLabelSetting() {
         view.addSubview(mainLabel)
-        mainLabel.text = "이메일 인증 대기중"
+        mainLabel.text = "이메일 인증 대기 중"
         mainLabel.textColor = UIColor(named: "fontBlack")
         mainLabel.font = UIFont(name: CustomFontType.bold.name, size: 24) ?? UIFont.systemFont(ofSize: 24)
         mainLabel.translatesAutoresizingMaskIntoConstraints = false

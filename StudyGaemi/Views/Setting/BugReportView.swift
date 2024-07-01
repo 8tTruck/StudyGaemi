@@ -51,7 +51,8 @@ class BugReportView: UIView {
     private func setupConstraints() {
         bugReportView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(15)
-            make.leading.trailing.equalToSuperview().inset(20)
+            // 승섭 좌우여백 24로 통일
+            make.leading.trailing.equalToSuperview().inset(24)
         }
         
         textView.snp.makeConstraints { make in
@@ -61,8 +62,10 @@ class BugReportView: UIView {
         
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(bugReportView.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(48)
+            // 승섭 버튼 좌우여백 통일 20 -> 24
+            make.leading.trailing.equalToSuperview().inset(24)
+            // 승섭 제출 버튼 높이 통일 48 -> 52
+            make.height.equalTo(52)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-30)
         }
     }

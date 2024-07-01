@@ -18,6 +18,7 @@ class PrivacyPolicyView: UIView {
     override init(frame: CGRect) {
         scrollView = UIScrollView()
         contentView = UIView()
+            // 승섭 개인정보처리방침 오타수정
         textView = UILabel().then {
             $0.text = """
                 개인정보 보호 담당부서
@@ -114,11 +115,11 @@ class PrivacyPolicyView: UIView {
                         - 성명 : 강태영
                         - 소속 : 개인정보보호팀
                         - 이메일 : [taengdev@gmail.com](mailto:taengdev@gmail.com)
-                2. 회원은 공부하개미 서비르를 이용하면서 발생한 모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의할 수 있습니다. 운영팀은 회원의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.
+                2. 회원은 공부하개미 서비스를 이용하면서 발생한 모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의할 수 있습니다. 운영팀은 회원의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.
 
                 **제 6조(개인정보 처리방법 변경)**
 
-                운영팀은 관련 법령이나 내부 정책 대응을 위하여 개인정보처리방침을 수정할 수 있습니다. 개인정보러처리방침이 변경되는 경우 회사는 변경 사항을 공지사항 등을 통해 게시하며, 변겨오딘 개인정보처리방침은 게시한 날로부터 7일후부터 효력이 발생합니다.
+                운영팀은 관련 법령이나 내부 정책 대응을 위하여 개인정보처리방침을 수정할 수 있습니다. 개인정보처리방침이 변경되는 경우 회사는 변경 사항을 공지사항 등을 통해 게시하며, 변경된 개인정보처리방침은 게시한 날로부터 7일후부터 효력이 발생합니다.
 
                 공고일자 : 2024년 6월 25일
 
@@ -148,9 +149,10 @@ class PrivacyPolicyView: UIView {
     
     private func setupConstraints() {
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(16)
-            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(29)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            // 승섭 상하좌우 개인정보처리방침 로그인 시와 동일하게 프레임 적용 top 16 -> 12, leading&trailing 29 -> 24, bottom 0 -> 12
+            make.top.equalTo(safeAreaLayoutGuide).offset(12)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(12)
         }
         
         contentView.snp.makeConstraints { make in

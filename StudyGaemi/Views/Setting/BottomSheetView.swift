@@ -84,7 +84,8 @@ class BottomSheetView: UIView {
         textField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.leading.trailing.equalTo(containerView).inset(20)
-            make.height.equalTo(60)
+            // 승섭 텍스트 필드 높이 통일 60 -> 52
+            make.height.equalTo(52)
         }
         
         deleteAccountButton.snp.makeConstraints { make in
@@ -95,7 +96,8 @@ class BottomSheetView: UIView {
         confirmButton.snp.makeConstraints { make in
             make.top.equalTo(textField.snp.bottom).offset(40)
             make.leading.trailing.equalTo(containerView).inset(20)
-            make.height.equalTo(44)
+            // 승섭 버튼 높이 통일 48 -> 52
+            make.height.equalTo(52)
         }
     }
 }
