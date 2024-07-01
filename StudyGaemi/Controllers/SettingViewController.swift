@@ -272,6 +272,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             self.imagePicker.sourceType = .photoLibrary
             self.imagePicker.modalPresentationStyle = .currentContext
             self.present(self.imagePicker, animated: true, completion: nil)
+            self.tabBarController?.tabBar.isHidden = true
         } else {
             print("앨범에 접근할 수 없습니다.")
         }
@@ -282,6 +283,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
             self.imagePicker.sourceType = .camera
             self.imagePicker.modalPresentationStyle = .currentContext
             self.present(self.imagePicker, animated: true, completion: nil)
+            self.tabBarController?.tabBar.isHidden = true
         } else {
             print("카메라에 접근할 수 없습니다.")
         }
@@ -295,7 +297,14 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         settingView.userImageView.image = selectedImage
         saveProfileImage(image: selectedImage)
         picker.dismiss(animated: true, completion: nil)
+        self.tabBarController?.tabBar.isHidden = false
     }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            picker.dismiss(animated: true) {
+                self.tabBarController?.tabBar.isHidden = false
+            }
+        }
 
     private func saveProfileImage(image: UIImage) {
         let fileName = UUID().uuidString
