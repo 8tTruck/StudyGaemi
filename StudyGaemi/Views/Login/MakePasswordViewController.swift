@@ -21,7 +21,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     let passwordTextField = CustomTextField(text: "사용할 비밀번호를 입력하세요")
     var passwordCheckDescriptionLabel = UILabel()
     let passwordCheckTextField = CustomTextField(text: "비밀번호를 다시 한 번 입력해주세요")
-    let confirmButton = CustomButton(title: "계정 생성")
+    let confirmButton = CustomButton(title: "인증메일 전송")
     
     // 사용자 동의 부분
     let personalInfoButton = UIButton()
@@ -166,7 +166,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(mainImage.snp.bottom).offset(20)
 //            make.width.equalTo(342)
-            make.height.equalTo(50)
+            make.height.equalTo(52)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
         }
@@ -196,7 +196,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(nicknameDescriptionLabel.snp.bottom).offset(10)
 //            make.width.equalTo(342)
-            make.height.equalTo(50)
+            make.height.equalTo(52)
             make.leading.equalTo(nicknameTextField.snp.leading)
             make.trailing.equalTo(nicknameTextField.snp.trailing)
         }
@@ -225,7 +225,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(passwordDescriptionLabel.snp.bottom).offset(10)
 //            make.width.equalTo(342)
-            make.height.equalTo(50)
+            make.height.equalTo(52)
             make.leading.equalTo(nicknameTextField.snp.leading)
             make.trailing.equalTo(nicknameTextField.snp.trailing)
         }
@@ -469,7 +469,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
 //            make.width.equalTo(342)
             make.leading.equalTo(nicknameTextField.snp.leading)
             make.trailing.equalTo(nicknameTextField.snp.trailing)
-            make.height.equalTo(60)
+            make.height.equalTo(52)
         }
     }
     
@@ -748,15 +748,15 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
                     - 성명 : 강태영
                     - 소속 : 개인정보보호팀
                     - 이메일 : [taengdev@gmail.com](mailto:taengdev@gmail.com)
-            2. 회원은 공부하개미 서비르를 이용하면서 발생한 모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의할 수 있습니다. 운영팀은 회원의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.
+            2. 회원은 공부하개미 서비스를 이용하면서 발생한 모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의할 수 있습니다. 운영팀은 회원의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.
 
             **제 6조(개인정보 처리방법 변경)**
 
-            운영팀은 관련 법령이나 내부 정책 대응을 위하여 개인정보처리방침을 수정할 수 있습니다. 개인정보러처리방침이 변경되는 경우 회사는 변경 사항을 공지사항 등을 통해 게시하며, 변겨오딘 개인정보처리방침은 게시한 날로부터 7일후부터 효력이 발생합니다.
+            운영팀은 관련 법령이나 내부 정책 대응을 위하여 개인정보처리방침을 수정할 수 있습니다. 개인정보처리방침이 변경되는 경우 회사는 변경 사항을 공지사항 등을 통해 게시하며, 변경된 개인정보처리방침은 게시한 날로부터 7일후부터 효력이 발생합니다.
 
             공고일자 : 2024년 6월 25일
 
-            시행일자 : 2024년 6월 25일
+            시행일자 : 2024년 7월 2일
             """
         case 2:
             return """

@@ -146,8 +146,9 @@ class AlarmResultView: BaseViewController {
         
         buttonStackView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(25)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            // 승섭 버튼높이 52로 통일
+            make.height.equalTo(52)
         }
     }
     

@@ -187,7 +187,8 @@ class TimerResultViewController: BaseViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(30)
             make.width.equalTo(UIScreen.main.bounds.width - 40)
-            make.height.equalTo(48)
+            // 승섭 버튼 높이 52로 통일
+            make.height.equalTo(52)
         }
         
         bottomBackView.snp.makeConstraints { make in
