@@ -120,7 +120,7 @@ class TutorialPageView: BaseViewController {
         case 4:
             imageView.image = UIImage(named: "tutorial4")
             titleLabel.text = "월간개미"
-            descriptionLabel.text = "한달간의 기상개미와 공부개미 현황을 파악해보세요"
+            descriptionLabel.text = "한 달 간의 기상개미와 공부개미 현황을 파악해보세요"
         case 5:
             imageView.image = UIImage(named: "tutorial5")
             titleLabel.text = "개ME"
