@@ -29,8 +29,8 @@ class TutorialPageView: BaseViewController {
         $0.numberOfLines = 0
     }
     
-    private let exitButton = CustomButton(radius: 16, title: "확인").then {
-        $0.setFontSize(name: CustomFontType.semiBold.name, 16)
+    private let exitButton = CustomButton(radius: 10, title: "확인").then {
+        $0.setFontSize(name: CustomFontType.semiBold.name, 17)
         $0.isHidden = true
     }
     
@@ -71,7 +71,7 @@ class TutorialPageView: BaseViewController {
 
     override func constraintLayout() {
         imageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(80)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
             make.centerX.equalToSuperview()
             make.width.equalTo(260)
             make.height.equalTo(410)
@@ -91,6 +91,7 @@ class TutorialPageView: BaseViewController {
         
         exitButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(16)
+            make.height.equalTo(48)
             make.leading.equalToSuperview().offset(32)
             make.trailing.equalToSuperview().offset(-32)
         }
@@ -103,7 +104,7 @@ class TutorialPageView: BaseViewController {
         case 0:
             imageView.image = UIImage(named: "tutorial0")
             titleLabel.text = "알림 권한 허용"
-            descriptionLabel.text = "알림 권한을 허용하지 않으면, 알람 기능을 사용할 수 없으니 권한을 허용해주세요"
+            descriptionLabel.text = "알림 권한을 허용하지 않으면,\n알람 기능을 사용할 수 없으니 권한을 허용해주세요"
         case 1:
             imageView.image = UIImage(named: "tutorial1")
             titleLabel.text = "기상하개미"
@@ -111,11 +112,11 @@ class TutorialPageView: BaseViewController {
         case 2:
             imageView.image = UIImage(named: "tutorial2")
             titleLabel.text = "문제풀개미"
-            descriptionLabel.text = "문제를 풀고 기상개미를 획득하세요"
+            descriptionLabel.text = "문제를 풀고 기상개미를 획득하세요\n(기상개미는 00:00시 기준으로 초기화 됩니다)"
         case 3:
             imageView.image = UIImage(named: "tutorial3")
             titleLabel.text = "공부하개미"
-            descriptionLabel.text = "목표시간을 설정하고 공부시간을 측정해보세요"
+            descriptionLabel.text = "목표시간을 설정하고 공부시간을 측정해보세요\n(공부개미는 05:00시 기준으로 초기화 됩니다)"
         case 4:
             imageView.image = UIImage(named: "tutorial4")
             titleLabel.text = "월간개미"
