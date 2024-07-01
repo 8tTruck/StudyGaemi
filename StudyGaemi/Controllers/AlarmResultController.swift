@@ -7,29 +7,22 @@
 
 import UIKit
 
-class AlarmResultController {
+class AlarmResultController: BaseViewController {
     
-    func moveToStudy() {
-        let bottomTabBarVC = BottomTabBarViewController()
-        bottomTabBarVC.selectedIndex = 1
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            window.rootViewController = bottomTabBarVC
-            window.makeKeyAndVisible()
+    func moveToStudy(_ viewController: UIViewController) {
+        if let tabBarController = viewController.presentingViewController as? UITabBarController {
+            print(tabBarController)
+            tabBarController.selectedIndex = 1 // 두번째 탭으로 이동
         }
+        viewController.dismiss(animated: true, completion: nil)
     }
     
-    func moveToCalendar() {
-        let bottomTabBarVC = BottomTabBarViewController()
-        bottomTabBarVC.selectedIndex = 2
- 
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            window.rootViewController = bottomTabBarVC
-            window.makeKeyAndVisible()
+    func moveToCalendar(_ viewController: UIViewController) {
+        if let tabBarController = viewController.presentingViewController as? UITabBarController {
+            print(tabBarController)
+            tabBarController.selectedIndex = 2 // 세번째 탭으로 이동
         }
- 
+        viewController.dismiss(animated: true, completion: nil)
         
     }
 }

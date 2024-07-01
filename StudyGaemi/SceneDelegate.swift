@@ -27,10 +27,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         self.window = window
 
-        // 로그인 상태 확인 및 적절한 ViewController 설정
-        checkLogin()
-        
-        
+        if connectionOptions.notificationResponse == nil {
+            // 로그인 상태 확인 및 적절한 ViewController 설정
+            checkLogin()
+        }
     }
 
 
@@ -42,13 +42,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -90,32 +88,36 @@ extension SceneDelegate {
         let rootViewController = window.rootViewController as? UINavigationController
         
         if rootViewController == nil {
-            // 네비게이션 컨트롤러가 없는 경우, 새로운 네비게이션 컨트롤러를 생성하여 설정
-            let navController = UINavigationController(rootViewController: createViewController(withIdentifier: identifier))
-            window.rootViewController = navController
+            if isLogined == false {
+                let bottomTabBarVC = BottomTabBarViewController()
+                window.rootViewController = bottomTabBarVC
+                isLogined = true
+            }
+            let alarmQuestionView = self.createViewController(withIdentifier: identifier)
+            let navigationController = UINavigationController(rootViewController: alarmQuestionView)
+            navigationController.modalPresentationStyle = .fullScreen
+            window.rootViewController?.present(navigationController, animated: true, completion: nil)
         } else {
-            // 네비게이션 컨트롤러가 있는 경우, 해당 네비게이션 컨트롤러를 통해 푸시
-            rootViewController?.pushViewController(createViewController(withIdentifier: identifier), animated: true)
+            let alarmQuestionView = self.createViewController(withIdentifier: identifier)
+            let navigationController = UINavigationController(rootViewController: alarmQuestionView)
+            navigationController.modalPresentationStyle = .fullScreen
+            window.rootViewController?.present(navigationController, animated: true, completion: nil)
         }
     }
     
     // MARK: - 특정 ViewController를 생성하는 메소드
-    private func createViewController(withIdentifier identifier: String) -> UIViewController {
-        switch identifier {
-        case "AlarmQuestionView":
+    func createViewController(withIdentifier identifier: String) -> UIViewController {
+        if identifier == "AlarmQuestionView" {
             let time = AlarmCoreDataManager.shared.getAlarmData().time
             let calendar = Calendar.current
             let currentDate = Date()
             
             let components = calendar.dateComponents([.minute], from: time, to: currentDate)
-            if let minuteDifference = components.minute, minuteDifference >= 26 {
-                return BottomTabBarViewController()
-            } else {
+            if let minuteDifference = components.minute, minuteDifference <= 26 {
                 return AlarmQuestionView()
             }
-        default:
-            return BottomTabBarViewController()
         }
+        return UIViewController()
     }
 }
 
@@ -131,21 +133,20 @@ extension SceneDelegate {
                     print("애플 또는 이메일 자동 로그인 성공: \(user.email ?? "")")
                     self.navigateToMainScreen()
                 } else {
-                    print("자동 로그인 실패. else 시작")
                     FirestoreManager.shared.getLoginMethod { loginMethod in
                         if loginMethod == "kakao" {
-                            print("카카오 계정임")
+                            print("카카오 계정 로그인 성공")
                             self.isLogined = true
                             self.navigateToMainScreen()
                         } else {
-                            print("카카오 계정 이외의 알 수 없는 무언가")
+                            print("카카오 계정 로그인 실패")
                             self.navigateToLoginScreen()
                         }
                     }
                 }
             }
         } else {
-            print("최종 else 진입")
+            print("로그인 되어 있지 않음")
             self.navigateToLoginScreen()
         }
     }
@@ -160,10 +161,10 @@ extension SceneDelegate {
     }
     
     func navigateToLoginScreen() {
-        let bottomTabBarVC = LoginViewController()
+        let loginvC = LoginViewController()
         // LoginViewController가 rootViewController에 속해있지 않아서 화면 전환이 안되었던 것.
         // 아래처럼 포함시켜준 이후로는 잘 넘어가는 모습.
-        let navController = UINavigationController(rootViewController: bottomTabBarVC)
+        let navController = UINavigationController(rootViewController: loginvC)
         if let window = self.window {
             window.rootViewController = navController
             window.makeKeyAndVisible()

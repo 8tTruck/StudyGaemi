@@ -152,10 +152,10 @@ class AlarmResultView: BaseViewController {
     }
     
     @objc func moveToStudy() {
-        alarmResultController.moveToStudy()
+        alarmResultController.moveToStudy(self)
     }
     
     @objc func moveToCalendar() {
-        alarmResultController.moveToCalendar()
+        alarmResultController.moveToCalendar(self)
     }
 }
