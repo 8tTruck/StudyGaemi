@@ -140,7 +140,8 @@ class AlarmResultView: BaseViewController {
         
         stackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(71)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(25)
+            // 좌우여백 24로 통일 25 -> 24
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(320)
         }
         

@@ -177,7 +177,10 @@ class AlarmViewController: BaseViewController {
         alarmView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(121)
             make.centerX.equalToSuperview()
-            make.width.equalTo(312)
+            // 승섭 width 지우고 좌우 여백 24로 통일
+//            make.width.equalTo(312)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(66)
             
         }
