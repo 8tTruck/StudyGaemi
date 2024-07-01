@@ -151,7 +151,8 @@ class SettingView: UIView {
         
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(30)
         }
         
         scrollContentView.snp.makeConstraints { make in
