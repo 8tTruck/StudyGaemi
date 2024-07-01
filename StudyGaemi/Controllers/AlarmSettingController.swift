@@ -69,6 +69,8 @@ class AlarmSettingController {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
+        self.removeScheduleAlarm()   // 알람 설정 전 모든 알람 제거
+        
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
                 print("알림 추가 오류: \(error.localizedDescription)")
@@ -159,6 +161,7 @@ class AlarmSettingController {
             let identifiers = requests.filter { $0.identifier.hasPrefix(identifier) }.map { $0.identifier }
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
         }
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
     
     func removeNotification() {

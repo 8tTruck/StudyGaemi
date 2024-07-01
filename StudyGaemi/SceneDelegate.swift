@@ -108,13 +108,13 @@ extension SceneDelegate {
             let currentDate = Date()
             
             let components = calendar.dateComponents([.minute], from: time, to: currentDate)
-            if let minuteDifference = components.minute, minuteDifference >= 2 {
-                return LoginViewController()
+            if let minuteDifference = components.minute, minuteDifference >= 26 {
+                return BottomTabBarViewController()
             } else {
                 return AlarmQuestionView()
             }
         default:
-            return LoginViewController()
+            return BottomTabBarViewController()
         }
     }
 }
