@@ -21,7 +21,7 @@ class AlarmSettingController {
         self.alarmModel = AlarmCoreDataManager.shared.getAlarmData()
         
         // 알림 권한 요청
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
                 self.scheduleAlarm(time: self.alarmModel.time, sound: self.alarmModel.sound, repeatEnabled: self.alarmModel.setRepeatEnabled(), repeatInterval: self.alarmModel.setRepeatInterval(), repeatCount: self.alarmModel.setRepeatCount())
             } else {

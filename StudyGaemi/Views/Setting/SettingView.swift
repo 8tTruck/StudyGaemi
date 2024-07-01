@@ -11,6 +11,16 @@ import UIKit
 
 class SettingView: UIView {
     
+    let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.backgroundColor = .clear
+        $0.bounces = false
+    }
+    
+    let scrollContentView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+
     let titleLabel = UILabel().then {
         $0.text = "개ME"
         $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -39,7 +49,7 @@ class SettingView: UIView {
     
     let userImageView = UIImageView().then {
         $0.image = UIImage(named: "profileAnt")
-        $0.contentMode = .center
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 23
         $0.layer.masksToBounds = true
     }
@@ -74,14 +84,15 @@ class SettingView: UIView {
     
     let totalTimeLabel = UILabel().then {
         $0.text = "8시간 0분"
-        $0.font = UIFont(name: "Pretendard-Regular", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
+        $0.font = UIFont(name: CustomFontType.semiBold.name, size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
     
     let tableView = UITableView().then {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        $0.backgroundColor = UIColor(named: "viewBackgroundColor")
+        $0.backgroundColor = UIColor.clear
         $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
     }
     
     let logoutButton = UIButton(type: .system).then {
@@ -98,8 +109,8 @@ class SettingView: UIView {
     let accumulatedLabel = UILabel().then {
         $0.text = "0일 누적"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
-        $0.textColor = .white
-        $0.backgroundColor = .orange
+        $0.textColor = UIColor(named: "fontBlack")
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
         $0.textAlignment = .center
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -120,8 +131,10 @@ class SettingView: UIView {
     func configureUI() {
         backgroundColor = UIColor(named: "viewBackgroundColor")
         
-        addSubview(titleView)
-        addSubview(userView)
+        addSubview(scrollView)
+        scrollView.addSubview(scrollContentView)
+        scrollContentView.addSubview(titleView)
+        scrollContentView.addSubview(userView)
         userView.addSubview(userImageView)
         userView.addSubview(userLabel)
         userView.addSubview(emailLabel)
@@ -130,11 +143,23 @@ class SettingView: UIView {
         userView.addSubview(totalStudyLabel)
         userView.addSubview(totalTimeLabel)
         userView.addSubview(accumulatedLabel)
-        addSubview(tableView)
-        addSubview(logoutButton)
+        scrollContentView.addSubview(tableView)
+        scrollContentView.addSubview(logoutButton)
     }
     
     func constraintLayout() {
+        
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(80)
+        }
+        
+        scrollContentView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView.contentLayoutGuide)
+            make.width.equalTo(scrollView.frameLayoutGuide)
+        }
+        
         imageView.snp.makeConstraints { make in
             make.width.height.equalTo(22)
         }
@@ -145,9 +170,9 @@ class SettingView: UIView {
         }
         
         userView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(40)
-            make.leading.equalTo(safeAreaLayoutGuide).inset(24)
-            make.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.top.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().inset(24)
+            make.trailing.equalToSuperview().inset(24)
             make.height.equalTo(169)
         }
         
@@ -199,14 +224,14 @@ class SettingView: UIView {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(userView.snp.bottom).offset(10)
             make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(180)
+            make.height.equalTo(600)
         }
         
         logoutButton.snp.makeConstraints { make in
             make.top.equalTo(tableView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
-            //make.bottom.equalTo(safeAreaLayoutGuide).offset(-100)
+            make.bottom.equalToSuperview().inset(20)
         }
     }
 }

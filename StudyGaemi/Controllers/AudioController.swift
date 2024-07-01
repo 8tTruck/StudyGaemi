@@ -38,7 +38,23 @@ class AudioController {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.numberOfLoops = -1
-            audioPlayer?.setVolume(1.0, fadeDuration: 0.0)
+            audioPlayer?.setVolume(5.0, fadeDuration: 0.0)
+            audioPlayer?.play()
+            print("오디오플레이어 볼륨 설정 값: \(String(describing: audioPlayer?.volume))")
+        } catch {
+            print("사운드 파일 재생 실패 에러: \(error)")
+        }
+    }
+    
+    func previewSound(soundName: String) {
+        guard let url = Bundle.main.url(forResource: soundName, withExtension: "wav") else {
+            print("사운드 파일이 존재 하지 않음")
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.setVolume(5.0, fadeDuration: 0.0)
             audioPlayer?.play()
             print("오디오플레이어 볼륨 설정 값: \(String(describing: audioPlayer?.volume))")
         } catch {

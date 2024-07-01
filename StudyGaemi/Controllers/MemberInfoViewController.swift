@@ -14,13 +14,12 @@ class MemberInfoViewController: BaseViewController {
     
     private var confirmButtonBottomConstraint: Constraint?
     private var originalConfirmButtonBottomOffset: CGFloat = -30
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupKeyboardNotifications()
         setupTapGesture()
-        setupBackButton()
     }
     
     private func setupUI() {
@@ -46,12 +45,12 @@ class MemberInfoViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     private func setupTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
-
+    
     @objc internal override func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -82,48 +81,49 @@ class MemberInfoViewController: BaseViewController {
     }
     
     @objc private func confirmButtonTapped() {
-        guard let currentPassword = memberInfoView.currentPasswordField.text,
-              let newPassword = memberInfoView.newPasswordField.text,
-              let confirmPassword = memberInfoView.confirmPasswordField.text else { return }
+        // 키보드를 내림
+        view.endEditing(true)
         
-        if newPassword != confirmPassword {
-            let alertController = UIAlertController(title: "비밀번호 변경 오류", message: "비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-            alertController.addAction(confirmAction)
-            self.present(alertController, animated: true, completion: nil)
-            return
-        } else if newPassword == currentPassword {
-            let alertController = UIAlertController(title: "비밀번호 변경 오류", message: "기존 비밀번호와 동일합니다.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-            alertController.addAction(confirmAction)
-            self.present(alertController, animated: true, completion: nil)
-            return
-        } else if !isPasswordValid(newPassword) {
-
-            memberInfoView.newPasswordLabel.text = "비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다."
-            memberInfoView.newPasswordLabel.textColor = UIColor(named: "fontRed")
-        } else {
-            memberInfoView.confirmPasswordLabel.textColor = UIColor(named: "fontGray")
-            memberInfoView.errorLabel.text = ""
+        // 비밀번호 변경 로직을 0.1초 지연시켜 키보드가 내려간 후에 실행
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            guard let currentPassword = self.memberInfoView.currentPasswordField.text,
+                  let newPassword = self.memberInfoView.newPasswordField.text,
+                  let confirmPassword = self.memberInfoView.confirmPasswordField.text else { return }
             
-            AuthenticationManager.shared.updatePassword(currentPassword: currentPassword, newPassword: newPassword) { success, error in
-                if success {
-                    let alertController = UIAlertController(title: "비밀번호 변경", message: "비밀번호가 성공적으로 변경되었습니다.", preferredStyle: .alert)
-                    let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
-                        self.navigationController?.popViewController(animated: true)
+            if newPassword != confirmPassword {
+                self.showAlert(title: "비밀번호 변경 오류", message: "비밀번호가 일치하지 않습니다.")
+                return
+            } else if newPassword == currentPassword {
+                self.showAlert(title: "비밀번호 변경 오류", message: "기존 비밀번호와 동일합니다.")
+                return
+            } else if !self.isPasswordValid(newPassword) {
+                self.memberInfoView.newPasswordLabel.text = "비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다."
+                self.memberInfoView.newPasswordLabel.textColor = UIColor(named: "fontRed")
+            } else {
+                self.memberInfoView.confirmPasswordLabel.textColor = UIColor(named: "fontGray")
+                self.memberInfoView.errorLabel.text = ""
+                
+                AuthenticationManager.shared.updatePassword(currentPassword: currentPassword, newPassword: newPassword) { success, error in
+                    if success {
+                        self.showAlert(title: "비밀번호 변경", message: "비밀번호가 성공적으로 변경되었습니다.") {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    } else {
+                        self.showAlert(title: "비밀번호 변경 오류", message: "현재 비밀번호가 일치하지 않습니다.")
                     }
-                    alertController.addAction(confirmAction)
-                    self.present(alertController, animated: true, completion: nil)
-                } else {
-                    let alertController = UIAlertController(title: "비밀번호 변경 오류", message: "현재 비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
-                    let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-                    alertController.addAction(confirmAction)
-                    self.present(alertController, animated: true, completion: nil)
                 }
             }
         }
     }
-
+    
+    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            completion?()
+        }
+        alertController.addAction(confirmAction)
+        present(alertController, animated: true, completion: nil)
+    }
     
     @objc private func textFieldEditingChanged(_ textField: UITextField) {
         if textField.text?.isEmpty ?? true {
@@ -170,20 +170,6 @@ class MemberInfoViewController: BaseViewController {
         return passwordPredicate.evaluate(with: password)
     }
     
-    private func setupBackButton() {
-        let backButton = UIButton(type: .system)
-        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 17)
-        backButton.tintColor = UIColor(named: "fontBlack")
-        backButton.setTitleColor(UIColor(named: "fontBlack"), for: .normal)
-        backButton.sizeToFit()
-        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
-        let backButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backButtonItem
-    }
-
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }

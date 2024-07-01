@@ -182,6 +182,11 @@ class CalendarViewController: BaseViewController {
         $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
     }
     
+    private let antImageView = UIImageView().then {
+        $0.image = UIImage(named: "kingAnt")
+        $0.contentMode = .scaleAspectFit
+    }
+    
     private let monthLabel = UILabel().then {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -242,6 +247,7 @@ class CalendarViewController: BaseViewController {
         self.calendarView.addSubview(customHeaderView)
         self.customHeaderView.addSubview(monthLabel)
         self.customHeaderView.addSubview(totalLabel)
+        self.customHeaderView.addSubview(antImageView)
         
     }
     
@@ -252,7 +258,8 @@ class CalendarViewController: BaseViewController {
         
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(80)
         }
         
         scrollContentView.snp.makeConstraints { make in
@@ -298,7 +305,14 @@ class CalendarViewController: BaseViewController {
         totalLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(15)
-            make.width.equalTo(50)
+            make.width.equalTo(40)
+        }
+        
+        antImageView.snp.makeConstraints { make in
+            make.trailing.equalTo(totalLabel.snp.leading)
+            make.centerY.equalTo(totalLabel)
+            make.height.equalTo(20)
+            make.width.equalTo(30)
         }
     }
     
