@@ -140,7 +140,6 @@ class AlarmResultView: BaseViewController {
         
         stackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(71)
-            // 좌우여백 24로 통일 25 -> 24
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(320)
         }
@@ -148,16 +147,15 @@ class AlarmResultView: BaseViewController {
         buttonStackView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
-            // 승섭 버튼높이 52로 통일
             make.height.equalTo(52)
         }
     }
     
     @objc func moveToStudy() {
-        alarmResultController.moveToStudy()
+        alarmResultController.moveToStudy(self)
     }
     
     @objc func moveToCalendar() {
-        alarmResultController.moveToCalendar()
+        alarmResultController.moveToCalendar(self)
     }
 }

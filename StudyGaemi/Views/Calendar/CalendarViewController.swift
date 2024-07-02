@@ -208,6 +208,14 @@ class CalendarViewController: BaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    private let noAntLabel = UILabel().then {
+        $0.font = UIFont(name: CustomFontType.regular.name, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = UIColor(named: "fontGray")
+        $0.text = "이달의 개미가 없습니다."
+        $0.textAlignment = .center
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -215,6 +223,11 @@ class CalendarViewController: BaseViewController {
         self.configureUI()
         self.constraintLayout()
         calCurrentYearAndMonth()
+        
+
+        if result.count == 0 {
+           discardNoAntAlert()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -243,6 +256,7 @@ class CalendarViewController: BaseViewController {
         //self.scrollContentView.addSubview(advView)
         self.scrollContentView.addSubview(calendarbackView)
         self.calendarbackView.addSubview(calendarView)
+        self.scrollContentView.addSubview(noAntLabel)
         self.scrollContentView.addSubview(badgeView)
         self.calendarView.addSubview(customHeaderView)
         self.customHeaderView.addSubview(monthLabel)
@@ -284,8 +298,15 @@ class CalendarViewController: BaseViewController {
             make.top.bottom.equalToSuperview().inset(10)
         }
         
+        noAntLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(calendarbackView.snp.bottom).offset(20)
+            make.width.equalToSuperview()
+            make.height.equalTo(100)
+        }
+        
         badgeView.snp.makeConstraints { make in
-            make.top.equalTo(calendarbackView.snp.bottom).offset(15)
+            make.top.equalTo(noAntLabel.snp.bottom).offset(5)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(tableHeight)
             make.bottom.equalToSuperview().inset(10)
@@ -439,6 +460,9 @@ class CalendarViewController: BaseViewController {
         calculateStraightForBadge(of: .perfect)
         calculateStraightForBadge(of: .study)
         calculateStraightForBadge(of: .wakeup)
+        
+        //discardNoAntAlert()
+        
     }
     
     private func removeTime(from date: Date, state: status) -> Date{
@@ -611,6 +635,31 @@ class CalendarViewController: BaseViewController {
         currentPageYearAndMonth = dateFormatter.string(from: currentDate)
     }
     
+    //이달의 개미가 없을시에 라벨 추가
+    private func showNoAntAlert(){
+        
+        noAntLabel.snp.removeConstraints()
+        noAntLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(calendarbackView.snp.bottom).offset(20)
+            make.width.equalToSuperview()
+            make.height.equalTo(100)
+        }
+        
+
+    }
+    
+    //이달의 개미가 없을시에 라벨 삭제
+    private func discardNoAntAlert(){
+        noAntLabel.snp.removeConstraints()
+        noAntLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(calendarbackView.snp.bottom).offset(20)
+            make.width.equalToSuperview()
+            make.height.equalTo(0)
+        }
+    }
+    
 }
 
 // MARK: - extension
@@ -712,7 +761,13 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         currentPageYearAndMonth = formatter.string(from: currentPage)
         
         updateData()
+        if result.count == 0 {
+            showNoAntAlert()
+        } else {
+            discardNoAntAlert()
+        }
         calendarView.reloadData()
+        self.scrollContentView.reloadInputViews()
         tableHeight = Int(CGFloat(result.count) * 100.0)
         badgeView.reloadData()
     }

@@ -17,7 +17,7 @@ class CustomButton: UIButton {
         $0.startPoint = CGPoint(x: 0.0, y: 0.5)
         $0.endPoint = CGPoint(x: 1.0, y: 0.5)
     }
-    // 승섭 height Int 53 -> 52로 통일
+
     init(x: Int = 0, y: Int = 0, width: Int = 334, height: Int = 52, radius: CGFloat = 10, title: String = "저장") {
         super.init(frame: CGRect(x: x, y: y, width: width, height: height))
         

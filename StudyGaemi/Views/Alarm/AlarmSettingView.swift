@@ -268,9 +268,7 @@ class AlarmSettingView: BaseViewController {
         
         saveButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-36)
-            // 승섭 세이브 버튼 높이 52로 통일
             make.height.equalTo(52)
-            // 승섭 버튼 좌우 인셋 24로 통일
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
     }
