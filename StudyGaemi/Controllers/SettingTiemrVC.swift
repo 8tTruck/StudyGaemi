@@ -37,15 +37,12 @@ class SettingTimerVC: BaseViewController {
         $0.spacing = 8
     }
     
-    private lazy var confirmButton: UIButton = {
-        let button = UIButton()
-        button.frame = CGRect(x: 50, y: 50, width: 334, height: 53)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        button.setImage(UIImage(named: "Image"), for: .normal)
-       
+    private lazy var confirmButton: CustomButton = {
+        let button = CustomButton(x: 50, y: 50, width: 334, height: 52, radius: 10, title: "공부 시작하기")
+        button.addTouchAnimation()
+        button.setTitleColor(UIColor(named: "fontWhite"), for: .normal)
         button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
+        
         return button
     }()
     
@@ -123,8 +120,11 @@ class SettingTimerVC: BaseViewController {
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
+            confirmButton.heightAnchor.constraint(equalToConstant: 52),
+            confirmButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            confirmButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+
             timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])

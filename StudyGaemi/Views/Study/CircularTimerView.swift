@@ -4,7 +4,8 @@
 //
 // Created by 김준철 on 6/14/24.
 // 바에니메이션 수정
-// starttimer 너무 많이 호출풀 된다.
+// 버튼 위로 올리기
+//
 import UIKit
 import Foundation
 
@@ -35,6 +36,12 @@ class CircularTimerView: UIView {
     private var elapsedTime: TimeInterval = 0
     weak var delegate: CircularTimerViewDelegate?
     private let fixedRadius: CGFloat = 150 //반지름 절대값
+    // case 1
+    let pauseImage = UIImage(systemName: "pause.fill")?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
+    // case 2
+    let playImage = UIImage(systemName: "play.fill")?.withTintColor(UIColor(named: "pointOrange") ?? .orange, renderingMode: .alwaysOriginal)
+    // case 3
+    let stopImage = UIImage(systemName: "stop.fill")?.withTintColor(UIColor.red, renderingMode: .alwaysOriginal)
     //private let fixedCenter: CGPoint = CGPoint(x: 196.5, y: 426) // bounds가 잡히기 전에 0,0으로 잡히는거 방지(15기준)
     private lazy var circularPath: UIBezierPath = {
         return UIBezierPath(arcCenter: center,
@@ -98,6 +105,7 @@ class CircularTimerView: UIView {
         layer.fillColor = progressColors.cutecircleColor.cgColor
         return layer
     }()
+    /*
     private lazy var pauseButton: UIButton = {
         let button = UIButton()
         button.setTitle("Pause", for: .normal)
@@ -109,7 +117,19 @@ class CircularTimerView: UIView {
         button.addTarget(self, action: #selector(pauseOrResumeTimer), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 224, height: 70)
         return button
+    }()*/
+    private lazy var pauseButton: UIButton = {
+        let button = UIButton()
+        button.setImage(pauseImage, for: .normal)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = (UIColor(named: "pointOrange")?.cgColor) ?? UIColor.orange.cgColor
+        button.layer.cornerRadius = 10
+        
+        button.addTarget(self, action: #selector(pauseOrResumeTimer), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 224, height: 22)
+        return button
     }()
+    /*기존 스탑
     private lazy var stopButton: UIButton = {
         let button = UIButton()
         
@@ -120,6 +140,17 @@ class CircularTimerView: UIView {
         
         button.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
+        return button
+    }()*/
+    private lazy var stopButton: UIButton = {
+        let button = UIButton()
+        button.setImage(stopImage, for: .normal)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = (UIColor(named: "pointOrange")?.cgColor) ?? UIColor.orange.cgColor
+        button.layer.cornerRadius = 10
+        
+        button.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 224, height: 22)
         return button
     }()
 
@@ -154,13 +185,13 @@ class CircularTimerView: UIView {
         pauseButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 50) .isActive = true
         pauseButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -120) .isActive = true
         pauseButton.widthAnchor.constraint(equalToConstant: 224).isActive = true
-        pauseButton.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        pauseButton.heightAnchor.constraint(equalToConstant: 52).isActive = true
         
         stopButton.translatesAutoresizingMaskIntoConstraints = false
         stopButton.trailingAnchor.constraint(equalTo: pauseButton.leadingAnchor, constant: -20).isActive = true
         stopButton.centerYAnchor.constraint(equalTo: pauseButton.centerYAnchor).isActive = true
-        stopButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        stopButton.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        stopButton.widthAnchor.constraint(equalToConstant: 52).isActive = true
+        stopButton.heightAnchor.constraint(equalToConstant: 52).isActive = true
     }
     private func setupViews() {
         timeLabel.frame = CGRect(x: bounds.midX - 75, y: bounds.midY - 25, width: 150, height: 50)
@@ -264,6 +295,7 @@ class CircularTimerView: UIView {
 //            pauseButton.setTitle("Pause", for: .normal)
 //        }
 //    }
+    /*
     @objc private func pauseOrResumeTimer() {
         if isRunning {
             pauseTimer()
@@ -279,6 +311,15 @@ class CircularTimerView: UIView {
             } else {
                 print("Pause 이미지를 찾을 수 없습니다.")
             }
+        }
+    }*/
+    @objc private func pauseOrResumeTimer() {
+        if isRunning {
+            pauseTimer()
+            pauseButton.setImage(playImage, for: .normal)
+        } else {
+            resumeTimer()
+            pauseButton.setImage(pauseImage, for: .normal)
         }
     }
 
