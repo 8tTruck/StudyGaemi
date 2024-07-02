@@ -16,8 +16,6 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let firestoreManager = FirestoreManager.shared
     private let settingView = SettingView()
   
-    //private var moreItems = [ 친구초대 ]//추후에 랭킹도 추가하면 될듯
-    //private var moreItemsIcons = ["paperplane", "info.circle"]
     private let imagePicker = UIImagePickerController()
     private var settingItems = ["친구초대","공지사항","도움말","오류 및 버그 신고", "앱 정보", "개인정보 처리 및 방침"]
     private var settingItemIcons = ["paperplane", "megaphone", "questionmark.circle",  "exclamationmark.triangle","info.circle", "lock.shield" ]
@@ -322,14 +320,6 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        switch section {
-//        case 0:
-//            return moreItems.count
-//        case 1:
-//            return settingItems.count
-//        default:
-//            return 0
-//        }
         return settingItems.count
     }
 
@@ -337,19 +327,6 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as? SettingTableViewCell else {
             return UITableViewCell()
         }
-        
-//        switch indexPath.section {
-//        case 0:
-//            cell.titleLabel.text = moreItems[indexPath.row]
-//            cell.iconImageView.image = UIImage(systemName: moreItemsIcons[indexPath.row])
-//            cell.iconImageView.tintColor = UIColor(named: "fontGray")
-//        case 1:
-//            cell.titleLabel.text = settingItems[indexPath.row]
-//            cell.iconImageView.image = UIImage(systemName: settingItemIcons[indexPath.row])
-//            cell.iconImageView.tintColor = UIColor(named: "fontGray")
-//        default:
-//            break
-//        }
         cell.titleLabel.text = settingItems[indexPath.row]
         cell.iconImageView.image = UIImage(systemName: settingItemIcons[indexPath.row])
         cell.iconImageView.tintColor = UIColor(named: "fontGray")
@@ -371,12 +348,7 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
         let headerView = UIView()
         headerView.backgroundColor = UIColor(named: "viewBackgroundColor")
         let headerLabel = UILabel()
-        
-//        if section == 0 {
-//            headerLabel.text = "더보기"
-//        } else {
-//            headerLabel.text = "설정"
-//        }
+
         headerLabel.text = "설정"
         headerLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
         headerLabel.textColor = UIColor(named: "fontBlack")
@@ -391,11 +363,6 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 0 {
-//            return 30
-//        } else {
-//            return 30
-//        }
         return 30
     }
     
@@ -406,45 +373,6 @@ class SettingViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let pageIndex = indexPath.row
         let pageViewController: UIViewController
-        
-//        if indexPath.section == 0 {
-//            switch moreItems[indexPath.row] {
-//            case "친구초대":
-//                let objectsToShare = ["https://apps.apple.com/kr/app/공부하개미/id6503416980"]
-//                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//                activityVC.popoverPresentationController?.sourceView = self.view
-//                self.present(activityVC, animated: true, completion: nil)
-//            case "앱 정보":
-//                pageViewController = TeamInfoViewController()
-//                pageViewController.hidesBottomBarWhenPushed = true
-//                pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
-//                pageViewController.title = moreItems[pageIndex]
-//                navigationController?.pushViewController(pageViewController, animated: true)
-//            default:
-//                return
-//            }
-//        } else {
-//            if settingItems[pageIndex] == "비밀번호 변경" {
-//                pageViewController = MemberInfoViewController()
-//            } else {
-//                switch settingItems[pageIndex] {
-//                case "개인정보 처리 및 방침":
-//                    pageViewController = PrivacyPolicyViewController()
-//                case "오류 및 버그 신고":
-//                    pageViewController = BugReportViewController()
-//                case "공지사항":
-//                    pageViewController = AnnouncementViewController()
-//                case "도움말":
-//                    pageViewController = TutorialPageViewController()
-//                default:
-//                    return
-//                }
-//            }
-//            pageViewController.hidesBottomBarWhenPushed = true
-//            pageViewController.view.backgroundColor = UIColor(named: "viewBackgroundColor")
-//            pageViewController.title = settingItems[pageIndex]
-//            navigationController?.pushViewController(pageViewController, animated: true)
-//        }
         
         if settingItems[pageIndex] == "비밀번호 변경" {
             pageViewController = MemberInfoViewController()
