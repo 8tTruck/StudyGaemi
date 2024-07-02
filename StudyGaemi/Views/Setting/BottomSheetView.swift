@@ -83,7 +83,8 @@ class BottomSheetView: UIView {
         confirmButton.snp.makeConstraints { make in
             make.top.equalTo(textField.snp.bottom).offset(40)
             make.leading.trailing.equalTo(containerView).inset(20)
-            make.height.equalTo(44)
+            // 승섭 버튼 높이 통일 48 -> 52
+            make.height.equalTo(52)
         }
     }
 }

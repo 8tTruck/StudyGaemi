@@ -18,6 +18,7 @@ class PrivacyPolicyView: UIView {
     override init(frame: CGRect) {
         scrollView = UIScrollView()
         contentView = UIView()
+            // 승섭 개인정보처리방침 오타수정
         textView = UILabel().then {
             $0.text = """
                 개인정보 보호 담당 부서
@@ -148,9 +149,10 @@ class PrivacyPolicyView: UIView {
     
     private func setupConstraints() {
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(16)
-            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(29)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            // 승섭 상하좌우 개인정보처리방침 로그인 시와 동일하게 프레임 적용 top 16 -> 12, leading&trailing 29 -> 24, bottom 0 -> 12
+            make.top.equalTo(safeAreaLayoutGuide).offset(12)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(12)
         }
         
         contentView.snp.makeConstraints { make in

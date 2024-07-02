@@ -128,13 +128,13 @@ class AlarmQuestionView: BaseViewController {
             make.height.equalTo(91)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(28)
         }
-        
+        // 승섭 커스텀 텍스트 필드 높이 통일 60 -> 52
         customTextField.snp.makeConstraints { make in
             make.top.equalTo(questionStackView.snp.bottom).offset(58)
             make.height.equalTo(52)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(25)
         }
-        
+        // 승섭 커스텀 버튼 높이 통일 48 -> 52
         customButton.snp.makeConstraints { make in
             make.top.equalTo(customTextField.snp.bottom).offset(17)
             make.height.equalTo(52)
