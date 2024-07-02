@@ -40,7 +40,7 @@ class SettingTimerVC: BaseViewController {
     private lazy var confirmButton: CustomButton = {
         let button = CustomButton(x: 50, y: 50, width: 334, height: 52, radius: 10, title: "공부 시작하기")
         button.addTouchAnimation()
-        button.setTitleColor(UIColor(named: "fontWhite"), for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
         
         return button
@@ -49,9 +49,9 @@ class SettingTimerVC: BaseViewController {
     
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "00:00"
+        label.text = "00 : 00"
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.font = UIFont(name: CustomFontType.black.name, size: 50)
         label.textColor = UIColor(hex: "#F68657")
         label.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTimeLabel))

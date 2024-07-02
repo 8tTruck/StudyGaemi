@@ -161,21 +161,22 @@ class AlarmViewController: BaseViewController {
             make.width.height.equalTo(22)
         }
         
-        stackView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(73)
-            make.height.equalTo(47)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(72)
+        alarmView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(34)
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(66)
         }
         
         alarmButton.snp.makeConstraints { make in
-            make.top.equalTo(stackView.snp.bottom).offset(40)
+            make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalTo(312)
             make.height.equalTo(312)
         }
         
-        alarmView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(121)
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(105)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(66)

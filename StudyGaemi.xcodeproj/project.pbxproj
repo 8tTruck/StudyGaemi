@@ -83,7 +83,7 @@
 		FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A342C1AA29900504C24 /* WakeUpModel.swift */; };
 		FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A362C1ABCFF00504C24 /* UserModel.swift */; };
 		FF254A3A2C1C1DA400504C24 /* RepeatingSecondsTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */; };
-		FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */; };
+		FF254A3F2C1C1DB600504C24 /* SettingTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3C2C1C1DB600504C24 /* SettingTimerVC.swift */; };
 		FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */; };
 		FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A412C1C1DC400504C24 /* CircularTimerView.swift */; };
 		FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A472C1C1EE300504C24 /* StudyViewController.swift */; };
@@ -171,7 +171,7 @@
 		FF254A342C1AA29900504C24 /* WakeUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpModel.swift; sourceTree = "<group>"; };
 		FF254A362C1ABCFF00504C24 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingSecondsTimer.swift; sourceTree = "<group>"; };
-		FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTiemrVC.swift; sourceTree = "<group>"; };
+		FF254A3C2C1C1DB600504C24 /* SettingTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTimerVC.swift; sourceTree = "<group>"; };
 		FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerVC.swift; sourceTree = "<group>"; };
 		FF254A412C1C1DC400504C24 /* CircularTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
 		FF254A472C1C1EE300504C24 /* StudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
@@ -287,7 +287,7 @@
 				FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */,
 				FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */,
 				FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */,
-				FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */,
+				FF254A3C2C1C1DB600504C24 /* SettingTimerVC.swift */,
 				FF6774012C0DACF800017E1F /* AlarmController.swift */,
 				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
 				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
@@ -581,7 +581,7 @@
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
 				FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */,
 				FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */,
-				FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */,
+				FF254A3F2C1C1DB600504C24 /* SettingTimerVC.swift in Sources */,
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				3F6270A32C23C54000BBA2D2 /* BottomSheetView.swift in Sources */,
