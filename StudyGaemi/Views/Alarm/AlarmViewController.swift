@@ -177,9 +177,8 @@ class AlarmViewController: BaseViewController {
         alarmView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(121)
             make.centerX.equalToSuperview()
-            make.width.equalTo(312)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(66)
-            
         }
         
         notificationStackView.snp.makeConstraints { make in

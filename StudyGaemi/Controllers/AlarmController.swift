@@ -27,7 +27,7 @@ class AlarmController {
     }
     
     func setAlarmInterval() -> String {
-        return alarmModel.setRepeatInterval()
+        return alarmModel.repeatIntervalValue
     }
     
     func setAlarmDifficulty() -> String {
@@ -56,8 +56,8 @@ class AlarmController {
             let currentDate = Date()
             let components = calendar.dateComponents([.minute], from: time, to: currentDate)
             
-            guard let count = Int(AlarmCoreDataManager.shared.getAlarmData().setRepeatCount().replacingOccurrences(of: "회 반복", with: "")),
-                  let minute = Int(AlarmCoreDataManager.shared.getAlarmData().setRepeatInterval().replacingOccurrences(of: "분마다", with: "")) else {
+            guard let count = Int(AlarmCoreDataManager.shared.getAlarmData().repeatCountValue.replacingOccurrences(of: "회 반복", with: "")),
+                  let minute = Int(AlarmCoreDataManager.shared.getAlarmData().repeatIntervalValue.replacingOccurrences(of: "분마다", with: "")) else {
                 
                 if let minuteDifference = components.minute, minuteDifference >= 2 {
                     print("알림 켜기")
@@ -78,8 +78,9 @@ class AlarmController {
             }
         } else {
             print("알림 끄기")
-            AlarmSettingController.shared.removeScheduleAlarm()
-            UserDefaults.standard.set(isOn, forKey: "toggleButtonState")
+            AlarmSettingController.shared.removeScheduleAlarm {
+                UserDefaults.standard.set(isOn, forKey: "toggleButtonState")
+            }
         }
     }
 }
