@@ -140,14 +140,14 @@ class AlarmResultView: BaseViewController {
         
         stackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(71)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(25)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(320)
         }
         
         buttonStackView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(25)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(52)
         }
     }
     

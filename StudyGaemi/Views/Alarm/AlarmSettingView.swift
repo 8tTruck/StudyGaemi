@@ -268,8 +268,8 @@ class AlarmSettingView: BaseViewController {
         
         saveButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-36)
-            make.height.equalTo(53)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(30)
+            make.height.equalTo(52)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
     }
     

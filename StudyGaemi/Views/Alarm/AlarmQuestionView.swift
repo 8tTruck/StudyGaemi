@@ -131,13 +131,13 @@ class AlarmQuestionView: BaseViewController {
         
         customTextField.snp.makeConstraints { make in
             make.top.equalTo(questionStackView.snp.bottom).offset(58)
-            make.height.equalTo(60)
+            make.height.equalTo(52)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(25)
         }
         
         customButton.snp.makeConstraints { make in
             make.top.equalTo(customTextField.snp.bottom).offset(17)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(25)
         }
     }
