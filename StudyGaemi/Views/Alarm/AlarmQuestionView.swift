@@ -79,11 +79,12 @@ class AlarmQuestionView: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.customTextField.becomeFirstResponder()
-        AlarmSettingController.shared.removeScheduleAlarm()
-        AlarmSettingController.shared.removeNotification()
-        AlarmSettingController.shared.resetAlarm()
-        AudioController.shared.playAlarmSound()
-        self.setSystemVolume(to: 1.0)
+        AlarmSettingController.shared.removeScheduleAlarm {
+            AlarmSettingController.shared.removeNotification()
+            AlarmSettingController.shared.resetAlarm()
+            AudioController.shared.playAlarmSound()
+            self.setSystemVolume(to: 1.0)
+        }
     }
     
     override func configureUI() {

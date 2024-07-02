@@ -28,7 +28,8 @@ class AudioController {
     }
     
     func playAlarmSound() {
-        guard let url = Bundle.main.url(forResource: soundName, withExtension: "wav") else { 
+        let soundName = AlarmCoreDataManager.shared.coreData?.sound
+        guard let url = Bundle.main.url(forResource: soundName, withExtension: "wav") else {
             print("사운드 파일이 존재 하지 않음")
             return
         }

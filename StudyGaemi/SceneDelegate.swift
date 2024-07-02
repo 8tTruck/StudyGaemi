@@ -93,31 +93,44 @@ extension SceneDelegate {
                 window.rootViewController = bottomTabBarVC
                 isLogined = true
             }
-            let alarmQuestionView = self.createViewController(withIdentifier: identifier)
-            let navigationController = UINavigationController(rootViewController: alarmQuestionView)
-            navigationController.modalPresentationStyle = .fullScreen
-            window.rootViewController?.present(navigationController, animated: true, completion: nil)
+            if let alarmQuestionView = self.createViewController(withIdentifier: identifier) {
+                let navigationController = UINavigationController(rootViewController: alarmQuestionView)
+                navigationController.modalPresentationStyle = .fullScreen
+                window.rootViewController?.present(navigationController, animated: true, completion: nil)
+            }
         } else {
-            let alarmQuestionView = self.createViewController(withIdentifier: identifier)
-            let navigationController = UINavigationController(rootViewController: alarmQuestionView)
-            navigationController.modalPresentationStyle = .fullScreen
-            window.rootViewController?.present(navigationController, animated: true, completion: nil)
+            if let alarmQuestionView = self.createViewController(withIdentifier: identifier) {
+                let navigationController = UINavigationController(rootViewController: alarmQuestionView)
+                navigationController.modalPresentationStyle = .fullScreen
+                window.rootViewController?.present(navigationController, animated: true, completion: nil)
+            }
         }
     }
     
     // MARK: - 특정 ViewController를 생성하는 메소드
-    func createViewController(withIdentifier identifier: String) -> UIViewController {
+    func createViewController(withIdentifier identifier: String) -> UIViewController? {
         if identifier == "AlarmQuestionView" {
-            let time = AlarmCoreDataManager.shared.getAlarmData().time
+            let data = AlarmCoreDataManager.shared.getAlarmData()
+            let time = data.time
             let calendar = Calendar.current
             let currentDate = Date()
             
             let components = calendar.dateComponents([.minute], from: time, to: currentDate)
-            if let minuteDifference = components.minute, minuteDifference <= 26 {
-                return AlarmQuestionView()
+            if let minuteDifference = components.minute {
+                if data.isRepeatEnabled {
+                    for i in 0..<data.repeatCountInt {
+                        let intervalTime = time.addingTimeInterval(TimeInterval(data.repeatIntervalMinutes * i * 60))
+                        let intervalComponents = calendar.dateComponents([.minute], from: intervalTime, to: currentDate)
+                        if let intervalMinuteDifference = intervalComponents.minute, intervalMinuteDifference >= 0, intervalMinuteDifference <= data.repeatIntervalMinutes + 2 {
+                            return AlarmQuestionView()
+                        }
+                    }
+                } else if minuteDifference >= 0, minuteDifference <= 2 {
+                    return AlarmQuestionView()
+                }
             }
         }
-        return UIViewController()
+        return nil
     }
 }
 

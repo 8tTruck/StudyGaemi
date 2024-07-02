@@ -12,7 +12,7 @@ class AlarmResultController: BaseViewController {
     func moveToStudy(_ viewController: UIViewController) {
         if let tabBarController = viewController.presentingViewController as? UITabBarController {
             print(tabBarController)
-            tabBarController.selectedIndex = 1 // 두번째 탭으로 이동
+            tabBarController.selectedIndex = 1
         }
         viewController.dismiss(animated: true, completion: nil)
     }
@@ -20,7 +20,7 @@ class AlarmResultController: BaseViewController {
     func moveToCalendar(_ viewController: UIViewController) {
         if let tabBarController = viewController.presentingViewController as? UITabBarController {
             print(tabBarController)
-            tabBarController.selectedIndex = 2 // 세번째 탭으로 이동
+            tabBarController.selectedIndex = 2
         }
         viewController.dismiss(animated: true, completion: nil)
         

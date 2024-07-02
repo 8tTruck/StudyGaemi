@@ -143,10 +143,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // 알람 질문 뷰를 modal fullscreen 방식으로 표시
         if let viewControllerIdentifier = userInfo["viewControllerIdentifier"] as? String {
             if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                let alarmQuestionView = sceneDelegate.createViewController(withIdentifier: viewControllerIdentifier)
-                let navigationController = UINavigationController(rootViewController: alarmQuestionView)
-                navigationController.modalPresentationStyle = .fullScreen
-                sceneDelegate.window?.rootViewController?.present(navigationController, animated: true, completion: nil)
+                if let alarmQuestionView = sceneDelegate.createViewController(withIdentifier: viewControllerIdentifier) {
+                    let navigationController = UINavigationController(rootViewController: alarmQuestionView)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    sceneDelegate.window?.rootViewController?.present(navigationController, animated: true, completion: nil)
+                }
             }
         }
         if let messageID = userInfo["viewControllerIdentifier"] {
