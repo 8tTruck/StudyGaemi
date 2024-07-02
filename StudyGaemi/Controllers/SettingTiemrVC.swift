@@ -45,6 +45,7 @@ class SettingTimerVC: BaseViewController {
         
         return button
     }()
+
     
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
@@ -119,6 +120,7 @@ class SettingTimerVC: BaseViewController {
     private func setupLayout() {
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
             confirmButton.heightAnchor.constraint(equalToConstant: 52),
@@ -128,8 +130,8 @@ class SettingTimerVC: BaseViewController {
             timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
     }
+
     @objc private func didTapConfirmButton() {
         guard selectedDuration > 0 else {
             // 선택된 시간이 없을 경우 경고 메시지를 표시할 수 있습니다.
