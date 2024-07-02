@@ -24,8 +24,6 @@ class BottomSheetViewController: UIViewController {
         bottomSheetView.textField.delegate = self
         bottomSheetView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         bottomSheetView.cancelButton.addTarget(self, action: #selector(dismissBottomSheet), for: .touchUpInside)
-        bottomSheetView.deleteAccountButton.addTarget(self, action: #selector(showDeleteAlert), for: .touchUpInside)
-
     }
     
     private func setupView() {
@@ -100,87 +98,6 @@ class BottomSheetViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
-    }
-    
-    @objc func showDeleteAlert() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        
-        let titleString = NSAttributedString(string: "회원탈퇴", attributes: [
-            .font: UIFont.boldSystemFont(ofSize: 17)
-        ])
-        
-        let messageString = NSAttributedString(string: """
-        회원탈퇴시 모든 정보가 삭제됩니다.
-        정말 회원탈퇴하시겠습니까?
-        """, attributes: [
-            .font: UIFont.systemFont(ofSize: 14)
-        ])
-        
-        alertController.setValue(titleString, forKey: "attributedTitle")
-        alertController.setValue(messageString, forKey: "attributedMessage")
-        
-        let cancelAction = UIAlertAction(title: "아니요", style: .cancel, handler: nil)
-        cancelAction.setValue(UIColor.gray, forKey: "titleTextColor")
-        
-        let confirmAction = UIAlertAction(title: "예", style: .destructive, handler: { _ in
-            let dispatchGroup = DispatchGroup()
-            
-            AuthenticationManager.shared.kakaoUnlinkAndSignOut()
-            
-            dispatchGroup.enter()
-            FirestoreManager.shared.deleteStudyData { result in
-                switch result {
-                case .success:
-                    print("Study 데이터가 삭제되었습니다.")
-                case .failure(let error):
-                    print("Study 데이터 삭제 에러: \(error)")
-                }
-                dispatchGroup.leave()
-            }
-            
-            dispatchGroup.enter()
-            FirestoreManager.shared.deleteWakeUpData { result in
-                switch result {
-                case .success:
-                    print("WakeUp 데이터가 삭제되었습니다.")
-                case .failure(let error):
-                    print("WakeUp 데이터 삭제 에러: \(error)")
-                }
-                dispatchGroup.leave()
-            }
-            
-            dispatchGroup.enter()
-            FirestoreManager.shared.deleteUserData { result in
-                switch result {
-                case .success:
-                    print("User 데이터가 삭제되었습니다.")
-                case .failure(let error):
-                    print("User 데이터 삭제 에: \(error)")
-                }
-                dispatchGroup.leave()
-            }
-            
-            dispatchGroup.notify(queue: .main) {
-                print("모든 데이터 삭제 작업이 완료되었습니다.")
-                AuthenticationManager.shared.deleteUser()
-                DispatchQueue.main.async {
-                    let alertController = UIAlertController(title: "회원탈퇴 처리되었습니다.", message: nil, preferredStyle: .alert)
-                    let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
-                        AuthenticationManager.shared.signOut()
-                        AlarmCoreDataManager.shared.deleteAlarm()
-                        self.completeLogout()
-                    }
-                    alertController.addAction(confirmAction)
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            }
-        })
-        confirmAction.setValue(UIColor.red, forKey: "titleTextColor")
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        
-        present(alertController, animated: true, completion: nil)
     }
     
     func completeLogout() {
