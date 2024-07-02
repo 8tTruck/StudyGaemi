@@ -637,9 +637,7 @@ class CalendarViewController: BaseViewController {
     
     //이달의 개미가 없을시에 라벨 추가
     private func showNoAntAlert(){
-        print("개미없음 라벨 추가")
         
-        //self.scrollContentView.addSubview(noAntLabel)
         noAntLabel.snp.removeConstraints()
         noAntLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -653,7 +651,6 @@ class CalendarViewController: BaseViewController {
     
     //이달의 개미가 없을시에 라벨 삭제
     private func discardNoAntAlert(){
-        print("개미없음 라벨 삭제")
         noAntLabel.snp.removeConstraints()
         noAntLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
