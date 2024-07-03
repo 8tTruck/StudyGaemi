@@ -461,8 +461,6 @@ class CalendarViewController: BaseViewController {
         calculateStraightForBadge(of: .study)
         calculateStraightForBadge(of: .wakeup)
         
-        //discardNoAntAlert()
-        
     }
     
     private func removeTime(from date: Date, state: status) -> Date{
@@ -681,13 +679,6 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
             cell.bind(yearAndMonth: currentPageYearAndMonth, days: wakeupAntCount, ant: "기상개미 달성")
         }
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let customAlert = AlertView(logImage: UIImage(named: "kingAnt")!,
-        //                                    titleText: "완벽개미 획득!",
-        //                                    doneButtonTitle: "확인")
-        //        self.present(customAlert, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
