@@ -122,7 +122,7 @@ class SettingTimerVC: BaseViewController {
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
+            confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45),
             confirmButton.heightAnchor.constraint(equalToConstant: 52),
             confirmButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
             confirmButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
@@ -150,7 +150,7 @@ class SettingTimerVC: BaseViewController {
         datePickerModalVC.onDatePicked = { [weak self] duration in
             let hours = Int(duration) / 3600
             let minutes = (Int(duration) % 3600) / 60
-            self?.timeLabel.text = String(format: "%02d:%02d", hours, minutes)
+            self?.timeLabel.text = String(format: "%02d : %02d", hours, minutes)
             self?.selectedDuration = duration
         }
         datePickerModalVC.modalPresentationStyle = .overFullScreen

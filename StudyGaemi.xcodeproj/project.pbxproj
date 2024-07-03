@@ -79,6 +79,7 @@
 		FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */; };
 		FF03F9022C16D55600134B54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF03F9012C16D55600134B54 /* GoogleService-Info.plist */; };
 		FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF03F9032C16D59700134B54 /* FirebaseAnalytics */; };
+		FF1DC4CA2C3479D7001CCAE6 /* AlarmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1DC4C92C3479D7001CCAE6 /* AlarmDelegate.swift */; };
 		FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A322C1AA26E00504C24 /* StudyModel.swift */; };
 		FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A342C1AA29900504C24 /* WakeUpModel.swift */; };
 		FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A362C1ABCFF00504C24 /* UserModel.swift */; };
@@ -167,6 +168,7 @@
 		FF03F8FD2C16A01400134B54 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
 		FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultController.swift; sourceTree = "<group>"; };
 		FF03F9012C16D55600134B54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FF1DC4C92C3479D7001CCAE6 /* AlarmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDelegate.swift; sourceTree = "<group>"; };
 		FF254A322C1AA26E00504C24 /* StudyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyModel.swift; sourceTree = "<group>"; };
 		FF254A342C1AA29900504C24 /* WakeUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpModel.swift; sourceTree = "<group>"; };
 		FF254A362C1ABCFF00504C24 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				FF783CA02C17EC700008AE70 /* AudioController.swift */,
 				FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */,
 				F47AEE1B2C2E83B20092AA69 /* TeamInfoViewController.swift */,
+				FF1DC4C92C3479D7001CCAE6 /* AlarmDelegate.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */,
 				FF2B9ABA2C25A33900E231DE /* DatePickerModalVC.swift in Sources */,
 				3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */,
+				FF1DC4CA2C3479D7001CCAE6 /* AlarmDelegate.swift in Sources */,
 				3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
