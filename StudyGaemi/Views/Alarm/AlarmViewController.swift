@@ -24,39 +24,6 @@ class AlarmViewController: BaseViewController {
         $0.contentMode = .scaleAspectFit
     }
     
-    private lazy var titleView = UIStackView(arrangedSubviews: [imageView, titleLabel]).then {
-        $0.axis = .horizontal
-        $0.spacing = 8
-    }
-    
-    private let alarmLabel = UILabel().then {
-        $0.text = "몇시에 일어날 개미?"
-        $0.font = UIFont(name: CustomFontType.regular.name, size: 18) ?? UIFont.systemFont(ofSize: 18)
-        $0.textColor = UIColor(named: "fontBlack")
-        $0.textAlignment = .center
-    }
-    
-    private var toggleState = UserDefaults.standard.bool(forKey: "toggleButtonState") {
-        didSet {
-            alarmController.updateNotificationSettings(isOn: toggleState)
-        }
-    }
-    lazy var toggleButton = UISwitch().then {
-        $0.onTintColor = UIColor(named: "pointOrange")
-        $0.isOn = self.toggleState
-        $0.addTarget(self, action: #selector(toggleChanged(_:)), for: .valueChanged)
-    }
-    
-    private lazy var stackView = UIStackView(arrangedSubviews: [alarmLabel, toggleButton]).then {
-        $0.axis = .horizontal
-        $0.alignment = .center
-        $0.spacing = 10
-    }
-    
-    private var alarmButton = AlarmButton().then {
-        $0.setImage(UIImage(named: "alarmButton"),for: .normal)
-    }
-    
     private let alarmView = UIView().then {
         $0.backgroundColor = UIColor(named: "alertBackgroundColor")
         $0.layer.cornerRadius = 23
@@ -105,8 +72,52 @@ class AlarmViewController: BaseViewController {
         $0.textColor = UIColor(named: "fontBlack")
     }
     
+    private lazy var titleView = UIStackView(arrangedSubviews: [imageView, titleLabel]).then {
+        $0.axis = .horizontal
+        $0.spacing = 8
+    }
+    
+    private var alarmButton = AlarmButton().then {
+        $0.setImage(UIImage(named: "alarmButton"),for: .normal)
+    }
+    
+    private let alarmLabel = UILabel().then {
+        $0.text = "알람 설정"
+        $0.font = UIFont(name: CustomFontType.regular.name, size: 18) ?? UIFont.systemFont(ofSize: 18)
+        $0.textColor = UIColor(named: "fontBlack")
+        $0.textAlignment = .center
+    }
+    
+    private var toggleState = UserDefaults.standard.bool(forKey: "toggleButtonState") {
+        didSet {
+            alarmController.updateNotificationSettings(isOn: toggleState)
+        }
+    }
+    
+    lazy var toggleButton = UISwitch().then {
+        $0.onTintColor = UIColor(named: "pointOrange")
+        $0.isOn = self.toggleState
+        $0.addTarget(self, action: #selector(toggleChanged(_:)), for: .valueChanged)
+    }
+    
+    private lazy var stackView = UIStackView(arrangedSubviews: [alarmLabel, toggleButton]).then {
+        $0.axis = .horizontal
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
+        $0.alignment = .center
+        $0.spacing = 10
+        $0.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        $0.isLayoutMarginsRelativeArrangement = true
+        $0.distribution = .equalCentering
+        $0.layer.cornerRadius = 10
+        $0.layer.shadowColor = UIColor(named: "pointBlack")?.cgColor
+        $0.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        $0.layer.shadowRadius = 5.0
+        $0.layer.shadowOpacity = 0.15
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        alarmController.delegate = self
         self.configureUI()
         self.constraintLayout()
         
@@ -128,9 +139,9 @@ class AlarmViewController: BaseViewController {
     override func configureUI() {
         view.backgroundColor = UIColor(named: "viewBackgroundColor") ?? .systemBackground
         self.navigationItem.titleView = titleView
-        view.addSubview(stackView)
-        view.addSubview(alarmButton)
         view.addSubview(alarmView)
+        view.addSubview(alarmButton)
+        view.addSubview(stackView)
         alarmView.addSubview(notificationStackView)
         notificationStackView.addArrangedSubview(notificationImageView)
         notificationStackView.addArrangedSubview(verticalStackView)
@@ -161,21 +172,8 @@ class AlarmViewController: BaseViewController {
             make.width.height.equalTo(22)
         }
         
-        stackView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(73)
-            make.height.equalTo(47)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(72)
-        }
-        
-        alarmButton.snp.makeConstraints { make in
-            make.top.equalTo(stackView.snp.bottom).offset(40)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(312)
-            make.height.equalTo(312)
-        }
-        
         alarmView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(121)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(34)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(66)
@@ -192,6 +190,20 @@ class AlarmViewController: BaseViewController {
             make.width.equalTo(38)
             make.height.equalTo(38)
         }
+        
+        alarmButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalTo(312)
+            make.height.equalTo(312)
+        }
+        
+        stackView.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(45)
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(52)
+        }
     }
     
     func setAlarm() {
@@ -204,7 +216,17 @@ class AlarmViewController: BaseViewController {
     }
     
     @objc private func tappedAlarmButton() {
-        alarmController.goAheadView(navigationController)
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                DispatchQueue.main.async {
+                    self.alarmController.goAheadView(self.navigationController)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.showAlert(message: "알림 권한이 거부되어\n 알람 기능을 사용할 수 없습니다.")
+                }
+            }
+        }
     }
     
     @objc private func toggleChanged(_ sender: UISwitch) {
@@ -212,3 +234,11 @@ class AlarmViewController: BaseViewController {
     }
 }
 
+extension AlarmViewController: AlarmDelegate {
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+}

@@ -40,7 +40,7 @@ class SettingTimerVC: BaseViewController {
     private lazy var confirmButton: CustomButton = {
         let button = CustomButton(x: 50, y: 50, width: 334, height: 52, radius: 10, title: "공부 시작하기")
         button.addTouchAnimation()
-        button.setTitleColor(UIColor(named: "fontWhite"), for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
         
         return button
@@ -49,9 +49,9 @@ class SettingTimerVC: BaseViewController {
     
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "00:00"
+        label.text = "00 : 00"
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.font = UIFont(name: CustomFontType.black.name, size: 50)
         label.textColor = UIColor(hex: "#F68657")
         label.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTimeLabel))
@@ -122,7 +122,7 @@ class SettingTimerVC: BaseViewController {
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
+            confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45),
             confirmButton.heightAnchor.constraint(equalToConstant: 52),
             confirmButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
             confirmButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
@@ -150,7 +150,7 @@ class SettingTimerVC: BaseViewController {
         datePickerModalVC.onDatePicked = { [weak self] duration in
             let hours = Int(duration) / 3600
             let minutes = (Int(duration) % 3600) / 60
-            self?.timeLabel.text = String(format: "%02d:%02d", hours, minutes)
+            self?.timeLabel.text = String(format: "%02d : %02d", hours, minutes)
             self?.selectedDuration = duration
         }
         datePickerModalVC.modalPresentationStyle = .overFullScreen

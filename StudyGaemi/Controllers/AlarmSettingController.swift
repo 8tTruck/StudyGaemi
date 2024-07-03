@@ -10,6 +10,8 @@ import UIKit
 
 class AlarmSettingController {
     
+    weak var delegate: AlarmDelegate?
+    
     static let shared = AlarmSettingController()
     
     private init() { }
@@ -20,12 +22,13 @@ class AlarmSettingController {
         
         self.alarmModel = AlarmCoreDataManager.shared.getAlarmData()
         
-        // 알림 권한 요청
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
                 self.scheduleAlarm(alarm: self.alarmModel)
             } else {
-                print("알림 권한이 거부되었습니다.")
+                DispatchQueue.main.async {
+                    self.delegate?.showAlert(message: "알림 권한이 거부되어\n 알람 기능을 사용할 수 없습니다.")
+                }
             }
         }
     }
@@ -51,7 +54,7 @@ class AlarmSettingController {
     
     private func scheduleAlarm(alarm: AlarmModel) {
         guard let time = setSecondsToZero(date: alarm.time) else {
-            print("시간 설정 오류")
+            self.delegate?.showAlert(message: "시간 설정 오류")
             return
         }
         
@@ -69,10 +72,10 @@ class AlarmSettingController {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
-        self.removeScheduleAlarm {    // 알람 설정 전 모든 알람 제거
+        self.removeScheduleAlarm {
             UNUserNotificationCenter.current().add(request) { (error) in
                 if let error = error {
-                    print("알림 추가 오류: \(error.localizedDescription)")
+                    self.delegate?.showAlert(message: "알림 추가 오류: \(error.localizedDescription)")
                 } else {
                     let delay = time.timeIntervalSinceNow
                     let dispatchTime = DispatchTime.now() + delay + 90
@@ -95,7 +98,7 @@ class AlarmSettingController {
                 
                 UNUserNotificationCenter.current().add(intervalRequest) { (error) in
                     if let error = error {
-                        print("알림 추가 오류: \(error.localizedDescription)")
+                        self.delegate?.showAlert(message: "알림 추가 오류: \(error.localizedDescription)")
                     }
                 }
             }
@@ -122,7 +125,7 @@ class AlarmSettingController {
                     let repeatRequest = UNNotificationRequest(identifier: identifier + "_repeat_\(i)", content: content, trigger: repeatTrigger)
                     UNUserNotificationCenter.current().add(repeatRequest) { (error) in
                         if let error = error {
-                            print("반복 알림 추가 오류: \(error.localizedDescription)")
+                            self.delegate?.showAlert(message: "알림 추가 오류: \(error.localizedDescription)")
                         } else {
                             let delay = repeatTime.timeIntervalSinceNow
                             let dispatchTime = DispatchTime.now() + delay + 90
@@ -144,7 +147,7 @@ class AlarmSettingController {
                         
                         UNUserNotificationCenter.current().add(repeatRequest) { (error) in
                             if let error = error {
-                                print("반복 알림 추가 오류: \(error.localizedDescription)")
+                                self.delegate?.showAlert(message: "반복 알림 추가 오류: \(error.localizedDescription)")
                             }
                         }
                     }
@@ -154,13 +157,23 @@ class AlarmSettingController {
         }
     }
     
+    // MARK: - 알람 저장 전에 시간 비교해서 반환해주는 메소드
+    func checkAlarmTimeSettings(_ navigationController: UINavigationController?) {
+        if self.isAlarmTimeValid() {
+            self.setAlarm()
+            self.getBackView(navigationController)
+            delegate?.showAlert(message: "알람이 설정되었습니다.\n원활한 알람을 위해 무음모드를 해제해 주세요.")
+        } else {
+            delegate?.showAlert(message: "알람 시간을 재설정해 주세요.")
+        }
+    }
+    
     // MARK: - 현재 설정된 모든 기상 알람을 제거
     func removeScheduleAlarm(completion: @escaping () -> Void) {
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             let identifier = "기상하개미"
             let identifiers = requests.filter { $0.identifier.hasPrefix(identifier) }.map { $0.identifier }
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-//            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             
             DispatchQueue.main.async {
                 completion()
@@ -178,7 +191,14 @@ class AlarmSettingController {
     
     // MARK: - 알람 재 설정 => 정답을 맞춘 후에 알람을 재 설정 하도록 해야함
     func resetAlarm() {
-        let dispatchTime = DispatchTime.now() + 1980
+        let data = AlarmCoreDataManager.shared.getAlarmData()
+        var adding: TimeInterval = 60
+        
+        if data.isRepeatEnabled {
+            adding += TimeInterval(data.repeatIntervalMinutes * data.repeatCountInt * 60)
+        }
+        
+        let dispatchTime = DispatchTime.now() + adding
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
             UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
                 self.ensureAlarmExists()
@@ -198,6 +218,60 @@ class AlarmSettingController {
             if !existingIdentifiers.contains(identifier) {
                 self.scheduleAlarm(alarm: self.alarmModel)
             }
+        }
+    }
+    
+    // MARK: - 알람 시간의 예외처리를 해주는 메소드
+    func isAlarmTimeValid() -> Bool {
+        let data = AlarmCoreDataManager.shared.getAlarmData()
+        let alarmTime = data.time
+        let currentTime = Date()
+        
+        let calendar = Calendar.current
+        let alarmComponents = calendar.dateComponents([.hour, .minute], from: alarmTime)
+        let currentComponents = calendar.dateComponents([.hour, .minute], from: currentTime)
+        
+        guard let alarmHour = alarmComponents.hour,
+              let alarmMinute = alarmComponents.minute,
+              let currentHour = currentComponents.hour,
+              let currentMinute = currentComponents.minute else {
+            return false
+        }
+        
+        if (alarmHour > currentHour) || (alarmHour == currentHour && alarmMinute > currentMinute) {
+            if data.isRepeatEnabled {
+                let intervalTime = alarmTime.addingTimeInterval(TimeInterval(data.repeatIntervalMinutes * data.repeatCountInt * 60 + 60))
+                let intervalComponents = calendar.dateComponents([.hour, .minute], from: intervalTime)
+                
+                guard let intervalHour = intervalComponents.hour,
+                      let intervalMinute = intervalComponents.minute else {
+                    return false
+                }
+                
+                if (intervalHour > currentHour) || (intervalHour == currentHour && intervalMinute > currentMinute) {
+                    if intervalTime <= currentTime.addingTimeInterval(TimeInterval(data.repeatIntervalMinutes * 60)) {
+                        return false
+                    }
+                }
+            }
+            return true
+        } else if (alarmHour < currentHour) || (alarmHour == currentHour && alarmMinute < currentMinute) {
+            if data.isRepeatEnabled {
+                let intervalTime = alarmTime.addingTimeInterval(TimeInterval(data.repeatIntervalMinutes * data.repeatCountInt * 60 + 60))
+                let intervalComponents = calendar.dateComponents([.hour, .minute], from: intervalTime)
+                
+                guard let intervalHour = intervalComponents.hour,
+                      let intervalMinute = intervalComponents.minute else {
+                    return false
+                }
+                
+                if (intervalHour > currentHour) || (intervalHour == currentHour && intervalMinute > currentMinute) {
+                    return false
+                }
+            }
+            return true
+        } else {
+            return false
         }
     }
 }
