@@ -186,14 +186,21 @@ class TimerResultViewController: BaseViewController {
         customButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(30)
-            make.width.equalTo(UIScreen.main.bounds.width - 40)
-            make.height.equalTo(48)
+            // 승섭 witdh 지우고 좌우 24로 통일
+//            make.width.equalTo(UIScreen.main.bounds.width - 40)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
+            // 승섭 버튼 높이 52로 통일
+            make.height.equalTo(52)
         }
         
         bottomBackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(customButton.snp.top).offset(-25)
-            make.width.equalTo(UIScreen.main.bounds.width - 40)
+            // 승섭 width 지우고 좌우 24로 통일
+//            make.width.equalTo(UIScreen.main.bounds.width - 40)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(bottomBackView.snp.width).multipliedBy(5.0 / 9.0)
         }
         
@@ -247,8 +254,8 @@ class TimerResultViewController: BaseViewController {
     
     private func setTimeData(){
         
-        let elapsedTimeText = elapsedTime.formattedTime
-        goalTimeLabel.text = "\(goalTime.formattedTime)"
+        let elapsedTimeText = elapsedTime.time
+        goalTimeLabel.text = "\(goalTime.time)"
         todayTimeLabel.text = "\(elapsedTimeText)"
         
         if goalTime <= elapsedTime {    //성공
@@ -279,8 +286,9 @@ class TimerResultViewController: BaseViewController {
     private func saveTimeData(){
         if result == .success {
             firestoreManager.createStudyData(success: true, during: Int(elapsedTime))
+        } else {
+            firestoreManager.createStudyData(success: false, during: Int(elapsedTime))
         }
-        
     }
     
 }

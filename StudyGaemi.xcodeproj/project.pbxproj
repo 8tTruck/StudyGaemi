@@ -79,11 +79,12 @@
 		FF03F9002C16A51100134B54 /* AlarmResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */; };
 		FF03F9022C16D55600134B54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF03F9012C16D55600134B54 /* GoogleService-Info.plist */; };
 		FF03F9042C16D59700134B54 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF03F9032C16D59700134B54 /* FirebaseAnalytics */; };
+		FF1DC4CA2C3479D7001CCAE6 /* AlarmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1DC4C92C3479D7001CCAE6 /* AlarmDelegate.swift */; };
 		FF254A332C1AA26E00504C24 /* StudyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A322C1AA26E00504C24 /* StudyModel.swift */; };
 		FF254A352C1AA29900504C24 /* WakeUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A342C1AA29900504C24 /* WakeUpModel.swift */; };
 		FF254A372C1ABCFF00504C24 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A362C1ABCFF00504C24 /* UserModel.swift */; };
 		FF254A3A2C1C1DA400504C24 /* RepeatingSecondsTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */; };
-		FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */; };
+		FF254A3F2C1C1DB600504C24 /* SettingTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3C2C1C1DB600504C24 /* SettingTimerVC.swift */; };
 		FF254A402C1C1DB600504C24 /* CircularTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */; };
 		FF254A422C1C1DC400504C24 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A412C1C1DC400504C24 /* CircularTimerView.swift */; };
 		FF254A482C1C1EE300504C24 /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF254A472C1C1EE300504C24 /* StudyViewController.swift */; };
@@ -167,11 +168,12 @@
 		FF03F8FD2C16A01400134B54 /* 알림음 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "알림음 1.wav"; sourceTree = "<group>"; };
 		FF03F8FF2C16A51100134B54 /* AlarmResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResultController.swift; sourceTree = "<group>"; };
 		FF03F9012C16D55600134B54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FF1DC4C92C3479D7001CCAE6 /* AlarmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDelegate.swift; sourceTree = "<group>"; };
 		FF254A322C1AA26E00504C24 /* StudyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyModel.swift; sourceTree = "<group>"; };
 		FF254A342C1AA29900504C24 /* WakeUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpModel.swift; sourceTree = "<group>"; };
 		FF254A362C1ABCFF00504C24 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FF254A392C1C1DA400504C24 /* RepeatingSecondsTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingSecondsTimer.swift; sourceTree = "<group>"; };
-		FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTiemrVC.swift; sourceTree = "<group>"; };
+		FF254A3C2C1C1DB600504C24 /* SettingTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTimerVC.swift; sourceTree = "<group>"; };
 		FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerVC.swift; sourceTree = "<group>"; };
 		FF254A412C1C1DC400504C24 /* CircularTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
 		FF254A472C1C1EE300504C24 /* StudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
@@ -287,7 +289,7 @@
 				FF254A4B2C1C1FBC00504C24 /* CircularTimer.swift */,
 				FF254A3D2C1C1DB600504C24 /* CircularTimerVC.swift */,
 				FF2B9AB92C25A33900E231DE /* DatePickerModalVC.swift */,
-				FF254A3C2C1C1DB600504C24 /* SettingTiemrVC.swift */,
+				FF254A3C2C1C1DB600504C24 /* SettingTimerVC.swift */,
 				FF6774012C0DACF800017E1F /* AlarmController.swift */,
 				FF875F602C0F0DFF00A5D534 /* AlarmSettingController.swift */,
 				FF931A612C12B74C00AD1513 /* AlarmQuestionController.swift */,
@@ -296,6 +298,7 @@
 				FF783CA02C17EC700008AE70 /* AudioController.swift */,
 				FF8746E22C19939300F63A86 /* AlarmCoreDataManager.swift */,
 				F47AEE1B2C2E83B20092AA69 /* TeamInfoViewController.swift */,
+				FF1DC4C92C3479D7001CCAE6 /* AlarmDelegate.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -581,7 +584,7 @@
 				FF00719F2C09FFA6000AE7AA /* CustomTextField.swift in Sources */,
 				FF783C9F2C17CFC30008AE70 /* AuthenticationManager.swift in Sources */,
 				FF254A4C2C1C1FBC00504C24 /* CircularTimer.swift in Sources */,
-				FF254A3F2C1C1DB600504C24 /* SettingTiemrVC.swift in Sources */,
+				FF254A3F2C1C1DB600504C24 /* SettingTimerVC.swift in Sources */,
 				FF6774022C0DACF800017E1F /* AlarmController.swift in Sources */,
 				FF0071992C08432E000AE7AA /* CustomFontType.swift in Sources */,
 				3F6270A32C23C54000BBA2D2 /* BottomSheetView.swift in Sources */,
@@ -595,6 +598,7 @@
 				3F86FC9E2C15AE7300C6C8F3 /* MemberInfoViewController.swift in Sources */,
 				FF2B9ABA2C25A33900E231DE /* DatePickerModalVC.swift in Sources */,
 				3F86FCA82C17F62700C6C8F3 /* BottomSheetViewController.swift in Sources */,
+				FF1DC4CA2C3479D7001CCAE6 /* AlarmDelegate.swift in Sources */,
 				3F6270A92C23C74800BBA2D2 /* PrivacyPolicyView.swift in Sources */,
 				FF0071522C074D86000AE7AA /* StudyGaemi.xcdatamodeld in Sources */,
 			);
@@ -760,7 +764,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.8ttruck.StudyGaemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -800,7 +804,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.8ttruck.StudyGaemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

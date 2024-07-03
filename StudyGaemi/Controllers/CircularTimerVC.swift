@@ -68,6 +68,7 @@ class CircularTimerVC: BaseViewController, CircularTimerViewDelegate {
         setupViews()
         addSubviews()
         makeConstraints()
+        
     }
     
     override func configureUI() {

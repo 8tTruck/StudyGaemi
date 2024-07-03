@@ -102,7 +102,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             make.top.equalTo(loginImage.snp.bottom).offset(28)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(60)
+            make.height.equalTo(52)
         }
         
         passwordTextField.snp.makeConstraints { make in
@@ -110,7 +110,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             make.top.equalTo(emailTextField.snp.bottom).offset(12)
             make.leading.equalTo(emailTextField.snp.leading)
             make.trailing.equalTo(emailTextField.snp.trailing)
-            make.height.equalTo(60)
+            make.height.equalTo(52)
         }
         
         loginButton.addTouchAnimation()
@@ -119,7 +119,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             make.top.equalTo(passwordTextField.snp.bottom).offset(12)
             make.leading.equalTo(emailTextField.snp.leading)
             make.trailing.equalTo(emailTextField.snp.trailing)
-            make.height.equalTo(60)
+            make.height.equalTo(52)
         }
         
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
@@ -158,7 +158,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             make.height.equalTo(45)
         }
         appleLoginButton.addTouchAnimation()
-        appleLoginButton.layer.cornerRadius = 12
+        appleLoginButton.layer.cornerRadius = 10
         let appleLoginImage = UIImage(named: "apple")
         appleLoginButton.setBackgroundImage(appleLoginImage, for: .normal)
         appleLoginButton.layer.borderWidth = 1
@@ -173,7 +173,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             make.centerX.equalToSuperview()
         }
         kakaoLoginButton.addTouchAnimation()
-        kakaoLoginButton.layer.cornerRadius = 12
+        kakaoLoginButton.layer.cornerRadius = 10
         let kakaoLoginImage = UIImage(named: "kakao")
         kakaoLoginButton.setBackgroundImage(kakaoLoginImage, for: .normal)
         applyCommonSettings(to: kakaoLoginButton)
@@ -239,7 +239,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         createAccountButton.addTarget(self, action: #selector(createAccountButtonTapped), for: .touchUpInside)
         
         createAccountStackView.snp.makeConstraints { make in
-            make.top.equalTo(findIDButton.snp.bottom).offset(12)
+            make.top.equalTo(findIDButton.snp.bottom).offset(6)
             make.centerX.equalToSuperview()
         }
     }

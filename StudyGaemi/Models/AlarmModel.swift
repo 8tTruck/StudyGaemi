@@ -15,24 +15,33 @@ struct AlarmModel {
     var repeatInterval: String? = nil
     var repeatCount: String? = nil
     
-    func setRepeatEnabled() -> Bool {
-        if let repeatEnabled = self.repeatEnabled {
-            return repeatEnabled
-        }
-        return false
+    var isRepeatEnabled: Bool {
+        return repeatEnabled ?? false
     }
     
-    func setRepeatInterval() -> String {
-        if let repeatInterval = self.repeatInterval {
-            return repeatInterval
-        }
-        return ""
+    var repeatIntervalValue: String {
+        return repeatInterval ?? ""
     }
     
-    func setRepeatCount() -> String {
-        if let repeatCount = self.repeatCount {
-            return repeatCount
+    var repeatIntervalMinutes: Int {
+        switch repeatInterval {
+        case "3분마다":
+            return 3
+        case "5분마다":
+            return 5
+        case "8분마다":
+            return 8
+        default:
+            return 0
         }
-        return ""
+    }
+    
+    var repeatCountValue: String {
+        return repeatCount ?? ""
+    }
+    
+    var repeatCountInt: Int {
+        guard let repeatCount = repeatCount else { return 0 }
+        return Int(repeatCount.replacingOccurrences(of: "회 반복", with: "")) ?? 1
     }
 }

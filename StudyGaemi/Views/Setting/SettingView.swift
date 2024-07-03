@@ -20,7 +20,7 @@ class SettingView: UIView {
     let scrollContentView = UIView().then {
         $0.backgroundColor = .clear
     }
-
+    
     let titleLabel = UILabel().then {
         $0.text = "개ME"
         $0.font = UIFont(name: CustomFontType.bold.name, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -47,12 +47,23 @@ class SettingView: UIView {
         $0.layer.shadowOpacity = 0.15
     }
     
+    let userDetailView = UIView().then {
+        $0.backgroundColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 0.2)
+        $0.layer.cornerRadius = 15
+    }
+    
     let userImageView = UIImageView().then {
         $0.image = UIImage(named: "profileAnt")
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 23
         $0.layer.masksToBounds = true
     }
+    
+    let editIconImageView = UIImageView().then {
+            $0.image = UIImage(systemName: "camera.rotate.fill")
+            $0.tintColor = .lightGray
+            $0.contentMode = .scaleAspectFit
+        }
     
     let userLabel = UILabel().then {
         $0.text = "User"
@@ -78,13 +89,13 @@ class SettingView: UIView {
     
     let totalStudyLabel = UILabel().then {
         $0.text = "총 공부개미"
-        $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
+        $0.font = UIFont(name: "Pretendard-Regular", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .regular)
         $0.textColor = .lightGray
     }
     
     let totalTimeLabel = UILabel().then {
         $0.text = "8시간 0분"
-        $0.font = UIFont(name: CustomFontType.semiBold.name, size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)
+        $0.font = UIFont(name: CustomFontType.semiBold.name, size: 26) ?? UIFont.systemFont(ofSize: 26, weight: .bold)
         $0.textColor = UIColor(named: "fontBlack")
     }
     
@@ -106,17 +117,27 @@ class SettingView: UIView {
         $0.layer.cornerRadius = 10
     }
     
+    let deleteAccountButton = UIButton(type: .system).then {
+        $0.setTitle("회원탈퇴", for: .normal)
+        $0.setTitleColor(UIColor(named: "fontGray"), for: .normal)
+        $0.backgroundColor = UIColor(named: "viewBackgroundColor")
+        $0.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 12)
+    }
+    
     let accumulatedLabel = UILabel().then {
         $0.text = "0일 누적"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
-        $0.textColor = UIColor(named: "fontBlack")
-        $0.backgroundColor = UIColor(named: "viewBackgroundColor2")
-        $0.textAlignment = .center
+        $0.textColor = UIColor(named: "pointOrange")
+        $0.backgroundColor = .clear
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
+        $0.layer.borderColor = UIColor(named: "pointOrange")?.cgColor
+        $0.layer.borderWidth = 1.0
+        $0.textAlignment = .center
         $0.setContentHuggingPriority(.required, for: .horizontal)
         $0.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -135,16 +156,19 @@ class SettingView: UIView {
         scrollView.addSubview(scrollContentView)
         scrollContentView.addSubview(titleView)
         scrollContentView.addSubview(userView)
-        userView.addSubview(userImageView)
-        userView.addSubview(userLabel)
-        userView.addSubview(emailLabel)
-        userView.addSubview(editButton)
+        userView.addSubview(userDetailView)
+        userDetailView.addSubview(userImageView)
+        userDetailView.addSubview(editIconImageView)
+        userDetailView.addSubview(userLabel)
+        userDetailView.addSubview(emailLabel)
+        userDetailView.addSubview(editButton)
         userView.addSubview(separatorView)
         userView.addSubview(totalStudyLabel)
         userView.addSubview(totalTimeLabel)
         userView.addSubview(accumulatedLabel)
         scrollContentView.addSubview(tableView)
         scrollContentView.addSubview(logoutButton)
+        scrollContentView.addSubview(deleteAccountButton)
     }
     
     func constraintLayout() {
@@ -176,49 +200,61 @@ class SettingView: UIView {
             make.height.equalTo(169)
         }
         
+        userDetailView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(userView).inset(10)
+            make.height.equalTo(60)
+        }
+        
         userImageView.snp.makeConstraints { make in
-            make.top.equalTo(userView.snp.top).offset(22)
+            make.centerY.equalTo(userDetailView.snp.centerY)
             make.leading.equalTo(userView.snp.leading).offset(22)
             make.width.height.equalTo(46)
         }
         
+        editIconImageView.snp.makeConstraints { make in
+            make.trailing.equalTo(userImageView.snp.trailing).offset(5)
+            make.bottom.equalTo(userImageView.snp.bottom).offset(5)
+                    make.width.height.equalTo(20)
+                }
+        
         userLabel.snp.makeConstraints { make in
             make.leading.equalTo(userImageView.snp.trailing).offset(10)
-            make.top.equalTo(userImageView.snp.top).offset(5)
+            make.top.equalTo(userDetailView).offset(8)
             make.trailing.equalTo(editButton.snp.leading).offset(-10)
         }
         
         emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(userLabel.snp.bottom).offset(4)
+            make.top.equalTo(userLabel.snp.bottom).offset(5)
             make.leading.equalTo(userLabel)
         }
         
         editButton.snp.makeConstraints { make in
-            make.trailing.equalTo(userView.snp.trailing).offset(-15)
+            make.trailing.equalTo(userDetailView.snp.trailing).offset(-15)
             make.centerY.equalTo(userImageView.snp.centerY)
         }
         
         separatorView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(userView).inset(5)
-            make.top.equalTo(userImageView.snp.bottom).offset(15)
+            make.top.equalTo(totalStudyLabel.snp.bottom).offset(8)
             make.height.equalTo(1)
         }
         
         totalStudyLabel.snp.makeConstraints { make in
-            make.top.equalTo(separatorView.snp.bottom).offset(16)
+            make.top.equalTo(userDetailView.snp.bottom).offset(14)
             make.leading.equalTo(userView.snp.leading).offset(22)
         }
         
+        
         totalTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(totalStudyLabel.snp.bottom).offset(4)
+            make.top.equalTo(separatorView.snp.bottom).offset(12)
             make.leading.equalTo(totalStudyLabel)
         }
         
         accumulatedLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(totalTimeLabel)
+            make.centerY.equalTo(totalStudyLabel)
             make.trailing.equalTo(userView.snp.trailing).offset(-22)
-            make.height.equalTo(30)
-            make.width.equalTo(80)
+            make.height.equalTo(26)
+            make.width.equalTo(60)
         }
         
         tableView.snp.makeConstraints { make in
@@ -231,7 +267,12 @@ class SettingView: UIView {
             make.top.equalTo(tableView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
-            make.bottom.equalToSuperview().inset(20)
+        }
+        deleteAccountButton.snp.makeConstraints { make in
+            make.top.equalTo(logoutButton.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(48)
+            make.bottom.equalToSuperview().inset(5)
         }
     }
 }

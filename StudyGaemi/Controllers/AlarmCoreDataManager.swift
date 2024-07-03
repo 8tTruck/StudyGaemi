@@ -37,6 +37,8 @@ class AlarmCoreDataManager {
             newAlarm.repeatCount = alarm.repeatCount
             
             try context.save()
+            
+            self.fetchAlarm()
         } catch {
             print("알람 저장 실패 에러: \(error)")
         }
@@ -69,15 +71,22 @@ class AlarmCoreDataManager {
         let fetchRequest: NSFetchRequest<Alarm> = Alarm.fetchRequest()
         
         do {
-            AlarmSettingController.shared.removeScheduleAlarm()
-            UserDefaults.standard.removeObject(forKey: "toggleButtonState")
             let alarms = try context.fetch(fetchRequest)
             
-            for alarm in alarms {
-                context.delete(alarm)
+            AlarmSettingController.shared.removeScheduleAlarm {
+                UserDefaults.standard.removeObject(forKey: "toggleButtonState")
+                
+                for alarm in alarms {
+                    self.context.delete(alarm)
+                }
+                
+                do {
+                    try self.context.save()
+                    print("알람이 성공적으로 삭제되었습니다.")
+                } catch {
+                    print("알람 삭제 후 저장 실패: \(error)")
+                }
             }
-            
-            try context.save()
         } catch {
             print("알람 삭제 실패 에러: \(error)")
         }
@@ -85,6 +94,7 @@ class AlarmCoreDataManager {
     
     // MARK: - 알람 데이터 반환 메소드
     func getAlarmData() -> AlarmModel {
+        self.fetchAlarm()
         guard let alarmData = self.coreData else {
             return AlarmModel(time: Date(), difficulty: "중", sound: "알림음 1")
         }

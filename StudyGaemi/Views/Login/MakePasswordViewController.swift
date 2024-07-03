@@ -21,24 +21,31 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     let passwordTextField = CustomTextField(text: "사용할 비밀번호를 입력하세요")
     var passwordCheckDescriptionLabel = UILabel()
     let passwordCheckTextField = CustomTextField(text: "비밀번호를 다시 한 번 입력해주세요")
-    let confirmButton = CustomButton(title: "계정 생성")
+    let confirmButton = CustomButton(title: "인증메일 전송")
+    
+    let pointOrange = UIColor(named: "pointOrange") ?? .orange
     
     // 사용자 동의 부분
     let personalInfoButton = UIButton()
+    let personalInfoMust = UILabel()
     let personalInfoLabel = UILabel()
     var personalInfoAgree = false
     let yakgwanButton = UIButton()
+    let yakgwanMust = UILabel()
     let yakgwanLabel = UILabel()
     var yakgwanAgree = false
     let ageButton = UIButton()
+    let ageMust = UILabel()
     let ageLabel = UILabel()
     var ageAgree = false
     var separatorView = UIView()
     let allAgreeButton = UIButton()
     let allAgreeLabel = UILabel()
     var allAgree = false
-    let offImage = UIImage(named: "checkboxOff")
-    let onImage = UIImage(named: "checkboxOn")
+//    let offImage = UIImage(named: "checkboxOff")
+//    let onImage = UIImage(named: "checkboxOn")
+    let offImage = UIImage(systemName: "square")?.withTintColor(.pointOrange, renderingMode: .alwaysOriginal)
+    let onImage = UIImage(systemName: "checkmark.square.fill")?.withTintColor(.pointOrange, renderingMode: .alwaysOriginal)
     let offColor = UIColor(red: 209/255, green: 211/255, blue: 217/255, alpha: 1.0)
     let passwordSecureButton = UIButton(type: .custom)
     
@@ -166,7 +173,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(mainImage.snp.bottom).offset(20)
 //            make.width.equalTo(342)
-            make.height.equalTo(50)
+            make.height.equalTo(52)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
         }
@@ -196,7 +203,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(nicknameDescriptionLabel.snp.bottom).offset(10)
 //            make.width.equalTo(342)
-            make.height.equalTo(50)
+            make.height.equalTo(52)
             make.leading.equalTo(nicknameTextField.snp.leading)
             make.trailing.equalTo(nicknameTextField.snp.trailing)
         }
@@ -225,7 +232,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(passwordDescriptionLabel.snp.bottom).offset(10)
 //            make.width.equalTo(342)
-            make.height.equalTo(50)
+            make.height.equalTo(52)
             make.leading.equalTo(nicknameTextField.snp.leading)
             make.trailing.equalTo(nicknameTextField.snp.trailing)
         }
@@ -248,32 +255,55 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(personalInfoLabel)
         view.addSubview(personalInfoButton)
         view.addSubview(personalInfoDescriptionButton)
+        view.addSubview(personalInfoMust)
         
-        personalInfoLabel.text = "[필수] 개인정보 처리 방침에 동의합니다"
-        personalInfoLabel.font = UIFont(name: CustomFontType.regular.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
-        personalInfoLabel.textAlignment = .left  // 텍스트 좌측 정렬 설정
+        personalInfoMust.text = "필수"
+        personalInfoMust.font = UIFont(name: CustomFontType.bold.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
+        personalInfoMust.textAlignment = .center
+        personalInfoMust.textColor = UIColor(named: "pointOrange")
+        personalInfoMust.layer.borderWidth = 1
+        personalInfoMust.layer.borderColor = UIColor(named: "pointOrange")?.cgColor
+        personalInfoMust.layer.cornerRadius = 10
+        personalInfoMust.layer.masksToBounds = true
+        
+        personalInfoLabel.text = "개인정보 처리 방침에 동의합니다"
+        personalInfoLabel.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)
+        personalInfoLabel.textAlignment = .right  // 텍스트 좌측 정렬 설정
         
         personalInfoButton.setImage(offImage, for: .normal)
         personalInfoButton.addTarget(self, action: #selector(personalInfoButtonTapped), for: .touchUpInside)
-        personalInfoButton.addTouchAnimation()
         
         personalInfoDescriptionButton.snp.makeConstraints { make in
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
+//            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
             make.centerY.equalTo(personalInfoButton.snp.centerY)
+            make.leading.equalTo(personalInfoLabel.snp.trailing).offset(10)
+            make.height.equalTo(16)
         }
         
         // 버튼 제약 조건
         personalInfoButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
+//            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
+//            make.bottom.equalTo(confirmButton.snp.top).offset(-10)
+//            make.width.equalTo(40)
+//            make.height.equalTo(40)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
             make.bottom.equalTo(confirmButton.snp.top).offset(-10)
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
         
+        // 필수 제약 조건
+        personalInfoMust.snp.makeConstraints { make in
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
+            make.centerY.equalTo(personalInfoButton.snp.centerY)
+            make.height.equalTo(18)
+            make.width.equalTo(40)
+        }
+        
         // 레이블 제약 조건
         personalInfoLabel.snp.makeConstraints { make in
             make.centerY.equalTo(personalInfoButton.snp.centerY)
-            make.leading.equalTo(personalInfoButton.snp.trailing).offset(0) // 버튼 옆에 딱 붙도록 설정
+            make.leading.equalTo(personalInfoMust.snp.trailing).offset(10)
         }
     }
     
@@ -293,32 +323,52 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(yakgwanButton)
         view.addSubview(yakgwanLabel)
         view.addSubview(yakgwanDescriptionButton)
+        view.addSubview(yakgwanMust)
         
-        yakgwanLabel.text = "[필수] 이용 약관에 동의합니다"
-        yakgwanLabel.font = UIFont(name: CustomFontType.regular.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
-        yakgwanLabel.textAlignment = .left  // 텍스트 좌측 정렬 설정
+        yakgwanMust.text = "필수"
+        yakgwanMust.font = UIFont(name: CustomFontType.bold.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
+        yakgwanMust.textAlignment = .center
+        yakgwanMust.textColor = UIColor(named: "pointOrange")
+        yakgwanMust.layer.borderWidth = 1
+        yakgwanMust.layer.borderColor = UIColor(named: "pointOrange")?.cgColor
+        yakgwanMust.layer.cornerRadius = 10
+        yakgwanMust.layer.masksToBounds = true
+        
+        yakgwanLabel.text = "이용 약관에 동의합니다"
+        yakgwanLabel.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)
+        yakgwanLabel.textAlignment = .right  // 텍스트 좌측 정렬 설정
         
         yakgwanButton.setImage(offImage, for: .normal)
+        yakgwanButton.imageView?.contentMode = .scaleAspectFit
         yakgwanButton.addTarget(self, action: #selector(yakgwanButtonTapped), for: .touchUpInside)
-        yakgwanButton.addTouchAnimation()
         
         yakgwanDescriptionButton.snp.makeConstraints { make in
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
+//            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
             make.centerY.equalTo(yakgwanButton.snp.centerY)
+            make.leading.equalTo(yakgwanLabel.snp.trailing).offset(10)
+            make.height.equalTo(16)
         }
         
         // 버튼 제약 조건
         yakgwanButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
             make.bottom.equalTo(personalInfoButton.snp.top).offset(0)
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
         
+        // 필수 제약 조건
+        yakgwanMust.snp.makeConstraints { make in
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
+            make.centerY.equalTo(yakgwanButton.snp.centerY)
+            make.height.equalTo(18)
+            make.width.equalTo(40)
+        }
+        
         // 레이블 제약 조건
         yakgwanLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(yakgwanButton.snp.centerY)
-            make.leading.equalTo(yakgwanButton.snp.trailing).offset(0) // 버튼 옆에 딱 붙도록 설정
+            make.centerY.equalTo(yakgwanMust.snp.centerY)
+            make.leading.equalTo(yakgwanMust.snp.trailing).offset(10) // 버튼 옆에 딱 붙도록 설정
         }
     }
     
@@ -337,15 +387,24 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
     func ageSetting() {
         view.addSubview(ageButton)
         view.addSubview(ageLabel)
+        view.addSubview(ageMust)
 //        view.addSubview(ageDescriptionButton)
         
-        ageLabel.text = "[필수] 만 14세 이상입니다"
-        ageLabel.font = UIFont(name: CustomFontType.regular.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
+        ageMust.text = "필수"
+        ageMust.font = UIFont(name: CustomFontType.bold.name, size: 12) ?? UIFont.systemFont(ofSize: 12)
+        ageMust.textAlignment = .center
+        ageMust.textColor = UIColor(named: "pointOrange")
+        ageMust.layer.borderWidth = 1
+        ageMust.layer.borderColor = UIColor(named: "pointOrange")?.cgColor
+        ageMust.layer.cornerRadius = 10
+        ageMust.layer.masksToBounds = true
+        
+        ageLabel.text = "만 13세 이상입니다"
+        ageLabel.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)
         ageLabel.textAlignment = .left  // 텍스트 좌측 정렬 설정
         
         ageButton.setImage(offImage, for: .normal)
         ageButton.addTarget(self, action: #selector(ageButtonTapped), for: .touchUpInside)
-        ageButton.addTouchAnimation()
         
 //        ageDescriptionButton.snp.makeConstraints { make in
 //            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
@@ -354,16 +413,25 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         
         // 버튼 제약 조건
         ageButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
             make.bottom.equalTo(yakgwanButton.snp.top).offset(0)
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
         
+        ageMust.snp.makeConstraints { make in
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
+            make.centerY.equalTo(ageButton.snp.centerY)
+            make.height.equalTo(18)
+            make.width.equalTo(40)
+        }
+        
         // 레이블 제약 조건
         ageLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(ageButton.snp.centerY)
-            make.leading.equalTo(ageButton.snp.trailing).offset(0) // 버튼 옆에 딱 붙도록 설정
+//            make.centerY.equalTo(ageButton.snp.centerY)
+//            make.leading.equalTo(ageButton.snp.trailing).offset(0) // 버튼 옆에 딱 붙도록 설정
+            make.centerY.equalTo(ageMust.snp.centerY)
+            make.leading.equalTo(ageMust.snp.trailing).offset(10) // 버튼 옆에 딱 붙도록 설정
         }
     }
     
@@ -384,25 +452,29 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(allAgreeLabel)
         
         allAgreeLabel.text = "전체 동의"
-        allAgreeLabel.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)
-        allAgreeLabel.textAlignment = .left  // 텍스트 좌측 정렬 설정
+        allAgreeLabel.font = UIFont(name: CustomFontType.bold.name, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        allAgreeLabel.textAlignment = .right  // 텍스트 좌측 정렬 설정
         
         allAgreeButton.setImage(offImage, for: .normal)
         allAgreeButton.addTarget(self, action: #selector(allAgreeButtonTapped), for: .touchUpInside)
-        allAgreeButton.addTouchAnimation()
         
         // 버튼 제약 조건
         allAgreeButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
-            make.bottom.equalTo(ageButton.snp.top).offset(0)
-            make.width.equalTo(45)
-            make.height.equalTo(45)
+//            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+//            make.bottom.equalTo(ageButton.snp.top).offset(0)
+//            make.width.equalTo(40)
+//            make.height.equalTo(40)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-30)
+            make.bottom.equalTo(ageButton.snp.top).offset(-15)
+            make.width.equalTo(40)
+            make.height.equalTo(40)
         }
         
         // 레이블 제약 조건
         allAgreeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(allAgreeButton.snp.centerY)
-            make.leading.equalTo(allAgreeButton.snp.trailing).offset(0) // 버튼 옆에 딱 붙도록 설정
+//            make.trailing.equalTo(allAgreeButton.snp.leading).offset(-10) // 버튼 옆에 딱 붙도록 설정
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
         }
     }
     
@@ -432,7 +504,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(separatorView)
         
         separatorView.snp.makeConstraints { make in
-            make.top.equalTo(allAgreeButton.snp.bottom).offset(1)
+            make.top.equalTo(allAgreeButton.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
 //            make.width.equalTo(335)
             make.leading.equalToSuperview().offset(24)
@@ -469,7 +541,7 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
 //            make.width.equalTo(342)
             make.leading.equalTo(nicknameTextField.snp.leading)
             make.trailing.equalTo(nicknameTextField.snp.trailing)
-            make.height.equalTo(60)
+            make.height.equalTo(52)
         }
     }
     
@@ -748,15 +820,15 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
                     - 성명 : 강태영
                     - 소속 : 개인정보보호팀
                     - 이메일 : [taengdev@gmail.com](mailto:taengdev@gmail.com)
-            2. 회원은 공부하개미 서비르를 이용하면서 발생한 모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의할 수 있습니다. 운영팀은 회원의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.
+            2. 회원은 공부하개미 서비스를 이용하면서 발생한 모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의할 수 있습니다. 운영팀은 회원의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.
 
             **제 6조(개인정보 처리방법 변경)**
 
-            운영팀은 관련 법령이나 내부 정책 대응을 위하여 개인정보처리방침을 수정할 수 있습니다. 개인정보러처리방침이 변경되는 경우 회사는 변경 사항을 공지사항 등을 통해 게시하며, 변겨오딘 개인정보처리방침은 게시한 날로부터 7일후부터 효력이 발생합니다.
+            운영팀은 관련 법령이나 내부 정책 대응을 위하여 개인정보처리방침을 수정할 수 있습니다. 개인정보처리방침이 변경되는 경우 회사는 변경 사항을 공지사항 등을 통해 게시하며, 변경된 개인정보처리방침은 게시한 날로부터 7일후부터 효력이 발생합니다.
 
             공고일자 : 2024년 6월 25일
 
-            시행일자 : 2024년 6월 25일
+            시행일자 : 2024년 7월 2일
             """
         case 2:
             return """

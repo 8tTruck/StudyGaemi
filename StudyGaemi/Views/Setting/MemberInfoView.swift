@@ -77,7 +77,7 @@ class MemberInfoView: UIView {
         currentPasswordField.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(40)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
         }
         
         currentPasswordLabel.snp.makeConstraints { make in
@@ -88,7 +88,7 @@ class MemberInfoView: UIView {
         newPasswordField.snp.makeConstraints { make in
             make.top.equalTo(currentPasswordLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
         }
         
         newPasswordLabel.snp.makeConstraints { make in
@@ -99,7 +99,7 @@ class MemberInfoView: UIView {
         confirmPasswordField.snp.makeConstraints { make in
             make.top.equalTo(newPasswordLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
         }
         
         confirmPasswordLabel.snp.makeConstraints { make in
@@ -114,7 +114,7 @@ class MemberInfoView: UIView {
         
         confirmButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-30)
         }
         

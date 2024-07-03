@@ -166,6 +166,7 @@ class AlarmSettingView: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        AlarmSettingController.shared.delegate = self
         self.configureUI()
         self.constraintLayout()
     }
@@ -268,8 +269,8 @@ class AlarmSettingView: BaseViewController {
         
         saveButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-36)
-            make.height.equalTo(53)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(30)
+            make.height.equalTo(52)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
     }
     
@@ -303,10 +304,8 @@ class AlarmSettingView: BaseViewController {
         )
         
         AlarmCoreDataManager.shared.saveAlarm(alarm: alarmModel)
-        AlarmCoreDataManager.shared.fetchAlarm()
         
-        AlarmSettingController.shared.setAlarm()
-        AlarmSettingController.shared.getBackView(navigationController)
+        AlarmSettingController.shared.checkAlarmTimeSettings(navigationController)
         
         AudioController.shared.soundName = dropDownButton.currentTitle ?? "알림음 1"
     }
@@ -314,5 +313,14 @@ class AlarmSettingView: BaseViewController {
     private func buttonSetTitle(_ title: String, for button: UIButton?) {
         guard let button = button else { return }
         button.setTitle(title, for: .normal)
+    }
+}
+
+extension AlarmSettingView: AlarmDelegate {
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
