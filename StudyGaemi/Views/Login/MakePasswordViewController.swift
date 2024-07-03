@@ -262,8 +262,9 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         personalInfoMust.textAlignment = .center
         personalInfoMust.textColor = UIColor(named: "pointOrange")
         personalInfoMust.layer.borderWidth = 1
-        personalInfoMust.layer.borderColor = UIColor.lightGray.cgColor
-        personalInfoMust.layer.cornerRadius = 9
+        personalInfoMust.layer.borderColor = UIColor(named: "pointOrange")?.cgColor
+        personalInfoMust.layer.cornerRadius = 10
+        personalInfoMust.layer.masksToBounds = true
         
         personalInfoLabel.text = "개인정보 처리 방침에 동의합니다"
         personalInfoLabel.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)
@@ -329,8 +330,9 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         yakgwanMust.textAlignment = .center
         yakgwanMust.textColor = UIColor(named: "pointOrange")
         yakgwanMust.layer.borderWidth = 1
-        yakgwanMust.layer.borderColor = UIColor.lightGray.cgColor
-        yakgwanMust.layer.cornerRadius = 9
+        yakgwanMust.layer.borderColor = UIColor(named: "pointOrange")?.cgColor
+        yakgwanMust.layer.cornerRadius = 10
+        yakgwanMust.layer.masksToBounds = true
         
         yakgwanLabel.text = "이용 약관에 동의합니다"
         yakgwanLabel.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)
@@ -393,8 +395,9 @@ class MakePasswordViewController: UIViewController, UITextFieldDelegate {
         ageMust.textAlignment = .center
         ageMust.textColor = UIColor(named: "pointOrange")
         ageMust.layer.borderWidth = 1
-        ageMust.layer.borderColor = UIColor.lightGray.cgColor
-        ageMust.layer.cornerRadius = 9
+        ageMust.layer.borderColor = UIColor(named: "pointOrange")?.cgColor
+        ageMust.layer.cornerRadius = 10
+        ageMust.layer.masksToBounds = true
         
         ageLabel.text = "만 13세 이상입니다"
         ageLabel.font = UIFont(name: CustomFontType.regular.name, size: 14) ?? UIFont.systemFont(ofSize: 14)

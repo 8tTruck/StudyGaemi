@@ -127,7 +127,7 @@ class SettingView: UIView {
     let accumulatedLabel = UILabel().then {
         $0.text = "0일 누적"
         $0.font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
-        $0.textColor = UIColor(named: "fontBlack")
+        $0.textColor = UIColor(named: "pointOrange")
         $0.backgroundColor = .clear
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
