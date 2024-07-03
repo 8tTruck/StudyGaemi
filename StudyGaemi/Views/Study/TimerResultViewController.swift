@@ -286,8 +286,9 @@ class TimerResultViewController: BaseViewController {
     private func saveTimeData(){
         if result == .success {
             firestoreManager.createStudyData(success: true, during: Int(elapsedTime))
+        } else {
+            firestoreManager.createStudyData(success: false, during: Int(elapsedTime))
         }
-        
     }
     
 }

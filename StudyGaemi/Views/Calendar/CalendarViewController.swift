@@ -348,7 +348,7 @@ class CalendarViewController: BaseViewController {
                 let today = Date()
                 let calendar = Calendar.current
                 
-                // 오늘의 날짜와 일치하는 data의 date 속성을 가진 항목만 필터링합니다.
+                // 오늘의 날짜와 일치하는 data의 date 속성을 가진 항목만 필터링
                 let todayDataCount = data.filter { study in
                     let studyTimestamp = study.date
                     let studyDate = studyTimestamp.dateValue() // Timestamp를 Date로 변환
