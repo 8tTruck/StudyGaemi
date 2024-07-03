@@ -48,7 +48,7 @@ class SettingView: UIView {
     }
     
     let userDetailView = UIView().then {
-        $0.backgroundColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 0.5)
+        $0.backgroundColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 0.2)
         $0.layer.cornerRadius = 15
     }
     
